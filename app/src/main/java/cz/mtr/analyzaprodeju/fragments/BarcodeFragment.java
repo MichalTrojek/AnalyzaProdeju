@@ -55,7 +55,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
             @Override
             public void run() {
 
-                Toast.makeText(getActivity(), "Barcode: " + barcode.displayValue, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Barcosde: " + barcode.displayValue, Toast.LENGTH_SHORT).show();
                 slideScannerUp();
             }
         });
