@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AnalyzaProdeju</string>
+
+
+    <string name="navigation_drawer_open">Close navigation close</string>
+    <string name="navigation_drawer_close">Open navigation drawer</string>
+    <string name="content_description_for_logo">Logo</string>
+    <string name="home_text_drawer_menu">Domů</string>
+    <string name="import_data_text_drawer_menu">Nahrát data z analýzy</string>
+    <string name="export_data_text_drawer_menu">Odeslat data</string>
+    <string name="settings_text_drawer_menu">Nastavení IP adresy</string>
+    <string name="about_text_drawer_menu">O aplikaci</string>
+    <string name="search_text_drawer_menu">Hledat podle názvu</string>
+    <string name="info_text_drawer_menu">Informace</string>
+    <string name="content_descriton_for_background_scanner">library_shelf</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
