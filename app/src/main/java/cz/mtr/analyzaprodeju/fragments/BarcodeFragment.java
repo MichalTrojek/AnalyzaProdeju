@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,7 +19,7 @@ import java.util.List;
 import cz.mtr.analyzaprodeju.R;
 import info.androidhive.barcode.BarcodeReader;
 
-public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeReaderListener, View.OnClickListener {
+public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeReaderListener {
     private static final String TAG = BarcodeFragment.class.getSimpleName();
 
     private BarcodeReader barcodeReader;
@@ -45,7 +44,15 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         barcodeReader = (BarcodeReader) getChildFragmentManager().findFragmentById(R.id.barcode_fragment);
         barcodeReader.setListener(this);
         stopScanningButton = (FloatingActionButton) view.findViewById(R.id.stopScanningButton);
-        stopScanningButton.setOnClickListener(this);
+//        stopScanningButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.barcodeToHome, null));
+
+
+        stopScanningButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(getView()).navigate(R.id.barcodeToInfo);
+            }
+        });
         return view;
     }
 
@@ -54,22 +61,10 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
                 Toast.makeText(getActivity(), "Barcosde: " + barcode.displayValue, Toast.LENGTH_SHORT).show();
-                slideScannerUp();
+//                Navigation.findNavController(getView()).navigate(R.id.barcodeToInfo);
             }
         });
-    }
-
-    private void slideScannerUp() {
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.enter_from_top, R.anim.exit_to_top);
-        ft.remove(BarcodeFragment.this);
-        ft.commit();
-    }
-
-    private void showInfoFragment() {
-
     }
 
 
@@ -91,29 +86,6 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
     @Override
     public void onCameraPermissionDenied() {
         Toast.makeText(getActivity(), "Camera permission denied!", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onClick(View view) {
-        slideScannerUp();
-        showHomeFragment();
-        SlideInBottomFragment();
-    }
-
-    private void SlideInBottomFragment() {
-        BottomFragment fragment = BottomFragment.newInstance();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_to_left, R.anim.enter_from_bottom, R.anim.exit_to_left); //the second pair of animations is there so back button shows animations.
-        transaction.add(R.id.bottom_container, fragment, "BOTTOM_FRAGMENT").commit();
-    }
-
-    private void showHomeFragment() {
-        HomeFragment fragment = HomeFragment.newInstance();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_to_left, R.anim.enter_from_bottom, R.anim.exit_to_left); //the second pair of animations is there so back button shows animations.
-        transaction.add(R.id.center_container, fragment, "HOME_FRAGMENT").commit();
     }
 
 

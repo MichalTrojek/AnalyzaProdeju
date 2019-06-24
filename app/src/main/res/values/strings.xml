@@ -13,6 +13,7 @@
     <string name="search_text_drawer_menu">Hledat podle názvu</string>
     <string name="info_text_drawer_menu">Informace</string>
     <string name="content_descriton_for_background_scanner">library_shelf</string>
+    <string name="content_description_for_infobackground">infobackgroun</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

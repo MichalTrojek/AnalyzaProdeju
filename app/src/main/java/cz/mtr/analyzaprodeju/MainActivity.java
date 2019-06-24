@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.navigation.NavigationView;
 
 import cz.mtr.analyzaprodeju.ViewModel.DataViewModel;
-import cz.mtr.analyzaprodeju.fragments.BottomFragment;
 import cz.mtr.analyzaprodeju.fragments.HomeFragment;
 import cz.mtr.analyzaprodeju.room.DatabaseCopier;
 
@@ -39,9 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupDrawerLayout();
         handleHamburgerButtonPress();
         if (savedInstanceState == null) {
-            showHomeFragment();
             navigationView.setCheckedItem(R.id.nav_home);
-            showBottomFragment();
         }
 
         mDataViewModel = ViewModelProviders.of(this).get(DataViewModel.class);
@@ -53,13 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void showBottomFragment() {
-        BottomFragment fragment = BottomFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_to_left, R.anim.enter_from_bottom, R.anim.exit_to_left); //the second pair of animations is there so back button shows animations.
-        transaction.add(R.id.bottom_container, fragment, "BOTTOM_FRAGMENT").commit();
-    }
+
 
 
     private void showHomeFragment() {
