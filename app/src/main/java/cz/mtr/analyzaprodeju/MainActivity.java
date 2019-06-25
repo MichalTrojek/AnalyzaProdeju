@@ -15,19 +15,16 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
+import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.room.DatabaseCopier;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private DrawerLayout mDrawerLayout;
-
     private Button mHamburgerButton;
-
     private NavigationView mNavigationView;
-
-    public NavController mNavController;
+    private NavController mNavController;
 
 
     @Override
@@ -37,11 +34,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         copyDatabaseFromAssetsToWorkingDirectory();
         setupDrawerLayout();
         handleHamburgerButtonPress();
-
         mNavigationView.setCheckedItem(R.id.nav_home);
-
-
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        Model.getInstance().createPrefs(this);
 
 
     }

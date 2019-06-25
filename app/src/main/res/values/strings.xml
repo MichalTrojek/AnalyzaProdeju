@@ -2,6 +2,10 @@
     <string name="app_name">AnalyzaProdeju</string>
 
 
+    <string name="db_version">Verze aplikace: 1</string>
+    <string name="author">(c) 2019, Michal Trojek</string>
+
+
     <string name="navigation_drawer_open">Close navigation close</string>
     <string name="navigation_drawer_close">Open navigation drawer</string>
     <string name="content_description_for_logo">Logo</string>
