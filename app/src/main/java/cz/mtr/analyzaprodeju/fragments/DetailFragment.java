@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import cz.mtr.analyzaprodeju.R;
 
-public class InfoFragment extends Fragment {
-    private static final String TAG = InfoFragment.class.getSimpleName();
+public class DetailFragment extends Fragment {
+    private static final String TAG = DetailFragment.class.getSimpleName();
 
     private TextView nameTextView, eanTextView, priceTextView, rankTextView, eshopTextView, salesTextView, salesAmountOneTextView, salesDaysOneTextView, salesAmountTwoTextView, salesDaysTwoTextView, lastSaleTextView,
             storedTextView, daysOfSuppliesTextView, lastDeliveryTextView, supplierTextView, releasedTextView, locationsTextView;
@@ -20,7 +20,7 @@ public class InfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
         nameTextView = (TextView) view.findViewById(R.id.nameTextView);
         nameTextView.setText("Veselí");
 

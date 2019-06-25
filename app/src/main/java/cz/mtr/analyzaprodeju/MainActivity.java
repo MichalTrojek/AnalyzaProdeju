@@ -10,15 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
 import cz.mtr.analyzaprodeju.ViewModel.DataViewModel;
-import cz.mtr.analyzaprodeju.fragments.HomeFragment;
 import cz.mtr.analyzaprodeju.room.DatabaseCopier;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,8 +25,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private DrawerLayout drawerLayout;
+
     private Button hamburgerButton;
+
     private NavigationView navigationView;
+
+    public NavController navController;
+
+
     private DataViewModel mDataViewModel;
 
     @Override
@@ -37,9 +42,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         copyDatabaseFromAssetsToWorkingDirectory();
         setupDrawerLayout();
         handleHamburgerButtonPress();
-        if (savedInstanceState == null) {
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
+
+        navigationView.setCheckedItem(R.id.nav_home);
+
+
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
 
         mDataViewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         mDataViewModel.getName().observe(this, new Observer<String>() {
@@ -51,23 +59,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-
-    private void showHomeFragment() {
-        HomeFragment fragment = HomeFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_to_left, R.anim.enter_from_bottom, R.anim.exit_to_left); //the second pair of animations is there so back button shows animations.
-        transaction.add(R.id.center_container, fragment, "HOME_FRAGMENT").commit();
-    }
-
     private void copyDatabaseFromAssetsToWorkingDirectory() {
         new DatabaseCopier(this).copy();
     }
 
     private void setupDrawerLayout() {
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -96,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.center_container, new HomeFragment()).commit();
+                navController.navigate(R.id.homeFragment);
                 break;
 
         }

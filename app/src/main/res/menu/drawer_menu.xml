@@ -1,50 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/home_text_drawer_menu" />
-
-
-        <item
-            android:id="@+id/nav_search"
-            android:icon="@drawable/search_icon"
-            android:title="@string/search_text_drawer_menu" />
-
-        <item
-            android:id="@+id/nav_import"
-            android:icon="@drawable/import_icon"
-            android:title="@string/import_data_text_drawer_menu" />
-
-
-        <item
-            android:id="@+id/nav_export"
-            android:icon="@drawable/export_icon"
-            android:title="@string/export_data_text_drawer_menu" />
-
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/settings_text_drawer_menu" />
-
-
-        <item android:title="@string/info_text_drawer_menu">
+        <item android:title="Navigace">
             <menu>
                 <item
-                    android:id="@+id/nav_about"
-                    android:icon="@drawable/about_icon"
-                    android:title="@string/about_text_drawer_menu" />
+                    android:id="@+id/nav_home"
+                    android:icon="@drawable/ic_home_black_24dp"
+                    android:title="@string/home_text_drawer_menu" />
+                <item
+                    android:id="@+id/nav_detail"
+                    android:icon="@drawable/ic_details_black_24dp"
+                    android:title="@string/detail_text_drawer_menu" />
+                <item
+                    android:id="@+id/nav_search"
+                    android:icon="@drawable/search_icon"
+                    android:title="@string/search_text_drawer_menu" />
+                <item
+                    android:id="@+id/nav_ranking"
+                    android:icon="@drawable/ic_insert_chart_black_24dp"
+                    android:title="@string/ranking_text_drawer_menu" />
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_settings_black_24dp"
+                    android:title="@string/settings_text_drawer_menu" />
             </menu>
-
-
         </item>
+
+
     </group>
+
+    <item android:title="Funkce">
+        <menu>
+            <item
+                android:id="@+id/nav_import"
+                android:icon="@drawable/import_icon"
+                android:title="@string/import_data_text_drawer_menu" />
+            <item
+                android:id="@+id/nav_export"
+                android:icon="@drawable/export_icon"
+                android:title="@string/export_data_text_drawer_menu" />
+        </menu>
+    </item>
+
+    <item android:title="@string/info_text_drawer_menu">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/about_icon"
+                android:title="@string/about_text_drawer_menu" />
+        </menu>
+
+
+    </item>
 
 
 </menu>
