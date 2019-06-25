@@ -60,4 +60,9 @@
         android:name="cz.mtr.analyzaprodeju.fragments.AboutFragment"
         android:label="fragment_abount"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
 </navigation>

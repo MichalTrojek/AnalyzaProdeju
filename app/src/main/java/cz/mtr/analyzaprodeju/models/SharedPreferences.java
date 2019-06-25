@@ -31,7 +31,7 @@ public class SharedPreferences {
     }
 
     public String getIp() {
-        return mPrefs.getString(IP_ADDRESS, "");
+        return mPrefs.getString(IP_ADDRESS, "0.0.0.0");
     }
 
     public void setIp(String ip) {

@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_about:
                 mNavController.navigate(R.id.aboutFragment);
                 break;
+            case R.id.nav_settings:
+                mNavController.navigate(R.id.settingsFragment);
+                break;
 
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
