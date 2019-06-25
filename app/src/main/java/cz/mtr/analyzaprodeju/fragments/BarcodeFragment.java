@@ -22,8 +22,8 @@ import info.androidhive.barcode.BarcodeReader;
 public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeReaderListener {
     private static final String TAG = BarcodeFragment.class.getSimpleName();
 
-    private BarcodeReader barcodeReader;
-    private FloatingActionButton stopScanningButton;
+    private BarcodeReader mBarcodeReader;
+    private FloatingActionButton mStopScanningButton;
 
 
     public BarcodeFragment() {
@@ -41,18 +41,10 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_barcode, container, false);
-        barcodeReader = (BarcodeReader) getChildFragmentManager().findFragmentById(R.id.barcode_fragment);
-        barcodeReader.setListener(this);
-        stopScanningButton = (FloatingActionButton) view.findViewById(R.id.stopScanningButton);
-//        stopScanningButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.barcodeToHome, null));
-
-
-        stopScanningButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(getView()).navigate(R.id.barcodeToInfo);
-            }
-        });
+        mBarcodeReader = (BarcodeReader) getChildFragmentManager().findFragmentById(R.id.barcode_fragment);
+        mBarcodeReader.setListener(this);
+        mStopScanningButton = (FloatingActionButton) view.findViewById(R.id.stopScanningButton);
+        mStopScanningButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.barcodeToHome, null));
         return view;
     }
 
@@ -61,8 +53,17 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getActivity(), "Barcosde: " + barcode.displayValue, Toast.LENGTH_SHORT).show();
-//                Navigation.findNavController(getView()).navigate(R.id.barcodeToInfo);
+
+                BarcodeFragmentDirections.BarcodeToDetail action = BarcodeFragmentDirections.barcodeToDetail();
+                action.setMessage(barcode.displayValue);
+
+                try {
+                    if (Navigation.findNavController(getView()).getCurrentDestination().getId() == R.id.barcodeFragment) {
+                        Navigation.findNavController(getView()).navigate(action);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

@@ -7,20 +7,21 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import cz.mtr.analyzaprodeju.repository.DataRepository;
+import cz.mtr.analyzaprodeju.room.Article;
 
-public class DataViewModel extends AndroidViewModel {
+public class DetailViewModel extends AndroidViewModel {
 
     private DataRepository mRepository;
-    private LiveData<String> mName;
+    private LiveData<Article> mArticle;
 
-    public DataViewModel(@NonNull Application application) {
+    public DetailViewModel(@NonNull Application application) {
         super(application);
         mRepository = new DataRepository(application);
-        mName = mRepository.getName();
     }
 
-    public LiveData<String> getName() {
-        return mName;
+    public LiveData<Article> getArticle(String ean) {
+        mArticle = mRepository.getArticle(ean);
+        return mArticle;
     }
 
 

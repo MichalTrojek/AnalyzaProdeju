@@ -17,7 +17,7 @@ public abstract class ArticleRoomDatabase extends RoomDatabase {
     private static volatile ArticleRoomDatabase INSTANCE;
 
 
-    public static ArticleRoomDatabase getDatabase(Context context) {
+    public static ArticleRoomDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             synchronized (ArticleRoomDatabase.class) {
                 if (INSTANCE == null) {
@@ -27,38 +27,6 @@ public abstract class ArticleRoomDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-
-
-//    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-//        @Override
-//        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-//            super.onOpen(db);
-//            new PopulateDbAsync(INSTANCE).execute();
-//        }
-//    };
-//
-//    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-//
-//        private final ArticleDao mDao;
-//
-//        PopulateDbAsync(ArticleRoomDatabase db) {
-//            mDao = db.articleDao();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(final Void... params) {
-////            mDao.deleteAll();
-////            Word word = new Word("Hello");
-////            mDao.insert(word);
-////            word = new Word("World");
-////            mDao.insert(word);
-//            String msg = mDao.selectNameByEan("1");
-//
-//
-//            Log.i(TAG, msg);
-//            return null;
-//        }
-//    }
 
 
 }

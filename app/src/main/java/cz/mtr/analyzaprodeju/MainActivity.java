@@ -10,30 +10,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
-import cz.mtr.analyzaprodeju.ViewModel.DataViewModel;
 import cz.mtr.analyzaprodeju.room.DatabaseCopier;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private DrawerLayout drawerLayout;
+    private DrawerLayout mDrawerLayout;
 
-    private Button hamburgerButton;
+    private Button mHamburgerButton;
 
-    private NavigationView navigationView;
+    private NavigationView mNavigationView;
 
-    public NavController navController;
+    public NavController mNavController;
 
-
-    private DataViewModel mDataViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +38,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupDrawerLayout();
         handleHamburgerButtonPress();
 
-        navigationView.setCheckedItem(R.id.nav_home);
+        mNavigationView.setCheckedItem(R.id.nav_home);
 
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
 
-        mDataViewModel = ViewModelProviders.of(this).get(DataViewModel.class);
-        mDataViewModel.getName().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-//                Toast.makeText(getApplicationContext(), "Nazev " + s, Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
 
@@ -64,17 +52,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupDrawerLayout() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(this);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mNavigationView = findViewById(R.id.navigationView);
+        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     private void handleHamburgerButtonPress() {
-        hamburgerButton = (Button) findViewById(R.id.hamburger_button);
-        hamburgerButton.setOnClickListener(new View.OnClickListener() {
+        mHamburgerButton = (Button) findViewById(R.id.hamburger_button);
+        mHamburgerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawerLayout.openDrawer(Gravity.LEFT);
+                mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         });
     }
@@ -82,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -94,11 +82,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                navController.navigate(R.id.homeFragment);
+                mNavController.navigate(R.id.homeFragment);
+                break;
+            case R.id.nav_about:
+                mNavController.navigate(R.id.aboutFragment);
                 break;
 
         }
-        drawerLayout.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 

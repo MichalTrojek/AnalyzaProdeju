@@ -9,7 +9,8 @@ import androidx.room.Query;
 public interface ArticleDao {
 
 
-    @Query("SELECT name FROM articles WHERE ean= :ean")
-    public LiveData<String> selectNameByEan(String ean);
+    @Query("SELECT * FROM articles WHERE ean= :ean")
+    public LiveData<Article> getArticle(String ean);
+
 
 }
