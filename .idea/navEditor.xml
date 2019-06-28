@@ -41,6 +41,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="detailToNotFound">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -84,8 +89,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="842" />
-                            <option name="y" value="75" />
+                            <option name="x" value="771" />
+                            <option name="y" value="-17" />
                           </Point>
                         </option>
                       </LayoutPositions>

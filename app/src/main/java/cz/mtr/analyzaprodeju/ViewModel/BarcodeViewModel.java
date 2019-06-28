@@ -19,8 +19,8 @@ public class BarcodeViewModel extends AndroidViewModel {
 
     private MutableLiveData<Status> mStatus = new MutableLiveData<>();
     private DataRepository mRepository;
-    private Article articleDB;
-    private SharedArticle articleAnalysis;
+    private SharedArticle mArticleDB;
+    private SharedArticle mArticleAnalysis;
 
 
     public BarcodeViewModel(@NonNull Application application) {
@@ -32,23 +32,30 @@ public class BarcodeViewModel extends AndroidViewModel {
         return mStatus;
     }
 
-    public Article getArticleDb() {
-        return articleDB;
+    public SharedArticle getArticleDb() {
+        return mArticleDB;
     }
 
-    public SharedArticle getArticleAnalysis() {
-        return articleAnalysis;
+    public SharedArticle getmArticleAnalysis() {
+        return mArticleAnalysis;
     }
 
 
     public void findArticle(String ean) {
         if (Model.getInstance().getAnalysis().containsKey(ean)) {
-            articleAnalysis = Model.getInstance().getAnalysis().get(ean);
+            mArticleAnalysis = Model.getInstance().getAnalysis().get(ean);
             mStatus.setValue(Status.ANALYSIS);
-
         } else {
-            articleDB = mRepository.getArticle(ean);
-            if (articleDB != null) {
+
+            Article article = mRepository.getArticle(ean);
+
+
+            if (article != null) {
+                mArticleDB = new SharedArticle("", article.getEan(), article.getName(), "", "", "", "",
+                        "", "", article.getPrice(), "", "", "",
+                        "", "", "", "",
+                        "", "", "", "", "",
+                        "");
                 mStatus.setValue(Status.DATABASE);
             } else {
                 mStatus.setValue(Status.NOT_FOUND);

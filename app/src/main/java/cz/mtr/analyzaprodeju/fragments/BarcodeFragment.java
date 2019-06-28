@@ -47,10 +47,10 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
 
                 switch (status) {
                     case NOT_FOUND:
-                        Toast.makeText(getActivity(), "EAN nenalezen", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "EAN NENALEZEN", Toast.LENGTH_SHORT).show();
                         break;
                     case DATABASE:
-                        Toast.makeText(getActivity(), "DATABASE", Toast.LENGTH_SHORT).show();
+                        goToNotFoundFragment();
                         break;
                     case ANALYSIS:
                         goToDetailFragment();
@@ -62,11 +62,22 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
 
     }
 
+    private void goToNotFoundFragment() {
+        try {
+            BarcodeFragmentDirections.BarcodeToNotFound action = BarcodeFragmentDirections.barcodeToNotFound(mViewModel.getArticleDb());
+            if (Navigation.findNavController(getView()).getCurrentDestination().getId() == R.id.barcodeFragment) {
+                Navigation.findNavController(getView()).navigate(action);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     private void goToDetailFragment() {
-        BarcodeFragmentDirections.BarcodeToDetail action = BarcodeFragmentDirections.barcodeToDetail(mViewModel.getArticleAnalysis());
         try {
-
+            BarcodeFragmentDirections.BarcodeToDetail action = BarcodeFragmentDirections.barcodeToDetail(mViewModel.getmArticleAnalysis());
             if (Navigation.findNavController(getView()).getCurrentDestination().getId() == R.id.barcodeFragment) {
                 Navigation.findNavController(getView()).navigate(action);
             }
