@@ -9,8 +9,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import cz.mtr.analyzaprodeju.shared.ArticleRow;
-import cz.mtr.analyzaprodeju.shared.ExportArticle;
+import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
+import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class SharedPreferences {
 
@@ -51,7 +51,7 @@ public class SharedPreferences {
     }
 
 
-    public void setAnalysis(HashMap<String, ArticleRow> analysis) {
+    public void setAnalysis(HashMap<String, SharedArticle> analysis) {
         mEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(analysis);
@@ -60,12 +60,12 @@ public class SharedPreferences {
     }
 
 
-    public HashMap<String, ArticleRow> getAnalysis() {
+    public HashMap<String, SharedArticle> getAnalysis() {
         Gson gson = new Gson();
         String json = mPrefs.getString(ANALYSIS, null);
-        Type type = new TypeToken<HashMap<String, ArticleRow>>() {
+        Type type = new TypeToken<HashMap<String, SharedArticle>>() {
         }.getType();
-        HashMap<String, ArticleRow> analysis;
+        HashMap<String, SharedArticle> analysis;
         analysis = gson.fromJson(json, type);
         if (analysis == null) {
             analysis = new HashMap<>();
@@ -73,7 +73,7 @@ public class SharedPreferences {
         return analysis;
     }
 
-    public void setOrders(ArrayList<ExportArticle> orders) {
+    public void setOrders(ArrayList<ExportSharedArticle> orders) {
         mEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(orders);
@@ -81,7 +81,7 @@ public class SharedPreferences {
         mEditor.apply();
     }
 
-    public void setReturns(ArrayList<ExportArticle> returns) {
+    public void setReturns(ArrayList<ExportSharedArticle> returns) {
         mEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(returns);
@@ -89,12 +89,12 @@ public class SharedPreferences {
         mEditor.apply();
     }
 
-    public ArrayList<ExportArticle> getOrders() {
+    public ArrayList<ExportSharedArticle> getOrders() {
         Gson gson = new Gson();
         String json = mPrefs.getString(ORDERS, null);
-        Type type = new TypeToken<ArrayList<ExportArticle>>() {
+        Type type = new TypeToken<ArrayList<ExportSharedArticle>>() {
         }.getType();
-        ArrayList<ExportArticle> orders;
+        ArrayList<ExportSharedArticle> orders;
         orders = gson.fromJson(json, type);
         if (orders == null) {
             orders = new ArrayList<>();
@@ -102,12 +102,12 @@ public class SharedPreferences {
         return orders;
     }
 
-    public ArrayList<ExportArticle> getReturns() {
+    public ArrayList<ExportSharedArticle> getReturns() {
         Gson gson = new Gson();
         String json = mPrefs.getString(RETURNS, null);
-        Type type = new TypeToken<ArrayList<ExportArticle>>() {
+        Type type = new TypeToken<ArrayList<ExportSharedArticle>>() {
         }.getType();
-        ArrayList<ExportArticle> returns;
+        ArrayList<ExportSharedArticle> returns;
         returns = gson.fromJson(json, type);
         if (returns == null) {
             returns = new ArrayList<>();

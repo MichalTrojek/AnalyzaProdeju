@@ -11,8 +11,8 @@
         android:id="@+id/logoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
         android:contentDescription="@string/content_description_for_logo"
-        app:layout_constraintBottom_toTopOf="@+id/scan_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +24,17 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="64dp"
+        android:backgroundTint="#F44438"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="center"
+        android:focusable="true"
+        app:fabCustomSize="76dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/search_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView"
+        app:maxImageSize="48dp"
+        app:srcCompat="@drawable/sharp_search_white_48" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.google.android.gms.vision.barcode.Barcode;
@@ -17,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.ViewModel.BarcodeViewModel;
 import info.androidhive.barcode.BarcodeReader;
 
 public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeReaderListener {
@@ -24,6 +27,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
 
     private BarcodeReader mBarcodeReader;
     private FloatingActionButton mStopScanningButton;
+    private BarcodeViewModel mViewModel;
 
 
     public BarcodeFragment() {
@@ -34,6 +38,40 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+        }
+        mViewModel = ViewModelProviders.of(this).get(BarcodeViewModel.class);
+        mViewModel.getStatus().observe(this, new Observer<BarcodeViewModel.Status>() {
+            @Override
+            public void onChanged(BarcodeViewModel.Status status) {
+
+
+                switch (status) {
+                    case NOT_FOUND:
+                        Toast.makeText(getActivity(), "EAN nenalezen", Toast.LENGTH_SHORT).show();
+                        break;
+                    case DATABASE:
+                        Toast.makeText(getActivity(), "DATABASE", Toast.LENGTH_SHORT).show();
+                        break;
+                    case ANALYSIS:
+                        goToDetailFragment();
+                        break;
+
+                }
+            }
+        });
+
+    }
+
+
+    private void goToDetailFragment() {
+        BarcodeFragmentDirections.BarcodeToDetail action = BarcodeFragmentDirections.barcodeToDetail(mViewModel.getArticleAnalysis());
+        try {
+
+            if (Navigation.findNavController(getView()).getCurrentDestination().getId() == R.id.barcodeFragment) {
+                Navigation.findNavController(getView()).navigate(action);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -54,16 +92,9 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
             @Override
             public void run() {
 
-                BarcodeFragmentDirections.BarcodeToDetail action = BarcodeFragmentDirections.barcodeToDetail();
-                action.setMessage(barcode.displayValue);
+                mViewModel.findArticle(barcode.displayValue);
 
-                try {
-                    if (Navigation.findNavController(getView()).getCurrentDestination().getId() == R.id.barcodeFragment) {
-                        Navigation.findNavController(getView()).navigate(action);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
             }
         });
     }

@@ -50,10 +50,10 @@
         android:name="cz.mtr.analyzaprodeju.fragments.DetailFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_detail">
+
         <argument
-            android:name="message"
-            android:defaultValue="No Message"
-            app:argType="string" />
+            android:name="articleAnalys"
+            app:argType="cz.mtr.analyzaprodeju.shared.SharedArticle" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -65,4 +65,9 @@
         android:name="cz.mtr.analyzaprodeju.fragments.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/notFoundFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.NotFoundFragment"
+        android:label="not_found_fragment"
+        tools:layout="@layout/not_found_fragment" />
 </navigation>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Button mHamburgerButton;
     private NavigationView mNavigationView;
     private NavController mNavController;
+    private AlertDialog loadingAnalysisDialog;
 
 
     @Override
@@ -85,10 +87,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_settings:
                 mNavController.navigate(R.id.settingsFragment);
                 break;
+            case R.id.nav_import:
+                handleImport();
+                break;
+
 
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void handleImport() {
+        Model.getInstance().clearAnalysis();
+        Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
+        client.execute("analyza");
+
+    }
+
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+
+////        Model.getInstance().saveOrdersAndReturns();
+//    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Model.getInstance().loadAnalysis();
     }
 
 

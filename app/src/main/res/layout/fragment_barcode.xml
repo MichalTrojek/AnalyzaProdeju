@@ -7,7 +7,7 @@
     android:id="@+id/barcode_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="25dp">
+    android:elevation="50dp">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -34,9 +34,9 @@
         android:background="@drawable/rounded_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.413">
 
         <fragment
             android:id="@+id/barcode_fragment"
@@ -57,12 +57,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:backgroundTint="#F44438"
+        android:scaleType="center"
         android:clickable="true"
+        android:focusable="true"
+        app:fabCustomSize="76dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:srcCompat="@drawable/shutdown" />
+        app:maxImageSize="48dp"
+        app:srcCompat="@drawable/sharp_power_settings_new_white_48" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ public abstract class ArticleRoomDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (ArticleRoomDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ArticleRoomDatabase.class, "BooksDatabase.db").build();
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ArticleRoomDatabase.class, "BooksDatabase.db").allowMainThreadQueries().build();
                 }
             }
         }
@@ -30,5 +30,3 @@ public abstract class ArticleRoomDatabase extends RoomDatabase {
 
 
 }
-
-
