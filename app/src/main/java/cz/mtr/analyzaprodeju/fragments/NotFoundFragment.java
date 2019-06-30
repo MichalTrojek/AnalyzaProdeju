@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.ViewModel.NotFoundViewModel;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class NotFoundFragment extends Fragment {

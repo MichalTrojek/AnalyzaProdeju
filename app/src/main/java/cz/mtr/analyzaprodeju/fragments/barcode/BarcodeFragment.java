@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments;
+package cz.mtr.analyzaprodeju.fragments.barcode;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.ViewModel.BarcodeViewModel;
 import info.androidhive.barcode.BarcodeReader;
 
 public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeReaderListener {

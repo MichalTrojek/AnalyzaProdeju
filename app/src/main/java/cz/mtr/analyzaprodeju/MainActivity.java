@@ -16,8 +16,9 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
+import cz.mtr.analyzaprodeju.Networks.Client;
 import cz.mtr.analyzaprodeju.models.Model;
-import cz.mtr.analyzaprodeju.room.DatabaseCopier;
+import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getSimpleName();

@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments;
+package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.ViewModel.DetailViewModel;
-import cz.mtr.analyzaprodeju.datastructures.DisplayableArticle;
+import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 
 public class DetailFragment extends Fragment {
     private static final String TAG = DetailFragment.class.getSimpleName();

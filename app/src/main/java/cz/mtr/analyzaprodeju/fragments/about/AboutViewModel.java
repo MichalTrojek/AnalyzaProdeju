@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.ViewModel;
+package cz.mtr.analyzaprodeju.fragments.about;
 
 import android.app.Application;
 

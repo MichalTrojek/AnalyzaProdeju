@@ -2,9 +2,9 @@ package cz.mtr.analyzaprodeju.repository;
 
 import android.app.Application;
 
-import cz.mtr.analyzaprodeju.room.Article;
-import cz.mtr.analyzaprodeju.room.ArticleDao;
-import cz.mtr.analyzaprodeju.room.ArticleRoomDatabase;
+import cz.mtr.analyzaprodeju.repository.room.Article;
+import cz.mtr.analyzaprodeju.repository.room.ArticleDao;
+import cz.mtr.analyzaprodeju.repository.room.ArticleRoomDatabase;
 
 public class DataRepository {
 

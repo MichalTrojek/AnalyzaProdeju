@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments;
+package cz.mtr.analyzaprodeju.fragments.settings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.ViewModel.SettingsViewModel;
 
 public class SettingsFragment extends Fragment {
 

@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.models.Model;
-import cz.mtr.analyzaprodeju.ranking.other.Item;
+import cz.mtr.analyzaprodeju.fragments.ranking.other.Item;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class RankingRepository {

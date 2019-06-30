@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.ViewModel;
+package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.app.Application;
 
@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import cz.mtr.analyzaprodeju.datastructures.DisplayableArticle;
+import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class DetailViewModel extends AndroidViewModel {

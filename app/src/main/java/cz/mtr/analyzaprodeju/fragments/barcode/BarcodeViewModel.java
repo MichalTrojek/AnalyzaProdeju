@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.ViewModel;
+package cz.mtr.analyzaprodeju.fragments.barcode;
 
 import android.app.Application;
 
@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.DataRepository;
-import cz.mtr.analyzaprodeju.room.Article;
+import cz.mtr.analyzaprodeju.repository.room.Article;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class BarcodeViewModel extends AndroidViewModel {

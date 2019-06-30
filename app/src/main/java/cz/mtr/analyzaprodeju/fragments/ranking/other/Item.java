@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.ranking.other;
+package cz.mtr.analyzaprodeju.fragments.ranking.other;
 
 public class Item {
 

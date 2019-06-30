@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.ranking.viewmodel;
+package cz.mtr.analyzaprodeju.fragments.ranking.viewmodel;
 
 import android.app.Application;
 
@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import java.util.List;
 
-import cz.mtr.analyzaprodeju.ranking.other.Item;
+import cz.mtr.analyzaprodeju.fragments.ranking.other.Item;
 import cz.mtr.analyzaprodeju.repository.RankingRepository;
 
 public class StoreRankingViewModel extends AndroidViewModel {

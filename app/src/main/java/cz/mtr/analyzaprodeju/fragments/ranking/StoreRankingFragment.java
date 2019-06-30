@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.ranking;
+package cz.mtr.analyzaprodeju.fragments.ranking;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.ranking.adapter.ItemAdapter;
-import cz.mtr.analyzaprodeju.ranking.viewmodel.StoreRankingViewModel;
+import cz.mtr.analyzaprodeju.fragments.ranking.adapter.ItemAdapter;
+import cz.mtr.analyzaprodeju.fragments.ranking.viewmodel.StoreRankingViewModel;
 
 public class StoreRankingFragment extends Fragment {
 

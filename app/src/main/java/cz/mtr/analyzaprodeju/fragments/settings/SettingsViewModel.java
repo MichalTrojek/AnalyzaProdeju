@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.ViewModel;
+package cz.mtr.analyzaprodeju.fragments.settings;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

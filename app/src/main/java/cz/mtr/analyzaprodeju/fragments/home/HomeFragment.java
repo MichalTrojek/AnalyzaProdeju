@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments;
+package cz.mtr.analyzaprodeju.fragments.home;
 
 import android.content.Context;
 import android.os.Bundle;

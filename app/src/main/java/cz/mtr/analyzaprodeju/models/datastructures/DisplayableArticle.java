@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.datastructures;
+package cz.mtr.analyzaprodeju.models.datastructures;
 
 import java.io.Serializable;
 

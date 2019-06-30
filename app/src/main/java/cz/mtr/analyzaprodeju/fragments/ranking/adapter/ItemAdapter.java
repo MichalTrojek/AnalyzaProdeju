@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.ranking.adapter;
+package cz.mtr.analyzaprodeju.fragments.ranking.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.ranking.other.Item;
+import cz.mtr.analyzaprodeju.fragments.ranking.other.Item;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 

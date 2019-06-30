@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.room;
+package cz.mtr.analyzaprodeju.repository.room;
 
 import android.content.Context;
 
