@@ -77,7 +77,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
 
     private void goToDetailFragment() {
         try {
-            BarcodeFragmentDirections.BarcodeToDetail action = BarcodeFragmentDirections.barcodeToDetail(mViewModel.getmArticleAnalysis());
+            BarcodeFragmentDirections.BarcodeToDetail action = BarcodeFragmentDirections.barcodeToDetail(mViewModel.getArticleAnalysis());
             if (Navigation.findNavController(getView()).getCurrentDestination().getId() == R.id.barcodeFragment) {
                 Navigation.findNavController(getView()).navigate(action);
             }
@@ -102,10 +102,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
                 mViewModel.findArticle(barcode.displayValue);
-
-
             }
         });
     }

@@ -40,8 +40,6 @@ public class NotFoundFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(NotFoundViewModel.class);
-
-
         mViewModel.getArticleDb(NotFoundFragmentArgs.fromBundle(getArguments()).getArticleDb()).observe(getViewLifecycleOwner(), new Observer<SharedArticle>() {
             @Override
             public void onChanged(SharedArticle article) {

@@ -90,8 +90,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_import:
                 handleImport();
                 break;
-
-
+            case R.id.nav_ranking:
+                mNavController.navigate(R.id.rankingFragment);
+                break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -101,8 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Model.getInstance().clearAnalysis();
         Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
         client.execute("analyza");
-
     }
+
+
 
 //    @Override
 //    public void onStop() {

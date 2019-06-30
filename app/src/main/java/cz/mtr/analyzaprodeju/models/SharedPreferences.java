@@ -44,6 +44,7 @@ public class SharedPreferences {
         return mPrefs.getInt(DATABASE_VERSION, -99);
     }
 
+
     public void setCurrentDatabaseVersion(int currentDatabaseVersion) {
         mEditor = mPrefs.edit();
         mEditor.putInt(DATABASE_VERSION, currentDatabaseVersion);

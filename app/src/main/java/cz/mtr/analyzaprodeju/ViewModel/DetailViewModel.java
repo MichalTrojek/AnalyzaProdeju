@@ -23,7 +23,6 @@ public class DetailViewModel extends AndroidViewModel {
 
     }
 
-
     public MutableLiveData<DisplayableArticle> getArticle(SharedArticle a) {
         DisplayableArticle article = new DisplayableArticle(a.getRanking(), a.getEan(), a.getName(), a.getSales1(), a.getSales2()
                 , a.getRevenue(), a.getStored(), a.getDaysOfSupplies(), a.getLocation(), a.getPrice(), a.getSupplier(),
@@ -32,7 +31,6 @@ public class DetailViewModel extends AndroidViewModel {
                 a.getSales2DateTo(), a.getSales2Days());
         mArticleFromAnalysis.setValue(article);
         return mArticleFromAnalysis;
-//        mArticleFromAnalysis.postValue(article);
     }
 
 

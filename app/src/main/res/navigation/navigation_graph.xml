@@ -40,8 +40,7 @@
             app:enterAnim="@anim/enter_from_bottom"
             app:exitAnim="@anim/exit_to_top"
             app:launchSingleTop="false"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@+id/homeFragment" />
         <action
             android:id="@+id/barcodeToNotFound"
             app:destination="@id/notFoundFragment"
@@ -81,4 +80,14 @@
             android:name="ArticleDb"
             app:argType="cz.mtr.analyzaprodeju.shared.SharedArticle" />
     </fragment>
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="cz.mtr.analyzaprodeju.ranking.StoreRankingFragment"
+        android:label="ranking_fragment"
+        tools:layout="@layout/storeranking_fragment" />
+    <fragment
+        android:id="@+id/tabFragment"
+        android:name="cz.mtr.analyzaprodeju.ranking.TabFragment"
+        android:label="tab_fragment"
+        tools:layout="@layout/tab_fragment" />
 </navigation>

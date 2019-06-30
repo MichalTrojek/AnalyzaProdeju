@@ -12,10 +12,6 @@
                     android:icon="@drawable/ic_home_black_24dp"
                     android:title="@string/home_text_drawer_menu" />
                 <item
-                    android:id="@+id/nav_detail"
-                    android:icon="@drawable/ic_details_black_24dp"
-                    android:title="@string/detail_text_drawer_menu" />
-                <item
                     android:id="@+id/nav_search"
                     android:icon="@drawable/search_icon"
                     android:title="@string/search_text_drawer_menu" />

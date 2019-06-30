@@ -36,7 +36,7 @@ public class BarcodeViewModel extends AndroidViewModel {
         return mArticleDB;
     }
 
-    public SharedArticle getmArticleAnalysis() {
+    public SharedArticle getArticleAnalysis() {
         return mArticleAnalysis;
     }
 
@@ -46,10 +46,7 @@ public class BarcodeViewModel extends AndroidViewModel {
             mArticleAnalysis = Model.getInstance().getAnalysis().get(ean);
             mStatus.setValue(Status.ANALYSIS);
         } else {
-
             Article article = mRepository.getArticle(ean);
-
-
             if (article != null) {
                 mArticleDB = new SharedArticle("", article.getEan(), article.getName(), "", "", "", "",
                         "", "", article.getPrice(), "", "", "",
