@@ -19,17 +19,15 @@ public class ExportSharedArticle extends SharedArticle {
 
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        if (!(obj instanceof ExportSharedArticle)) {
-            return false;
-        }
+        ExportSharedArticle member = (ExportSharedArticle) o;
 
-        ExportSharedArticle other = (ExportSharedArticle) obj;
-        return this.getEan() == other.getEan();
+        if (!getEan().equals(member.getEan())) return false;
+
+        return true;
     }
 
 }

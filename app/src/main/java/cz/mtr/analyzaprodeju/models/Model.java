@@ -43,23 +43,26 @@ public class Model {
     }
 
     public void addReturns(ExportSharedArticle a) {
-        if (returns.contains(a)) {
-            returns.remove(a);
-            returns.add(a);
-        } else {
-            returns.add(a);
+        if (!"".equals(a.getExportAmount())) {
+            if (returns.contains(a)) {
+                returns.remove(a);
+                returns.add(a);
+            } else {
+                returns.add(a);
+            }
         }
     }
 
 
     public void addOrders(ExportSharedArticle a) {
-        if (orders.contains(a)) {
-            orders.remove(a);
-            orders.add(a);
-        } else {
-            orders.add(a);
+        if (!"".equals(a.getExportAmount())) {
+            if (orders.contains(a)) {
+                orders.remove(a);
+                orders.add(a);
+            } else {
+                orders.add(a);
+            }
         }
-
     }
 
     public ArrayList<ExportSharedArticle> getOrders() {
