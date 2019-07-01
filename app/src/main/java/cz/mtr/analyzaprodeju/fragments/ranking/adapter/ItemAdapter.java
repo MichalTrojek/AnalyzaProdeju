@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.fragments.ranking.other.Item;
+import cz.mtr.analyzaprodeju.fragments.ranking.other.rankingItem;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
-    private List<Item> items = new ArrayList<>();
+    private List<rankingItem> rankingItems = new ArrayList<>();
 
     @NonNull
     @Override
@@ -27,19 +27,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-        Item currentItem = items.get(position);
-        holder.mNameTextView.setText(currentItem.getName());
-        holder.mRankTextView.setText(currentItem.getRank());
+        rankingItem currentRankingItem = rankingItems.get(position);
+        holder.mNameTextView.setText(currentRankingItem.getName());
+        holder.mRankTextView.setText(currentRankingItem.getRank());
 
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return rankingItems.size();
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setRankingItems(List<rankingItem> rankingItems) {
+        this.rankingItems = rankingItems;
         notifyDataSetChanged();
     }
 

@@ -1,14 +1,25 @@
 package cz.mtr.analyzaprodeju.fragments.ranking.other;
 
-public class Item {
+public class rankingItem {
 
 
     private String rank;
     private String name;
+    private String amount;
 
-    public Item(String rank, String name) {
+    public rankingItem(String rank, String name) {
         this.rank = rank;
         this.name = name;
+    }
+
+    public rankingItem(String rank, String name, String amount) {
+        this(rank, name);
+        amount = amount;
+    }
+
+
+    public String getAmount(){
+        return this.amount;
     }
 
     public String getRank() {

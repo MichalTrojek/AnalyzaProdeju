@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.ranking.adapter.ItemAdapter;
-import cz.mtr.analyzaprodeju.fragments.ranking.viewmodel.StoreRankingViewModel;
 
 public class StoreRankingFragment extends Fragment {
 
@@ -46,7 +45,7 @@ public class StoreRankingFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(StoreRankingViewModel.class);
-        mAdapter.setItems(mViewModel.getAllItems());
+        mAdapter.setRankingItems(mViewModel.getAllItems());
         mInfoTextView.setText(mViewModel.getInfo());
     }
 

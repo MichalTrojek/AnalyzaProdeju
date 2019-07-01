@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.Networks;
+package cz.mtr.analyzaprodeju.Network;
 
 import android.content.Context;
 import android.os.AsyncTask;

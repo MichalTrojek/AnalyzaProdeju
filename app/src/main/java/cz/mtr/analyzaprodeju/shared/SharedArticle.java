@@ -36,20 +36,20 @@ public class SharedArticle implements Serializable {
                          String sales1DateSince, String sales1DateTo, String sales1Days, String sales2DateSince, String sales2DateTo,
                          String sales2Days) {
         super();
-        this.ranking = ranking;
-        this.ean = ean;
-        this.name = name;
-        this.sales1 = sales1;
-        this.sales2 = sales2;
-        this.revenue = revenue;
-        this.stored = stored;
-        this.daysOfSupplies = daysOfSupplies;
-        this.location = location;
-        this.price = price;
-        this.supplier = supplier;
-        this.author = author;
-        this.dateOfLastSale = dateOfLastSale;
-        this.dateOfLastDelivery = dateOfLastDelivery;
+        this.setRanking(ranking);
+        this.setEan(ean);
+        this.setName(name);
+        this.setSales1(sales1);
+        this.setSales2(sales2);
+        this.setRevenue(revenue);
+        this.setStored(stored);
+        this.setDaysOfSupplies(daysOfSupplies);
+        this.setLocation(location);
+        this.setPrice(price);
+        this.setSupplier(supplier);
+        this.setAuthor(author);
+        this.setDateOfLastSale(dateOfLastSale);
+        this.setDateOfLastDelivery(dateOfLastDelivery);
         this.releaseDate = releaseDate;
         this.commision = commision;
         this.rankingEshop = rankingEshop;
@@ -157,4 +157,59 @@ public class SharedArticle implements Serializable {
         return sales2Days;
     }
 
+    public void setRanking(String ranking) {
+        this.ranking = ranking;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSales1(String sales1) {
+        this.sales1 = sales1;
+    }
+
+    public void setSales2(String sales2) {
+        this.sales2 = sales2;
+    }
+
+    public void setRevenue(String revenue) {
+        this.revenue = revenue;
+    }
+
+    public void setStored(String stored) {
+        this.stored = stored;
+    }
+
+    public void setDaysOfSupplies(String daysOfSupplies) {
+        this.daysOfSupplies = daysOfSupplies;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setDateOfLastSale(String dateOfLastSale) {
+        this.dateOfLastSale = dateOfLastSale;
+    }
+
+    public void setDateOfLastDelivery(String dateOfLastDelivery) {
+        this.dateOfLastDelivery = dateOfLastDelivery;
+    }
 }

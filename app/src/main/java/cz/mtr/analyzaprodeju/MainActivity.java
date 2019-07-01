@@ -16,7 +16,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
-import cz.mtr.analyzaprodeju.Networks.Client;
+import cz.mtr.analyzaprodeju.Network.Client;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
 
@@ -93,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_ranking:
                 mNavController.navigate(R.id.rankingFragment);
+                break;
+            case R.id.nav_printer:
+                mNavController.navigate(R.id.printerFragment);
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

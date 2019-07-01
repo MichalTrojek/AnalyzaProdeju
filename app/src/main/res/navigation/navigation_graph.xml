@@ -73,7 +73,7 @@
         tools:layout="@layout/settings_fragment" />
     <fragment
         android:id="@+id/notFoundFragment"
-        android:name="cz.mtr.analyzaprodeju.fragments.NotFoundFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.NotFoundDetail.NotFoundFragment"
         android:label="not_found_fragment"
         tools:layout="@layout/not_found_fragment">
         <argument
@@ -86,8 +86,8 @@
         android:label="ranking_fragment"
         tools:layout="@layout/storeranking_fragment" />
     <fragment
-        android:id="@+id/tabFragment"
-        android:name="cz.mtr.analyzaprodeju.fragments.ranking.TabFragment"
-        android:label="tab_fragment"
-        tools:layout="@layout/tab_fragment" />
+        android:id="@+id/printerFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.printer.PrinterFragment"
+        android:label="printer_fragment"
+        tools:layout="@layout/printer_fragment" />
 </navigation>

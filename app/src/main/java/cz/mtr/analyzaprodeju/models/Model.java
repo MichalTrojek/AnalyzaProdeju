@@ -2,16 +2,22 @@ package cz.mtr.analyzaprodeju.models;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class Model {
+
+    public static final String TAG = Model.class.getSimpleName();
 
     private static volatile Model INSTANCE;
     private HashMap<String, SharedArticle> analysis = new HashMap<>();
     private SharedPreferences mPrefs;
     private Context mContext;
+    private ArrayList<ExportSharedArticle> orders = new ArrayList<>();
+    private ArrayList<ExportSharedArticle> returns = new ArrayList<>();
 
 
     public Model() {
@@ -34,6 +40,34 @@ public class Model {
         this.mContext = context;
         mPrefs = new SharedPreferences(mContext);
 
+    }
+
+    public void addReturns(ExportSharedArticle a) {
+        if (returns.contains(a)) {
+            returns.remove(a);
+            returns.add(a);
+        } else {
+            returns.add(a);
+        }
+    }
+
+
+    public void addOrders(ExportSharedArticle a) {
+        if (orders.contains(a)) {
+            orders.remove(a);
+            orders.add(a);
+        } else {
+            orders.add(a);
+        }
+
+    }
+
+    public ArrayList<ExportSharedArticle> getOrders() {
+        return orders;
+    }
+
+    public ArrayList<ExportSharedArticle> getReturns() {
+        return returns;
     }
 
 
