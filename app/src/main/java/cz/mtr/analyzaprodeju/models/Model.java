@@ -82,6 +82,16 @@ public class Model {
         }
     }
 
+    public void saveOrdersAndReturns() {
+        mPrefs.setOrders(orders);
+        mPrefs.setReturns(returns);
+    }
+
+    public void loadOrdersAndReturns() {
+        orders = mPrefs.getOrders();
+        returns = mPrefs.getReturns();
+    }
+
     public HashMap<String, SharedArticle> getAnalysis() {
         return this.analysis;
     }

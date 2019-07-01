@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
+import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class DetailViewModel extends AndroidViewModel {
@@ -31,6 +33,26 @@ public class DetailViewModel extends AndroidViewModel {
                 a.getSales2DateTo(), a.getSales2Days());
         mArticleFromAnalysis.setValue(article);
         return mArticleFromAnalysis;
+    }
+
+    public void saveArticleAndAmountOrders(DisplayableArticle article, String amount) {
+        ExportSharedArticle exportArticle = new ExportSharedArticle();
+        exportArticle.setEan(article.getEan());
+        exportArticle.setName(article.getName());
+        exportArticle.setSupplier(article.getSupplier());
+        exportArticle.setExportAmount(amount);
+        exportArticle.setLocation(article.getLocation());
+        Model.getInstance().addOrders(exportArticle);
+    }
+
+    public void saveArticleAndAmountReturns(DisplayableArticle article, String amount) {
+        ExportSharedArticle exportArticle = new ExportSharedArticle();
+        exportArticle.setEan(article.getEan());
+        exportArticle.setName(article.getName());
+        exportArticle.setSupplier(article.getSupplier());
+        exportArticle.setExportAmount(amount);
+        exportArticle.setLocation(article.getLocation());
+        Model.getInstance().addReturns(exportArticle);
     }
 
 

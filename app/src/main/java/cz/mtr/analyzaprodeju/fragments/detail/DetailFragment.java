@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -21,7 +22,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
-import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class DetailFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = DetailFragment.class.getSimpleName();
@@ -30,9 +30,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private FloatingActionButton addFob, returnFob, orderFob;
     private Animation fab_open, fab_close, fab_rotate_anticlock, fab_rotate_clock;
     private EditText ordersEditText, returnsEditText;
-    private SharedArticle selectedArticle;
+    private DisplayableArticle selectedArticle;
     private DetailViewModel mViewModel;
     private boolean isOpen = false;
+    private ScrollView scrollView2;
 
     @Nullable
     @Override
@@ -46,10 +47,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         returnFob.setOnClickListener(this);
         orderFob.setOnClickListener(this);
 
+        scrollView2 = view.findViewById(R.id.scrollView2);
         ordersEditText = view.findViewById(R.id.ordersInput);
         returnsEditText = view.findViewById(R.id.returnsInput);
         ordersEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         returnsEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
         return view;
     }
 
@@ -61,6 +64,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         mViewModel.getArticle(DetailFragmentArgs.fromBundle(getArguments()).getArticleAnalys()).observe(getViewLifecycleOwner(), new Observer<DisplayableArticle>() {
             @Override
             public void onChanged(DisplayableArticle displayableArticle) {
+                selectedArticle = displayableArticle;
                 nameTextView.setText(displayableArticle.getName());
                 eanTextView.setText(displayableArticle.getEan());
                 priceTextView.setText(displayableArticle.getPrice() + ",- Kč");
@@ -144,6 +148,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         ordersEditText.setVisibility(View.INVISIBLE);
         returnsEditText.setVisibility(View.INVISIBLE);
         isOpen = false;
+        scrollView2.setVisibility(View.VISIBLE);
     }
 
     private void open() {
@@ -157,16 +162,18 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         ordersEditText.getText().clear();
         returnsEditText.getText().clear();
         isOpen = true;
+        scrollView2.setVisibility(View.INVISIBLE);
+
     }
 
     private void handleOrdersClick() {
-//        mViewModel.saveArticleAndAmountOrders(selectedArticle, ordersEditText.getText().toString());
+        mViewModel.saveArticleAndAmountOrders(selectedArticle, ordersEditText.getText().toString());
         close();
         closeKeyboard();
     }
 
     private void handleReturnsClick() {
-//        mViewModel.saveArticleAndAmountReturns(selectedArticle, returnsEditText.getText().toString());
+        mViewModel.saveArticleAndAmountReturns(selectedArticle, returnsEditText.getText().toString());
         closeKeyboard();
         close();
     }
@@ -175,5 +182,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
+
 
 }

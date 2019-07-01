@@ -109,17 +109,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-
-////        Model.getInstance().saveOrdersAndReturns();
-//    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Model.getInstance().saveOrdersAndReturns();
+    }
 
     @Override
     public void onStart() {
         super.onStart();
+        Model.getInstance().loadOrdersAndReturns();
         Model.getInstance().loadAnalysis();
     }
 
