@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_printer:
                 mNavController.navigate(R.id.printerFragment);
                 break;
+            case R.id.nav_search:
+                mNavController.navigate(R.id.searchFragment);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;

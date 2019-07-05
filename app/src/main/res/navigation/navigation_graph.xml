@@ -90,4 +90,9 @@
         android:name="cz.mtr.analyzaprodeju.fragments.printer.PrinterFragment"
         android:label="printer_fragment"
         tools:layout="@layout/printer_fragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.search.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
 </navigation>

@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
-@Database(entities = Article.class, version = 1, exportSchema = false)
+@Database(entities = {Article.class, ItemFts.class}, version = 1, exportSchema = false)
 public abstract class ArticleRoomDatabase extends RoomDatabase {
     private static final String TAG = ArticleRoomDatabase.class.getSimpleName();
 
