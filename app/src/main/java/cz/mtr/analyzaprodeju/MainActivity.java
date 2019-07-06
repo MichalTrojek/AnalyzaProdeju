@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -92,10 +93,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 handleImport();
                 break;
             case R.id.nav_ranking:
-                mNavController.navigate(R.id.rankingFragment);
+                if (Model.getInstance().getAnalysis().isEmpty()) {
+                    Toast.makeText(this, "Není nahraná analýza.", Toast.LENGTH_SHORT).show();
+                } else {
+                    mNavController.navigate(R.id.rankingFragment);
+                }
                 break;
             case R.id.nav_printer:
-                mNavController.navigate(R.id.printerFragment);
+                if (Model.getInstance().getReturns().isEmpty() && Model.getInstance().getOrders().isEmpty()) {
+                    Toast.makeText(this, "Není nic nachystaného k tisknutí.", Toast.LENGTH_SHORT).show();
+                } else {
+                    mNavController.navigate(R.id.printerFragment);
+                }
                 break;
             case R.id.nav_search:
                 mNavController.navigate(R.id.searchFragment);

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,19 +36,23 @@ public class SettingsFragment extends Fragment {
 
 
         mInputIpAdress = view.findViewById(R.id.ip_adress_input);
-        mIpTextView = view.findViewById(R.id.ip_textView);
         saveButton = view.findViewById(R.id.save_ip_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mViewModel.setIpAddress(mInputIpAdress.getText().toString());
-                Navigation.findNavController(getView()).navigate(R.id.homeFragment);
+                if (!mInputIpAdress.getText().toString().isEmpty()) {
+                    if (mViewModel.validateIpAddress(mInputIpAdress.getText().toString())) {
+                        mViewModel.setIpAddress(mInputIpAdress.getText().toString());
+                        Navigation.findNavController(getView()).navigate(R.id.homeFragment);
+                    } else {
+                        Toast.makeText(getActivity(), "Vložena IP adresa ve špatném formátu.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Není zadaná IP adresa", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
-
-
-        backButton = view.findViewById(R.id.back_ip_button);
-        backButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeFragment));
 
 
         return view;
@@ -62,7 +67,7 @@ public class SettingsFragment extends Fragment {
         mViewModel.getIpAdress().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mIpTextView.setText(s);
+                mInputIpAdress.setHint("IP adresa: " + s);
             }
         });
 

@@ -1,15 +1,19 @@
 package cz.mtr.analyzaprodeju.repository;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.fragments.ranking.other.rankingItem;
+import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class RankingRepository {
+
+    private static final String TAG = RankingRepository.class.getSimpleName();
 
     private String info = "";
 
@@ -50,6 +54,7 @@ public class RankingRepository {
 
     public String getInfo() {
         ArrayList<SharedArticle> list = new ArrayList<>(Model.getInstance().getAnalysis().values());
+        Log.d(TAG, list.size()+"");
         SharedArticle article = (SharedArticle) list.get(0);
         info = String.format("Od: %s\nDo: %s\nCelkem %s dní", article.getSales1DateSince(), article.getSales1DateTo(), article.getSales1Days());
         return info;
