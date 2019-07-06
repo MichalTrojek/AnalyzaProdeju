@@ -42,8 +42,6 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         mViewModel.getStatus().observe(this, new Observer<BarcodeViewModel.Status>() {
             @Override
             public void onChanged(BarcodeViewModel.Status status) {
-
-
                 switch (status) {
                     case NOT_FOUND:
                         Toast.makeText(getActivity(), "EAN NENALEZEN", Toast.LENGTH_SHORT).show();
@@ -101,7 +99,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mViewModel.findArticle(barcode.displayValue);
+                mViewModel.saveScannedEan(barcode.displayValue);
             }
         });
     }

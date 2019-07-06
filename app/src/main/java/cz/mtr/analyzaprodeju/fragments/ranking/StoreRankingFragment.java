@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,9 +20,10 @@ import java.util.List;
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.ranking.adapter.RankingItemAdapter;
 import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
+import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class StoreRankingFragment extends Fragment implements RankingItemAdapter.OnItemClickListener {
-
+    private static final String TAG = StoreRankingFragment.class.getSimpleName();
     private StoreRankingViewModel mViewModel;
     private RecyclerView mStoreRecyclerView;
     private RankingItemAdapter mAdapter;
@@ -67,10 +68,26 @@ public class StoreRankingFragment extends Fragment implements RankingItemAdapter
                 mInfoTextView.setText(s);
             }
         });
+
+        mViewModel.getArticleAnalysis().observe(getViewLifecycleOwner(), new Observer<SharedArticle>() {
+            @Override
+            public void onChanged(SharedArticle sharedArticle) {
+                try {
+                    StoreRankingFragmentDirections.RankingToDetail action = StoreRankingFragmentDirections.rankingToDetail(sharedArticle);
+                    if (Navigation.findNavController(getView()).getCurrentDestination().getId() == R.id.rankingFragment) {
+                        Navigation.findNavController(getView()).navigate(action);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getContext(), "ean " + mViewModel.getAllItems().getValue().get(position).getEan(), Toast.LENGTH_SHORT).show();
+        mViewModel.sendPosition(position);
     }
+
+
 }

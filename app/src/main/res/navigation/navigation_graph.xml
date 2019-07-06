@@ -84,7 +84,16 @@
         android:id="@+id/rankingFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.ranking.StoreRankingFragment"
         android:label="ranking_fragment"
-        tools:layout="@layout/storeranking_fragment" />
+        tools:layout="@layout/storeranking_fragment" >
+        <action
+            android:id="@+id/rankingToDetail"
+            app:destination="@+id/detailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@+id/rankingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/printerFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.printer.PrinterFragment"

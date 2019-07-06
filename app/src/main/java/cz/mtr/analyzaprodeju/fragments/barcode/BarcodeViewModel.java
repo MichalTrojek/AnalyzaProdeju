@@ -13,6 +13,9 @@ import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class BarcodeViewModel extends AndroidViewModel {
 
+    private String mEan;
+
+
     public enum Status {
         NOT_FOUND, ANALYSIS, DATABASE
     }
@@ -28,6 +31,7 @@ public class BarcodeViewModel extends AndroidViewModel {
         mRepository = new DataRepository(application);
     }
 
+
     public MutableLiveData<Status> getStatus() {
         return mStatus;
     }
@@ -38,6 +42,12 @@ public class BarcodeViewModel extends AndroidViewModel {
 
     public SharedArticle getArticleAnalysis() {
         return mArticleAnalysis;
+    }
+
+
+    public void saveScannedEan(String displayValue) {
+        mEan = displayValue;
+        findArticle(mEan);
     }
 
 

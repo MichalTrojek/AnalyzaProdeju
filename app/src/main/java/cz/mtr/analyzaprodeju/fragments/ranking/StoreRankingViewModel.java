@@ -10,14 +10,18 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
+import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.RankingRepository;
+import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class StoreRankingViewModel extends AndroidViewModel {
+    private static final String TAG = StoreRankingViewModel.class.getSimpleName();
 
 
     private LiveData<List<RankingItem>> mAllRankingItems;
     private MutableLiveData<String> mInfo = new MutableLiveData<>();
     private RankingRepository mRepository;
+    private MutableLiveData<SharedArticle> mArticleAnalysis = new MutableLiveData<>();
 
 
     public StoreRankingViewModel(@NonNull Application application) {
@@ -36,5 +40,12 @@ public class StoreRankingViewModel extends AndroidViewModel {
         return mInfo;
     }
 
+    public MutableLiveData<SharedArticle> getArticleAnalysis() {
+        return mArticleAnalysis;
+    }
+
+    public void sendPosition(int position) {
+        mArticleAnalysis.setValue(Model.getInstance().getAnalysis().get(mAllRankingItems.getValue().get(position).getEan()));
+    }
 
 }
