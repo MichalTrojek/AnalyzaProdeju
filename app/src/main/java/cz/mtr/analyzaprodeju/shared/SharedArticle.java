@@ -30,36 +30,6 @@ public class SharedArticle implements Serializable {
     private String sales2DateTo = "";
     private String sales2Days = "";
 
-    public SharedArticle(String ranking, String ean, String name, String sales1, String sales2, String revenue, String stored,
-                         String daysOfSupplies, String location, String price, String supplier, String author, String dateOfLastSale,
-                         String dateOfLastDelivery, String releaseDate, String commision, String rankingEshop,
-                         String sales1DateSince, String sales1DateTo, String sales1Days, String sales2DateSince, String sales2DateTo,
-                         String sales2Days) {
-        super();
-        this.setRanking(ranking);
-        this.setEan(ean);
-        this.setName(name);
-        this.setSales1(sales1);
-        this.setSales2(sales2);
-        this.setRevenue(revenue);
-        this.setStored(stored);
-        this.setDaysOfSupplies(daysOfSupplies);
-        this.setLocation(location);
-        this.setPrice(price);
-        this.setSupplier(supplier);
-        this.setAuthor(author);
-        this.setDateOfLastSale(dateOfLastSale);
-        this.setDateOfLastDelivery(dateOfLastDelivery);
-        this.releaseDate = releaseDate;
-        this.commision = commision;
-        this.rankingEshop = rankingEshop;
-        this.sales1DateSince = sales1DateSince;
-        this.sales1DateTo = sales1DateTo;
-        this.sales1Days = sales1Days;
-        this.sales2DateSince = sales2DateSince;
-        this.sales2DateTo = sales2DateTo;
-        this.sales2Days = sales2Days;
-    }
 
     public SharedArticle() {
 

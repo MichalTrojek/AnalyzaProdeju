@@ -48,15 +48,19 @@ public class BarcodeViewModel extends AndroidViewModel {
         } else {
             Article article = mRepository.getArticle(ean);
             if (article != null) {
-                mArticleDB = new SharedArticle("", article.getEan(), article.getName(), "", "", "", "",
-                        "", "", article.getPrice(), "", "", "",
-                        "", "", "", "",
-                        "", "", "", "", "",
-                        "");
+                mArticleDB = convertArticleToSharedArticle(article);
                 mStatus.setValue(Status.DATABASE);
             } else {
                 mStatus.setValue(Status.NOT_FOUND);
             }
         }
+    }
+
+    private SharedArticle convertArticleToSharedArticle(Article article) {
+        SharedArticle shared = new SharedArticle();
+        shared.setEan(article.getEan());
+        shared.setName(article.getName());
+        shared.setPrice(article.getPrice());
+        return shared;
     }
 }

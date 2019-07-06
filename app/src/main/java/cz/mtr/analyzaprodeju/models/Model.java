@@ -18,6 +18,7 @@ public class Model {
     private Context mContext;
     private ArrayList<ExportSharedArticle> orders = new ArrayList<>();
     private ArrayList<ExportSharedArticle> returns = new ArrayList<>();
+    private SharedArticle selectedArticle = new SharedArticle();
 
 
     public Model() {
