@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Button mHamburgerButton;
     private NavigationView mNavigationView;
     private NavController mNavController;
-    private AlertDialog loadingAnalysisDialog;
 
 
     @Override

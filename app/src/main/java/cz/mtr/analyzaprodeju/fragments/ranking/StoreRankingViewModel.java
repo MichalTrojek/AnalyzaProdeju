@@ -4,32 +4,35 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import cz.mtr.analyzaprodeju.fragments.ranking.other.rankingItem;
+import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
 import cz.mtr.analyzaprodeju.repository.RankingRepository;
 
 public class StoreRankingViewModel extends AndroidViewModel {
 
 
-    private List<rankingItem> mAllRankingItems;
+    private LiveData<List<RankingItem>> mAllRankingItems;
+    private MutableLiveData<String> mInfo = new MutableLiveData<>();
     private RankingRepository mRepository;
-    private String mInfo;
+
 
     public StoreRankingViewModel(@NonNull Application application) {
         super(application);
         mRepository = new RankingRepository();
-        mAllRankingItems = mRepository.getStoreListOfItems();
+        mAllRankingItems = mRepository.getAllRankingItems();
     }
 
 
-    public List<rankingItem> getAllItems() {
+    public LiveData<List<RankingItem>> getAllItems() {
         return mAllRankingItems;
     }
 
-    public String getInfo() {
-        mInfo = mRepository.getInfo();
+    public MutableLiveData<String> getInfo() {
+        mInfo.setValue(mRepository.getInfo());
         return mInfo;
     }
 

@@ -1,13 +1,14 @@
 package cz.mtr.analyzaprodeju.repository;
 
-import android.util.Log;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import cz.mtr.analyzaprodeju.fragments.ranking.other.rankingItem;
+import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -16,18 +17,24 @@ public class RankingRepository {
     private static final String TAG = RankingRepository.class.getSimpleName();
 
     private String info = "";
+    private MutableLiveData<List<RankingItem>> allRankingItem = new MutableLiveData<>();
 
     public RankingRepository() {
 
     }
 
 
-    public List<rankingItem> getStoreListOfItems() {
-        List<rankingItem> rankingItems = new ArrayList<>();
-        List<SharedArticle> articles = new ArrayList<>(Model.getInstance().getAnalysis().values());
-        articles = sortByStoreRankings(articles);
-        for (SharedArticle a : articles) {
-            rankingItems.add(new rankingItem(a.getRanking(), a.getName()));
+    public LiveData<List<RankingItem>> getAllRankingItems() {
+        allRankingItem.setValue(getRankingItems());
+        return allRankingItem;
+    }
+
+    private List<RankingItem> getRankingItems() {
+        List<RankingItem> rankingItems = new ArrayList<>();
+        List<SharedArticle> articlesFromAnalysis = new ArrayList<>(Model.getInstance().getAnalysis().values());
+        articlesFromAnalysis = sortByStoreRankings(articlesFromAnalysis);
+        for (SharedArticle a : articlesFromAnalysis) {
+            rankingItems.add(new RankingItem(a.getRanking(), a.getName(), a.getEan()));
         }
         return rankingItems;
     }
@@ -54,7 +61,6 @@ public class RankingRepository {
 
     public String getInfo() {
         ArrayList<SharedArticle> list = new ArrayList<>(Model.getInstance().getAnalysis().values());
-        Log.d(TAG, list.size()+"");
         SharedArticle article = (SharedArticle) list.get(0);
         info = String.format("Od: %s\nDo: %s\nCelkem %s dní", article.getSales1DateSince(), article.getSales1DateTo(), article.getSales1Days());
         return info;
