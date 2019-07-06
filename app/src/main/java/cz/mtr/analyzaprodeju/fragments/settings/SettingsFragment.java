@@ -45,12 +45,11 @@ public class SettingsFragment extends Fragment {
                         mViewModel.setIpAddress(mInputIpAdress.getText().toString());
                         Navigation.findNavController(getView()).navigate(R.id.homeFragment);
                     } else {
-                        Toast.makeText(getActivity(), "Vložena IP adresa ve špatném formátu.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Byla vložena IP adresa ve špatném formátu.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "Není zadaná IP adresa", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Nebyla vložena nová IP adresa", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
