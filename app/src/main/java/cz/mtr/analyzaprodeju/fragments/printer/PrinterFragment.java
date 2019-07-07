@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.fragments.printer.adapter.SectionPageAdapter;
+import cz.mtr.analyzaprodeju.fragments.printer.adapter.PrinterPageViewAdapter;
 import cz.mtr.analyzaprodeju.fragments.printer.orders.OrdersFragment;
 import cz.mtr.analyzaprodeju.fragments.printer.returns.ReturnsFragment;
 
@@ -50,7 +50,7 @@ public class PrinterFragment extends Fragment {
 
 
     private void setupViewPager(ViewPager viewPager) {
-        SectionPageAdapter adapter = new SectionPageAdapter(getChildFragmentManager());
+        PrinterPageViewAdapter adapter = new PrinterPageViewAdapter(getChildFragmentManager());
         adapter.addFragment(new ReturnsFragment(), "Vratka");
         adapter.addFragment(new OrdersFragment(), "Objednavka");
         viewPager.setAdapter(adapter);

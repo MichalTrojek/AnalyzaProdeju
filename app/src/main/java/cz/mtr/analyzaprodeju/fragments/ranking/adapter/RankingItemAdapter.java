@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
 
@@ -65,11 +66,10 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
 
         @Override
         public void onClick(View view) {
+
             mOnItemListener.onItemClick(getAdapterPosition());
         }
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
+
 }

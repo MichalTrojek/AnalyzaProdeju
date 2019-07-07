@@ -11,18 +11,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.repository.room.ItemFts;
 
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ItemHolder> {
     public final static String TAG = SearchItemAdapter.class.getSimpleName();
     private List<ItemFts> mSearchItems = new ArrayList<>();
+    private OnItemClickListener mListener;
+
+    public SearchItemAdapter(OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_list_item, parent, false);
-        return new ItemHolder(itemView);
+        return new ItemHolder(itemView, mListener);
     }
 
     @Override
@@ -45,16 +51,25 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.It
     }
 
 
-    class ItemHolder extends RecyclerView.ViewHolder {
+    class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private TextView mNameTextView;
         private TextView mEanTextView;
+        OnItemClickListener mListener;
 
 
-        public ItemHolder(@NonNull View itemView) {
+        public ItemHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             mNameTextView = itemView.findViewById(R.id.itemNameTextView);
             mEanTextView = itemView.findViewById(R.id.itemEanTextView);
+            this.mListener = listener;
+            itemView.setOnClickListener(this);
+        }
 
+
+        @Override
+        public void onClick(View view) {
+            mListener.onItemClick(getAdapterPosition());
         }
     }
 

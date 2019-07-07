@@ -17,21 +17,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.ranking.adapter.RankingItemAdapter;
 import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
-public class StoreRankingFragment extends Fragment implements RankingItemAdapter.OnItemClickListener {
-    private static final String TAG = StoreRankingFragment.class.getSimpleName();
-    private StoreRankingViewModel mViewModel;
+public class RankingFragment extends Fragment implements OnItemClickListener {
+    private static final String TAG = RankingFragment.class.getSimpleName();
+    private RankingViewModel mViewModel;
     private RecyclerView mStoreRecyclerView;
     private RankingItemAdapter mAdapter;
     private TextView mInfoTextView;
 
 
-    public static StoreRankingFragment newInstance() {
-        return new StoreRankingFragment();
+    public static RankingFragment newInstance() {
+        return new RankingFragment();
     }
 
     @Override
@@ -55,7 +56,7 @@ public class StoreRankingFragment extends Fragment implements RankingItemAdapter
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mViewModel = ViewModelProviders.of(this).get(StoreRankingViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(RankingViewModel.class);
         mViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<RankingItem>>() {
             @Override
             public void onChanged(List<RankingItem> rankingItems) {
@@ -73,7 +74,7 @@ public class StoreRankingFragment extends Fragment implements RankingItemAdapter
             @Override
             public void onChanged(SharedArticle sharedArticle) {
                 try {
-                    StoreRankingFragmentDirections.RankingToDetail action = StoreRankingFragmentDirections.rankingToDetail(sharedArticle);
+                    RankingFragmentDirections.RankingToDetail action = RankingFragmentDirections.rankingToDetail(sharedArticle);
                     if (Navigation.findNavController(getView()).getCurrentDestination().getId() == R.id.rankingFragment) {
                         Navigation.findNavController(getView()).navigate(action);
                     }

@@ -12,10 +12,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.printer.adapter.PrinterItemAdapter;
 
-public class ReturnsFragment extends Fragment {
+public class ReturnsFragment extends Fragment implements OnItemClickListener {
 
     private ReturnsViewModel mViewModel;
     private RecyclerView mPrinterRecyclerView;
@@ -28,7 +29,7 @@ public class ReturnsFragment extends Fragment {
         mPrinterRecyclerView = view.findViewById(R.id.recyclerView);
         mPrinterRecyclerView.setHasFixedSize(true);
         mPrinterRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new PrinterItemAdapter();
+        mAdapter = new PrinterItemAdapter(this);
         mPrinterRecyclerView.setAdapter(mAdapter);
         return view;
     }
@@ -41,4 +42,8 @@ public class ReturnsFragment extends Fragment {
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+
+    }
 }

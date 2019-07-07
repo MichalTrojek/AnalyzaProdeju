@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="37" />
-                            <option name="y" value="386" />
+                            <option name="x" value="7" />
+                            <option name="y" value="380" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -56,8 +56,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="942" />
-                            <option name="y" value="-544" />
+                            <option name="x" value="1200" />
+                            <option name="y" value="-697" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -68,8 +68,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="143" />
-                            <option name="y" value="-108" />
+                            <option name="x" value="117" />
+                            <option name="y" value="-236" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -89,8 +89,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="771" />
-                            <option name="y" value="-17" />
+                            <option name="x" value="1216" />
+                            <option name="y" value="341" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -101,8 +101,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="955" />
-                            <option name="y" value="352" />
+                            <option name="x" value="1472" />
+                            <option name="y" value="-222" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -113,8 +113,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="476" />
-                            <option name="y" value="-652" />
+                            <option name="x" value="481" />
+                            <option name="y" value="-633" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -134,9 +134,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="697" />
-                            <option name="y" value="388" />
+                            <option name="x" value="934" />
+                            <option name="y" value="-186" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="searchToDetail">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="searchToNotFound">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -146,8 +160,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="234" />
-                            <option name="y" value="383" />
+                            <option name="x" value="212" />
+                            <option name="y" value="381" />
                           </Point>
                         </option>
                       </LayoutPositions>

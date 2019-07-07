@@ -14,8 +14,8 @@ import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.RankingRepository;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
-public class StoreRankingViewModel extends AndroidViewModel {
-    private static final String TAG = StoreRankingViewModel.class.getSimpleName();
+public class RankingViewModel extends AndroidViewModel {
+    private static final String TAG = RankingViewModel.class.getSimpleName();
 
 
     private LiveData<List<RankingItem>> mAllRankingItems;
@@ -24,7 +24,7 @@ public class StoreRankingViewModel extends AndroidViewModel {
     private MutableLiveData<SharedArticle> mArticleAnalysis = new MutableLiveData<>();
 
 
-    public StoreRankingViewModel(@NonNull Application application) {
+    public RankingViewModel(@NonNull Application application) {
         super(application);
         mRepository = new RankingRepository();
         mAllRankingItems = mRepository.getAllRankingItems();

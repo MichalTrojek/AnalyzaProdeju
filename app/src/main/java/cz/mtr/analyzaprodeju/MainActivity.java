@@ -66,16 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
@@ -129,6 +119,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         Model.getInstance().loadOrdersAndReturns();
         Model.getInstance().loadAnalysis();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
 

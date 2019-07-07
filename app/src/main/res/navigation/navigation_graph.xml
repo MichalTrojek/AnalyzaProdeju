@@ -40,12 +40,16 @@
             app:enterAnim="@anim/enter_from_bottom"
             app:exitAnim="@anim/exit_to_top"
             app:launchSingleTop="false"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
             app:popUpTo="@+id/homeFragment" />
         <action
             android:id="@+id/barcodeToNotFound"
             app:destination="@id/notFoundFragment"
             app:enterAnim="@anim/enter_from_bottom"
             app:exitAnim="@anim/enter_from_top"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -82,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/rankingFragment"
-        android:name="cz.mtr.analyzaprodeju.fragments.ranking.StoreRankingFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.ranking.RankingFragment"
         android:label="ranking_fragment"
         tools:layout="@layout/storeranking_fragment" >
         <action
@@ -103,5 +107,22 @@
         android:id="@+id/searchFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.search.SearchFragment"
         android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/searchToDetail"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@+id/homeFragment" />
+        <action
+            android:id="@+id/searchToNotFound"
+            app:destination="@id/notFoundFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@+id/homeFragment" />
+    </fragment>
 </navigation>

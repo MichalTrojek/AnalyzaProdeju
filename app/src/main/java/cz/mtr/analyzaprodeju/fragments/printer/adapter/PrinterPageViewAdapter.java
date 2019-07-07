@@ -7,13 +7,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SectionPageAdapter extends FragmentPagerAdapter {
+public class PrinterPageViewAdapter extends FragmentPagerAdapter {
 
     List<Fragment> mFragments = new ArrayList<>();
     List<String> mFragmentTitles = new ArrayList<>();
 
 
-    public SectionPageAdapter(FragmentManager fm) {
+    public PrinterPageViewAdapter(FragmentManager fm) {
         super(fm);
     }
 
