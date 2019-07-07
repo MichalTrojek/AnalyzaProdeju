@@ -20,4 +20,14 @@ public class ReturnsViewModel extends ViewModel {
         return items;
     }
 
+
+    public void changeAmount(int position, String amount) {
+        Model.getInstance().getReturns().get(position).setExportAmount(amount);
+        Model.getInstance().saveOrdersAndReturns();
+    }
+
+    public void delete(int position) {
+        Model.getInstance().getReturns().remove(position);
+        Model.getInstance().saveOrdersAndReturns();
+    }
 }

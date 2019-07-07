@@ -15,12 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.printer.adapter.PrinterItemAdapter;
+import cz.mtr.analyzaprodeju.fragments.printer.dialog.FragmentChangeDialog;
 
-public class OrdersFragment extends Fragment implements OnItemClickListener {
+public class OrdersFragment extends Fragment implements OnItemClickListener, FragmentChangeDialog.OnInputSelected {
+
+    private static final String TAG = OrdersFragment.class.getSimpleName();
 
     private OrdersViewModel mViewModel;
     private RecyclerView mPrinterRecyclerView;
     private PrinterItemAdapter mAdapter;
+    private int mPosition;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -45,6 +49,25 @@ public class OrdersFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClick(int position) {
+        mPosition = position;
+        FragmentChangeDialog dialog = new FragmentChangeDialog();
+        dialog.setTargetFragment(OrdersFragment.this, 1);
+        dialog.show(getFragmentManager(), "FragmentChangeDialog");
 
+
+    }
+
+    @Override
+    public void sendAmount(String amount) {
+        mViewModel.changeAmount(mPosition, amount);
+        mAdapter.setPrinterItems(mViewModel.getOrders());
+        mAdapter.notifyItemChanged(mPosition);
+    }
+
+    @Override
+    public void deleteItem() {
+        mViewModel.delete(mPosition);
+        mAdapter.setPrinterItems(mViewModel.getOrders());
+        mAdapter.notifyItemChanged(mPosition);
     }
 }
