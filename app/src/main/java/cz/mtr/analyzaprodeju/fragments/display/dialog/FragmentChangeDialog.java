@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.printer.dialog;
+package cz.mtr.analyzaprodeju.fragments.display.dialog;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -37,7 +37,7 @@ public class FragmentChangeDialog extends DialogFragment {
     @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_change_dialog, container, false);
+        View view = inflater.inflate(R.layout.dialog_change_fragment, container, false);
         changeButton = view.findViewById(R.id.changeButton);
         changeButton.setEnabled(false);
         deleteButton = view.findViewById(R.id.deleteButton);

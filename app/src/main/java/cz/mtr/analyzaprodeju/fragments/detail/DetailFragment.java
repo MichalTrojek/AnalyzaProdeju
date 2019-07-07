@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 
 public class DetailFragment extends Fragment implements View.OnClickListener {
@@ -149,6 +150,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         returnsEditText.setVisibility(View.INVISIBLE);
         isOpen = false;
         scrollView2.setVisibility(View.VISIBLE);
+        Model.getInstance().saveOrdersAndReturns();
     }
 
     private void open() {

@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.printer.adapter;
+package cz.mtr.analyzaprodeju.fragments.display.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.fragments.printer.other.PrinterItem;
+import cz.mtr.analyzaprodeju.fragments.display.other.PrinterItem;
 
 public class PrinterItemAdapter extends RecyclerView.Adapter<PrinterItemAdapter.ItemHolder> {
     public final static String TAG = PrinterItemAdapter.class.getSimpleName();

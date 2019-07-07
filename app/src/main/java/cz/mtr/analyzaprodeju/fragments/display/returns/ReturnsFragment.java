@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.printer.returns;
+package cz.mtr.analyzaprodeju.fragments.display.returns;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.fragments.printer.adapter.PrinterItemAdapter;
-import cz.mtr.analyzaprodeju.fragments.printer.dialog.FragmentChangeDialog;
+import cz.mtr.analyzaprodeju.fragments.display.adapter.PrinterItemAdapter;
+import cz.mtr.analyzaprodeju.fragments.display.dialog.FragmentChangeDialog;
 
 public class ReturnsFragment extends Fragment implements OnItemClickListener, FragmentChangeDialog.OnInputSelected {
 

@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.printer;
+package cz.mtr.analyzaprodeju.fragments.display;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,24 +13,24 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.fragments.printer.adapter.PrinterPageViewAdapter;
-import cz.mtr.analyzaprodeju.fragments.printer.orders.OrdersFragment;
-import cz.mtr.analyzaprodeju.fragments.printer.returns.ReturnsFragment;
+import cz.mtr.analyzaprodeju.fragments.display.adapter.PrinterPageViewAdapter;
+import cz.mtr.analyzaprodeju.fragments.display.orders.OrdersFragment;
+import cz.mtr.analyzaprodeju.fragments.display.returns.ReturnsFragment;
 
-public class PrinterFragment extends Fragment {
+public class DisplayFragment extends Fragment {
 
 
     private ViewPager mViewPager;
 
 
-    public static PrinterFragment newInstance() {
-        return new PrinterFragment();
+    public static DisplayFragment newInstance() {
+        return new DisplayFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.printer_fragment, container, false);
+        View view = inflater.inflate(R.layout.frament_printer, container, false);
 
         mViewPager = view.findViewById(R.id.viewPager);
         setupViewPager(mViewPager);

@@ -11,11 +11,12 @@
     <string name="content_description_for_logo">Logo</string>
     <string name="home_text_drawer_menu">Domů</string>
     <string name="import_data_text_drawer_menu">Nahrát data z analýzy</string>
+    <string name="printer_data_text_drawer_menu">Tisk</string>
     <string name="export_data_text_drawer_menu">Odeslat data</string>
     <string name="ranking_text_drawer_menu">Žebříček prodejů</string>
     <string name="detail_text_drawer_menu">Detail</string>
 
-    <string name="printer_text_drawer_menu">Tisknout vratku/objednávku</string>
+    <string name="printer_text_drawer_menu"> Vratky a Objednávky</string>
     <string name="settings_text_drawer_menu">Nastavení IP adresy</string>
     <string name="about_text_drawer_menu">O aplikaci</string>
     <string name="search_text_drawer_menu">Hledat podle názvu</string>

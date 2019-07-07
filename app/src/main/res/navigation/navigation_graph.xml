@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@+id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -74,12 +74,12 @@
         android:id="@+id/settingsFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.settings.SettingsFragment"
         android:label="settings_fragment"
-        tools:layout="@layout/settings_fragment" />
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/notFoundFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.NotFoundDetail.NotFoundFragment"
         android:label="not_found_fragment"
-        tools:layout="@layout/not_found_fragment">
+        tools:layout="@layout/fragment_notfound">
         <argument
             android:name="ArticleDb"
             app:argType="cz.mtr.analyzaprodeju.shared.SharedArticle" />
@@ -88,7 +88,7 @@
         android:id="@+id/rankingFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.ranking.RankingFragment"
         android:label="ranking_fragment"
-        tools:layout="@layout/storeranking_fragment" >
+        tools:layout="@layout/fragment_ranking">
         <action
             android:id="@+id/rankingToDetail"
             app:destination="@+id/detailFragment"
@@ -99,15 +99,15 @@
             app:popUpTo="@+id/rankingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/printerFragment"
-        android:name="cz.mtr.analyzaprodeju.fragments.printer.PrinterFragment"
-        android:label="printer_fragment"
-        tools:layout="@layout/printer_fragment" />
+        android:id="@+id/displayFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.display.DisplayFragment"
+        android:label="display_fragment"
+        tools:layout="@layout/frament_printer" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.search.SearchFragment"
         android:label="search_fragment"
-        tools:layout="@layout/search_fragment" >
+        tools:layout="@layout/search_fragment">
         <action
             android:id="@+id/searchToDetail"
             app:destination="@id/detailFragment"

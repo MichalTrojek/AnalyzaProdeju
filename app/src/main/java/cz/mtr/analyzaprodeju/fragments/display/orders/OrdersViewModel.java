@@ -1,10 +1,10 @@
-package cz.mtr.analyzaprodeju.fragments.printer.orders;
+package cz.mtr.analyzaprodeju.fragments.display.orders;
 
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import cz.mtr.analyzaprodeju.fragments.printer.other.PrinterItem;
+import cz.mtr.analyzaprodeju.fragments.display.other.PrinterItem;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 

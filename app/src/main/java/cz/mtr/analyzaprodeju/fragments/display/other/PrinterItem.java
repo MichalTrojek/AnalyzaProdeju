@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.printer.other;
+package cz.mtr.analyzaprodeju.fragments.display.other;
 
 public class PrinterItem {
 

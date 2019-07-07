@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.printer.adapter;
+package cz.mtr.analyzaprodeju.fragments.display.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

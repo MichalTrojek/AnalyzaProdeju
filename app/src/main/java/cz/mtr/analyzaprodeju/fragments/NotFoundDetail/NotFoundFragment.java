@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class NotFoundFragment extends Fragment implements View.OnClickListener {
@@ -40,7 +41,7 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.not_found_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_notfound, container, false);
         mNameTextView = view.findViewById(R.id.nameTextView);
         mEanTextView = view.findViewById(R.id.eanTextView);
         mPriceTextView = view.findViewById(R.id.priceTextView);
@@ -113,6 +114,7 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
         ordersEditText.setVisibility(View.INVISIBLE);
         returnsEditText.setVisibility(View.INVISIBLE);
         isOpen = false;
+        Model.getInstance().saveOrdersAndReturns();
     }
 
     private void open() {

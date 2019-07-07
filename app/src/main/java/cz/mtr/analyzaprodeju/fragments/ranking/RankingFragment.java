@@ -38,7 +38,7 @@ public class RankingFragment extends Fragment implements OnItemClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.storeranking_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_ranking, container, false);
         setupRecyclerView(view);
         return view;
     }
