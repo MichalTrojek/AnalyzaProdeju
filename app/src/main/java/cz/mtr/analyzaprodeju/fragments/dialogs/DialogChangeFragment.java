@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.display.dialog;
+package cz.mtr.analyzaprodeju.fragments.dialogs;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,17 +15,12 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+import cz.mtr.analyzaprodeju.Interfaces.OnInputSelected;
 import cz.mtr.analyzaprodeju.R;
 
 
-public class FragmentChangeDialog extends DialogFragment {
-    private static final String TAG = FragmentChangeDialog.class.getSimpleName();
-
-    public interface OnInputSelected {
-        void sendAmount(String amount);
-
-        void deleteItem();
-    }
+public class DialogChangeFragment extends DialogFragment {
+    private static final String TAG = DialogChangeFragment.class.getSimpleName();
 
     public OnInputSelected mOnInputSelected;
 

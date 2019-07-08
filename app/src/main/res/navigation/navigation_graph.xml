@@ -102,7 +102,7 @@
         android:id="@+id/displayFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.display.DisplayFragment"
         android:label="display_fragment"
-        tools:layout="@layout/frament_printer" />
+        tools:layout="@layout/frament_display" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.search.SearchFragment"

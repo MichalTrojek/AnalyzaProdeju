@@ -26,7 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.Network.Client;
-import cz.mtr.analyzaprodeju.fragments.printer.PrinterDialog;
+import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;

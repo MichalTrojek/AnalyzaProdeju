@@ -12,12 +12,14 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import cz.mtr.analyzaprodeju.Interfaces.OnInputSelected;
 import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogChangeFragment;
 import cz.mtr.analyzaprodeju.fragments.display.adapter.PrinterItemAdapter;
-import cz.mtr.analyzaprodeju.fragments.display.dialog.FragmentChangeDialog;
+import cz.mtr.analyzaprodeju.models.Model;
 
-public class OrdersFragment extends Fragment implements OnItemClickListener, FragmentChangeDialog.OnInputSelected {
+public class OrdersFragment extends Fragment implements OnItemClickListener, OnInputSelected {
 
     private static final String TAG = OrdersFragment.class.getSimpleName();
 
@@ -50,9 +52,9 @@ public class OrdersFragment extends Fragment implements OnItemClickListener, Fra
     @Override
     public void onItemClick(int position) {
         mPosition = position;
-        FragmentChangeDialog dialog = new FragmentChangeDialog();
+        DialogChangeFragment dialog = new DialogChangeFragment();
         dialog.setTargetFragment(OrdersFragment.this, 1);
-        dialog.show(getFragmentManager(), "FragmentChangeDialog");
+        dialog.show(getFragmentManager(), "DialogChangeFragment");
 
 
     }
@@ -69,5 +71,12 @@ public class OrdersFragment extends Fragment implements OnItemClickListener, Fra
         mViewModel.delete(mPosition);
         mAdapter.setPrinterItems(mViewModel.getOrders());
         mAdapter.notifyItemChanged(mPosition);
+    }
+
+    public void deleteAllAndRefresh() {
+        Model.getInstance().getOrders().clear();
+        Model.getInstance().saveOrdersAndReturns();
+        mAdapter.setPrinterItems(mViewModel.getOrders());
+        mAdapter.notifyDataSetChanged();
     }
 }

@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.printer;
+package cz.mtr.analyzaprodeju.fragments.dialogs;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -12,17 +12,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import cz.mtr.analyzaprodeju.Interfaces.OnInputSelected;
 import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogChangeFragment;
 import cz.mtr.analyzaprodeju.fragments.display.adapter.PrinterItemAdapter;
-import cz.mtr.analyzaprodeju.fragments.display.dialog.FragmentChangeDialog;
+import cz.mtr.analyzaprodeju.models.Model;
 
-public class ReturnsFragment extends Fragment implements OnItemClickListener, FragmentChangeDialog.OnInputSelected {
+public class ReturnsFragment extends Fragment implements OnItemClickListener, OnInputSelected {
 
     private ReturnsViewModel mViewModel;
     private RecyclerView mPrinterRecyclerView;
     private PrinterItemAdapter mAdapter;
     private int mPosition;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -47,9 +50,9 @@ public class ReturnsFragment extends Fragment implements OnItemClickListener, Fr
     @Override
     public void onItemClick(int position) {
         mPosition = position;
-        FragmentChangeDialog dialog = new FragmentChangeDialog();
+        DialogChangeFragment dialog = new DialogChangeFragment();
         dialog.setTargetFragment(ReturnsFragment.this, 1);
-        dialog.show(getFragmentManager(), "FragmentChangeDialog");
+        dialog.show(getFragmentManager(), "DialogChangeFragment");
 
 
     }
@@ -66,5 +69,13 @@ public class ReturnsFragment extends Fragment implements OnItemClickListener, Fr
         mViewModel.delete(mPosition);
         mAdapter.setPrinterItems(mViewModel.getReturns());
         mAdapter.notifyItemChanged(mPosition);
+    }
+
+
+    public void deleteAllAndRefresh() {
+        Model.getInstance().getReturns().clear();
+        Model.getInstance().saveOrdersAndReturns();
+        mAdapter.setPrinterItems(mViewModel.getReturns());
+        mAdapter.notifyDataSetChanged();
     }
 }
