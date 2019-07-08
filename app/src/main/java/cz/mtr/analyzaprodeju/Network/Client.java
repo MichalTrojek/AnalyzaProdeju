@@ -11,6 +11,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import cz.mtr.analyzaprodeju.MainActivity;
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.Message;
 
@@ -23,11 +25,20 @@ public class Client extends AsyncTask<String, Integer, Void> {
     private Context context;
     private String ip;
     private String message;
+    private DialogLoadingFragment progressDialog;
 
 
     public Client(String ip, Context c) {
         this.ip = ip;
         this.context = c;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        progressDialog = new DialogLoadingFragment();
+        progressDialog.setCancelable(false);
+        progressDialog.show(((MainActivity) context).getSupportFragmentManager(), "FragmentChangeDialog");
+
     }
 
     @Override
@@ -88,6 +99,7 @@ public class Client extends AsyncTask<String, Integer, Void> {
         } else {
             Toast.makeText(context, "Připojení selhalo.", Toast.LENGTH_LONG).show();
         }
+        progressDialog.dismiss();
     }
 
 
