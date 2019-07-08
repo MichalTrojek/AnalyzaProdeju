@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
+import cz.mtr.analyzaprodeju.fragments.ranking.item.RankingItem;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -34,7 +34,7 @@ public class RankingRepository {
         List<SharedArticle> articlesFromAnalysis = new ArrayList<>(Model.getInstance().getAnalysis().values());
         articlesFromAnalysis = sortByStoreRankings(articlesFromAnalysis);
         for (SharedArticle a : articlesFromAnalysis) {
-            rankingItems.add(new RankingItem(a.getRanking(), a.getName(), a.getEan()));
+            rankingItems.add(new RankingItem(a.getRanking(), a.getName(), a.getEan(), a.getRevenue()));
         }
         return rankingItems;
     }

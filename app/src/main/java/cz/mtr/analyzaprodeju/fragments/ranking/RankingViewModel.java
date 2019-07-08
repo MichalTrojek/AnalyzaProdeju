@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
+import cz.mtr.analyzaprodeju.fragments.ranking.item.RankingItem;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.RankingRepository;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;

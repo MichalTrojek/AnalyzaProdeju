@@ -2,11 +2,11 @@ package cz.mtr.analyzaprodeju.Network;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -26,7 +26,6 @@ public class Client extends AsyncTask<String, Integer, Void> {
 
 
     public Client(String ip, Context c) {
-        Log.e(TAG, "CLIENT INSUDE");
         this.ip = ip;
         this.context = c;
     }
@@ -34,8 +33,11 @@ public class Client extends AsyncTask<String, Integer, Void> {
     @Override
     protected Void doInBackground(String... voids) {
         this.message = voids[0];
-        handleAnalysisImport();
-
+        if (voids[0].equalsIgnoreCase("analyza")) {
+            handleAnalysisImport();
+        } else if (voids[0].equalsIgnoreCase("export")) {
+            handleExport();
+        }
         return null;
     }
 
@@ -56,23 +58,36 @@ public class Client extends AsyncTask<String, Integer, Void> {
         }
     }
 
+    private void handleExport() {
+        try (Socket socket = new Socket()) {
+            port = 5678;
+            socket.connect(new InetSocketAddress(ip, port), 500);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            Message outputMessage = new Message();
+            outputMessage.createExport(Model.getInstance().getOrders(), Model.getInstance().getReturns());
+            objectOutputStream.writeObject(outputMessage);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            connectedToServer = false; //  this means that server is offline
+            e.printStackTrace();
+        }
+    }
 
-    //
+
     @Override
     protected void onPostExecute(Void v) {
-        Log.e(TAG, "TAD3");
         if (connectedToServer && port == 9998) {
             if (Model.getInstance().getAnalysis() == null || Model.getInstance().getAnalysis().isEmpty()) {
                 Toast.makeText(context, "Nebyl vložen CSV soubor.", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(context, String.format("Data byla nahraná\nAnalyza: %d", Model.getInstance().getAnalysis().size()), Toast.LENGTH_LONG).show();
             }
-
+        } else if (connectedToServer && port == 5678) {
+            Toast.makeText(context, "Data byla vyexportováno.", Toast.LENGTH_LONG).show();
         } else {
-//            Toast.makeText(context, "Připojení selhalo.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Připojení selhalo.", Toast.LENGTH_LONG).show();
         }
-
-        Toast.makeText(context, String.format("Analyza: %d", Model.getInstance().getAnalysis().size()) + " adresa  " + ip, Toast.LENGTH_LONG).show();
     }
 
 

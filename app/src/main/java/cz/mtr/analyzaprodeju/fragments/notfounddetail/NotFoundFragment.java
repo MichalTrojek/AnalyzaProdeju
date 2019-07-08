@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.NotFoundDetail;
+package cz.mtr.analyzaprodeju.fragments.notfounddetail;
 
 import android.content.Context;
 import android.os.Bundle;

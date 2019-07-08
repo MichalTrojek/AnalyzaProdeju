@@ -13,7 +13,7 @@ import java.util.List;
 
 import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
+import cz.mtr.analyzaprodeju.fragments.ranking.item.RankingItem;
 
 public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.ItemHolder> {
 
@@ -29,7 +29,7 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ranking_list, parent, false);
         return new ItemHolder(itemView, mOnItemListener);
     }
 
@@ -37,7 +37,8 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         RankingItem currentRankingItem = rankingItems.get(position);
         holder.mNameTextView.setText(currentRankingItem.getName());
-        holder.mRankTextView.setText(currentRankingItem.getRank());
+        holder.mRankTextView.setText(currentRankingItem.getRank() + ".");
+        holder.mRevenueTextView.setText(currentRankingItem.getRevenue() + " Kč");
 
     }
 
@@ -53,13 +54,14 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
 
 
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mNameTextView, mRankTextView;
+        private TextView mNameTextView, mRankTextView, mRevenueTextView;
         OnItemClickListener mOnItemListener;
 
         public ItemHolder(@NonNull View itemView, OnItemClickListener onItemListener) {
             super(itemView);
             mNameTextView = itemView.findViewById(R.id.itemNameTextView);
             mRankTextView = itemView.findViewById(R.id.itemRankTextView);
+            mRevenueTextView = itemView.findViewById(R.id.revenueTextView);
             this.mOnItemListener = onItemListener;
             itemView.setOnClickListener(this);
         }

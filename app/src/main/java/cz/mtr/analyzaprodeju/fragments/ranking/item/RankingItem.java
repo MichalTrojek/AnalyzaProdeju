@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.ranking.other;
+package cz.mtr.analyzaprodeju.fragments.ranking.item;
 
 public class RankingItem {
 
@@ -6,12 +6,14 @@ public class RankingItem {
     private String rank;
     private String name;
     private String ean;
+    private String revenue;
 
 
-    public RankingItem(String rank, String name, String ean) {
+    public RankingItem(String rank, String name, String ean, String revenue) {
         this.rank = rank;
         this.name = name;
         this.ean = ean;
+        this.revenue = revenue;
     }
 
 
@@ -25,6 +27,10 @@ public class RankingItem {
 
     public String getName() {
         return name;
+    }
+
+    public String getRevenue() {
+        return revenue;
     }
 
 

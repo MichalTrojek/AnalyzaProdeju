@@ -43,7 +43,7 @@ public class ReturnsFragment extends Fragment implements OnItemClickListener, On
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(ReturnsViewModel.class);
-        mAdapter.setPrinterItems(mViewModel.getReturns());
+        mAdapter.setDisplayItems(mViewModel.getReturns());
     }
 
 
@@ -60,14 +60,14 @@ public class ReturnsFragment extends Fragment implements OnItemClickListener, On
     @Override
     public void sendAmount(String amount) {
         mViewModel.changeAmount(mPosition, amount);
-        mAdapter.setPrinterItems(mViewModel.getReturns());
+        mAdapter.setDisplayItems(mViewModel.getReturns());
         mAdapter.notifyItemChanged(mPosition);
     }
 
     @Override
     public void deleteItem() {
         mViewModel.delete(mPosition);
-        mAdapter.setPrinterItems(mViewModel.getReturns());
+        mAdapter.setDisplayItems(mViewModel.getReturns());
         mAdapter.notifyItemChanged(mPosition);
     }
 
@@ -75,7 +75,7 @@ public class ReturnsFragment extends Fragment implements OnItemClickListener, On
     public void deleteAllAndRefresh() {
         Model.getInstance().getReturns().clear();
         Model.getInstance().saveOrdersAndReturns();
-        mAdapter.setPrinterItems(mViewModel.getReturns());
+        mAdapter.setDisplayItems(mViewModel.getReturns());
         mAdapter.notifyDataSetChanged();
     }
 }

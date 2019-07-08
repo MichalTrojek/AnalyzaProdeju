@@ -77,7 +77,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/notFoundFragment"
-        android:name="cz.mtr.analyzaprodeju.fragments.NotFoundDetail.NotFoundFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.notfounddetail.NotFoundFragment"
         android:label="not_found_fragment"
         tools:layout="@layout/fragment_notfound">
         <argument

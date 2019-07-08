@@ -20,7 +20,7 @@ import java.util.List;
 import cz.mtr.analyzaprodeju.Interfaces.OnItemClickListener;
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.ranking.adapter.RankingItemAdapter;
-import cz.mtr.analyzaprodeju.fragments.ranking.other.RankingItem;
+import cz.mtr.analyzaprodeju.fragments.ranking.item.RankingItem;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class RankingFragment extends Fragment implements OnItemClickListener {

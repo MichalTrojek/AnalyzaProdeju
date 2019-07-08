@@ -45,7 +45,7 @@ public class OrdersFragment extends Fragment implements OnItemClickListener, OnI
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(OrdersViewModel.class);
-        mAdapter.setPrinterItems(mViewModel.getOrders());
+        mAdapter.setDisplayItems(mViewModel.getOrders());
     }
 
 
@@ -62,21 +62,21 @@ public class OrdersFragment extends Fragment implements OnItemClickListener, OnI
     @Override
     public void sendAmount(String amount) {
         mViewModel.changeAmount(mPosition, amount);
-        mAdapter.setPrinterItems(mViewModel.getOrders());
+        mAdapter.setDisplayItems(mViewModel.getOrders());
         mAdapter.notifyItemChanged(mPosition);
     }
 
     @Override
     public void deleteItem() {
         mViewModel.delete(mPosition);
-        mAdapter.setPrinterItems(mViewModel.getOrders());
+        mAdapter.setDisplayItems(mViewModel.getOrders());
         mAdapter.notifyItemChanged(mPosition);
     }
 
     public void deleteAllAndRefresh() {
         Model.getInstance().getOrders().clear();
         Model.getInstance().saveOrdersAndReturns();
-        mAdapter.setPrinterItems(mViewModel.getOrders());
+        mAdapter.setDisplayItems(mViewModel.getOrders());
         mAdapter.notifyDataSetChanged();
     }
 }

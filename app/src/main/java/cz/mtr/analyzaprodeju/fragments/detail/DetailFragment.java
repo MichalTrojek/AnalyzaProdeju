@@ -80,7 +80,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 storedTextView.setText(displayableArticle.getStored() + "ks");
                 daysOfSuppliesTextView.setText(displayableArticle.getDaysOfSupplies() + " dnů");
                 lastDeliveryTextView.setText(displayableArticle.getDateOfLastDelivery());
-                supplierTextView.setText(displayableArticle.getSupplier());
+                supplierTextView.setText(String.format("%s (%s)", displayableArticle.getSupplier(), deliveredAs(displayableArticle)));
                 releasedTextView.setText(displayableArticle.getReleaseDate());
                 locationsTextView.setText(displayableArticle.getLocation());
             }
@@ -91,6 +91,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         fab_rotate_anticlock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_anticlock);
         fab_rotate_clock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_clock);
 
+    }
+
+    private String deliveredAs(DisplayableArticle displayableArticle) {
+        if (displayableArticle.getCommision().equals("1514")) {
+            return "Komise";
+        } else {
+            return "Pevno";
+        }
     }
 
 

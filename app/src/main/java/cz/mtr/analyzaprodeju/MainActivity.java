@@ -91,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_import:
                 handleImport();
                 break;
+            case R.id.nav_export:
+                handleExport();
+                break;
             case R.id.nav_printer:
                 handlePrintJob();
                 break;
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_display:
                 if (Model.getInstance().getReturns().isEmpty() && Model.getInstance().getOrders().isEmpty()) {
-                    Toast.makeText(this, "Není nic nachystaného k tisknutí.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Neobsahuje žádné položky.", Toast.LENGTH_SHORT).show();
                 } else {
                     mNavController.navigate(R.id.displayFragment);
                 }
@@ -119,6 +122,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Model.getInstance().clearAnalysis();
         Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
         client.execute("analyza");
+    }
+
+    private void handleExport() {
+        Model.getInstance().clearAnalysis();
+        Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
+        client.execute("export");
     }
 
     private void handlePrintJob() {
@@ -159,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         StringBuilder sb = new StringBuilder();
         sb.append(name + "<BR/>");
         for (ExportSharedArticle e : list) {
-            sb.append("Počet :" + e.getExportAmount() + ", " + e.getName() + ", " + e.getEan() + ", lokace: " + e.getLocation() + "<BR/>");
+            sb.append("Počet: " + e.getExportAmount() + ", " + e.getName() + ", " + e.getEan() + ", lokace: " + e.getLocation() + "<BR/>");
         }
         String htmlDocument = "<html><body><p>" + sb.toString() + "</p></body></html>";
         webview.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);

@@ -29,6 +29,8 @@ public class DetailViewModel extends AndroidViewModel {
         DisplayableArticle article = new DisplayableArticle(a.getRanking(), a.getEan(), a.getName(), a.getSales1(), a.getSales2()
                 , a.getRevenue(), a.getStored(), a.getDaysOfSupplies(), a.getLocation(), a.getPrice(), a.getSupplier(),
                 a.getAuthor(), a.getDateOfLastSale(), a.getDateOfLastDelivery(), a.getReleaseDate(), a.getCommision(), a.getRankingEshop(),
+
+
                 a.getSales1DateSince(), a.getSales1DateTo(), a.getSales1Days(), a.getSales2DateSince(),
                 a.getSales2DateTo(), a.getSales2Days());
         mArticleFromAnalysis.setValue(article);
@@ -36,23 +38,40 @@ public class DetailViewModel extends AndroidViewModel {
     }
 
     public void saveArticleAndAmountOrders(DisplayableArticle article, String amount) {
-        ExportSharedArticle exportArticle = new ExportSharedArticle();
-        exportArticle.setEan(article.getEan());
-        exportArticle.setName(article.getName());
-        exportArticle.setSupplier(article.getSupplier());
-        exportArticle.setExportAmount(amount);
-        exportArticle.setLocation(article.getLocation());
-        Model.getInstance().addOrders(exportArticle);
+        Model.getInstance().addOrders(getExportSharedArticle(article, amount));
     }
 
     public void saveArticleAndAmountReturns(DisplayableArticle article, String amount) {
+        Model.getInstance().addReturns(getExportSharedArticle(article, amount));
+    }
+
+    private ExportSharedArticle getExportSharedArticle(DisplayableArticle article, String amount) {
         ExportSharedArticle exportArticle = new ExportSharedArticle();
+        exportArticle.setRanking(article.getRanking());
         exportArticle.setEan(article.getEan());
         exportArticle.setName(article.getName());
-        exportArticle.setSupplier(article.getSupplier());
-        exportArticle.setExportAmount(amount);
+        exportArticle.setSales1(article.getSales1());
+        exportArticle.setSales1(article.getSales2());
+        exportArticle.setRevenue(article.getRevenue());
+        exportArticle.setStored(article.getStored());
+        exportArticle.setDaysOfSupplies(article.getDaysOfSupplies());
         exportArticle.setLocation(article.getLocation());
-        Model.getInstance().addReturns(exportArticle);
+        exportArticle.setPrice(article.getPrice());
+        exportArticle.setSupplier(article.getSupplier());
+        exportArticle.setAuthor(article.getAuthor());
+        exportArticle.setDateOfLastSale(article.getDateOfLastSale());
+        exportArticle.setDateOfLastDelivery(article.getDateOfLastDelivery());
+        exportArticle.setReleaseDate(article.getReleaseDate());
+        exportArticle.setCommision(article.getCommision());
+        exportArticle.setRankingEshop(article.getRankingEshop());
+        exportArticle.setSales1DateSince(article.getSales1DateSince());
+        exportArticle.setSales1DateTo(article.getSales1DateTo());
+        exportArticle.setSales1Days(article.getSales1Days());
+        exportArticle.setSales2DateSince(article.getSales2DateSince());
+        exportArticle.setSales2DateTo(article.getSales2DateTo());
+        exportArticle.setSales2Days(article.getSales2Days());
+        exportArticle.setExportAmount(amount);
+        return exportArticle;
     }
 
 

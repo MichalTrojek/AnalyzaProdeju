@@ -30,7 +30,6 @@ public class SharedArticle implements Serializable {
     private String sales2DateTo = "";
     private String sales2Days = "";
 
-
     public SharedArticle() {
 
     }
@@ -151,6 +150,10 @@ public class SharedArticle implements Serializable {
         this.revenue = revenue;
     }
 
+    public void setReleaseDate(String released) {
+        releaseDate = released;
+    }
+
     public void setStored(String stored) {
         this.stored = stored;
     }
@@ -181,5 +184,37 @@ public class SharedArticle implements Serializable {
 
     public void setDateOfLastDelivery(String dateOfLastDelivery) {
         this.dateOfLastDelivery = dateOfLastDelivery;
+    }
+
+    public void setCommision(String com) {
+        commision = com;
+    }
+
+    public void setRankingEshop(String rankingEshop) {
+        this.rankingEshop = rankingEshop;
+    }
+
+    public void setSales1DateSince(String sales1DateSince) {
+        this.sales1DateSince = sales1DateSince;
+    }
+
+    public void setSales1DateTo(String sales1DateTo) {
+        this.sales1DateTo = sales1DateTo;
+    }
+
+    public void setSales1Days(String sales1Days) {
+        this.sales1Days = sales1Days;
+    }
+
+    public void setSales2DateSince(String sales2DateSince) {
+        this.sales2DateSince = sales2DateSince;
+    }
+
+    public void setSales2DateTo(String sales2DateTo) {
+        this.sales2DateTo = sales2DateTo;
+    }
+
+    public void setSales2Days(String sales2Days) {
+        this.sales2Days = sales2Days;
     }
 }
