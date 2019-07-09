@@ -95,9 +95,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     private String deliveredAs(DisplayableArticle displayableArticle) {
         if (displayableArticle.getCommision().equals("1514")) {
-            return "Komise";
+            return "K";
         } else {
-            return "Pevno";
+            return "P";
         }
     }
 

@@ -133,6 +133,7 @@ public class SearchFragment extends Fragment implements OnItemClickListener {
         }
     }
 
+
     private void hideKeyboard(TextView editText) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);

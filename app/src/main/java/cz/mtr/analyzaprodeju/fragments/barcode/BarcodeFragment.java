@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.MainActivity;
 import cz.mtr.analyzaprodeju.R;
 import info.androidhive.barcode.BarcodeReader;
 
@@ -90,7 +91,13 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
         mBarcodeReader = (BarcodeReader) getChildFragmentManager().findFragmentById(R.id.barcode_fragment);
         mBarcodeReader.setListener(this);
         mStopScanningButton = (FloatingActionButton) view.findViewById(R.id.stopScanningButton);
-        mStopScanningButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.barcodeToHome, null));
+
+        mStopScanningButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).onBackPressed();
+            }
+        });
         return view;
     }
 

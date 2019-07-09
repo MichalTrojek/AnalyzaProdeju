@@ -47,11 +47,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         copyDatabaseFromAssetsToWorkingDirectory();
         setupDrawerLayout();
         handleHamburgerButtonPress();
+
         mNavigationView.setCheckedItem(R.id.nav_home);
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+
         Model.getInstance().createPrefs(this);
-
-
     }
 
 
@@ -83,10 +84,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mNavController.navigate(R.id.homeFragment);
                 break;
             case R.id.nav_about:
-                mNavController.navigate(R.id.aboutFragment);
+                mNavController.navigate(R.id.toAbout);
                 break;
             case R.id.nav_settings:
-                mNavController.navigate(R.id.settingsFragment);
+                mNavController.navigate(R.id.toSettings);
                 break;
             case R.id.nav_import:
                 handleImport();
@@ -101,31 +102,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (Model.getInstance().getAnalysis().isEmpty()) {
                     Toast.makeText(this, "Není nahraná analýza.", Toast.LENGTH_SHORT).show();
                 } else {
-                    mNavController.navigate(R.id.rankingFragment);
+                    mNavController.navigate(R.id.toRanking);
                 }
                 break;
             case R.id.nav_display:
                 if (Model.getInstance().getReturns().isEmpty() && Model.getInstance().getOrders().isEmpty()) {
                     Toast.makeText(this, "Neobsahuje žádné položky.", Toast.LENGTH_SHORT).show();
                 } else {
-                    mNavController.navigate(R.id.displayFragment);
+                    mNavController.navigate(R.id.toDisplay);
                 }
                 break;
             case R.id.nav_search:
-                mNavController.navigate(R.id.searchFragment);
+                mNavController.navigate(R.id.toSearch);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     private void handleImport() {
-        Model.getInstance().clearAnalysis();
         Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
         client.execute("analyza");
     }
 
     private void handleExport() {
-        Model.getInstance().clearAnalysis();
         Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
         client.execute("export");
     }

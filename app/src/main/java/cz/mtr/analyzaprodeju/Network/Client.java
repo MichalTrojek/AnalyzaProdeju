@@ -58,6 +58,7 @@ public class Client extends AsyncTask<String, Integer, Void> {
             socket.connect(new InetSocketAddress(ip, port), 500);
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             Message message = (Message) objectInputStream.readObject();
+            Model.getInstance().clearAnalysis();
             Model.getInstance().setAnalysis(message.getAnalysis());
         } catch (UnknownHostException e) {
             e.printStackTrace();
