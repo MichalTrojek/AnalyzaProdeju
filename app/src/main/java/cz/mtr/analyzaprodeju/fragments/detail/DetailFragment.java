@@ -1,6 +1,8 @@
 package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,6 +107,16 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private void setupTextViews(View view) {
         nameTextView = (TextView) view.findViewById(R.id.nameTextView);
         eanTextView = (TextView) view.findViewById(R.id.eanTextView);
+        eanTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + eanTextView.getText().toString()));
+                startActivity(browserIntent);
+                return false;
+            }
+        });
         priceTextView = (TextView) view.findViewById(R.id.priceTextView);
         rankTextView = (TextView) view.findViewById(R.id.rankTextView);
         eshopTextView = (TextView) view.findViewById(R.id.eshopTextView);

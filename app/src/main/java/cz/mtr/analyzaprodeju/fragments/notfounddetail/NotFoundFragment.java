@@ -1,6 +1,8 @@
 package cz.mtr.analyzaprodeju.fragments.notfounddetail;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,16 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_notfound, container, false);
         mNameTextView = view.findViewById(R.id.nameTextView);
         mEanTextView = view.findViewById(R.id.eanTextView);
+        mEanTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + mEanTextView.getText().toString()));
+                startActivity(browserIntent);
+                return false;
+            }
+        });
         mPriceTextView = view.findViewById(R.id.priceTextView);
         addFob = view.findViewById(R.id.addFab);
         returnFob = view.findViewById(R.id.returnFab);
