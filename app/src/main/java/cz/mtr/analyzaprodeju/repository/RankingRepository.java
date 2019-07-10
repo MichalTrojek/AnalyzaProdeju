@@ -34,7 +34,7 @@ public class RankingRepository {
         List<SharedArticle> articlesFromAnalysis = new ArrayList<>(Model.getInstance().getAnalysis().values());
         articlesFromAnalysis = sortByStoreRankings(articlesFromAnalysis);
         for (SharedArticle a : articlesFromAnalysis) {
-            rankingItems.add(new RankingItem(a.getRanking(), a.getName(), a.getEan(), a.getRevenue()));
+            rankingItems.add(new RankingItem(a.getRanking(), a.getName(), a.getEan(), a.getStored(), a.getSales1(), a.getSales2(), a.getSales1Days(), a.getSales2Days()));
         }
         return rankingItems;
     }

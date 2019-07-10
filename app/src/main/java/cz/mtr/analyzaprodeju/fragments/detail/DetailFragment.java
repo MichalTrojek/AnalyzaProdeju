@@ -120,7 +120,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         priceTextView = (TextView) view.findViewById(R.id.priceTextView);
         rankTextView = (TextView) view.findViewById(R.id.rankTextView);
         eshopTextView = (TextView) view.findViewById(R.id.eshopTextView);
-        revenueTextView = (TextView) view.findViewById(R.id.revenueTextView);
+        revenueTextView = (TextView) view.findViewById(R.id.amountTextView);
         salesAmountOneTextView = (TextView) view.findViewById(R.id.salesAmountOneTextView);
         salesDaysOneTextView = (TextView) view.findViewById(R.id.salesDaysOneTextView);
         salesAmountTwoTextView = (TextView) view.findViewById(R.id.salesAmountTwoTextView);

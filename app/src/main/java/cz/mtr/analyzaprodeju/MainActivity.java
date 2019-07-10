@@ -1,6 +1,7 @@
 package cz.mtr.analyzaprodeju;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mNavigationView.setCheckedItem(R.id.nav_home);
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         Model.getInstance().createPrefs(this);
     }

@@ -38,7 +38,9 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
         RankingItem currentRankingItem = rankingItems.get(position);
         holder.mNameTextView.setText(currentRankingItem.getName());
         holder.mRankTextView.setText(currentRankingItem.getRank() + ".");
-        holder.mRevenueTextView.setText(currentRankingItem.getRevenue() + " Kč");
+        holder.mAmountTextView.setText(currentRankingItem.getAmount() + "ks");
+        holder.mSalesOneTextView.setText(String.format("Za %s dnů: %sks", currentRankingItem.getFirstDays(), currentRankingItem.getFirstSales()));
+        holder.mSalesTwoTextView.setText(String.format("Za %s dnů: %sks", currentRankingItem.getSecondDays(), currentRankingItem.getSecondSales()));
 
     }
 
@@ -54,14 +56,19 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
 
 
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mNameTextView, mRankTextView, mRevenueTextView;
+        private TextView mNameTextView, mRankTextView, mAmountTextView, mSalesOneTextView, mSalesTwoTextView;
         OnItemClickListener mOnItemListener;
+
 
         public ItemHolder(@NonNull View itemView, OnItemClickListener onItemListener) {
             super(itemView);
             mNameTextView = itemView.findViewById(R.id.itemNameTextView);
             mRankTextView = itemView.findViewById(R.id.itemRankTextView);
-            mRevenueTextView = itemView.findViewById(R.id.revenueTextView);
+            mAmountTextView = itemView.findViewById(R.id.amountTextView);
+            mSalesOneTextView = itemView.findViewById(R.id.firstSalesTextView);
+            mSalesTwoTextView = itemView.findViewById(R.id.secondSalesTextView);
+
+
             this.mOnItemListener = onItemListener;
             itemView.setOnClickListener(this);
         }
