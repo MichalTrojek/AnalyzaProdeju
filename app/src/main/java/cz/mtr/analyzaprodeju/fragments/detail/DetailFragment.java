@@ -29,7 +29,7 @@ import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 public class DetailFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = DetailFragment.class.getSimpleName();
     private TextView nameTextView, eanTextView, priceTextView, rankTextView, eshopTextView, revenueTextView, salesAmountOneTextView, salesDaysOneTextView, salesAmountTwoTextView, salesDaysTwoTextView, lastSaleTextView,
-            storedTextView, daysOfSuppliesTextView, lastDeliveryTextView, supplierTextView, releasedTextView, locationsTextView;
+            storedTextView, daysOfSuppliesTextView, lastDeliveryTextView, supplierTextView, releasedTextView, locationsTextView, authorTextView;
     private FloatingActionButton addFob, returnFob, orderFob;
     private Animation fab_open, fab_close, fab_rotate_anticlock, fab_rotate_clock;
     private EditText ordersEditText, returnsEditText;
@@ -71,8 +71,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 nameTextView.setText(displayableArticle.getName());
                 eanTextView.setText(displayableArticle.getEan());
                 priceTextView.setText(displayableArticle.getPrice() + ",- Kč");
-                rankTextView.setText(displayableArticle.getRanking());
-                eshopTextView.setText(displayableArticle.getRankingEshop());
+                rankTextView.setText(displayableArticle.getRanking()+".");
+                eshopTextView.setText(displayableArticle.getRankingEshop()+".");
                 revenueTextView.setText(displayableArticle.getRevenue() + ",- Kč");
                 salesAmountOneTextView.setText(displayableArticle.getSales1() + "ks");
                 salesDaysOneTextView.setText("Za " + displayableArticle.getSales1Days() + " dnů");
@@ -83,8 +83,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 daysOfSuppliesTextView.setText(displayableArticle.getDaysOfSupplies() + " dnů");
                 lastDeliveryTextView.setText(displayableArticle.getDateOfLastDelivery());
                 supplierTextView.setText(String.format("%s (%s)", displayableArticle.getSupplier(), deliveredAs(displayableArticle)));
-                releasedTextView.setText(displayableArticle.getReleaseDate());
+                releasedTextView.setText(" Vydáno: " + displayableArticle.getReleaseDate());
                 locationsTextView.setText(displayableArticle.getLocation());
+                authorTextView.setText("Autor " + displayableArticle.getAuthor());
             }
         });
 
@@ -97,9 +98,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     private String deliveredAs(DisplayableArticle displayableArticle) {
         if (displayableArticle.getCommision().equals("1514")) {
-            return "K";
+            return "KOMISE";
         } else {
-            return "P";
+            return "PEVNO";
         }
     }
 
@@ -132,6 +133,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         supplierTextView = (TextView) view.findViewById(R.id.supplierTextView);
         releasedTextView = (TextView) view.findViewById(R.id.releasedTextView);
         locationsTextView = (TextView) view.findViewById(R.id.locationsTextView);
+        authorTextView = (TextView) view.findViewById(R.id.authorTextView);
     }
 
 
