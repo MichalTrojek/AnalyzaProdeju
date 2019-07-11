@@ -82,15 +82,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                mNavController.navigate(R.id.homeFragment);
+                if (mNavController.getCurrentDestination().getId() != R.id.homeFragment) {
+                    mNavController.navigate(R.id.toHome);
+                }
                 break;
             case R.id.nav_about:
-                mNavController.navigate(R.id.toAbout);
+                if (mNavController.getCurrentDestination().getId() != R.id.aboutFragment) {
+                    mNavController.navigate(R.id.toAbout);
+                }
                 break;
             case R.id.nav_settings:
-                mNavController.navigate(R.id.toSettings);
+                if (mNavController.getCurrentDestination().getId() != R.id.settingsFragment) {
+                    mNavController.navigate(R.id.toSettings);
+                }
                 break;
             case R.id.nav_import:
+
                 handleImport();
                 break;
             case R.id.nav_export:
@@ -100,21 +107,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 handlePrintJob();
                 break;
             case R.id.nav_ranking:
-                if (Model.getInstance().getAnalysis().isEmpty()) {
-                    Toast.makeText(this, "Není nahraná analýza.", Toast.LENGTH_SHORT).show();
-                } else {
-                    mNavController.navigate(R.id.toRanking);
+                if (mNavController.getCurrentDestination().getId() != R.id.rankingFragment) {
+                    if (Model.getInstance().getAnalysis().isEmpty()) {
+                        Toast.makeText(this, "Není nahraná analýza.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        mNavController.navigate(R.id.toRanking);
+                    }
                 }
                 break;
             case R.id.nav_display:
-                if (Model.getInstance().getReturns().isEmpty() && Model.getInstance().getOrders().isEmpty()) {
-                    Toast.makeText(this, "Neobsahuje žádné položky.", Toast.LENGTH_SHORT).show();
-                } else {
-                    mNavController.navigate(R.id.toDisplay);
+                if (mNavController.getCurrentDestination().getId() != R.id.displayFragment) {
+                    if (Model.getInstance().getReturns().isEmpty() && Model.getInstance().getOrders().isEmpty()) {
+                        Toast.makeText(this, "Neobsahuje žádné položky.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        mNavController.navigate(R.id.toDisplay);
+                    }
                 }
                 break;
             case R.id.nav_search:
-                mNavController.navigate(R.id.toSearch);
+                if (mNavController.getCurrentDestination().getId() != R.id.searchFragment) {
+                    mNavController.navigate(R.id.toSearch);
+                }
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
