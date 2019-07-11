@@ -132,6 +132,7 @@
         app:enterAnim="@anim/enter_from_right"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
+        app:popExitAnim="@anim/exit_to_right"
         app:popUpTo="@+id/homeFragment" />
     <action
         android:id="@+id/toDisplay"
@@ -139,6 +140,7 @@
         app:enterAnim="@anim/enter_from_right"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
+        app:popExitAnim="@anim/exit_to_right"
         app:popUpTo="@+id/homeFragment" />
     <action
         android:id="@+id/toSettings"
@@ -146,6 +148,7 @@
         app:enterAnim="@anim/enter_from_right"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
+        app:popExitAnim="@anim/exit_to_right"
         app:popUpTo="@+id/homeFragment" />
     <action
         android:id="@+id/toAbout"
@@ -153,5 +156,6 @@
         app:enterAnim="@anim/enter_from_right"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
+        app:popExitAnim="@anim/exit_to_right"
         app:popUpTo="@+id/homeFragment" />
 </navigation>
