@@ -29,12 +29,13 @@ public class DisplayableArticle implements Serializable {
     private String sales2DateSince = "";
     private String sales2DateTo = "";
     private String sales2Days = "";
+    private String eshopCode = "";
 
     public DisplayableArticle(String ranking, String ean, String name, String sales1, String sales2, String revenue, String stored,
                               String daysOfSupplies, String location, String price, String supplier, String author, String dateOfLastSale,
                               String dateOfLastDelivery, String releaseDate, String commision, String rankingEshop,
                               String sales1DateSince, String sales1DateTo, String sales1Days, String sales2DateSince, String sales2DateTo,
-                              String sales2Days) {
+                              String sales2Days, String eshopCode) {
         super();
         this.ranking = ranking;
         this.ean = ean;
@@ -59,6 +60,7 @@ public class DisplayableArticle implements Serializable {
         this.sales2DateSince = sales2DateSince;
         this.sales2DateTo = sales2DateTo;
         this.sales2Days = sales2Days;
+        this.eshopCode = eshopCode;
     }
 
     public DisplayableArticle(String ean, String name, String price) {
@@ -162,6 +164,10 @@ public class DisplayableArticle implements Serializable {
 
     public String getSales2Days() {
         return sales2Days;
+    }
+
+    public String getEshopCode() {
+        return eshopCode;
     }
 
 }

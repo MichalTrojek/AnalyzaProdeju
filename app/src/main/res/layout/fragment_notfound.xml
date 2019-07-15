@@ -38,7 +38,7 @@
             android:layout_margin="4dp">
 
             <TextView
-                android:id="@+id/nameTextView"
+                android:id="@+id/scaperNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -55,7 +55,7 @@
                 android:id="@+id/eanTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/nameTextView"
+                android:layout_below="@+id/scaperNameTextView"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="1dp"

@@ -4,217 +4,227 @@ import java.io.Serializable;
 
 public class SharedArticle implements Serializable {
 
-    private static final long serialVersionUID = -2160864851277312099L;
+	private static final long serialVersionUID = -2160864851277312099L;
 
-    private String ranking = "";
-    private String ean = "";
-    private String name = "";
-    private String sales1 = "";
-    private String sales2 = "";
-    private String revenue = "";
-    private String stored = "";
-    private String daysOfSupplies = "";
-    private String location = "";
-    private String price = "";
-    private String supplier = "";
-    private String author = "";
-    private String dateOfLastSale = "";
-    private String dateOfLastDelivery = "";
-    private String releaseDate = "";
-    private String commision = "";
-    private String rankingEshop = "";
-    private String sales1DateSince = "";
-    private String sales1DateTo = "";
-    private String sales1Days = "";
-    private String sales2DateSince = "";
-    private String sales2DateTo = "";
-    private String sales2Days = "";
+	private String ranking = "";
+	private String ean = "";
+	private String name = "";
+	private String sales1 = "";
+	private String sales2 = "";
+	private String revenue = "";
+	private String stored = "";
+	private String daysOfSupplies = "";
+	private String location = "";
+	private String price = "";
+	private String supplier = "";
+	private String author = "";
+	private String dateOfLastSale = "";
+	private String dateOfLastDelivery = "";
+	private String releaseDate = "";
+	private String commision = "";
+	private String rankingEshop = "";
+	private String sales1DateSince = "";
+	private String sales1DateTo = "";
+	private String sales1Days = "";
+	private String sales2DateSince = "";
+	private String sales2DateTo = "";
+	private String sales2Days = "";
+	private String eshopCode = "";
 
-    public SharedArticle() {
+	public SharedArticle() {
 
-    }
+	}
 
-    public String getRanking() {
-        return ranking;
-    }
+	public String getEshopCode() {
+		return this.eshopCode;
+	}
 
-    public String getEan() {
-        return ean;
-    }
+	public void setEshopCode(String code) {
+		eshopCode = code;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getRanking() {
+		return ranking;
+	}
 
-    public String getSales1() {
-        return sales1;
-    }
+	public String getEan() {
+		return ean;
+	}
 
-    public String getSales2() {
-        return sales2;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getRevenue() {
-        return revenue;
-    }
+	public String getSales1() {
+		return sales1;
+	}
 
-    public String getStored() {
-        return stored;
-    }
+	public String getSales2() {
+		return sales2;
+	}
 
-    public String getDaysOfSupplies() {
-        return daysOfSupplies;
-    }
+	public String getRevenue() {
+		return revenue;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public String getStored() {
+		return stored;
+	}
 
-    public String getPrice() {
-        return price;
-    }
+	public String getDaysOfSupplies() {
+		return daysOfSupplies;
+	}
 
-    public String getSupplier() {
-        return supplier;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public String getAuthor() {
-        return author;
-    }
+	public String getPrice() {
+		return price;
+	}
 
-    public String getDateOfLastSale() {
-        return dateOfLastSale;
-    }
+	public String getSupplier() {
+		return supplier;
+	}
 
-    public String getDateOfLastDelivery() {
-        return dateOfLastDelivery;
-    }
+	public String getAuthor() {
+		return author;
+	}
 
-    public String getReleaseDate() {
-        return releaseDate;
-    }
+	public String getDateOfLastSale() {
+		return dateOfLastSale;
+	}
 
-    public String getCommision() {
-        return commision;
-    }
+	public String getDateOfLastDelivery() {
+		return dateOfLastDelivery;
+	}
 
-    public String getRankingEshop() {
-        return rankingEshop;
-    }
+	public String getReleaseDate() {
+		return releaseDate;
+	}
 
-    public String getSales1DateSince() {
-        return sales1DateSince;
-    }
+	public String getCommision() {
+		return commision;
+	}
 
-    public String getSales1DateTo() {
-        return sales1DateTo;
-    }
+	public String getRankingEshop() {
+		return rankingEshop;
+	}
 
-    public String getSales1Days() {
-        return sales1Days;
-    }
+	public String getSales1DateSince() {
+		return sales1DateSince;
+	}
 
-    public String getSales2DateSince() {
-        return sales2DateSince;
-    }
+	public String getSales1DateTo() {
+		return sales1DateTo;
+	}
 
-    public String getSales2DateTo() {
-        return sales2DateTo;
-    }
+	public String getSales1Days() {
+		return sales1Days;
+	}
 
-    public String getSales2Days() {
-        return sales2Days;
-    }
+	public String getSales2DateSince() {
+		return sales2DateSince;
+	}
 
-    public void setRanking(String ranking) {
-        this.ranking = ranking;
-    }
+	public String getSales2DateTo() {
+		return sales2DateTo;
+	}
 
-    public void setEan(String ean) {
-        this.ean = ean;
-    }
+	public String getSales2Days() {
+		return sales2Days;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setRanking(String ranking) {
+		this.ranking = ranking;
+	}
 
-    public void setSales1(String sales1) {
-        this.sales1 = sales1;
-    }
+	public void setEan(String ean) {
+		this.ean = ean;
+	}
 
-    public void setSales2(String sales2) {
-        this.sales2 = sales2;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setRevenue(String revenue) {
-        this.revenue = revenue;
-    }
+	public void setSales1(String sales1) {
+		this.sales1 = sales1;
+	}
 
-    public void setReleaseDate(String released) {
-        releaseDate = released;
-    }
+	public void setSales2(String sales2) {
+		this.sales2 = sales2;
+	}
 
-    public void setStored(String stored) {
-        this.stored = stored;
-    }
+	public void setRevenue(String revenue) {
+		this.revenue = revenue;
+	}
 
-    public void setDaysOfSupplies(String daysOfSupplies) {
-        this.daysOfSupplies = daysOfSupplies;
-    }
+	public void setReleaseDate(String released) {
+		releaseDate = released;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public void setStored(String stored) {
+		this.stored = stored;
+	}
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
+	public void setDaysOfSupplies(String daysOfSupplies) {
+		this.daysOfSupplies = daysOfSupplies;
+	}
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+	public void setPrice(String price) {
+		this.price = price;
+	}
 
-    public void setDateOfLastSale(String dateOfLastSale) {
-        this.dateOfLastSale = dateOfLastSale;
-    }
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
+	}
 
-    public void setDateOfLastDelivery(String dateOfLastDelivery) {
-        this.dateOfLastDelivery = dateOfLastDelivery;
-    }
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
-    public void setCommision(String com) {
-        commision = com;
-    }
+	public void setDateOfLastSale(String dateOfLastSale) {
+		this.dateOfLastSale = dateOfLastSale;
+	}
 
-    public void setRankingEshop(String rankingEshop) {
-        this.rankingEshop = rankingEshop;
-    }
+	public void setDateOfLastDelivery(String dateOfLastDelivery) {
+		this.dateOfLastDelivery = dateOfLastDelivery;
+	}
 
-    public void setSales1DateSince(String sales1DateSince) {
-        this.sales1DateSince = sales1DateSince;
-    }
+	public void setCommision(String com) {
+		commision = com;
+	}
 
-    public void setSales1DateTo(String sales1DateTo) {
-        this.sales1DateTo = sales1DateTo;
-    }
+	public void setRankingEshop(String rankingEshop) {
+		this.rankingEshop = rankingEshop;
+	}
 
-    public void setSales1Days(String sales1Days) {
-        this.sales1Days = sales1Days;
-    }
+	public void setSales1DateSince(String sales1DateSince) {
+		this.sales1DateSince = sales1DateSince;
+	}
 
-    public void setSales2DateSince(String sales2DateSince) {
-        this.sales2DateSince = sales2DateSince;
-    }
+	public void setSales1DateTo(String sales1DateTo) {
+		this.sales1DateTo = sales1DateTo;
+	}
 
-    public void setSales2DateTo(String sales2DateTo) {
-        this.sales2DateTo = sales2DateTo;
-    }
+	public void setSales1Days(String sales1Days) {
+		this.sales1Days = sales1Days;
+	}
 
-    public void setSales2Days(String sales2Days) {
-        this.sales2Days = sales2Days;
-    }
+	public void setSales2DateSince(String sales2DateSince) {
+		this.sales2DateSince = sales2DateSince;
+	}
+
+	public void setSales2DateTo(String sales2DateTo) {
+		this.sales2DateTo = sales2DateTo;
+	}
+
+	public void setSales2Days(String sales2Days) {
+		this.sales2Days = sales2Days;
+	}
+
 }

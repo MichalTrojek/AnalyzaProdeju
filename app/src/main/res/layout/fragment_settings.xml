@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:digits="0123456789."
 
@@ -46,8 +46,38 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="8dp"
         android:text="@string/save_ip_button"
+        app:layout_constraintEnd_toEndOf="@+id/eshopPasswordEditText"
+        app:layout_constraintStart_toStartOf="@+id/eshopPasswordEditText"
+        app:layout_constraintTop_toBottomOf="@+id/eshopPasswordEditText" />
+
+    <EditText
+        android:id="@+id/eshopPasswordEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Vložte eshop heslo"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/eshopLoginEditText"
+        app:layout_constraintStart_toStartOf="@+id/eshopLoginEditText"
+        app:layout_constraintTop_toBottomOf="@+id/eshopLoginEditText" />
+
+    <EditText
+        android:id="@+id/eshopLoginEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:hint="Vložte eshop login"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="@+id/ip_adress_input"
         app:layout_constraintStart_toStartOf="@+id/ip_adress_input"
         app:layout_constraintTop_toBottomOf="@+id/ip_adress_input" />

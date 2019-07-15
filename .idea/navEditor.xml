@@ -55,6 +55,15 @@
                             <option name="y" value="-577" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="detailToScraper">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -124,6 +133,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="scraperFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1966" />
+                            <option name="y" value="-627" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="searchFragment">
                     <value>
                       <LayoutPositions>
@@ -168,6 +189,11 @@
                     </value>
                   </entry>
                   <entry key="toDisplay">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="toHome">
                     <value>
                       <LayoutPositions />
                     </value>

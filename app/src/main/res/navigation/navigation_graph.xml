@@ -56,6 +56,9 @@
         <argument
             android:name="articleAnalys"
             app:argType="cz.mtr.analyzaprodeju.shared.SharedArticle" />
+        <action
+            android:id="@+id/detailToScraper"
+            app:destination="@id/scraperFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -165,4 +168,10 @@
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
         app:popExitAnim="@anim/exit_to_right" />
+    <fragment
+        android:id="@+id/scraperFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.scraper.ScraperFragment"
+        android:label="fragment_scraper"
+        tools:layout="@layout/fragment_scraper" />
+
 </navigation>

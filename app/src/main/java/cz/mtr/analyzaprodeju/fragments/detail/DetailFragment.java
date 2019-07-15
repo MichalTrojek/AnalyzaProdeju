@@ -2,6 +2,8 @@ package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,6 +26,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.fragments.scraper.ScrapInfoAsyncTask;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 
@@ -37,6 +41,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private DetailViewModel mViewModel;
     private boolean isOpen = false;
     private ScrollView scrollView2;
+
+    public DetailFragment() {
+
+    }
 
     @Nullable
     @Override
@@ -71,8 +79,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 nameTextView.setText(displayableArticle.getName());
                 eanTextView.setText(displayableArticle.getEan());
                 priceTextView.setText(displayableArticle.getPrice() + ",- Kč");
-                rankTextView.setText(displayableArticle.getRanking()+".");
-                eshopTextView.setText(displayableArticle.getRankingEshop()+".");
+                rankTextView.setText(displayableArticle.getRanking() + ".");
+                eshopTextView.setText(displayableArticle.getRankingEshop() + ".");
                 revenueTextView.setText(displayableArticle.getRevenue() + ",- Kč");
                 salesAmountOneTextView.setText(displayableArticle.getSales1() + "ks");
                 salesDaysOneTextView.setText("Za " + displayableArticle.getSales1Days() + " dnů");
@@ -106,15 +114,26 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
 
     private void setupTextViews(View view) {
-        nameTextView = (TextView) view.findViewById(R.id.nameTextView);
+        nameTextView = (TextView) view.findViewById(R.id.scaperNameTextView);
         eanTextView = (TextView) view.findViewById(R.id.eanTextView);
         eanTextView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                if (isNetworkAvailable()) {
+                    if (Model.getInstance().getPrefs().getLogin().isEmpty() || Model.getInstance().getPrefs().getPassword().isEmpty()) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + eanTextView.getText().toString()));
+                        startActivity(browserIntent);
+                        Toast.makeText(getContext(), "Nejsou vloženy logovací údaje.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Model.getInstance().setEan(eanTextView.getText().toString());
+                        ScrapInfoAsyncTask task = new ScrapInfoAsyncTask(getView(), getContext());
+                        task.execute(Model.getInstance().getEan());
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Nepřipojeno k internetu.", Toast.LENGTH_SHORT).show();
+                }
 
 
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + eanTextView.getText().toString()));
-                startActivity(browserIntent);
                 return false;
             }
         });
@@ -134,6 +153,13 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         releasedTextView = (TextView) view.findViewById(R.id.releasedTextView);
         locationsTextView = (TextView) view.findViewById(R.id.locationsTextView);
         authorTextView = (TextView) view.findViewById(R.id.authorTextView);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 

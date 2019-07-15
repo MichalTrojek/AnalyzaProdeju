@@ -4,7 +4,10 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import cz.mtr.analyzaprodeju.fragments.scraper.stores.WebItem;
+import cz.mtr.analyzaprodeju.fragments.scraper.suppliers.WebItemSuppliers;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -53,6 +56,33 @@ public class Model {
         }
     }
 
+    String ean;
+    List<WebItem> items = new ArrayList<>();
+    List<WebItemSuppliers> suppliersItems = new ArrayList<>();
+
+    public List<WebItem> getItems() {
+        return this.items;
+    }
+
+    public void setItems(List<WebItem> items) {
+        this.items = items;
+    }
+
+    public List<WebItemSuppliers> getSuppliersItems() {
+        return this.suppliersItems;
+    }
+
+    public void setSuppliersItems(List<WebItemSuppliers> items) {
+        this.suppliersItems = items;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
+    public String getEan() {
+        return ean;
+    }
 
     public void addOrders(ExportSharedArticle a) {
         if (!"".equals(a.getExportAmount())) {

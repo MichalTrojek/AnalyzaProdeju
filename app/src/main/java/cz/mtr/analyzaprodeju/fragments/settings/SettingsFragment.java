@@ -1,12 +1,13 @@
 package cz.mtr.analyzaprodeju.fragments.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,13 +22,8 @@ import cz.mtr.analyzaprodeju.R;
 public class SettingsFragment extends Fragment {
 
     private SettingsViewModel mViewModel;
-    private EditText mInputIpAdress;
-    private TextView mIpTextView;
-    private Button saveButton, backButton;
-
-    public static SettingsFragment newInstance() {
-        return new SettingsFragment();
-    }
+    private EditText mInputIpAdress, mInputPassword, mInputLogin;
+    private Button saveButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -36,6 +32,9 @@ public class SettingsFragment extends Fragment {
 
 
         mInputIpAdress = view.findViewById(R.id.ip_adress_input);
+        mInputLogin = view.findViewById(R.id.eshopLoginEditText);
+        mInputPassword = view.findViewById(R.id.eshopPasswordEditText);
+
         saveButton = view.findViewById(R.id.save_ip_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,19 +42,37 @@ public class SettingsFragment extends Fragment {
                 if (!mInputIpAdress.getText().toString().isEmpty()) {
                     if (mViewModel.validateIpAddress(mInputIpAdress.getText().toString())) {
                         mViewModel.setIpAddress(mInputIpAdress.getText().toString());
-                        Navigation.findNavController(getView()).navigate(R.id.homeFragment);
                     } else {
                         Toast.makeText(getActivity(), "Byla vložena IP adresa ve špatném formátu.", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(getActivity(), "Nebyla vložena nová IP adresa", Toast.LENGTH_SHORT).show();
                 }
+                if (!mInputLogin.getText().toString().isEmpty()) {
+                    mViewModel.setLogin(mInputLogin.getText().toString());
+                }
+
+                if (!mInputPassword.getText().toString().isEmpty()) {
+                    mViewModel.setPassword(mInputPassword.getText().toString());
+                }
+
+                hideKeyboard(mInputIpAdress);
+                hideKeyboard(mInputLogin);
+                hideKeyboard(mInputPassword);
+
+                Navigation.findNavController(getView()).navigate(R.id.homeFragment);
+
             }
+
         });
 
 
         return view;
     }
+
+    private void hideKeyboard(EditText editText) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -63,10 +80,24 @@ public class SettingsFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
 
 
-        mViewModel.getIpAdress().observe(getViewLifecycleOwner(), new Observer<String>() {
+        mViewModel.getIpAddress().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 mInputIpAdress.setHint("IP adresa: " + s);
+            }
+        });
+
+        mViewModel.getPassword().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                mInputPassword.setHint(s);
+            }
+        });
+
+        mViewModel.getLogin().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                mInputLogin.setHint(s);
             }
         });
 

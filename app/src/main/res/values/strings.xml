@@ -17,7 +17,7 @@
     <string name="detail_text_drawer_menu">Detail</string>
 
     <string name="printer_text_drawer_menu"> Vratky a Objednávky</string>
-    <string name="settings_text_drawer_menu">Nastavení IP adresy</string>
+    <string name="settings_text_drawer_menu">Nastavení</string>
     <string name="about_text_drawer_menu">O aplikaci</string>
     <string name="search_text_drawer_menu">Hledat podle názvu</string>
     <string name="info_text_drawer_menu">Informace</string>
@@ -26,8 +26,8 @@
 
 
     <string name="ip_adress_textView">Vložte IP adresu.</string>
-    <string name="save_ip_button">ZMĚNIT IP ADRESU</string>
-    <string name="back_ip_button">ZPĚT</string>
+    <string name="save_ip_button">ULOŽIT NASTAVENÍ</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

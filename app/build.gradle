@@ -9,7 +9,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.fragment_scraper.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -30,8 +30,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0-alpha03'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha03'
     implementation 'androidx.room:room-runtime:2.1.0'
     annotationProcessor 'androidx.room:room-compiler:2.1.0'
     // google mobile vision
@@ -45,4 +45,7 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+
+    implementation 'org.jsoup:jsoup:1.12.1'
 }

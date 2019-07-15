@@ -2,6 +2,8 @@ package cz.mtr.analyzaprodeju.fragments.notfounddetail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +26,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.fragments.scraper.ScrapInfoAsyncTask;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -44,15 +48,24 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notfound, container, false);
-        mNameTextView = view.findViewById(R.id.nameTextView);
+        mNameTextView = view.findViewById(R.id.scaperNameTextView);
         mEanTextView = view.findViewById(R.id.eanTextView);
         mEanTextView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-
-
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + mEanTextView.getText().toString()));
-                startActivity(browserIntent);
+                if (isNetworkAvailable()) {
+                    if (Model.getInstance().getPrefs().getLogin().isEmpty() || Model.getInstance().getPrefs().getPassword().isEmpty()) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + mEanTextView.getText().toString()));
+                        startActivity(browserIntent);
+                        Toast.makeText(getContext(), "Nejsou vloženy logovací údaje.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Model.getInstance().setEan(mEanTextView.getText().toString());
+                        ScrapInfoAsyncTask task = new ScrapInfoAsyncTask(getView(), getContext());
+                        task.execute(Model.getInstance().getEan());
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Nepřipojeno k internetu.", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });
@@ -69,6 +82,13 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
         ordersEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         returnsEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         return view;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override

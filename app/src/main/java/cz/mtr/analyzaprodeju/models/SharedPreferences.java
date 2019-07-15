@@ -20,7 +20,8 @@ public class SharedPreferences {
     private final String ANALYSIS = "analysis";
     private final String ORDERS = "orders";
     private final String RETURNS = "returns";
-
+    private final String PASSWORD = "password";
+    private final String LOGIN = "login";
 
     private android.content.SharedPreferences mPrefs;
     private android.content.SharedPreferences.Editor mEditor;
@@ -37,6 +38,28 @@ public class SharedPreferences {
     public void setIp(String ip) {
         mEditor = mPrefs.edit();
         mEditor.putString(IP_ADDRESS, ip);
+        mEditor.apply();
+    }
+
+    public String getPassword() {
+        return mPrefs.getString(PASSWORD, "");
+    }
+
+
+    public void setPassword(String password) {
+        mEditor = mPrefs.edit();
+        mEditor.putString(PASSWORD, password);
+        mEditor.apply();
+    }
+
+
+    public String getLogin() {
+        return mPrefs.getString(LOGIN, "");
+    }
+
+    public void setLogin(String login) {
+        mEditor = mPrefs.edit();
+        mEditor.putString(LOGIN, login);
         mEditor.apply();
     }
 
