@@ -47,50 +47,51 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... args) {
+        String ean = args[0];
         try {
-            String ean = args[0];
+            String password = Model.getInstance().getPrefs().getPassword();
+            String username = Model.getInstance().getPrefs().getLogin();
+
             String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
 
             String loginUrl = "https://www.knihydobrovsky.cz/nette-admin/sign/in";
             String loginActionUrl = "https://www.knihydobrovsky.cz/nette-admin/sign/in";
 
             Map<String, String> formData = new HashMap<String, String>();
-            formData.put("username", Model.getInstance().getPrefs().getLogin());
-            formData.put("password", Model.getInstance().getPrefs().getPassword());
+            formData.put("username", username);
+            formData.put("password", password);
             formData.put("send", "Přihlásit");
             formData.put("do", "signInForm-submit");
+
+
+            // Po vyhledání podle eanu najde odkaz na detail knížky
+            Connection.Response searchQuery = Jsoup
+                    .connect("https://www.knihydobrovsky.cz/vyhledavani?search=" + ean).method(Connection.Method.GET)
+                    .userAgent(userAgent).execute();
+            String linkToPage = searchQuery.parse()
+                    .select("#snippet-bookSearchList-itemListSnippet > div > div > ul > li > div > h2 > a").attr("href");
+            System.out.println(linkToPage);
+
 
             Map<String, String> cookies = new HashMap<String, String>();
 
             Connection.Response loginForm = Jsoup.connect(loginUrl).method(Connection.Method.GET).userAgent(userAgent)
                     .execute();
+
             cookies.putAll(loginForm.cookies());
 
-            Connection.Response loggedInPage = Jsoup.connect(loginActionUrl).cookies(cookies).data(formData)
+            Connection.Response homePage = Jsoup.connect(loginActionUrl).cookies(cookies).data(formData)
                     .method(Connection.Method.POST).userAgent(userAgent).execute();
 
-
-            if (loggedInPage.parse().html().contains("Neplatné přihlášení.")) {
+            if (homePage.parse().html().contains("Neplatné přihlášení.")) {
                 isLoggedIn = false;
                 this.cancel(true);
             }
 
-            cookies.clear();
-            cookies.putAll(loggedInPage.cookies());
+            Document pageDetail = Jsoup.connect("https://www.knihydobrovsky.cz/" + linkToPage).cookies(homePage.cookies())
+                    .method(Connection.Method.GET).userAgent(userAgent).get();
 
-
-            String searchString = "https://www.knihydobrovsky.cz/admin/widgetloader-ajax.php?wplocha=4&wid=dobro&wakce=search&cislo=" + ean + "&fulltext=";
-            Document doc = Jsoup.connect(searchString).referrer("https://www.knihydobrovsky.cz/admin/modul-eshop.php")
-                    .cookies(cookies).get();
-
-
-            String productString = "https://www.knihydobrovsky.cz/admin/modul-eshop-produkt.php?cil=" + getBookId(doc.html().substring(doc.html().indexOf("cil="), doc.html().indexOf("cil=") + 25));
-            Document product = Jsoup.connect(productString).referrer("https://www.knihydobrovsky.cz/admin/modul-eshop.php")
-                    .cookies(cookies).get();
-
-            Elements table = product.select("table");
-
-
+            Elements table = pageDetail.select("table");
             createStoresList(table);
             createSupplierList(table);
 
