@@ -10,20 +10,18 @@
 
     <ImageView
         android:id="@+id/imageView19"
-        android:layout_width="90dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="230dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="181dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_settings_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/ip_adress_input"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
@@ -54,7 +52,7 @@
 
     <EditText
         android:id="@+id/eshopPasswordEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
@@ -69,15 +67,15 @@
 
     <EditText
         android:id="@+id/eshopLoginEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:textAlignment="center"
         android:hint="Vložte eshop login"
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         android:singleLine="true"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/ip_adress_input"
         app:layout_constraintStart_toStartOf="@+id/ip_adress_input"
         app:layout_constraintTop_toBottomOf="@+id/ip_adress_input" />

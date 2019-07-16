@@ -46,13 +46,12 @@ public class SettingsFragment extends Fragment {
                         Toast.makeText(getActivity(), "Byla vložena IP adresa ve špatném formátu.", Toast.LENGTH_SHORT).show();
                     }
                 }
-                if (!mInputLogin.getText().toString().isEmpty()) {
-                    mViewModel.setLogin(mInputLogin.getText().toString());
-                }
 
-                if (!mInputPassword.getText().toString().isEmpty()) {
-                    mViewModel.setPassword(mInputPassword.getText().toString());
-                }
+                mViewModel.setLogin(mInputLogin.getText().toString());
+
+
+                mViewModel.setPassword(mInputPassword.getText().toString());
+
 
                 hideKeyboard(mInputIpAdress);
                 hideKeyboard(mInputLogin);
@@ -83,21 +82,21 @@ public class SettingsFragment extends Fragment {
         mViewModel.getIpAddress().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mInputIpAdress.setHint("IP adresa: " + s);
+                mInputIpAdress.setText(s);
             }
         });
 
         mViewModel.getPassword().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mInputPassword.setHint(s);
+                mInputPassword.setText(s);
             }
         });
 
         mViewModel.getLogin().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mInputLogin.setHint(s);
+                mInputLogin.setText(s);
             }
         });
 
