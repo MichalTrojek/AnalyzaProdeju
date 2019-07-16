@@ -33,10 +33,8 @@ public class ScraperItemAdapter extends RecyclerView.Adapter<ScraperItemAdapter.
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         WebItem item = displayItems.get(position);
         holder.mNameTextView.setText(item.getName());
-        holder.mStoreTextView.setText(item.getStore());
-        holder.mEshopTextView.setText(item.getEshop());
-        holder.mTotalTextView.setText(item.getTotal());
-        holder.mVKTextView.setText(item.getVk());
+        holder.mStoreTextView.setText("Sklad1: "+item.getStore());
+        holder.mStorePriceView.setText("Cena: " + item.getPrice());
         holder.mRegalTextView.setText("Regál: " + item.getRegal());
     }
 
@@ -54,9 +52,7 @@ public class ScraperItemAdapter extends RecyclerView.Adapter<ScraperItemAdapter.
     class ItemHolder extends RecyclerView.ViewHolder {
         private TextView mNameTextView;
         private TextView mStoreTextView;
-        private TextView mEshopTextView;
-        private TextView mTotalTextView;
-        private TextView mVKTextView;
+        private TextView mStorePriceView;
         private TextView mRegalTextView;
 
 
@@ -64,10 +60,8 @@ public class ScraperItemAdapter extends RecyclerView.Adapter<ScraperItemAdapter.
             super(itemView);
             mNameTextView = itemView.findViewById(R.id.scaperNameTextView);
             mStoreTextView = itemView.findViewById(R.id.scraperStoreTextView);
-            mEshopTextView = itemView.findViewById(R.id.scraperEshopTextView);
-            mTotalTextView = itemView.findViewById(R.id.scraperTotalTextView);
-            mVKTextView = itemView.findViewById(R.id.scraperVKTextView);
             mRegalTextView = itemView.findViewById(R.id.scraperRegalTextView);
+            mStorePriceView = itemView.findViewById(R.id.scraperPriceTextView);
         }
     }
 
