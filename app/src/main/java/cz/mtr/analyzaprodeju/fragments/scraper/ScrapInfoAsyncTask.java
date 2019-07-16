@@ -35,6 +35,7 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
     private DialogLoadingFragment mProgressDialog;
     private boolean isLoggedIn = true;
     private Context mContext;
+    private String mImageLink;
 
     public ScrapInfoAsyncTask(View view, Context context) {
         mContext = context;
@@ -65,12 +66,13 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
 
 
             // Po vyhledání podle eanu najde odkaz na detail knížky
-            Connection.Response searchQuery = Jsoup
-                    .connect("https://www.knihydobrovsky.cz/vyhledavani?search=" + ean).method(Connection.Method.GET)
-                    .userAgent(userAgent).execute();
-            String linkToPage = searchQuery.parse()
+            Document searchQuery = Jsoup.connect("https://www.knihydobrovsky.cz/vyhledavani?search=" + ean)
+                    .method(Connection.Method.GET).userAgent(userAgent).get();
+
+            mImageLink = searchQuery.select("#snippet-bookSearchList-itemListSnippet > div > div > ul > li > div > h2 > a > span.img.shadow > img").attr("src");
+
+            String linkToPage = searchQuery
                     .select("#snippet-bookSearchList-itemListSnippet > div > div > ul > li > div > h2 > a").attr("href");
-            System.out.println(linkToPage);
 
 
             Map<String, String> cookies = new HashMap<String, String>();
@@ -155,6 +157,7 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
         if (isLoggedIn) {
             Model.getInstance().setItems(mItems);
             Model.getInstance().setSuppliersItems(mSuppliersItems);
+            Model.getInstance().setImageLink(mImageLink);
             Navigation.findNavController(mView).navigate(DetailFragmentDirections.detailToScraper());
             mProgressDialog.dismiss();
         }

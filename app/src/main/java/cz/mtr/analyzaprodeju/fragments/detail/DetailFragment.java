@@ -126,6 +126,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getContext(), "Nejsou vloženy logovací údaje.", Toast.LENGTH_SHORT).show();
                     } else {
                         Model.getInstance().setEan(eanTextView.getText().toString());
+                        Model.getInstance().setTitleName(nameTextView.getText().toString());
                         ScrapInfoAsyncTask task = new ScrapInfoAsyncTask(getView(), getContext());
                         task.execute(Model.getInstance().getEan());
                     }

@@ -21,6 +21,10 @@ public class Model {
     private Context mContext;
     private ArrayList<ExportSharedArticle> orders = new ArrayList<>();
     private ArrayList<ExportSharedArticle> returns = new ArrayList<>();
+    private String mImageLink = "";
+
+
+    private String mTitleName = "";
 
 
     public Model() {
@@ -124,6 +128,23 @@ public class Model {
         orders = mPrefs.getOrders();
         returns = mPrefs.getReturns();
     }
+
+    public void setImageLink(String imageLink) {
+        mImageLink = imageLink;
+    }
+
+    public String getImageLink() {
+        return "https://knihydobrovsky.cz/" + mImageLink;
+    }
+
+    public String getTitleName() {
+        return mTitleName;
+    }
+
+    public void setTitleName(String mTitleName) {
+        this.mTitleName = mTitleName;
+    }
+
 
     public HashMap<String, SharedArticle> getAnalysis() {
         return this.analysis;
