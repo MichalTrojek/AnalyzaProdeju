@@ -58,7 +58,11 @@
             app:argType="cz.mtr.analyzaprodeju.shared.SharedArticle" />
         <action
             android:id="@+id/detailToScraper"
-            app:destination="@id/scraperFragment" />
+            app:destination="@id/scraperFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -78,6 +82,13 @@
         <argument
             android:name="ArticleDb"
             app:argType="cz.mtr.analyzaprodeju.shared.SharedArticle" />
+        <action
+            android:id="@+id/notFoundToScraper"
+            app:destination="@id/scraperFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/rankingFragment"

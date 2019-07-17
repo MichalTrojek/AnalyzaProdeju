@@ -1,10 +1,8 @@
 package cz.mtr.analyzaprodeju.fragments.notfounddetail;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,11 +53,10 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
             public boolean onLongClick(View view) {
                 if (isNetworkAvailable()) {
                     if (Model.getInstance().getPrefs().getLogin().isEmpty() || Model.getInstance().getPrefs().getPassword().isEmpty()) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + mEanTextView.getText().toString()));
-                        startActivity(browserIntent);
                         Toast.makeText(getContext(), "Nejsou vloženy logovací údaje.", Toast.LENGTH_SHORT).show();
                     } else {
                         Model.getInstance().setEan(mEanTextView.getText().toString());
+                        Model.getInstance().setTitleName(mNameTextView.getText().toString());
                         ScrapInfoAsyncTask task = new ScrapInfoAsyncTask(getView(), getContext());
                         task.execute(Model.getInstance().getEan());
                     }

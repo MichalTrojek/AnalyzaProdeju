@@ -20,8 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 import cz.mtr.analyzaprodeju.MainActivity;
+import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.detail.DetailFragmentDirections;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
+import cz.mtr.analyzaprodeju.fragments.notfounddetail.NotFoundFragmentDirections;
 import cz.mtr.analyzaprodeju.fragments.scraper.stores.WebItem;
 import cz.mtr.analyzaprodeju.fragments.scraper.suppliers.WebItemSuppliers;
 import cz.mtr.analyzaprodeju.models.Model;
@@ -35,7 +37,10 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
     private DialogLoadingFragment mProgressDialog;
     private boolean isLoggedIn = true;
     private Context mContext;
-    private String mImageLink;
+    private String mImageLink = "";
+    private String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
+    private String loginUrl = "https://www.knihydobrovsky.cz/nette-admin/sign/in";
+    private String loginActionUrl = "https://www.knihydobrovsky.cz/nette-admin/sign/in";
 
     public ScrapInfoAsyncTask(View view, Context context) {
         mContext = context;
@@ -50,17 +55,11 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... args) {
         String ean = args[0];
         try {
-            String password = Model.getInstance().getPrefs().getPassword();
-            String username = Model.getInstance().getPrefs().getLogin();
 
-            String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
-
-            String loginUrl = "https://www.knihydobrovsky.cz/nette-admin/sign/in";
-            String loginActionUrl = "https://www.knihydobrovsky.cz/nette-admin/sign/in";
 
             Map<String, String> formData = new HashMap<String, String>();
-            formData.put("username", username);
-            formData.put("password", password);
+            formData.put("username", Model.getInstance().getPrefs().getLogin());
+            formData.put("password", Model.getInstance().getPrefs().getPassword());
             formData.put("send", "Přihlásit");
             formData.put("do", "signInForm-submit");
 
@@ -103,10 +102,6 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
         return null;
     }
 
-
-    private String getBookId(String bookId) {
-        return bookId = bookId.replaceAll(" ", "").replaceAll("[^0-9]", "");
-    }
 
     private void createStoresList(Elements table) {
         Elements rows = table.get(0).select("tr");
@@ -158,8 +153,16 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
             Model.getInstance().setItems(mItems);
             Model.getInstance().setSuppliersItems(mSuppliersItems);
             Model.getInstance().setImageLink(mImageLink);
-            Navigation.findNavController(mView).navigate(DetailFragmentDirections.detailToScraper());
+            transitionToScraperFragment();
             mProgressDialog.dismiss();
+        }
+    }
+
+    private void transitionToScraperFragment() {
+        if (Navigation.findNavController(mView).getCurrentDestination().getId() == R.id.notFoundFragment) {
+            Navigation.findNavController(mView).navigate(NotFoundFragmentDirections.notFoundToScraper());
+        } else if (Navigation.findNavController(mView).getCurrentDestination().getId() == R.id.detailFragment) {
+            Navigation.findNavController(mView).navigate(DetailFragmentDirections.detailToScraper());
         }
     }
 }

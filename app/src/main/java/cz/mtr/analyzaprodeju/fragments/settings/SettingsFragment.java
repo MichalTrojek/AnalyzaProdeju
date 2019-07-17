@@ -47,17 +47,18 @@ public class SettingsFragment extends Fragment {
                     }
                 }
 
-                mViewModel.setLogin(mInputLogin.getText().toString());
+                mViewModel.setLogin(mInputLogin.getText().toString().trim());
 
-
-                mViewModel.setPassword(mInputPassword.getText().toString());
+                if (!mInputPassword.getText().toString().isEmpty() && !mInputPassword.getText().toString().contains("*")) {
+                    mViewModel.setPassword(mInputPassword.getText().toString().trim());
+                }
 
 
                 hideKeyboard(mInputIpAdress);
                 hideKeyboard(mInputLogin);
                 hideKeyboard(mInputPassword);
 
-                Navigation.findNavController(getView()).navigate(R.id.homeFragment);
+                Navigation.findNavController(getView()).navigate(R.id.toHome);
 
             }
 
