@@ -66,31 +66,33 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
 
             // Po vyhledání podle eanu najde odkaz na detail knížky
             Document searchQuery = Jsoup.connect("https://www.knihydobrovsky.cz/vyhledavani?search=" + ean)
-                    .method(Connection.Method.GET).userAgent(userAgent).get();
+                    .userAgent(userAgent)
+                    .get();
 
-            mImageLink = searchQuery.select("#snippet-bookSearchList-itemListSnippet > div > div > ul > li > div > h2 > a > span.img.shadow > img").attr("src");
+            mImageLink = searchQuery
+                    .select("#snippet-bookSearchList-itemListSnippet > div > div > ul > li > div > h2 > a > span.img.shadow > img")
+                    .attr("src");
 
             String linkToPage = searchQuery
-                    .select("#snippet-bookSearchList-itemListSnippet > div > div > ul > li > div > h2 > a").attr("href");
+                    .select("#snippet-bookSearchList-itemListSnippet > div > div > ul > li > div > h2 > a")
+                    .attr("href");
 
 
-            Map<String, String> cookies = new HashMap<String, String>();
-
-            Connection.Response loginForm = Jsoup.connect(loginUrl).method(Connection.Method.GET).userAgent(userAgent)
+            //login to get login cookies and check if logged in.
+            Connection.Response homePage = Jsoup.connect(loginActionUrl)
+                    .data(formData)
+                    .method(Connection.Method.POST).userAgent(userAgent)
                     .execute();
-
-            cookies.putAll(loginForm.cookies());
-
-            Connection.Response homePage = Jsoup.connect(loginActionUrl).cookies(cookies).data(formData)
-                    .method(Connection.Method.POST).userAgent(userAgent).execute();
-
             if (homePage.parse().html().contains("Neplatné přihlášení.")) {
                 isLoggedIn = false;
                 this.cancel(true);
             }
 
-            Document pageDetail = Jsoup.connect("https://www.knihydobrovsky.cz/" + linkToPage).cookies(homePage.cookies())
-                    .method(Connection.Method.GET).userAgent(userAgent).get();
+
+            //open detail page while logged in
+            Document pageDetail = Jsoup.connect("https://www.knihydobrovsky.cz/" + linkToPage)
+                    .cookies(homePage.cookies())
+                    .userAgent(userAgent).get();
 
             Elements table = pageDetail.select("table");
             createStoresList(table);
@@ -153,12 +155,12 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
             Model.getInstance().setItems(mItems);
             Model.getInstance().setSuppliersItems(mSuppliersItems);
             Model.getInstance().setImageLink(mImageLink);
-            transitionToScraperFragment();
+            moveToScraperFragment();
             mProgressDialog.dismiss();
         }
     }
 
-    private void transitionToScraperFragment() {
+    private void moveToScraperFragment() {
         if (Navigation.findNavController(mView).getCurrentDestination().getId() == R.id.notFoundFragment) {
             Navigation.findNavController(mView).navigate(NotFoundFragmentDirections.notFoundToScraper());
         } else if (Navigation.findNavController(mView).getCurrentDestination().getId() == R.id.detailFragment) {
