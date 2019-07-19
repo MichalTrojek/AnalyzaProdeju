@@ -114,8 +114,10 @@ public class Model {
 
     public void setAnalysis(HashMap<String, SharedArticle> analysis) {
         this.analysis = analysis;
-        if (analysis.size() > 0) {
-            saveAnalysis();
+        if (analysis != null) {
+            if (analysis.size() > 0) {
+                saveAnalysis();
+            }
         }
     }
 
@@ -159,7 +161,9 @@ public class Model {
     }
 
     public void clearAnalysis() {
-        analysis.clear();
+        if (analysis != null) {
+            analysis.clear();
+        }
     }
 
 

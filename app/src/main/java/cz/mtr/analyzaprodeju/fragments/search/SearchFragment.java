@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,8 +80,9 @@ public class SearchFragment extends Fragment implements OnItemClickListener {
                 String normalizedInput = Normalizer.normalize(editable.toString(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
                 mViewModel.searchByName(normalizedInput);
                 mDataSet.addAll(mViewModel.searchByName(normalizedInput));
+                Log.d(TAG, "AfterTextChanged " + mDataSet.size());
                 mAdapter.setSearchItems(mDataSet);
-
+                Log.d(TAG, "AfterTextChanged2 " + mDataSet.size());
             }
         });
     }

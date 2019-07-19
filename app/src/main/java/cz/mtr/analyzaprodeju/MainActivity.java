@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -30,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -139,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (onlineDbVersionNumber > Model.getInstance().getPrefs().getCurrentDatabaseVersion()) {
                         if (isWifiEnabled()) {
                             Log.d(TAG, "Wifi jo");
-                            Log.d(TAG, Model.getInstance().getPrefs().getCurrentDatabaseVersion()+ " vs olnine " + onlineDbVersionNumber);
+                            Log.d(TAG, Model.getInstance().getPrefs().getCurrentDatabaseVersion() + " vs olnine " + onlineDbVersionNumber);
                             updateFoundDialog(MainActivity.this);
                         } else {
                             Log.d(TAG, "Wifi ne");
@@ -207,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 mDrawerLayout.openDrawer(Gravity.LEFT);
+                closeKeyboard();
             }
         });
     }
@@ -214,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        clearBackStack();
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
                 if (mNavController.getCurrentDestination().getId() != R.id.homeFragment) {
@@ -356,6 +360,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void clearBackStack() {
+        FragmentManager fm = getSupportFragmentManager();
+        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStack();
+        }
+    }
+
+    private void closeKeyboard() {
+        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mNavigationView.getWindowToken(), 0);
     }
 
 

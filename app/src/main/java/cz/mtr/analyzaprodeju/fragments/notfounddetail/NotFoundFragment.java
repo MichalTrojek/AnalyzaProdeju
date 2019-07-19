@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +13,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -31,16 +35,15 @@ import cz.mtr.analyzaprodeju.shared.SharedArticle;
 public class NotFoundFragment extends Fragment implements View.OnClickListener {
 
     private NotFoundViewModel mViewModel;
-    private TextView mNameTextView, mEanTextView, mPriceTextView;
+    private TextView mNameTextView, mEanTextView, mPriceTextView, textView, mOrdersLabelTextView, mReturnsLabelTextView;
     private FloatingActionButton addFob, returnFob, orderFob;
     private Animation fab_open, fab_close, fab_rotate_anticlock, fab_rotate_clock;
-    private EditText ordersEditText, returnsEditText;
+    private EditText ordersEditText;
     private boolean isOpen = false;
     private SharedArticle selectedArticle;
+    private Button mBackButton, mSaveButton;
+    private CardView mInfoCardView;
 
-    public static NotFoundFragment newInstance() {
-        return new NotFoundFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -75,9 +78,24 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
         orderFob.setOnClickListener(this);
 
         ordersEditText = view.findViewById(R.id.ordersInput);
-        returnsEditText = view.findViewById(R.id.returnsInput);
+        ordersEditText.addTextChangedListener(changeTextWatcher);
+
         ordersEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        returnsEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+
+        mBackButton = view.findViewById(R.id.backButtonNotFound);
+        mBackButton.setOnClickListener(this);
+
+        mSaveButton = view.findViewById(R.id.saveButtonNotFound);
+        mSaveButton.setOnClickListener(this);
+
+        mInfoCardView = view.findViewById(R.id.infoCardViewNotFound);
+
+        textView = view.findViewById(R.id.textView);
+        mOrdersLabelTextView = view.findViewById(R.id.textView11);
+        mReturnsLabelTextView = view.findViewById(R.id.TextView7);
+
+
         return view;
     }
 
@@ -108,6 +126,7 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
         fab_rotate_clock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_clock);
     }
 
+    boolean isOrder;
 
     @Override
     public void onClick(View view) {
@@ -117,64 +136,128 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
                 handleAddClick();
                 break;
             case R.id.orderFab:
-                handleOrdersClick();
+                handleOrdersAndReturnsClick();
+                isOrder = true;
                 break;
             case R.id.returnFab:
-                handleReturnsClick();
+                handleOrdersAndReturnsClick();
+                isOrder = false;
+                break;
+            case R.id.saveButtonNotFound:
+                handleSaveButton();
+                break;
+            case R.id.backButtonNotFound:
+                showDefaultState();
                 break;
         }
 
     }
 
-    private void handleAddClick() {
-        if (isOpen) {
-            close();
+    private void handleSaveButton() {
+        if (isOrder) {
+            mViewModel.saveArticleAndAmountOrders(selectedArticle, ordersEditText.getText().toString().trim());
         } else {
-            open();
+            mViewModel.saveArticleAndAmountReturns(selectedArticle, ordersEditText.getText().toString().trim());
         }
+        Model.getInstance().saveOrdersAndReturns();
+        showDefaultState();
     }
 
-    private void close() {
+    private void showDefaultState() {
+        ordersEditText.setVisibility(View.GONE);
+        mBackButton.setVisibility(View.GONE);
+        mSaveButton.setVisibility(View.GONE);
+        textView.setVisibility(View.VISIBLE);
+        mInfoCardView.setVisibility(View.VISIBLE);
+        closeKeyboard();
+        addFob.show();
+    }
+
+    private void handleOrdersAndReturnsClick() {
+
+        showAmountInputAndSaveButton();
+
+    }
+
+    private void showAmountInputAndSaveButton() {
+        hideAddButtons();
+        mSaveButton.setVisibility(View.VISIBLE);
+        mBackButton.setVisibility(View.VISIBLE);
+        ordersEditText.setVisibility(View.VISIBLE);
+
+
+    }
+
+    private void hideAddButtons() {
         addFob.startAnimation(fab_rotate_anticlock);
         returnFob.startAnimation(fab_close);
         orderFob.startAnimation(fab_close);
-        returnFob.setClickable(false);
-        orderFob.setClickable(false);
-        ordersEditText.setVisibility(View.INVISIBLE);
-        returnsEditText.setVisibility(View.INVISIBLE);
+        ordersEditText.setVisibility(View.GONE);
+        mOrdersLabelTextView.setVisibility(View.GONE);
+        mReturnsLabelTextView.setVisibility(View.GONE);
+        addFob.hide();
         isOpen = false;
-        Model.getInstance().saveOrdersAndReturns();
     }
 
-    private void open() {
+
+    private void handleAddClick() {
+        if (isOpen) {
+            hideMoreButtons();
+        } else {
+            showMoreButtons();
+        }
+    }
+
+    private void hideMoreButtons() {
+        addFob.startAnimation(fab_rotate_anticlock);
+        returnFob.startAnimation(fab_close);
+        orderFob.startAnimation(fab_close);
+        ordersEditText.setVisibility(View.GONE);
+        mOrdersLabelTextView.setVisibility(View.GONE);
+        mReturnsLabelTextView.setVisibility(View.GONE);
+        textView.setVisibility(View.VISIBLE);
+        mInfoCardView.setVisibility(View.VISIBLE);
+        isOpen = false;
+
+    }
+
+    private void showMoreButtons() {
         addFob.startAnimation(fab_rotate_clock);
         returnFob.startAnimation(fab_open);
         orderFob.startAnimation(fab_open);
-        returnFob.setClickable(true);
-        orderFob.setClickable(true);
-        ordersEditText.setVisibility(View.VISIBLE);
-        returnsEditText.setVisibility(View.VISIBLE);
+
+        returnFob.show();
+        orderFob.show();
         ordersEditText.getText().clear();
-        returnsEditText.getText().clear();
         isOpen = true;
+        mOrdersLabelTextView.setVisibility(View.VISIBLE);
+        mReturnsLabelTextView.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.GONE);
+        mInfoCardView.setVisibility(View.GONE);
     }
 
-    private void handleOrdersClick() {
-        mViewModel.saveArticleAndAmountOrders(selectedArticle, ordersEditText.getText().toString());
-        close();
-        closeKeyboard();
-    }
-
-    private void handleReturnsClick() {
-        mViewModel.saveArticleAndAmountReturns(selectedArticle, returnsEditText.getText().toString());
-        closeKeyboard();
-        close();
-    }
 
     private void closeKeyboard() {
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 
+    private TextWatcher changeTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String amountInput = ordersEditText.getText().toString().trim();
+            mSaveButton.setEnabled(!amountInput.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 
 }

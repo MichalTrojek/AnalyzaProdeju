@@ -96,6 +96,7 @@ public class DatabaseDownloader {
                     String sdCard = Environment.getExternalStorageDirectory().toString();
                     File sourceFile = new File(sdCard + "/temp/BooksDatabase.db");
                     File destinationFile = new File("/data/data/cz.mtr.analyzaprodeju/databases/BooksDatabase.db");
+
                     copyFileFromExternalToInternalMemory(sourceFile, destinationFile);
                     Toast.makeText(context
                             , "Stahovaní dokončeno", Toast.LENGTH_SHORT).show();

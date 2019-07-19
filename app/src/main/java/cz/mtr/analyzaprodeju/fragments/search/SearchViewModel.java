@@ -41,6 +41,7 @@ public class SearchViewModel extends AndroidViewModel {
 
     public List<ItemFts> searchByName(String name) {
         mList = mRepository.searchByName(name);
+
         return mList;
     }
 
