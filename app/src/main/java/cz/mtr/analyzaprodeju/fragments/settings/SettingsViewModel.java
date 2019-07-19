@@ -44,7 +44,7 @@ public class SettingsViewModel extends ViewModel {
 
     public LiveData<String> getPassword() {
         if (Model.getInstance().getPrefs().getPassword().isEmpty()) {
-            mPassword.setValue("Vložte eshop heslo");
+            mPassword.setValue("");
         } else {
             mPassword.setValue(hidePassword(Model.getInstance().getPrefs().getPassword().length()));
         }
@@ -53,7 +53,7 @@ public class SettingsViewModel extends ViewModel {
 
     public LiveData<String> getLogin() {
         if (Model.getInstance().getPrefs().getLogin().isEmpty()) {
-            mLogin.setValue("Vložte eshop login");
+            mLogin.setValue("");
         } else {
 
             mLogin.setValue(Model.getInstance().getPrefs().getLogin());

@@ -49,7 +49,7 @@ public class SettingsFragment extends Fragment {
 
                 mViewModel.setLogin(mInputLogin.getText().toString().trim());
 
-                if (!mInputPassword.getText().toString().isEmpty() && !mInputPassword.getText().toString().contains("*")) {
+                if (!mInputPassword.getText().toString().contains("*")) {
                     mViewModel.setPassword(mInputPassword.getText().toString().trim());
                 }
 
@@ -58,7 +58,13 @@ public class SettingsFragment extends Fragment {
                 hideKeyboard(mInputLogin);
                 hideKeyboard(mInputPassword);
 
-                Navigation.findNavController(getView()).navigate(R.id.toHome);
+
+                if ((mInputPassword.getText().toString().isEmpty() && mInputLogin.getText().toString().isEmpty() ||
+                        (!mInputPassword.getText().toString().isEmpty() && !mInputLogin.getText().toString().isEmpty()))) {
+                    Navigation.findNavController(getView()).navigate(R.id.toHome);
+                } else {
+                    Toast.makeText(getContext(), "Přihlašovací pole je prázdné!", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
