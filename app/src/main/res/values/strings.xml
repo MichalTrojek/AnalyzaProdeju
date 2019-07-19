@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AnalyzaProdeju</string>
+    <string name="app_name">Analýza Prodejů</string>
 
 
     <string name="db_version">Verze aplikace: 1</string>

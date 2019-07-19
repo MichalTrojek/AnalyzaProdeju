@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                         android:id="@+id/salesDaysOneTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="Za 31 dnů"
                         android:textAlignment="center"
@@ -258,7 +258,7 @@
                         android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginEnd="16dp"
                         android:text="ESHOP  "
                         android:textAlignment="center"
                         android:textSize="12sp"
@@ -342,7 +342,7 @@
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="Název:   "
                         android:textStyle="italic"
@@ -382,7 +382,7 @@
                         android:id="@+id/textView15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginBottom="8dp"
                         android:text="EAN:   "
                         android:textStyle="italic"
@@ -414,7 +414,7 @@
                         android:id="@+id/priceTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginEnd="16dp"
                         android:text="349,- Kč"
                         android:textColor="#000000"
                         android:textStyle="bold"
@@ -444,7 +444,7 @@
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="8dp"
                         android:text="SKLADEM  "
                         android:textStyle="italic"
                         app:layout_constraintStart_toStartOf="parent"
@@ -518,7 +518,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginEnd="8dp"
                         android:text="POSLEDNÍ PŘÍJEM  "
                         android:textStyle="italic"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -561,7 +561,7 @@
         app:layout_constraintBottom_toTopOf="@+id/orderFab"
         app:layout_constraintStart_toStartOf="@+id/orderFab"
         app:srcCompat="@drawable/ic_add_black_24dp"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/orderFab"
@@ -577,7 +577,7 @@
         app:layout_constraintBottom_toTopOf="@+id/addFab"
         app:layout_constraintStart_toStartOf="@+id/addFab"
         app:srcCompat="@drawable/ic_add_black_24dp"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFab"
@@ -589,20 +589,6 @@
         android:src="@drawable/ic_add_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible" />
-
-    <Button
-        android:id="@+id/saveButtonDetail"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="16dp"
-        android:enabled="false"
-        android:text="Uložit"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/ordersInput"
-        app:layout_constraintStart_toStartOf="@+id/ordersInput"
         tools:visibility="visible" />
 
     <EditText
@@ -626,7 +612,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
+
+    <Button
+        android:id="@+id/saveButtonDetail"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:enabled="false"
+        android:text="Uložit"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/ordersInput"
+        app:layout_constraintStart_toStartOf="@+id/ordersInput"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/returnsLabelTextView"
@@ -641,7 +641,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/orderLabelTextView"
         app:layout_constraintTop_toTopOf="@+id/returnFab"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/orderLabelTextView"
@@ -654,7 +654,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/orderFab"
         app:layout_constraintTop_toTopOf="@+id/orderFab"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/backButtonDetail"
@@ -666,7 +666,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/ordersInput"
         app:layout_constraintTop_toTopOf="@+id/saveButtonDetail"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
