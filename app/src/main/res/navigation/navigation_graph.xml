@@ -30,7 +30,7 @@
         <action
             android:id="@+id/barcodeToDetail"
             app:destination="@+id/detailFragment"
-            app:enterAnim="@anim/enter_from_bottom"
+            app:enterAnim="@anim/enter_from_top"
             app:exitAnim="@anim/exit_to_top"
             app:launchSingleTop="false"
             app:popEnterAnim="@anim/enter_from_top"
@@ -39,7 +39,7 @@
         <action
             android:id="@+id/barcodeToNotFound"
             app:destination="@id/notFoundFragment"
-            app:enterAnim="@anim/enter_from_bottom"
+            app:enterAnim="@anim/enter_from_top"
             app:exitAnim="@anim/exit_to_top"
             app:popEnterAnim="@anim/enter_from_top"
             app:popExitAnim="@anim/exit_to_bottom"
@@ -59,7 +59,7 @@
         <action
             android:id="@+id/detailToScraper"
             app:destination="@id/scraperFragment"
-            app:enterAnim="@anim/enter_from_right"
+            app:enterAnim="@anim/enter_from_top"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
@@ -85,7 +85,7 @@
         <action
             android:id="@+id/notFoundToScraper"
             app:destination="@id/scraperFragment"
-            app:enterAnim="@anim/enter_from_right"
+            app:enterAnim="@anim/enter_from_top"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
@@ -98,7 +98,7 @@
         <action
             android:id="@+id/rankingToDetail"
             app:destination="@+id/detailFragment"
-            app:enterAnim="@anim/enter_from_right"
+            app:enterAnim="@anim/enter_from_top"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"
@@ -117,7 +117,7 @@
         <action
             android:id="@+id/searchToDetail"
             app:destination="@id/detailFragment"
-            app:enterAnim="@anim/enter_from_right"
+            app:enterAnim="@anim/enter_from_top"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"
@@ -125,7 +125,7 @@
         <action
             android:id="@+id/searchToNotFound"
             app:destination="@id/notFoundFragment"
-            app:enterAnim="@anim/enter_from_right"
+            app:enterAnim="@anim/enter_from_top"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"
@@ -135,7 +135,7 @@
     <action
         android:id="@+id/toSearch"
         app:destination="@id/searchFragment"
-        app:enterAnim="@anim/enter_from_right"
+        app:enterAnim="@anim/enter_from_top"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
         app:popExitAnim="@anim/exit_to_right"
@@ -143,7 +143,7 @@
     <action
         android:id="@+id/toRanking"
         app:destination="@id/rankingFragment"
-        app:enterAnim="@anim/enter_from_right"
+        app:enterAnim="@anim/enter_from_top"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
         app:popExitAnim="@anim/exit_to_right"
@@ -151,7 +151,7 @@
     <action
         android:id="@+id/toDisplay"
         app:destination="@id/displayFragment"
-        app:enterAnim="@anim/enter_from_right"
+        app:enterAnim="@anim/enter_from_top"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
         app:popExitAnim="@anim/exit_to_right"
@@ -159,7 +159,7 @@
     <action
         android:id="@+id/toSettings"
         app:destination="@id/settingsFragment"
-        app:enterAnim="@anim/enter_from_right"
+        app:enterAnim="@anim/enter_from_top"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
         app:popExitAnim="@anim/exit_to_right"
@@ -167,7 +167,7 @@
     <action
         android:id="@+id/toAbout"
         app:destination="@id/aboutFragment"
-        app:enterAnim="@anim/enter_from_right"
+        app:enterAnim="@anim/enter_from_top"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
         app:popExitAnim="@anim/exit_to_right"
@@ -175,10 +175,12 @@
     <action
         android:id="@+id/toHome"
         app:destination="@id/homeFragment"
-        app:enterAnim="@anim/enter_from_right"
+        app:enterAnim="@anim/enter_from_top"
         app:exitAnim="@anim/exit_to_left"
         app:popEnterAnim="@anim/enter_from_left"
-        app:popExitAnim="@anim/exit_to_right" />
+        app:popExitAnim="@anim/exit_to_right"
+        app:popUpTo="@+id/homeFragment"
+        app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/scraperFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.scraper.ScraperFragment"
