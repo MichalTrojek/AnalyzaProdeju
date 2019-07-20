@@ -5,8 +5,6 @@ import android.os.Environment;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-
 import com.tonyodev.fetch2.Download;
 import com.tonyodev.fetch2.Error;
 import com.tonyodev.fetch2.Fetch;
@@ -27,20 +25,20 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDownloadDatabase;
 import cz.mtr.analyzaprodeju.models.Model;
 
 public class DatabaseDownloader {
 
     private int onlineDbVersionNumber;
     private Context context;
-    private AlertDialog dialog;
+    private DialogDownloadDatabase dialog;
     private ProgressBar progress;
 
-    public DatabaseDownloader(Context context, int onlineDbVersionNumber, AlertDialog dialog, ProgressBar progress) {
+    public DatabaseDownloader(Context context, int onlineDbVersionNumber, DialogDownloadDatabase dialog) {
         this.context = context;
         this.onlineDbVersionNumber = onlineDbVersionNumber;
         this.dialog = dialog;
-        this.progress = progress;
     }
 
     public void download(String databaseUrl) {
@@ -85,7 +83,6 @@ public class DatabaseDownloader {
 
             @Override
             public void onWaitingNetwork(Download download) {
-                dialog.hide();
                 dialog.dismiss();
                 Toast.makeText(context, "Stahování databáze bylo přerušeno zdůvody ztráty spojení s WIFI.", Toast.LENGTH_LONG).show();
             }
@@ -101,12 +98,11 @@ public class DatabaseDownloader {
                     Toast.makeText(context
                             , "Stahovaní dokončeno", Toast.LENGTH_SHORT).show();
                     dialog.setCancelable(true);
-                    dialog.hide();
+
                     dialog.dismiss();
                     Model.getInstance().getPrefs().setCurrentDatabaseVersion(onlineDbVersionNumber);
                 } catch (IOException e) {
                     dialog.setCancelable(true);
-                    dialog.hide();
                     dialog.dismiss();
                     e.printStackTrace();
                 }
@@ -127,9 +123,10 @@ public class DatabaseDownloader {
             public void onStarted(Download download, List<? extends DownloadBlock> list,
                                   int i) {
                 Toast.makeText(context, "Začalo stahování, čekejte.", Toast.LENGTH_SHORT).show();
+                progress = dialog.getProgressBar();
                 progress.setMax(100);
                 progress.setProgress(0);
-                dialog.show();
+
             }
 
             @Override
