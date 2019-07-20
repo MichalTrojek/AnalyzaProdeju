@@ -6,16 +6,10 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.print.PrintAttributes;
-import android.print.PrintDocumentAdapter;
-import android.print.PrintJob;
-import android.print.PrintManager;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -32,15 +26,12 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
-
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDownloadDatabase;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogUpdateFound;
 import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.network.Client;
 import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
-import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PrinterDialog.OnPrintClicked {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -240,50 +231,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void returnsClicked() {
-        print(Model.getInstance().getReturns(), "Vratka");
+        Printer printer = new Printer(this);
+        printer.print(Model.getInstance().getReturns(), "Vratka");
     }
 
     @Override
     public void ordersClicked() {
-        print(Model.getInstance().getOrders(), "Objednávka");
-    }
-
-    private WebView mWebView;
-    private List<PrintJob> mPrintJobs;
-
-    public void print(List<ExportSharedArticle> list, String name) {
-        WebView webview = new WebView(this);
-        webview.setWebViewClient(new WebViewClient() {
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                System.out.println("Page finished loading " + url);
-                createWebPrintJob(view);
-                mWebView = null;
-            }
-        });
-        StringBuilder sb = new StringBuilder();
-        sb.append(name + "<BR/>");
-        for (ExportSharedArticle e : list) {
-            sb.append("Počet: " + e.getExportAmount() + ", " + e.getName() + ", " + e.getEan() + ", lokace: " + e.getLocation() + "<BR/>");
-        }
-        String htmlDocument = "<html><body><p>" + sb.toString() + "</p></body></html>";
-        webview.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
-        mWebView = webview;
-    }
-
-
-    private void createWebPrintJob(WebView webView) {
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
-        mPrintJobs = printManager.getPrintJobs();
-        String jobName = getString(R.string.app_name) + " Document";
-        PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter(jobName);
-        PrintJob printJob = printManager.print(jobName, printAdapter,
-                new PrintAttributes.Builder().build());
-        mPrintJobs.add(printJob);
+        Printer printer = new Printer(this);
+        printer.print(Model.getInstance().getOrders(), "Objednávka");
     }
 
 
