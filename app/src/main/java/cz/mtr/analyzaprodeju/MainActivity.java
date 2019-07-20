@@ -1,7 +1,6 @@
 package cz.mtr.analyzaprodeju;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -32,6 +30,8 @@ import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.network.Client;
 import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
+import cz.mtr.analyzaprodeju.utils.KeyboardHider;
+import cz.mtr.analyzaprodeju.utils.Printer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PrinterDialog.OnPrintClicked {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 mDrawerLayout.openDrawer(Gravity.LEFT);
-                closeKeyboard();
+                KeyboardHider.closeKeyboard(MainActivity.this, mNavigationView);
             }
         });
     }
@@ -256,11 +256,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
             fm.popBackStack();
         }
-    }
-
-    private void closeKeyboard() {
-        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mNavigationView.getWindowToken(), 0);
     }
 
 

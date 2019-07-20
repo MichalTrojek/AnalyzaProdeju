@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju;
+package cz.mtr.analyzaprodeju.utils;
 
 import android.content.Context;
 import android.print.PrintAttributes;
@@ -10,6 +10,7 @@ import android.webkit.WebViewClient;
 
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 
 public class Printer {
