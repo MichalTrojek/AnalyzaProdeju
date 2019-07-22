@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.fragments.ranking.item.RankingItem;
@@ -62,8 +63,23 @@ public class RankingRepository {
     public String getInfo() {
         ArrayList<SharedArticle> list = new ArrayList<>(Model.getInstance().getAnalysis().values());
         SharedArticle article = (SharedArticle) list.get(0);
-        info = String.format("Od: %s\nDo: %s\nCelkem %s dní", article.getSales1DateSince(), article.getSales1DateTo(), article.getSales1Days());
+        info = String.format("Od: %s\nDo: %s\nCelkem %s Kč", article.getSales1DateSince(), article.getSales1DateTo(), getTotalRevenue());
         return info;
+    }
+
+    private String getTotalRevenue() {
+        HashMap<String, SharedArticle> analysis = Model.getInstance().getAnalysis();
+        int total = 0;
+        for (SharedArticle a : analysis.values()) {
+            String revenue = a.getRevenue();
+            revenue = revenue.replace(",", ".");
+            Double asDouble = Double.parseDouble(revenue);
+            int asInt = asDouble.intValue();
+            total += asInt;
+        }
+
+
+        return total + "";
     }
 
 
