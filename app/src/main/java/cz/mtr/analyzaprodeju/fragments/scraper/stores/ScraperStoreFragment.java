@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLargerImage;
 import cz.mtr.analyzaprodeju.fragments.scraper.ScraperViewModel;
 import cz.mtr.analyzaprodeju.models.Model;
 
@@ -51,6 +52,17 @@ public class ScraperStoreFragment extends Fragment {
         mAdapter.setItems(mViewModel.getItems());
         Picasso.get().load(Model.getInstance().getImageLink()).into(mImageView);
         mTitleNameTextView.setText(Model.getInstance().getTitleName());
+
+
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogLargerImage dialog = new DialogLargerImage();
+                dialog.setCancelable(true);
+                dialog.show(getFragmentManager(), "DialogLargerImage");
+
+            }
+        });
     }
 
 

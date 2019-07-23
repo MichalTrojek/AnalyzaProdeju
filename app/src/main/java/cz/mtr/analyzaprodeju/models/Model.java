@@ -22,6 +22,7 @@ public class Model {
     private ArrayList<ExportSharedArticle> orders = new ArrayList<>();
     private ArrayList<ExportSharedArticle> returns = new ArrayList<>();
     private String mImageLink = "";
+    private String largeImageLink = "";
 
 
     private String mTitleName = "";
@@ -134,6 +135,15 @@ public class Model {
     public void setImageLink(String imageLink) {
         mImageLink = imageLink;
     }
+
+    public void setLargeImageLink(String imageLink) {
+        largeImageLink = imageLink;
+    }
+
+    public String getLargeImageLink() {
+        return "https://knihydobrovsky.cz/" + largeImageLink;
+    }
+
 
     public String getImageLink() {
         return "https://knihydobrovsky.cz/" + mImageLink;

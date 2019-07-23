@@ -38,6 +38,7 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
     private boolean isLoggedIn = true;
     private Context mContext;
     private String mImageLink = "";
+    private String largeImageLink = "";
     private String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
     private String loginUrl = "https://www.knihydobrovsky.cz/nette-admin/sign/in";
     private String loginActionUrl = "https://www.knihydobrovsky.cz/nette-admin/sign/in";
@@ -93,6 +94,10 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
             Document pageDetail = Jsoup.connect("https://www.knihydobrovsky.cz/" + linkToPage)
                     .cookies(homePage.cookies())
                     .userAgent(userAgent).get();
+
+
+            largeImageLink = pageDetail.select("#main > div.section.section-gradient-bottom-big > div > div > div.img.shelf > div.book > img").attr("src");
+
 
             Elements table = pageDetail.select("table");
             createStoresList(table);
@@ -155,6 +160,7 @@ public class ScrapInfoAsyncTask extends AsyncTask<String, Void, Void> {
             Model.getInstance().setItems(mItems);
             Model.getInstance().setSuppliersItems(mSuppliersItems);
             Model.getInstance().setImageLink(mImageLink);
+            Model.getInstance().setLargeImageLink(largeImageLink);
             moveToScraperFragment();
             mProgressDialog.dismiss();
         }

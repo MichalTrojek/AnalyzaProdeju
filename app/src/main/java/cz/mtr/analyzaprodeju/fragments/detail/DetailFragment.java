@@ -1,10 +1,8 @@
 package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -136,8 +134,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             public boolean onLongClick(View view) {
                 if (isNetworkAvailable()) {
                     if (Model.getInstance().getPrefs().getLogin().isEmpty() || Model.getInstance().getPrefs().getPassword().isEmpty()) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + eanTextView.getText().toString()));
-                        startActivity(browserIntent);
                         Toast.makeText(getContext(), "Nejsou vloženy logovací údaje.", Toast.LENGTH_SHORT).show();
                     } else {
                         Model.getInstance().setEan(eanTextView.getText().toString());
