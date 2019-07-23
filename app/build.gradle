@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -35,7 +36,7 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.1.0'
     annotationProcessor 'androidx.room:room-compiler:2.1.0'
     // google mobile vision
-    implementation 'com.google.android.gms:play-services-vision:11.0.2'
+    implementation 'com.google.android.gms:play-services-vision:18.0.0'
 
     // barcode reader
     implementation 'info.androidhive:barcode-reader:1.1.5'
@@ -55,4 +56,14 @@ dependencies {
 
 
     implementation 'org.jsoup:jsoup:1.12.1'
+
+
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
+
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
+
 }
+
+
+apply plugin: 'com.google.gms.google-services'
