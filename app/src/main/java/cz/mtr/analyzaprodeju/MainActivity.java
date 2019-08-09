@@ -212,8 +212,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void handleImport() {
-        Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
-        client.execute("analyza");
+//        Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
+//        client.execute("analyza");
+//
+        DownloadDataTask download = new DownloadDataTask(this);
+        download.execute();
+
+
+
+
     }
 
     private void handleExport() {
