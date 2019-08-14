@@ -186,5 +186,14 @@
         android:name="cz.mtr.analyzaprodeju.fragments.scraper.ScraperFragment"
         android:label="fragment_scraper"
         tools:layout="@layout/fragment_scraper" />
+    <fragment
+        android:id="@+id/ftpFragment"
+        android:name="cz.mtr.analyzaprodeju.fragments.ftp.FtpFragment"
+        android:label="ftpFragment"
+        tools:layout="@layout/ftp_fragment" />
+    <action
+        android:id="@+id/toFtp"
+        app:destination="@id/ftpFragment"
+        app:popUpTo="@+id/homeFragment" />
 
 </navigation>

@@ -79,9 +79,9 @@ public class DownloadDataTask extends AsyncTask<String, Integer, Void> {
             OutputStream outputStream = null;
             boolean success = false;
             try {
-                outputStream = context.openFileOutput("analyza.csv", Context.MODE_PRIVATE);
+                    outputStream = context.openFileOutput("analyza.csv", Context.MODE_PRIVATE);
 
-                success = ftp.retrieveFile("/www/" + filename, outputStream);
+                    success = ftp.retrieveFile("/www/" + filename, outputStream);
 
 
                 Log.d(TAG, success + "");

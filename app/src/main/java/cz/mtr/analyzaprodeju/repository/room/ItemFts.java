@@ -15,9 +15,13 @@ public class ItemFts {
     @ColumnInfo(name = "name")
     private String mName;
 
-    public ItemFts(String ean, String name) {
+    @ColumnInfo(name = "normalizedName")
+    private String mNormalizedName;
+
+    public ItemFts(String ean, String name, String normalizedName) {
         this.mEan = ean;
         this.mName = name;
+        this.mNormalizedName = normalizedName;
     }
 
     public String getEan() {
@@ -26,6 +30,10 @@ public class ItemFts {
 
     public String getName() {
         return this.mName;
+    }
+
+    public String getNormalizedName() {
+        return this.mNormalizedName;
     }
 
 

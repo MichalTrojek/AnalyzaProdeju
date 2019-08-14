@@ -79,6 +79,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="ftpFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="759" />
+                            <option name="y" value="1096" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="homeFragment">
                     <value>
                       <LayoutPositions>
@@ -198,6 +210,11 @@
                     </value>
                   </entry>
                   <entry key="toDisplay">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="toFtp">
                     <value>
                       <LayoutPositions />
                     </value>

@@ -174,8 +174,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     mNavController.navigate(R.id.toSettings);
                 }
                 break;
+            case R.id.nav_ftp:
+                if (mNavController.getCurrentDestination().getId() != R.id.ftpFragment) {
+                    mNavController.navigate(R.id.toFtp);
+                }
+                break;
             case R.id.nav_import:
-
                 handleImport();
                 break;
             case R.id.nav_export:
@@ -212,15 +216,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void handleImport() {
-//        Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
-//        client.execute("analyza");
-//
-        DownloadDataTask download = new DownloadDataTask(this);
-        download.execute();
-
-
-
-
+        Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
+        client.execute("analyza");
     }
 
     private void handleExport() {

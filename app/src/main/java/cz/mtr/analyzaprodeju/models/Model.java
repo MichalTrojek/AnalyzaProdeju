@@ -8,6 +8,7 @@ import java.util.List;
 
 import cz.mtr.analyzaprodeju.fragments.scraper.stores.WebItem;
 import cz.mtr.analyzaprodeju.fragments.scraper.suppliers.WebItemSuppliers;
+import cz.mtr.analyzaprodeju.repository.room.Article;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -98,6 +99,16 @@ public class Model {
                 orders.add(a);
             }
         }
+    }
+
+    public ArrayList<Article> allDbItems = new ArrayList<>();
+
+    public ArrayList<Article> getAllDbItems() {
+        return allDbItems;
+    }
+
+    public void setAllDbItems(ArrayList<Article> items) {
+        allDbItems = items;
     }
 
     public ArrayList<ExportSharedArticle> getOrders() {

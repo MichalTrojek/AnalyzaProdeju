@@ -11,6 +11,7 @@
     <string name="content_description_for_logo">Logo</string>
     <string name="home_text_drawer_menu">Domů</string>
     <string name="import_data_text_drawer_menu">Nahrát data z analýzy</string>
+    <string name="ftp_data_text_drawer_menu">Nahrát data z FTP</string>
     <string name="printer_data_text_drawer_menu">Tisk</string>
     <string name="export_data_text_drawer_menu">Odeslat data</string>
     <string name="ranking_text_drawer_menu">Žebříček prodejů</string>
@@ -35,4 +36,41 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="not_found_textView">Produkt nebyl nalezen v analýze</string>
+    <string name="ftp_save_button">Stahnout data z vybrané prodejny.</string>
+    <string name="import_from_pc">Nahrát data přes SP</string>
+
+
+    <string-array name="stores">
+        <item>Praha - Václavské Náměstí</item>
+        <item>Praha - Arkády Pankrác</item>
+        <item>Praha - Anděl City</item>
+        <item>Praha - OD Kotva</item>
+        <item>Praha - NC Metrolope Zličín</item>
+        <item>Praha - OC Letňany</item>
+        <item>Praha - Dejvice</item>
+        <item>Praha - Vivo! Hostivař</item>
+        <item>Praha - NC Eden</item>
+        <item>Brno - Joštova</item>
+        <item>Brno - Galerie Vaňkovka</item>
+        <item>Ostrava - Forum Nová Karolína</item>
+        <item>Ostrava - OC Galerie</item>
+        <item>České Budějovice - IGY Centrum</item>
+        <item>České Budějovice - OD Prior</item>
+        <item>Hradec Králové - OC Fontána</item>
+        <item>Karviná - Tesco</item>
+        <item>Kolín - OC Futurum</item>
+        <item>Liberec - OC Nisa</item>
+        <item>Liberec - NG Plaza</item>
+        <item>Most - Central</item>
+        <item>Olomouc - Galerie Šantovka</item>
+        <item>Olomouc - City</item>
+        <item>Opava - OC Silesia</item>
+        <item>Pardubice- Atrium Palác</item>
+        <item>Plzeň - Náměstí Republiky</item>
+        <item>Plzeň - Sedláčkova</item>
+        <item>Plzeň - OC Plzeň</item>
+        <item>Teplice - Galerie Teplice</item>
+        <item>Tachov - Náměstí Republiky</item>
+        <item>Ústí nad Labem - Forum</item>
+    </string-array>
 </resources>
