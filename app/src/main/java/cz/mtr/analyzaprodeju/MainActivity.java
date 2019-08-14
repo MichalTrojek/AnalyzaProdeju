@@ -1,10 +1,14 @@
 package cz.mtr.analyzaprodeju;
 
 import android.Manifest;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +39,8 @@ import cz.mtr.analyzaprodeju.utils.Printer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PrinterDialog.OnPrintClicked {
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static final int UPDATE_DATA_JOB = 321;
+
 
     private DrawerLayout mDrawerLayout;
     private Button mHamburgerButton;
@@ -69,6 +75,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+
+        scheduleUpdateDataJob();
+    }
+
+
+    private void scheduleUpdateDataJob() {
+        ComponentName componentName = new ComponentName(this, UpdateDataJobService.class);
+        JobInfo info = new JobInfo.Builder(UPDATE_DATA_JOB, componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPersisted(true)
+                .setPeriodic(15 * 60 * 1000)
+                .build();
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+
+        int resultCode = scheduler.schedule(info);
+        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+            Log.d(TAG, "Job scheduld");
+        } else {
+            Log.d(TAG, "Job scheduling failed");
+        }
+    }
+
+    private void cancelUpdateDataJob() {
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.cancel(UPDATE_DATA_JOB);
 
     }
 
