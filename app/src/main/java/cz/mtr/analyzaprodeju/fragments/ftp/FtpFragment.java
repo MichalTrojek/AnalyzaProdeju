@@ -1,6 +1,7 @@
 package cz.mtr.analyzaprodeju.fragments.ftp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.text.Normalizer;
+
 import cz.mtr.analyzaprodeju.R;
 
 public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
@@ -21,8 +24,8 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     public static final String TAG = FtpFragment.class.getSimpleName();
 
     private FtpViewModel mViewModel;
-    private Spinner spinner;
-    private Button downloadButton;
+    private Spinner mSpinner;
+    private Button mDownloadButton;
 
     public static FtpFragment newInstance() {
         return new FtpFragment();
@@ -33,16 +36,14 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ftp_fragment, container, false);
 
-        spinner = view.findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
+        mSpinner = view.findViewById(R.id.spinner);
+        mSpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.stores, android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        mSpinner.setAdapter(adapter);
 
 
-        downloadButton = view.findViewById(R.id.downloadButton);
-        downloadButton.setOnClickListener(this);
-
-//        spinner.setSelection(5);
+        mDownloadButton = view.findViewById(R.id.downloadButton);
+        mDownloadButton.setOnClickListener(this);
         return view;
     }
 
@@ -68,12 +69,14 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
 
     @Override
     public void onClick(View view) {
+        String name = Normalizer.normalize(mSpinner.getSelectedItem().toString(), Normalizer.Form.NFD);
+        name = name.replaceAll("[^\\p{ASCII}]", "");
+        Log.d(TAG, name);
+        DownloadAnalysisFtpTask task = new DownloadAnalysisFtpTask(getContext(), name);
+        task.execute();
 
-
-//        Toast.makeText(getContext(), spinner.getSelectedItem() + "", Toast.LENGTH_SHORT).show();
-
-        UpdateDatabaseTask updateDatabase = new UpdateDatabaseTask(getContext(), mViewModel);
-        updateDatabase.execute();
+//        UpdateDatabaseTask updateDatabase = new UpdateDatabaseTask(getContext(), mViewModel);
+//        updateDatabase.execute();
 
 
     }

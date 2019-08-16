@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.RawQuery;
+import androidx.room.RoomWarnings;
 import androidx.room.Transaction;
 import androidx.sqlite.db.SupportSQLiteQuery;
 
@@ -18,7 +19,7 @@ public interface ArticleDao {
     @Query("SELECT * FROM articles WHERE ean= :ean LIMIT 1")
     public Article getArticle(String ean);
 
-
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Transaction
     @Query("SELECT ean, name FROM fts_books_names WHERE fts_books_names MATCH  :term ORDER BY name ASC")
     public List<ItemFts> searchByName(String term);
