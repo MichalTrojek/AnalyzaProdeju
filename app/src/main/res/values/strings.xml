@@ -73,4 +73,11 @@
         <item>Tachov - Náměstí Republiky</item>
         <item>Ústí nad Labem - Forum</item>
     </string-array>
+
+    <string-array name="search_options">
+        <item>podle eanu</item>
+        <item>čarovým kódem</item>
+        <item>podle nazvu</item>
+
+    </string-array>
 </resources>

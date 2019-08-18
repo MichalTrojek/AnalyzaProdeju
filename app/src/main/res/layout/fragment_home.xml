@@ -11,7 +11,7 @@
         android:id="@+id/logoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/content_description_for_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,19 +22,74 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/scan_button"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#F44438"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/colorAccent"
         android:clickable="true"
-        android:scaleType="center"
         android:focusable="true"
+        android:scaleType="center"
         app:fabCustomSize="76dp"
+        app:layout_constraintBottom_toTopOf="@+id/mstb_multi_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoImageView"
         app:maxImageSize="48dp"
         app:srcCompat="@drawable/sharp_search_white_48" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/eanInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/mstb_multi_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/eanEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Vložte EAN"
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <org.honorato.multistatetogglebutton.MultiStateToggleButton
+        android:id="@+id/mstb_multi_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:mstbColorNotPressedBackground="@color/white"
+        app:mstbColorNotPressedText="@color/blue"
+        app:mstbColorPressedBackground="@color/blue"
+        app:mstbColorPressedText="@color/white"
+        app:values="@array/search_options" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Vyhledat produkt"
+        app:layout_constraintBottom_toTopOf="@+id/mstb_multi_id"
+        app:layout_constraintEnd_toEndOf="@+id/mstb_multi_id"
+        app:layout_constraintStart_toStartOf="@+id/mstb_multi_id" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

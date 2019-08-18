@@ -19,6 +19,24 @@
             app:popExitAnim="@anim/exit_to_top"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/homeToNotFound"
+            app:destination="@id/notFoundFragment"
+            app:enterAnim="@anim/enter_from_top"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/homeToDetail"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/enter_from_top"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
 

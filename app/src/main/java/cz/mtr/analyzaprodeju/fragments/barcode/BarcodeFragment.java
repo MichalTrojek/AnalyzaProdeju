@@ -53,7 +53,6 @@ public class BarcodeFragment extends Fragment implements BarcodeReader.BarcodeRe
                     case ANALYSIS:
                         goToDetailFragment();
                         break;
-
                 }
             }
         });

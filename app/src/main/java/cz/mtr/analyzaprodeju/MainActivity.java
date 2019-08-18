@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int resultCode = scheduler.schedule(info);
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
-            Log.d(TAG, "Job scheduld");
+            Log.d(TAG, "Job scheduled");
         } else {
             Log.d(TAG, "Job scheduling failed");
         }
@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Model.getInstance().loadOrdersAndReturns();
         Model.getInstance().loadAnalysis();
         askForPermission();
+
+
     }
 
 
