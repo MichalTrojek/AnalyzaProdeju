@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -28,12 +28,13 @@ import cz.mtr.analyzaprodeju.fragments.barcode.BarcodeViewModel;
 
 public class HomeFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
     private static final String TAG = HomeFragment.class.getSimpleName();
-    private Switch mSwitch;
-    private FloatingActionButton scanButton;
-    private TextInputLayout eanInput;
-    private TextInputEditText eanEditText;
+
+    private FloatingActionButton mScanButton;
+    private TextInputLayout mEanInputLayout;
+    private TextInputEditText mEanInputEditText;
     private HomeFragmentViewModel mViewModel;
-    private MultiStateToggleButton toggle;
+    private MultiStateToggleButton mToggle;
+    private ImageView mLogo;
 
     @Nullable
     @Override
@@ -47,10 +48,11 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
     }
 
     private void findViews(View view) {
-        scanButton = view.findViewById(R.id.scan_button);
-        scanButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToBarcode, null));
-        eanInput = view.findViewById(R.id.eanInput);
-        eanEditText = view.findViewById(R.id.eanEditText);
+        mScanButton = view.findViewById(R.id.scan_button);
+        mScanButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToBarcode, null));
+        mEanInputLayout = view.findViewById(R.id.eanInput);
+        mEanInputEditText = view.findViewById(R.id.eanEditText);
+        mLogo = view.findViewById(R.id.logoImageView);
     }
 
 
@@ -76,9 +78,9 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
 
 
     private void setupToggle(View view) {
-        toggle = view.findViewById(R.id.mstb_multi_id);
-        toggle.setElements(R.array.search_options, 1);
-        toggle.setOnValueChangedListener(new ToggleButton.OnValueChangedListener() {
+        mToggle = view.findViewById(R.id.mstb_multi_id);
+        mToggle.setElements(R.array.search_options, 1);
+        mToggle.setOnValueChangedListener(new ToggleButton.OnValueChangedListener() {
             @Override
             public void onValueChanged(int position) {
                 switch (position) {
@@ -138,25 +140,28 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
     }
 
     private void searchWithScanner() {
-        scanButton.show();
-        eanInput.setVisibility(View.GONE);
+        mLogo.setVisibility(View.VISIBLE);
+        mScanButton.show();
+        mEanInputLayout.setVisibility(View.GONE);
     }
 
     private void searchByEan() {
-        scanButton.hide();
-        eanInput.setFocusable(true);
-        eanInput.requestFocus();
-        eanInput.setVisibility(View.VISIBLE);
-//        mSwitch.setFocusable(false);
+        mLogo.setVisibility(View.VISIBLE);
+        mScanButton.hide();
+        mEanInputLayout.setFocusable(true);
+        mEanInputLayout.requestFocus();
+        mEanInputLayout.setVisibility(View.VISIBLE);
     }
 
     private void searchByName() {
-        Toast.makeText(getContext(), "NAME SEARHC", Toast.LENGTH_SHORT).show();
+        mLogo.setVisibility(View.GONE);
+        mScanButton.hide();
+        mEanInputLayout.setVisibility(View.GONE);
     }
 
 
     private void setEanInputListenerToHandleEnterKey() {
-        eanEditText.setOnKeyListener(new View.OnKeyListener() {
+        mEanInputEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent keyevent) {
                 return handleEnter(keyCode, keyevent);
@@ -166,8 +171,8 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
 
     private boolean handleEnter(int keyCode, KeyEvent keyevent) {
         if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-            mViewModel.findArticle(eanEditText.getText().toString());
-            eanEditText.setText("");
+            mViewModel.findArticle(mEanInputEditText.getText().toString());
+            mEanInputEditText.setText("");
             return true;
         }
         return false;
