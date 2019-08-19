@@ -73,10 +73,12 @@ dependencies {
 
     implementation group: 'com.google.guava', name: 'guava', version: '11.0.2'
 
-    implementation 'com.github.BeppiMenozzi:TriStateToggleButton:1.1.4'
+
 
 
     implementation 'org.honorato.multistatetogglebutton:multistatetogglebutton:0.2.2'
+
+    implementation  'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.3.0'
 
     implementation 'com.android.support:design:28.0.0'
 }

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -79,7 +80,6 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
 
     private void setupToggle(View view) {
         mToggle = view.findViewById(R.id.mstb_multi_id);
-        mToggle.setElements(R.array.search_options, 1);
         mToggle.setOnValueChangedListener(new ToggleButton.OnValueChangedListener() {
             @Override
             public void onValueChanged(int position) {
@@ -129,6 +129,13 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
         super.onAttach(context);
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        mToggle.setElements(R.array.search_options, 1);
+        searchWithScanner();
+    }
+
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
@@ -154,9 +161,11 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
     }
 
     private void searchByName() {
-        mLogo.setVisibility(View.GONE);
-        mScanButton.hide();
-        mEanInputLayout.setVisibility(View.GONE);
+        moveToSearchFragment();
+    }
+
+    private void moveToSearchFragment(){
+            NavHostFragment.findNavController(this).navigate(R.id.toSearch);
     }
 
 

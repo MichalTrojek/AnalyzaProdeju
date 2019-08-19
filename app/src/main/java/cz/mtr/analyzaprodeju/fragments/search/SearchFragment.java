@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,23 +33,22 @@ public class SearchFragment extends Fragment implements OnItemClickListener {
 
     private static final String TAG = SearchFragment.class.getSimpleName();
     private SearchViewModel mViewModel;
-    private TextView mSearchInput;
+    private EditText mSearchInput;
     private RecyclerView mRecyclerView;
     private SearchItemAdapter mAdapter;
     private ArrayList<ItemFts> mDataSet = new ArrayList<>();
 
 
-    public static SearchFragment newInstance() {
-        return new SearchFragment();
-    }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        setupSearchView(view);
 
-        View view = inflater.inflate(R.layout.search_fragment, container, false);
 
-        mSearchInput = view.findViewById(R.id.searchInput);
+
         mRecyclerView = view.findViewById(R.id.recyclerViewSearch);
 
         mRecyclerView.setHasFixedSize(true);
@@ -56,6 +56,11 @@ public class SearchFragment extends Fragment implements OnItemClickListener {
         mAdapter = new SearchItemAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         return view;
+    }
+
+    private void setupSearchView(View view){
+        mSearchInput = view.findViewById(R.id.searchInput);
+        mSearchInput.requestFocus();
     }
 
     @Override

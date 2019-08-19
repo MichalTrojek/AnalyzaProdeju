@@ -32,7 +32,7 @@
         android:focusable="true"
         android:scaleType="center"
         app:fabCustomSize="76dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView22"
+        app:layout_constraintBottom_toTopOf="@+id/mstb_multi_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoImageView"
@@ -48,7 +48,7 @@
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="8dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/textView22"
+        app:layout_constraintBottom_toTopOf="@+id/mstb_multi_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,32 +67,20 @@
 
     <org.honorato.multistatetogglebutton.MultiStateToggleButton
         android:id="@+id/mstb_multi_id"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:scrollbarSize="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:mstbColorNotPressedBackground="@color/white"
-        app:mstbColorNotPressedText="@color/blue"
-        app:mstbColorPressedBackground="@color/blue"
-        app:mstbColorPressedText="@color/white"
-        app:values="@array/search_options" />
+        app:mstbColorNotPressedBackground="@color/upperLight"
+        app:mstbColorNotPressedText="@color/black"
 
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:text="  Vyhledat produkt  "
-        android:textAlignment="center"
-        android:textColor="@color/blue"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/mstb_multi_id"
-        app:layout_constraintEnd_toEndOf="@+id/mstb_multi_id"
-        app:layout_constraintStart_toStartOf="@+id/mstb_multi_id" />
+
+        app:mstbColorPressedBackground="@color/blue"
+        app:mstbColorPressedText="@color/upperLight"
+        app:values="@array/search_options" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
