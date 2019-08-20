@@ -77,14 +77,6 @@ public class HomeFragment extends Fragment {
 
 
 
-    private void setIconEnabled(boolean enabled, boolean animate) {
-
-    }
-
-    private void switchState(boolean animate) {
-
-    }
-
 
 
 

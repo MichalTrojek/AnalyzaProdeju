@@ -17,12 +17,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import cz.mtr.analyzaprodeju.R;
 
 public class SettingsFragment extends Fragment {
 
     private SettingsViewModel mViewModel;
-    private EditText mInputIpAdress, mInputPassword, mInputLogin;
+    private TextInputEditText mInputIpAddress;
     private Button saveButton;
 
     @Override
@@ -31,40 +33,23 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
 
-        mInputIpAdress = view.findViewById(R.id.ip_adress_input);
-        mInputLogin = view.findViewById(R.id.eshopLoginEditText);
-        mInputPassword = view.findViewById(R.id.eshopPasswordEditText);
+        mInputIpAddress = view.findViewById(R.id.eanEditText);
+
 
         saveButton = view.findViewById(R.id.save_ip_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mInputIpAdress.getText().toString().isEmpty()) {
-                    if (mViewModel.validateIpAddress(mInputIpAdress.getText().toString())) {
-                        mViewModel.setIpAddress(mInputIpAdress.getText().toString());
+                if (!mInputIpAddress.getText().toString().isEmpty()) {
+                    if (mViewModel.validateIpAddress(mInputIpAddress.getText().toString())) {
+                        mViewModel.setIpAddress(mInputIpAddress.getText().toString());
                     } else {
                         Toast.makeText(getActivity(), "Byla vložena IP adresa ve špatném formátu.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
-                mViewModel.setLogin(mInputLogin.getText().toString().trim());
-
-                if (!mInputPassword.getText().toString().contains("*")) {
-                    mViewModel.setPassword(mInputPassword.getText().toString().trim());
-                }
-
-
-                hideKeyboard(mInputIpAdress);
-                hideKeyboard(mInputLogin);
-                hideKeyboard(mInputPassword);
-
-
-                if ((mInputPassword.getText().toString().isEmpty() && mInputLogin.getText().toString().isEmpty() ||
-                        (!mInputPassword.getText().toString().isEmpty() && !mInputLogin.getText().toString().isEmpty()))) {
-                    Navigation.findNavController(getView()).navigate(R.id.toHome);
-                } else {
-                    Toast.makeText(getContext(), "Přihlašovací pole je prázdné!", Toast.LENGTH_SHORT).show();
-                }
+                hideKeyboard(mInputIpAddress);
+                Navigation.findNavController(getView()).navigate(R.id.toHome);
 
             }
 
@@ -89,23 +74,10 @@ public class SettingsFragment extends Fragment {
         mViewModel.getIpAddress().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mInputIpAdress.setText(s);
+                mInputIpAddress.setText(s);
             }
         });
 
-        mViewModel.getPassword().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                mInputPassword.setText(s);
-            }
-        });
-
-        mViewModel.getLogin().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                mInputLogin.setText(s);
-            }
-        });
 
     }
 
