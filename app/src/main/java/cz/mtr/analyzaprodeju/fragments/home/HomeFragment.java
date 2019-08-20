@@ -6,8 +6,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,25 +16,28 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.github.zagum.switchicon.SwitchIconView;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.honorato.multistatetogglebutton.MultiStateToggleButton;
-import org.honorato.multistatetogglebutton.ToggleButton;
-
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.barcode.BarcodeViewModel;
 
-public class HomeFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class HomeFragment extends Fragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
 
     private FloatingActionButton mScanButton;
     private TextInputLayout mEanInputLayout;
     private TextInputEditText mEanInputEditText;
     private HomeFragmentViewModel mViewModel;
-    private MultiStateToggleButton mToggle;
-    private ImageView mLogo;
+    private BottomAppBar mBottomAppBar;
+    private ImageButton mButtonName;
+    private SwitchIconView switchIconView;
+
+
+
 
     @Nullable
     @Override
@@ -43,17 +45,56 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         findViews(view);
         setupViewModel();
-        setupToggle(view);
         setEanInputListenerToHandleEnterKey();
+
+
+        switchIconView = view.findViewById(R.id.switchIconView);
+        switchIconView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchIconView.switchState();
+                if(switchIconView.isIconEnabled()){
+                    showSearchByEan();
+                } else {
+                    hideSearchByEan();
+                }
+            }
+        });
+
+        mButtonName = view.findViewById(R.id.byNameButton);
+        mButtonName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchByName();
+            }
+        });
+        mBottomAppBar = view.findViewById(R.id.bottomAppBar);
+
         return view;
     }
+
+
+
+
+
+    private void setIconEnabled(boolean enabled, boolean animate) {
+
+    }
+
+    private void switchState(boolean animate) {
+
+    }
+
+
+
+
 
     private void findViews(View view) {
         mScanButton = view.findViewById(R.id.scan_button);
         mScanButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToBarcode, null));
         mEanInputLayout = view.findViewById(R.id.eanInput);
         mEanInputEditText = view.findViewById(R.id.eanEditText);
-        mLogo = view.findViewById(R.id.logoImageView);
+
     }
 
 
@@ -71,27 +112,6 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
                         break;
                     case ANALYSIS:
                         goToDetailFragment();
-                        break;
-                }
-            }
-        });
-    }
-
-
-    private void setupToggle(View view) {
-        mToggle = view.findViewById(R.id.mstb_multi_id);
-        mToggle.setOnValueChangedListener(new ToggleButton.OnValueChangedListener() {
-            @Override
-            public void onValueChanged(int position) {
-                switch (position) {
-                    case 0:
-                        searchByEan();
-                        break;
-                    case 1:
-                        searchWithScanner();
-                        break;
-                    case 2:
-                        searchByName();
                         break;
                 }
             }
@@ -132,32 +152,21 @@ public class HomeFragment extends Fragment implements CompoundButton.OnCheckedCh
     @Override
     public void onStart(){
         super.onStart();
-        mToggle.setElements(R.array.search_options, 1);
-        searchWithScanner();
-    }
-
-
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-        if (checked) {
-            searchByEan();
-        } else {
-            searchWithScanner();
+        if(switchIconView.isIconEnabled()){
+            showSearchByEan();
         }
     }
 
-    private void searchWithScanner() {
-        mLogo.setVisibility(View.VISIBLE);
-        mScanButton.show();
-        mEanInputLayout.setVisibility(View.GONE);
-    }
 
-    private void searchByEan() {
-        mLogo.setVisibility(View.VISIBLE);
-        mScanButton.hide();
+    private void showSearchByEan() {
         mEanInputLayout.setFocusable(true);
         mEanInputLayout.requestFocus();
         mEanInputLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void hideSearchByEan() {
+        mEanInputLayout.requestFocus();
+        mEanInputLayout.setVisibility(View.GONE);
     }
 
     private void searchByName() {
