@@ -30,10 +30,22 @@ public class SharedArticle implements Serializable {
 	private String sales2DateTo = "";
 	private String sales2Days = "";
 	private String eshopCode = "";
+	private String dontOrder = "";
+
 
 	public SharedArticle() {
 
 	}
+
+
+	public String getDontOrder() {
+		return dontOrder;
+	}
+
+	public void setDontOrder(String dontOrder) {
+		this.dontOrder = dontOrder;
+	}
+
 
 	public String getEshopCode() {
 		return this.eshopCode;

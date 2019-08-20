@@ -35,7 +35,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = DetailFragment.class.getSimpleName();
     private TextView nameTextView, eanTextView, priceTextView, rankTextView, eshopTextView, revenueTextView, salesAmountOneTextView, salesDaysOneTextView,
             salesAmountTwoTextView, salesDaysTwoTextView, lastSaleTextView, storedTextView, daysOfSuppliesTextView, lastDeliveryTextView, supplierTextView,
-            releasedTextView, locationsTextView, authorTextView, mReturnsLabelTextView, mOrdersLabelTextView;
+            releasedTextView, locationsTextView, authorTextView, mReturnsLabelTextView, mOrdersLabelTextView, mDontOrderLabelTextView;
     private FloatingActionButton addFob, returnFob, orderFob;
     private Animation fab_open, fab_close, fab_rotate_anticlock, fab_rotate_clock;
     private EditText ordersEditText;
@@ -107,6 +107,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 releasedTextView.setText("Vydáno: " + displayableArticle.getReleaseDate());
                 locationsTextView.setText(displayableArticle.getLocation());
                 authorTextView.setText("Autor: " + displayableArticle.getAuthor());
+                mDontOrderLabelTextView.setText(displayableArticle.getDontOrder());
+
             }
         });
 
@@ -167,6 +169,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         authorTextView = view.findViewById(R.id.authorTextView);
         mReturnsLabelTextView = view.findViewById(R.id.returnsLabelTextView);
         mOrdersLabelTextView = view.findViewById(R.id.orderLabelTextView);
+        mDontOrderLabelTextView = view.findViewById(R.id.dontOrderTextView);
     }
 
     private boolean isNetworkAvailable() {

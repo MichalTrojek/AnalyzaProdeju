@@ -31,14 +31,25 @@ public class DetailViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<DisplayableArticle> getArticle(SharedArticle a) {
+
+
         DisplayableArticle article = new DisplayableArticle(a.getRanking(), a.getEan(), a.getName(), a.getSales1(), a.getSales2()
                 , a.getRevenue(), a.getStored(), a.getDaysOfSupplies(), a.getLocation(), a.getPrice(), a.getSupplier(),
                 a.getAuthor(), a.getDateOfLastSale(), a.getDateOfLastDelivery(), a.getReleaseDate(), a.getCommision(), a.getRankingEshop(),
                 a.getSales1DateSince(), a.getSales1DateTo(), a.getSales1Days(), a.getSales2DateSince(),
-                a.getSales2DateTo(), a.getSales2Days(), a.getEshopCode());
+                a.getSales2DateTo(), a.getSales2Days(), a.getEshopCode(), change(a.getDontOrder()));
         mArticleFromAnalysis.setValue(article);
         return mArticleFromAnalysis;
     }
+
+    private String change(String input) {
+        if ("n".equals(input.toLowerCase()) || input.isEmpty()) {
+            return "";
+        } else {
+            return " (Doprodej)";
+        }
+    }
+
 
     public void saveArticleAndAmountOrders(DisplayableArticle article, String amount) {
         Model.getInstance().addOrders(getExportSharedArticle(article, amount));
