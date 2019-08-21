@@ -24,7 +24,7 @@ import retrofit2.http.GET;
 
 public class MainActivityViewModel extends AndroidViewModel {
 
-
+    private static final String TAG = MainActivityViewModel.class.getSimpleName();
     private MutableLiveData<Boolean> updateFound = new MutableLiveData();
     private int onlineDbVersionNumber;
 
@@ -64,6 +64,7 @@ public class MainActivityViewModel extends AndroidViewModel {
                 Toast.makeText(getApplication(), "Nepřipojeno k internetu", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 
 

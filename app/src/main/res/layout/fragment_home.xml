@@ -39,13 +39,12 @@
 
                 <ImageButton
                     android:id="@+id/byNameButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="0dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="64dp"
-                    android:layout_marginBottom="16dp"
                     android:background="@color/upperLight"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/textView23"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/search_icon" />
@@ -74,13 +73,12 @@
 
                 <com.github.zagum.switchicon.SwitchIconView
                     android:id="@+id/switchIconView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="48dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:padding="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/textView22"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:si_animation_duration="500"
@@ -88,7 +86,7 @@
                     app:si_disabled_color="#b7b7b7"
                     app:si_enabled="false"
                     app:si_no_dash="false"
-                    app:si_tint_color="#ff3c00"
+                    app:si_tint_color="#4CAF50"
                     app:srcCompat="@drawable/about_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,7 +102,7 @@
             app:fabCustomSize="76dp"
             app:layout_anchor="@id/bottomAppBar"
             app:maxImageSize="48dp"
-            app:srcCompat="@drawable/sharp_search_white_48" />
+            app:srcCompat="@drawable/barcodescannericon" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

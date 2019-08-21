@@ -33,6 +33,7 @@ import cz.mtr.analyzaprodeju.fragments.dialogs.DialogUpdateFound;
 import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.network.Client;
+import cz.mtr.analyzaprodeju.repository.room.ArticleRoomDatabase;
 import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
 import cz.mtr.analyzaprodeju.utils.KeyboardHider;
 import cz.mtr.analyzaprodeju.utils.Printer;
@@ -140,7 +141,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 // you already have a permission
-                mViewModel.checkForDatabaseUpdate();
+//                if (mNavController.getCurrentDestination().getId() == R.id.homeFragment) {
+//                    mViewModel.checkForDatabaseUpdate();
+//                }
+                handleUpdatingDatabase();
+
             } else {
                 // asks for permission
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -157,12 +162,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mViewModel.checkForDatabaseUpdate();
+//                    if (mNavController.getCurrentDestination().getId() == R.id.homeFragment) {
+//                        mViewModel.checkForDatabaseUpdate();
+//                    }
+                    handleUpdatingDatabase();
                 } else {
                     Toast.makeText(this, "Aplikace nebude správně fungovat bez povoleného přístupu k souborům.", Toast.LENGTH_LONG).show();
                 }
                 break;
             }
+        }
+    }
+
+    private void handleUpdatingDatabase() {
+        if (mNavController.getCurrentDestination().getId() == R.id.homeFragment) {
+            ArticleRoomDatabase.getInstance(getApplication()).close();
+            mViewModel.checkForDatabaseUpdate();
         }
     }
 
