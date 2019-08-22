@@ -15,6 +15,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLargerImage;
 import cz.mtr.analyzaprodeju.fragments.scraper.ScrapInfoAsyncTask;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
@@ -44,6 +47,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private boolean isOpen = false;
     private ScrollView scrollView2;
     private Button mSaveButton, mBackButton;
+    private ImageView mImageView;
+    private ProgressBar mProgressBar;
 
     public DetailFragment() {
 
@@ -77,6 +82,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         ordersEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
 
+        mImageView = view.findViewById(R.id.itemPreview);
+        mProgressBar = view.findViewById(R.id.imageProgress);
+
         return view;
     }
 
@@ -108,6 +116,19 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 locationsTextView.setText(displayableArticle.getLocation());
                 authorTextView.setText("Autor: " + displayableArticle.getAuthor());
                 mDontOrderLabelTextView.setText(displayableArticle.getDontOrder());
+
+                ImageScrapTask task = new ImageScrapTask(getView(), getContext(), mImageView, mProgressBar);
+                task.execute(eanTextView.getText().toString());
+
+            }
+        });
+
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogLargerImage dialog = new DialogLargerImage();
+                dialog.setCancelable(true);
+                dialog.show(getFragmentManager(), "DialogLargerImage");
 
             }
         });

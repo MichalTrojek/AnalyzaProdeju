@@ -29,8 +29,10 @@ public class DialogLargerImage extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_larger_image, container, false);
 
         mImageView = view.findViewById(R.id.largeImageView);
+//        ImageDisplay display = new ImageDisplay(Model.getInstance().getLargeImageLink(), mImageView);
+//        display.show();
 
-        Picasso.get().load(Model.getInstance().getLargeImageLink()).into(mImageView);
+
 
         return view;
     }

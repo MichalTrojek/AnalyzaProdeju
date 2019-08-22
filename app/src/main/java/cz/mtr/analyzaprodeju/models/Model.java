@@ -157,7 +157,7 @@ public class Model {
 
 
     public String getImageLink() {
-        return "https://knihydobrovsky.cz/" + mImageLink;
+        return "https://knihydobrovsky.cz" + mImageLink;
     }
 
     public String getTitleName() {
