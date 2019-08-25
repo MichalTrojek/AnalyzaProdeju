@@ -24,7 +24,6 @@ import cz.mtr.analyzaprodeju.shared.SharedArticle;
 public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
 
     private static final String TAG = DownloadAnalysisFtpTask.class.getSimpleName();
-    private String mFilename = "analyza.csv";
     private String mAddress = "81.95.110.138";
     private String mUsername = "knihydobro9";
     private String mPassword = "";
@@ -62,8 +61,10 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
             if (login) {
                 ftp.setFileType(FTP.BINARY_FILE_TYPE);
                 ftp.enterLocalPassiveMode();
-                ftp.changeWorkingDirectory(mPath.toLowerCase());
-                readAnalysFromFtp(ftp.retrieveFileStream(mFilename));
+                ftp.changeWorkingDirectory(mPath);
+
+                String filename = ftp.listFiles()[2].getName();
+                readAnalysFromFtp(ftp.retrieveFileStream(filename));
             } else {
                 Toast.makeText(mContext, "Nepodarilo se přihlásit do ftp.", Toast.LENGTH_SHORT).show();
             }
@@ -85,14 +86,13 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
             String[] record;
             int rankingCounter = 0;
             while ((record = reader.readNext()) != null) {
-                if (record.length == 1) {
-                } else {
+                try {
                     rankingCounter++;
                     String ranking = rankingCounter + "";
-                    Log.d(TAG, record.length + "");
+//                    Log.d(TAG, record.length + "");
                     String eshopCode = record[1];
                     String ean = record[2];
-                    Log.d(TAG, ean);
+//                    Log.d(TAG, ean);
                     String name = record[3];
 
                     if (name.contains("Dárková knižní") || name.contains("Klubový slevový poukaz")
@@ -153,21 +153,18 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
                     shared.setSales2DateTo(sales2DateTo);
                     shared.setSales2Days(sales2Days);
                     map.put(ean, shared);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
                 }
             }
+
             mArticleAmount = map.size() + "";
             if (map.size() != 0) {
                 Model.getInstance().setAnalysis(map);
             }
             reader.close();
-            for (String supplier : suppliers.keySet()) {
-                double total = 0;
-                for (String s : suppliers.get(supplier)) {
-                    s = s.replace(",", ".");
-                    double revenue = Double.parseDouble(s);
-                    total += revenue;
-                }
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

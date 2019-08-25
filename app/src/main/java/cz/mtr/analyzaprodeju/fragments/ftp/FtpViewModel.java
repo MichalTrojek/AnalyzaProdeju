@@ -14,7 +14,7 @@ import cz.mtr.analyzaprodeju.repository.room.Article;
 
 public class FtpViewModel extends AndroidViewModel {
 
-
+    private final static String TAG = FtpViewModel.class.getSimpleName();
     private DataRepository mRepository;
     private Context mContext;
 
@@ -27,6 +27,17 @@ public class FtpViewModel extends AndroidViewModel {
 
     public void insertAll(List<Article> items) {
         mRepository.insertAll(items);
+    }
+
+
+    public String convertNameToShortcut(String name) {
+        String temp = "";
+        switch (name) {
+            case "Praha - Vaclavske Namesti":
+                temp = "VAN";
+                break;
+        }
+        return temp;
     }
 
 

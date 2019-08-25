@@ -1,7 +1,6 @@
 package cz.mtr.analyzaprodeju.fragments.ftp;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +70,8 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     public void onClick(View view) {
         String name = Normalizer.normalize(mSpinner.getSelectedItem().toString(), Normalizer.Form.NFD);
         name = name.replaceAll("[^\\p{ASCII}]", "");
-        Log.d(TAG, name);
-        DownloadAnalysisFtpTask task = new DownloadAnalysisFtpTask(getContext(), name);
+
+        DownloadAnalysisFtpTask task = new DownloadAnalysisFtpTask(getContext(), mViewModel.convertNameToShortcut(name));
         task.execute();
 
 //        UpdateDatabaseTask updateDatabase = new UpdateDatabaseTask(getContext(), mViewModel);
