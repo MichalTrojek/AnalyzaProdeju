@@ -70,14 +70,8 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     public void onClick(View view) {
         String name = Normalizer.normalize(mSpinner.getSelectedItem().toString(), Normalizer.Form.NFD);
         name = name.replaceAll("[^\\p{ASCII}]", "");
-
-        DownloadAnalysisFtpTask task = new DownloadAnalysisFtpTask(getContext(), mViewModel.convertNameToShortcut(name));
+        DownloadAnalysisFtpTask task = new DownloadAnalysisFtpTask(getContext(), mViewModel.convertNameToShortcut(name.toLowerCase()));
         task.execute();
-
-//        UpdateDatabaseTask updateDatabase = new UpdateDatabaseTask(getContext(), mViewModel);
-//        updateDatabase.execute();
-
-
     }
 
 

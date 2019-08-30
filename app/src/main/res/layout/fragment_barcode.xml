@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         app:maxImageSize="48dp"
-        app:srcCompat="@drawable/sharp_power_settings_new_white_48" />
+        app:srcCompat="@drawable/close_24dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

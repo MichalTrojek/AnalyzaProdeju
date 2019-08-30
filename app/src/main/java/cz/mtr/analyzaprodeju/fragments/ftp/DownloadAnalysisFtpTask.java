@@ -3,6 +3,7 @@ package cz.mtr.analyzaprodeju.fragments.ftp;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.opencsv.CSVReader;
@@ -13,7 +14,6 @@ import org.apache.commons.net.ftp.FTPClient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.MainActivity;
@@ -29,6 +29,7 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
     private String mPassword = "";
     private String mArticleAmount = "";
     private String mPath = "";
+    private boolean isEmpty = true;
 
 
     private Context mContext;
@@ -63,8 +64,13 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
                 ftp.enterLocalPassiveMode();
                 ftp.changeWorkingDirectory(mPath);
 
-                String filename = ftp.listFiles()[2].getName();
-                readAnalysFromFtp(ftp.retrieveFileStream(filename));
+                String filename = ftp.listFiles()[ftp.listFiles().length - 1].getName();
+                Log.d(TAG, filename);
+                Log.d(TAG, "pocet ve slozce " + ftp.listFiles().length);
+                if (ftp.listFiles().length > 2) {
+                    isEmpty = false;
+                    readAnalysFromFtp(ftp.retrieveFileStream(filename));
+                }
             } else {
                 Toast.makeText(mContext, "Nepodarilo se přihlásit do ftp.", Toast.LENGTH_SHORT).show();
             }
@@ -79,8 +85,8 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
 
 
     private HashMap<String, SharedArticle> readAnalysFromFtp(InputStream input) {
-        HashMap<String, SharedArticle> map = new HashMap<>();
-        HashMap<String, ArrayList<String>> suppliers = new HashMap<>();
+        HashMap<String, SharedArticle> map = new HashMap<>(500000, 1);
+        SharedArticle shared;
         try {
             CSVReader reader = new CSVReader(new InputStreamReader(input, "Windows-1250"), ';', '\"', 1);
             String[] record;
@@ -88,71 +94,39 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
             while ((record = reader.readNext()) != null) {
                 try {
                     rankingCounter++;
-                    String ranking = rankingCounter + "";
-//                    Log.d(TAG, record.length + "");
-                    String eshopCode = record[1];
-                    String ean = record[2];
-//                    Log.d(TAG, ean);
-                    String name = record[3];
-
-                    if (name.contains("Dárková knižní") || name.contains("Klubový slevový poukaz")
-                            || name.contains("VOUCHER")) {
+                    if (record[3].contains("Dárková knižní") || record[3].contains("Klubový slevový poukaz")
+                            || record[3].contains("VOUCHER")) {
                         rankingCounter--;
                         continue;
                     }
-                    String sales1 = record[4];
-                    String sales2 = record[5];
-                    String revenue = record[6];
-                    String stored = record[7];
-                    String daysOfSupplies = record[8];
-                    String location = record[9];
-                    String price = record[10];
-                    String supplier = record[12];
-                    String author = record[13];
-                    String dateOfLastSale = record[14];
-                    String dateOfLastDelivery = record[15];
-                    String releaseDate = record[16];
-                    String commision = record[17];
-                    String rankingEshop = record[18];
-                    String sales1DateSince = record[19];
-                    String sales1DateTo = record[20];
-                    String sales1Days = record[21];
-                    String sales2DateSince = record[22];
-                    String sales2DateTo = record[23];
-                    String sales2Days = record[24];
-                    if (!suppliers.containsKey(supplier)) {
-                        ArrayList<String> list = new ArrayList<>();
-                        list.add(revenue);
-                        suppliers.put(supplier, list);
-                    } else {
-                        suppliers.get(supplier).add(revenue);
-                    }
-                    SharedArticle shared = new SharedArticle();
-                    shared.setEshopCode(eshopCode);
-                    shared.setRanking(ranking);
-                    shared.setEan(ean);
-                    shared.setName(name);
-                    shared.setSales1(sales1);
-                    shared.setSales2(sales2);
-                    shared.setRevenue(revenue);
-                    shared.setStored(stored);
-                    shared.setDaysOfSupplies(daysOfSupplies);
-                    shared.setLocation(location);
-                    shared.setPrice(price);
-                    shared.setSupplier(supplier);
-                    shared.setAuthor(author);
-                    shared.setDateOfLastSale(dateOfLastSale);
-                    shared.setDateOfLastDelivery(dateOfLastDelivery);
-                    shared.setReleaseDate(releaseDate);
-                    shared.setCommision(commision);
-                    shared.setRankingEshop(rankingEshop);
-                    shared.setSales1DateSince(sales1DateSince);
-                    shared.setSales1DateTo(sales1DateTo);
-                    shared.setSales1Days(sales1Days);
-                    shared.setSales2DateSince(sales2DateSince);
-                    shared.setSales2DateTo(sales2DateTo);
-                    shared.setSales2Days(sales2Days);
-                    map.put(ean, shared);
+                    shared = new SharedArticle();
+                    shared.setEshopCode(record[1]);
+                    shared.setRanking(rankingCounter + "");
+                    shared.setEan(record[2]);
+                    shared.setName(record[3]);
+                    shared.setSales1(record[4]);
+                    shared.setSales2(record[5]);
+                    shared.setRevenue(record[6]);
+                    shared.setStored(record[7]);
+                    shared.setDaysOfSupplies(record[8]);
+                    shared.setLocation(record[9]);
+                    shared.setPrice(record[10]);
+                    shared.setSupplier(record[12]);
+                    shared.setAuthor(record[13]);
+                    shared.setDontOrder(record[14]);
+                    shared.setDateOfLastSale(record[15]);
+                    shared.setDateOfLastDelivery(record[16]);
+                    shared.setReleaseDate(record[17]);
+                    shared.setCommision(record[18]);
+                    shared.setRankingEshop(record[19]);
+                    shared.setSales1DateSince(record[20]);
+                    shared.setSales1DateTo(record[21]);
+                    shared.setSales1Days(record[22]);
+                    shared.setSales2DateSince(record[23]);
+                    shared.setSales2DateTo(record[24]);
+                    shared.setSales2Days(record[25]);
+
+                    map.put(record[2], shared);
                 } catch (Exception e) {
                     e.printStackTrace();
                     continue;
@@ -174,7 +148,15 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
 
     @Override
     protected void onPostExecute(Void v) {
-        Toast.makeText(mContext, mArticleAmount + " položek v analýze.", Toast.LENGTH_SHORT).show();
+        if (!isEmpty) {
+            Toast toast = Toast.makeText(mContext, mArticleAmount + " položek v analýze.", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        } else {
+            Toast toast = Toast.makeText(mContext, "Složka na FTP neobsahuje žádná data", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
         progressDialog.dismiss();
     }
 

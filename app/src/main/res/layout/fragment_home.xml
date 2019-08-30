@@ -30,6 +30,8 @@
             style="@style/Widget.MaterialComponents.BottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:fabCradleMargin="0dp"
+            app:fabCradleRoundedCornerRadius="0dp"
             android:layout_gravity="bottom"
             android:backgroundTint="@color/upperLight">
 
@@ -42,7 +44,7 @@
                     android:layout_width="100dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="64dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/upperLight"
                     app:layout_constraintBottom_toTopOf="@+id/textView23"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -53,12 +55,12 @@
                     android:id="@+id/textView22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="8dp"
                     android:text="HLEDAT PODLE EANU"
                     android:textSize="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/switchIconView"
-                    app:layout_constraintStart_toStartOf="@+id/switchIconView" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/textView23"
@@ -73,21 +75,23 @@
 
                 <com.github.zagum.switchicon.SwitchIconView
                     android:id="@+id/switchIconView"
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
                     android:layout_marginTop="8dp"
                     android:padding="8dp"
+                    android:text="test"
                     app:layout_constraintBottom_toTopOf="@+id/textView22"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView22"
+                    app:layout_constraintStart_toStartOf="@+id/textView22"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
                     app:si_animation_duration="500"
                     app:si_disabled_alpha=".3"
                     app:si_disabled_color="#b7b7b7"
                     app:si_enabled="false"
-                    app:si_no_dash="false"
-                    app:si_tint_color="#4CAF50"
-                    app:srcCompat="@drawable/about_icon" />
+                    app:si_no_dash="true"
+                    app:si_tint_color="#000000"
+                    app:srcCompat="@drawable/searchnuname" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -102,7 +106,7 @@
             app:fabCustomSize="76dp"
             app:layout_anchor="@id/bottomAppBar"
             app:maxImageSize="48dp"
-            app:srcCompat="@drawable/barcodescannericon" />
+            app:srcCompat="@drawable/black_barcode" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

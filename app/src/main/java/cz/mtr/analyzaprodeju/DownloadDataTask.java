@@ -15,20 +15,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
-import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class DownloadDataTask extends AsyncTask<String, Integer, Void> {
 
     private static final String TAG = DownloadDataTask.class.getSimpleName();
-    String address = "test";
-    String username = "test";
-    String password = "test";
-    String filename = "anl2.csv";
+    String address = "81.95.110.138";
+    String username = "knihydobro9";
+    String password = "";
+    String filename = "2019-08-25.csv";
+
+
 
 
     private Context context;
@@ -51,9 +51,9 @@ public class DownloadDataTask extends AsyncTask<String, Integer, Void> {
     @Override
     protected Void doInBackground(String... voids) {
         try {
-            if (downloadAndSaveFile(filename)) {
+//            if (downloadAndSaveFile(filename)) {
                 readAnalysisFile();
-            }
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,7 +81,7 @@ public class DownloadDataTask extends AsyncTask<String, Integer, Void> {
             try {
                     outputStream = context.openFileOutput("analyza.csv", Context.MODE_PRIVATE);
 
-                    success = ftp.retrieveFile("/www/" + filename, outputStream);
+                success = ftp.retrieveFile("/prodejny/VAN/" + filename, outputStream);
 
 
                 Log.d(TAG, success + "");
@@ -105,8 +105,7 @@ public class DownloadDataTask extends AsyncTask<String, Integer, Void> {
 
 
     private HashMap<String, SharedArticle> readAnalysisFile() {
-        HashMap<String, SharedArticle> map = new HashMap<>();
-        HashMap<String, ArrayList<String>> suppliers = new HashMap<>();
+        HashMap<String, SharedArticle> map = new HashMap<>(500000, 1);
         String path = context.getFilesDir().getAbsolutePath() + "/analyza.csv";
         Log.d(TAG, path);
         try {
@@ -116,105 +115,60 @@ public class DownloadDataTask extends AsyncTask<String, Integer, Void> {
             String[] record;
             int rankingCounter = 0;
             while ((record = reader.readNext()) != null) {
-
-                if (record.length == 1) {
-
-                } else {
+                try {
                     rankingCounter++;
-                    String ranking = rankingCounter + "";
-                    Log.d(TAG, record.length + "");
-                    String eshopCode = record[1];
-                    String ean = record[2];
-
-                    String name = record[3];
-
-                    if (name.contains("Dárková knižní") || name.contains("Klubový slevový poukaz")
-                            || name.contains("VOUCHER")) {
+                    if (record[3].contains("Dárková knižní") || record[3].contains("Klubový slevový poukaz")
+                            || record[3].contains("VOUCHER")) {
                         rankingCounter--;
                         continue;
                     }
-                    String sales1 = record[4];
-                    String sales2 = record[5];
-                    String revenue = record[6];
-                    String stored = record[7];
-                    String daysOfSupplies = record[8];
-                    String location = record[9];
-                    String price = record[10];
-                    String supplier = record[12];
-                    String author = record[13];
-                    String dateOfLastSale = record[14];
-                    String dateOfLastDelivery = record[15];
-                    String releaseDate = record[16];
-                    String commision = record[17];
-                    String rankingEshop = record[18];
-                    String sales1DateSince = record[19];
-                    String sales1DateTo = record[20];
-                    String sales1Days = record[21];
-                    String sales2DateSince = record[22];
-                    String sales2DateTo = record[23];
-                    String sales2Days = record[24];
-
-
-                    if (!suppliers.containsKey(supplier)) {
-                        ArrayList<String> list = new ArrayList<>();
-                        list.add(revenue);
-                        suppliers.put(supplier, list);
-                    } else {
-
-                        suppliers.get(supplier).add(revenue);
-                    }
-
-
-
                     SharedArticle shared = new SharedArticle();
+                    shared.setEshopCode(record[1]);
+                    shared.setRanking(rankingCounter + "");
+                    shared.setEan(record[2]);
+                    shared.setName(record[3]);
+                    shared.setSales1(record[4]);
+                    shared.setSales2(record[5]);
+                    shared.setRevenue(record[6]);
+                    shared.setStored(record[7]);
+                    shared.setDaysOfSupplies(record[8]);
+                    shared.setLocation(record[9]);
+                    shared.setPrice(record[10]);
+                    shared.setSupplier(record[12]);
+                    shared.setAuthor(record[13]);
+                    shared.setDontOrder(record[14]);
+                    shared.setDateOfLastSale(record[15]);
+                    shared.setDateOfLastDelivery(record[16]);
+                    shared.setReleaseDate(record[17]);
+                    shared.setCommision(record[18]);
+                    shared.setRankingEshop(record[19]);
+                    shared.setSales1DateSince(record[20]);
+                    shared.setSales1DateTo(record[21]);
+                    shared.setSales1Days(record[22]);
+                    shared.setSales2DateSince(record[23]);
+                    shared.setSales2DateTo(record[24]);
+                    shared.setSales2Days(record[25]);
 
-                    shared.setEshopCode(eshopCode);
-                    shared.setRanking(ranking);
-                    shared.setEan(ean);
-                    shared.setName(name);
-                    shared.setSales1(sales1);
-                    shared.setSales2(sales2);
-                    shared.setRevenue(revenue);
-                    shared.setStored(stored);
-                    shared.setDaysOfSupplies(daysOfSupplies);
-                    shared.setLocation(location);
-                    shared.setPrice(price);
-                    shared.setSupplier(supplier);
-                    shared.setAuthor(author);
-                    shared.setDateOfLastSale(dateOfLastSale);
-                    shared.setDateOfLastDelivery(dateOfLastDelivery);
-                    shared.setReleaseDate(releaseDate);
-                    shared.setCommision(commision);
-                    shared.setRankingEshop(rankingEshop);
-                    shared.setSales1DateSince(sales1DateSince);
-                    shared.setSales1DateTo(sales1DateTo);
-                    shared.setSales1Days(sales1Days);
-                    shared.setSales2DateSince(sales2DateSince);
-                    shared.setSales2DateTo(sales2DateTo);
-                    shared.setSales2Days(sales2Days);
-                    map.put(ean, shared);
+                    map.put(record[2], shared);
+                    shared = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
                 }
+
 
             }
             Log.d(TAG, "" + map.size() + " polozek v analyze");
 
             if (map.size() != 0) {
-                Model.getInstance().setAnalysis(map);
+//                Model.getInstance().setAnalysis(map);
             }
             reader.close();
 
-
-            for (String supplier : suppliers.keySet()) {
-                double total = 0;
-
-                for (String s : suppliers.get(supplier)) {
-                    s = s.replace(",", ".");
-                    double revenue = Double.parseDouble(s);
-                    total += revenue;
-                }
-
-
+            for (SharedArticle s : map.values()) {
+                Log.d(TAG, s.getEan());
             }
+
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
