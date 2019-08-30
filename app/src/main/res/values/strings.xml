@@ -38,6 +38,8 @@
     <string name="not_found_textView">Produkt nebyl nalezen v analýze</string>
     <string name="ftp_save_button">Stahnout data z vybrané prodejny.</string>
     <string name="import_from_pc">Nahrát data přes SP</string>
+    <string name="heslo_k_ftp">HESLO K FTP</string>
+    <string name="vyberte_prodejnu">Vyberte prodejnu</string>
 
 
     <string-array name="stores">
