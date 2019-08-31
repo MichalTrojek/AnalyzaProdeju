@@ -1,7 +1,6 @@
 package cz.mtr.analyzaprodeju.fragments.ftp;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,10 +75,11 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     public void onClick(View view) {
         String name = Normalizer.normalize(mSpinner.getSelectedItem().toString(), Normalizer.Form.NFD);
         name = name.replaceAll("[^\\p{ASCII}]", "");
-        Log.d(TAG, "Heslo " + mPasswordEditText.length());
         if (mPasswordEditText.length() != 0) {
             mViewModel.savePassword(mPasswordEditText.getText().toString());
-            mTask = new DownloadAnalysisFtpTask(getContext(), mViewModel.convertNameToShortcut(name.toLowerCase()), mViewModel.getPassword());
+            name = mViewModel.convertNameToShortcut(name.toLowerCase());
+            mViewModel.setSelectedStore(name);
+            mTask = new DownloadAnalysisFtpTask(getContext(), name, mViewModel.getPassword());
             mTask.execute();
         } else {
             Toast toast = Toast.makeText(getContext(), "Není vložené heslo", Toast.LENGTH_SHORT);

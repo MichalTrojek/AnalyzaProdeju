@@ -159,6 +159,7 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
         } else {
             mViewModel.saveArticleAndAmountReturns(selectedArticle, ordersEditText.getText().toString().trim());
         }
+        Toast.makeText(getContext(), "Uloženo", Toast.LENGTH_SHORT).show();
         Model.getInstance().saveOrdersAndReturns();
         showDefaultState();
     }

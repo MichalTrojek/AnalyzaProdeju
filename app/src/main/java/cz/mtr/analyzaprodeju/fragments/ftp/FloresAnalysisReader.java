@@ -1,5 +1,7 @@
 package cz.mtr.analyzaprodeju.fragments.ftp;
 
+import android.util.Log;
+
 import com.opencsv.CSVReader;
 
 import java.io.IOException;
@@ -12,7 +14,9 @@ import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class FloresAnalysisReader {
 
+    private static final String TAG = FloresAnalysisReader.class.getSimpleName();
     private String mArticleAmount = "";
+
 
     public FloresAnalysisReader(){
 
@@ -70,6 +74,7 @@ public class FloresAnalysisReader {
             mArticleAmount = map.size() + "";
             if (map.size() != 0) {
                 Model.getInstance().setAnalysis(map);
+                Log.d(TAG, "Analyza nahrana " + map.size());
             }
             reader.close();
 

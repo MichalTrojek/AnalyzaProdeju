@@ -9,6 +9,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import cz.mtr.analyzaprodeju.StoreItem;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -139,6 +140,26 @@ public class SharedPreferences {
         return returns;
     }
 
+    public void setStoreItems(ArrayList<StoreItem> items) {
+        mEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(items);
+        mEditor.putString("storeItems", json);
+        mEditor.apply();
+    }
+
+    public ArrayList<StoreItem> getStoreItems() {
+        Gson gson = new Gson();
+        String json = mPrefs.getString("storeItems", null);
+        Type type = new TypeToken<ArrayList<StoreItem>>() {
+        }.getType();
+        ArrayList<StoreItem> storeItems = gson.fromJson(json, type);
+        if (storeItems == null) {
+            storeItems = new ArrayList<>();
+        }
+        return storeItems;
+    }
+
     public void setLastSelectedItem(int index) {
         mEditor = mPrefs.edit();
         mEditor.putInt("index", index);
@@ -149,6 +170,26 @@ public class SharedPreferences {
         return mPrefs.getInt("index", 0);
     }
 
+    public String getSelectedStore() {
+        return mPrefs.getString("selectedStore", "");
+    }
+
+    public void setSelectedStore(String name) {
+        mEditor = mPrefs.edit();
+        mEditor.putString("selectedStore", name);
+        mEditor.apply();
+    }
+
+    public long getUpdatedTime() {
+        return mPrefs.getInt("time", -99);
+    }
+
+    public void setUpdatedTime(long currentDbVersion) {
+        mEditor = mPrefs.edit();
+        mEditor.clear();
+        mEditor.putLong("time", currentDbVersion);
+        mEditor.apply();
+    }
 
 
 }

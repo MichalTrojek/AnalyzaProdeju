@@ -5,48 +5,45 @@ import android.app.job.JobService;
 import android.util.Log;
 
 import cz.mtr.analyzaprodeju.fragments.ftp.UpdateDatabaseTask;
+import cz.mtr.analyzaprodeju.models.Model;
 
 public class UpdateDataJobService extends JobService {
 
     private static final String TAG = UpdateDatabaseTask.class.getSimpleName();
     private boolean jobCancelled = false;
+    private UpdateDataServiceTask mTask;
 
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
         Log.d(TAG, "UpdateDataJob started");
         doBackgroundWork(jobParameters);
-
-
-        return true;
+        return true; // true = task bude trvat delsi dobu
     }
 
 
     private void doBackgroundWork(final JobParameters jobParameters) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 10; i++) {
-                    Log.d(TAG, "Run: " + i);
-                    if(jobCancelled){
-                        return;
-                    }
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+        String storeName = Model.getInstance().getPrefs().getSelectedStore();
+        String password = Model.getInstance().getPrefs().getPassword();
 
-                Log.d(TAG, "JOB finished");
-                jobFinished(jobParameters, false);
-            }
-        }).start();
+        if (!storeName.isEmpty() && !password.isEmpty()) {
+            Log.d(TAG, "Task called");
+            mTask = new UpdateDataServiceTask(storeName, password) {
+                @Override
+                protected void onPostExecute(Boolean success) {
+                    jobFinished(jobParameters, !success);
+                }
+            };
+            mTask.execute();
+        }
     }
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
         Log.d(TAG, "Job cancelled before completion");
+        if (mTask != null) {
+            mTask.cancel(true);
+        }
         jobCancelled = true; // pokud pouzivam async task tak tady zavolam cancel.
         return true; // true =  prelozit termin
     }

@@ -150,5 +150,10 @@ public class FtpViewModel extends AndroidViewModel {
         return Model.getInstance().getPrefs().getLastSelectedItem();
     }
 
+    public void setSelectedStore(String name) {
+        Model.getInstance().getPrefs().setSelectedStore(name);
+    }
+
+
 
 }

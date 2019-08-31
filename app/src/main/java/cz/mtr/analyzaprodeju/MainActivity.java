@@ -53,21 +53,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "Device " + Build.DEVICE);
-        Log.d(TAG, "Display " + Build.DISPLAY);
-        Log.d(TAG, "Model " + Build.MODEL);
-        Log.d(TAG, "Manufacturer " + Build.MANUFACTURER);
-        Log.d(TAG, "Hardware " + Build.HARDWARE);
-
         setContentView(R.layout.activity_main);
         copyDatabaseFromAssetsToWorkingDirectory();
         setupDrawerLayout();
         handleHamburgerButtonPress();
 
-
         mNavigationView.setCheckedItem(R.id.nav_home);
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+
 
         Model.getInstance().createPrefs(this);
 
@@ -86,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void scheduleUpdateDataJob() {
+        Log.d(TAG, "zavolal se ScheduleUpdateDataJob");
         ComponentName componentName = new ComponentName(this, UpdateDataJobService.class);
         JobInfo info = new JobInfo.Builder(UPDATE_DATA_JOB, componentName)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
