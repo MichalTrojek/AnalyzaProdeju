@@ -141,5 +141,13 @@ public class FtpViewModel extends AndroidViewModel {
         Model.getInstance().getPrefs().setPassword(pass);
     }
 
+    public void setLastSelectedItem(int i) {
+        Model.getInstance().getPrefs().setLastSelectedItem(i);
+    }
+
+    public int getLastSelectedItem() {
+        return Model.getInstance().getPrefs().getLastSelectedItem();
+    }
+
 
 }

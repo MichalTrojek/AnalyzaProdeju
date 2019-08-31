@@ -33,9 +33,6 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     private DownloadAnalysisFtpTask mTask;
     private TextInputEditText mPasswordEditText;
 
-    public static FtpFragment newInstance() {
-        return new FtpFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -59,11 +56,13 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(FtpViewModel.class);
         mPasswordEditText.setText(mViewModel.getPassword());
+        mSpinner.setSelection(mViewModel.getLastSelectedItem());
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
         adapterView.getAdapter().getItem(pos);
+        mViewModel.setLastSelectedItem(pos);
 
     }
 

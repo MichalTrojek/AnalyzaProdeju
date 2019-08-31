@@ -139,5 +139,16 @@ public class SharedPreferences {
         return returns;
     }
 
+    public void setLastSelectedItem(int index) {
+        mEditor = mPrefs.edit();
+        mEditor.putInt("index", index);
+        mEditor.apply();
+    }
+
+    public int getLastSelectedItem() {
+        return mPrefs.getInt("index", 0);
+    }
+
+
 
 }

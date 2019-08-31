@@ -8,9 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
 
-
-
-        <!--<item name="android:navigationBarColor">@color/upperLight</item>-->
     </style>
 
 
