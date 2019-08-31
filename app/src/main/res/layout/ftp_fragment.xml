@@ -67,15 +67,4 @@
         app:layout_constraintStart_toStartOf="@+id/spinner"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/savedStoreTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
-        tools:text="Uložená prodejna: Vaňkovka" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
