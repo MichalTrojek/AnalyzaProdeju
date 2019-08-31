@@ -1,8 +1,6 @@
 package cz.mtr.analyzaprodeju.fragments.detail;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -11,15 +9,12 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-import cz.mtr.analyzaprodeju.ImageDisplay;
 import cz.mtr.analyzaprodeju.models.Model;
 
 public class ImageScrapTask extends AsyncTask<String, Void, Void> {
     public static final String TAG = ImageScrapTask.class.getSimpleName();
 
 
-    private View mView;
-    private Context mContext;
     private String mImageLink = "";
     private String largeImageLink = "";
     private String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
@@ -27,9 +22,7 @@ public class ImageScrapTask extends AsyncTask<String, Void, Void> {
     private ProgressBar mProgress;
 
 
-    public ImageScrapTask(View view, Context context, ImageView imageView, ProgressBar progressBar) {
-        mContext = context;
-        mView = view;
+    public ImageScrapTask(ImageView imageView, ProgressBar progressBar) {
         mImageView = imageView;
         mProgress = progressBar;
     }

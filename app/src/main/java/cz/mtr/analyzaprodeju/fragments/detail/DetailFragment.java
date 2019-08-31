@@ -117,7 +117,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 authorTextView.setText("Autor: " + displayableArticle.getAuthor());
                 mDontOrderLabelTextView.setText(displayableArticle.getDontOrder());
 
-                ImageScrapTask task = new ImageScrapTask(getView(), getContext(), mImageView, mProgressBar);
+                ImageScrapTask task = new ImageScrapTask(mImageView, mProgressBar);
                 task.execute(eanTextView.getText().toString());
 
             }

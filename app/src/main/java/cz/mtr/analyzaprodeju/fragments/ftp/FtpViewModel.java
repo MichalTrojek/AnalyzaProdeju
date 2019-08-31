@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.DataRepository;
 import cz.mtr.analyzaprodeju.repository.room.Article;
 
@@ -130,6 +131,14 @@ public class FtpViewModel extends AndroidViewModel {
         }
         Log.d(TAG, name.toLowerCase().trim() + " temp " + temp);
         return temp;
+    }
+
+    public String getPassword() {
+        return Model.getInstance().getPrefs().getPassword();
+    }
+
+    public void savePassword(String pass) {
+        Model.getInstance().getPrefs().setPassword(pass);
     }
 
 

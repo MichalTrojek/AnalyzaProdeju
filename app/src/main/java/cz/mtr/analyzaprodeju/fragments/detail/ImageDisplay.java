@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju;
+package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.models.Model;
 
 public class ImageDisplay {
@@ -33,7 +34,8 @@ public class ImageDisplay {
 
             @Override
             public void onError(Exception e) {
-
+                Picasso.get().load(mUrl).error(R.drawable.notfound).into(mImageView);
+                mProgress.setVisibility(View.GONE);
             }
         });
     }

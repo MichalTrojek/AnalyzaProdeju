@@ -26,28 +26,27 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
     private static final String TAG = DownloadAnalysisFtpTask.class.getSimpleName();
     private String mAddress = "81.95.110.138";
     private String mUsername = "knihydobro9";
-    private String mPassword = "";
+    private String mPassword;
+
     private String mArticleAmount = "";
     private String mPath = "";
-    private boolean isEmpty = true;
-
-
+    private boolean isEmpty = true, isLoggedIn = true;
     private Context mContext;
 
     private DialogLoadingFragment progressDialog;
 
 
-    public DownloadAnalysisFtpTask(Context c, String name) {
+    public DownloadAnalysisFtpTask(Context context, String name, String password) {
         mPath = "/prodejny/" + name;
-        this.mContext = c;
-
+        mContext = context;
+        mPassword = password;
     }
 
     @Override
     protected void onPreExecute() {
         progressDialog = new DialogLoadingFragment();
         progressDialog.setCancelable(false);
-        progressDialog.show(((MainActivity) mContext).getSupportFragmentManager(), "FragmentChangeDialog");
+        progressDialog.show((((MainActivity) mContext).getSupportFragmentManager()), "FragmentChangeDialog");
     }
 
     @Override
@@ -72,7 +71,7 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
                     readAnalysFromFtp(ftp.retrieveFileStream(filename));
                 }
             } else {
-                Toast.makeText(mContext, "Nepodarilo se přihlásit do ftp.", Toast.LENGTH_SHORT).show();
+                isLoggedIn = false;
             }
             ftp.logout();
             ftp.disconnect();
@@ -148,14 +147,21 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
 
     @Override
     protected void onPostExecute(Void v) {
-        if (!isEmpty) {
-            Toast toast = Toast.makeText(mContext, mArticleAmount + " položek v analýze.", Toast.LENGTH_SHORT);
+        super.onPostExecute(v);
+        if (!isLoggedIn) {
+            Toast toast = Toast.makeText(mContext, "Nepodařilo se přihlásit na FTP.", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         } else {
-            Toast toast = Toast.makeText(mContext, "Složka na FTP neobsahuje žádná data", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            if (!isEmpty) {
+                Toast toast = Toast.makeText(mContext, mArticleAmount + " položek v analýze.", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            } else {
+                Toast toast = Toast.makeText(mContext, "Složka na FTP neobsahuje žádná data", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
         }
         progressDialog.dismiss();
     }
