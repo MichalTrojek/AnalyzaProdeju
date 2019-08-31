@@ -19,6 +19,7 @@ public class FtpViewModel extends AndroidViewModel {
     private final static String TAG = FtpViewModel.class.getSimpleName();
     private DataRepository mRepository;
     private Context mContext;
+    
 
     public FtpViewModel(@NonNull Application application) {
         super(application);

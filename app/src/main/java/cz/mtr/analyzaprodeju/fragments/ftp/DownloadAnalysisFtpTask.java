@@ -8,7 +8,6 @@ import android.widget.Toast;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
-import cz.mtr.analyzaprodeju.FloresAnalysisReader;
 import cz.mtr.analyzaprodeju.MainActivity;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 

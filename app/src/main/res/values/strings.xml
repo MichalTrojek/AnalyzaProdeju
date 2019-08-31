@@ -40,6 +40,10 @@
     <string name="import_from_pc">Nahrát data přes SP</string>
     <string name="heslo_k_ftp">HESLO K FTP</string>
     <string name="vyberte_prodejnu">Vyberte prodejnu</string>
+    <string name="hledat_podle_n_zvu">HLEDAT PODLE NÁZVU</string>
+    <string name="hledat_podle_jmena">Hledat podle jmena</string>
+    <string name="hledat_podle_eanu">HLEDAT PODLE EANU</string>
+    <string name="vlo_te_ean">Vložte EAN</string>
 
 
     <string-array name="stores">

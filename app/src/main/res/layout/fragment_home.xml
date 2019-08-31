@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -22,7 +23,10 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-107dp">
 
 
         <com.google.android.material.bottomappbar.BottomAppBar
@@ -30,12 +34,14 @@
             style="@style/Widget.MaterialComponents.BottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/upperLight"
             app:fabCradleMargin="0dp"
             app:fabCradleRoundedCornerRadius="0dp"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/upperLight">
+            tools:visibility="invisible">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/barConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -44,21 +50,22 @@
                     android:layout_width="100dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@color/upperLight"
+                    android:contentDescription="@string/hledat_podle_jmena"
                     app:layout_constraintBottom_toTopOf="@+id/textView23"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView23"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/search_icon" />
 
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="8dp"
-                    android:text="HLEDAT PODLE EANU"
-                    android:textSize="10dp"
+                    android:text="@string/hledat_podle_eanu"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -66,12 +73,12 @@
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
-                    android:text="HLEDAT PODLE NÁZVU"
-                    android:textSize="10dp"
+                    android:text="@string/hledat_podle_n_zvu"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/byNameButton"
-                    app:layout_constraintStart_toStartOf="@+id/byNameButton" />
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <com.github.zagum.switchicon.SwitchIconView
                     android:id="@+id/switchIconView"
@@ -79,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:padding="8dp"
-                    android:text="test"
                     app:layout_constraintBottom_toTopOf="@+id/textView22"
                     app:layout_constraintEnd_toEndOf="@+id/textView22"
                     app:layout_constraintStart_toStartOf="@+id/textView22"
@@ -114,23 +120,22 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/eanInput"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
 
+        android:layout_marginBottom="32dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/coordinatorLayout">
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/eanEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Vložte EAN"
+            android:hint="@string/vlo_te_ean"
             android:inputType="number"
             android:selectAllOnFocus="true"
             android:singleLine="true" />

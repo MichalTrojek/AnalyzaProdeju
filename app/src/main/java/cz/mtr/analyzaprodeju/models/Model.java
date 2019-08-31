@@ -24,6 +24,10 @@ public class Model {
     private ArrayList<ExportSharedArticle> returns = new ArrayList<>();
     private String mImageLink = "";
     private String largeImageLink = "";
+    private String ean;
+    private List<WebItem> items = new ArrayList<>();
+    private List<WebItemSuppliers> suppliersItems = new ArrayList<>();
+
 
 
     private String mTitleName = "";
@@ -62,9 +66,6 @@ public class Model {
         }
     }
 
-    String ean;
-    List<WebItem> items = new ArrayList<>();
-    List<WebItemSuppliers> suppliersItems = new ArrayList<>();
 
     public List<WebItem> getItems() {
         return this.items;

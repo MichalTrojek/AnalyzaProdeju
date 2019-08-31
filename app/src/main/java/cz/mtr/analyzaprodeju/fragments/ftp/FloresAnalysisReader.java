@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju;
+package cz.mtr.analyzaprodeju.fragments.ftp;
 
 import com.opencsv.CSVReader;
 
