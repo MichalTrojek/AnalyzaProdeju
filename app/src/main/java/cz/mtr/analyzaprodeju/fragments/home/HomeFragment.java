@@ -7,7 +7,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -35,7 +37,8 @@ public class HomeFragment extends Fragment {
     private HomeFragmentViewModel mViewModel;
     private BottomAppBar mBottomAppBar;
     private ImageButton mButtonName;
-    private SwitchIconView switchIconView;
+    private SwitchIconView mSwitchIconView;
+    private TextView mSearchByEanTextView, mSearchByNameTextView;
 
 
 
@@ -43,37 +46,60 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         setupViews(view);
         setupViewModel();
         setEanInputListenerToHandleEnterKey();
 
+        mSearchByEanTextView = view.findViewById(R.id.textView22);
+        mSearchByEanTextView.setOnClickListener(searchByEanListener());
 
-        switchIconView = view.findViewById(R.id.switchIconView);
-        switchIconView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switchIconView.switchState();
-                if(switchIconView.isIconEnabled()){
-                    showSearchByEan();
-                } else {
-                    hideSearchByEan();
-                }
-            }
-        });
+        mSwitchIconView = view.findViewById(R.id.switchIconView);
+        mSwitchIconView.setOnClickListener(searchByEanListener());
+
+
+        mSearchByNameTextView = view.findViewById(R.id.textView23);
+        mSearchByNameTextView.setOnClickListener(searchByNameListener());
 
         mButtonName = view.findViewById(R.id.byNameButton);
-        mButtonName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchByName();
-            }
-        });
+        mButtonName.setOnClickListener(searchByNameListener());
         mBottomAppBar = view.findViewById(R.id.bottomAppBar);
 
         return view;
     }
 
+    private View.OnClickListener searchByNameListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToSearchFragment();
+            }
+        };
+    }
+
+
+    private void moveToSearchFragment() {
+        NavHostFragment.findNavController(this).navigate(R.id.toSearch);
+    }
+
+    private View.OnClickListener searchByEanListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleSwitchButton();
+            }
+        };
+    }
+
+    private void handleSwitchButton() {
+        mSwitchIconView.switchState();
+        if (mSwitchIconView.isIconEnabled()) {
+            showSearchByEan();
+        } else {
+            hideSearchByEan();
+        }
+    }
 
     private void setupViews(View view) {
         mScanButton = view.findViewById(R.id.scan_button);
@@ -93,7 +119,7 @@ public class HomeFragment extends Fragment {
         if (Build.MODEL.toLowerCase().equals("pda")) {
             Toast.makeText(getContext(), "Na tomto zařízení je tato funkce vypnutá. Použíjte funkci hledat podle eanu a pak skenujte tlačítkem na zařízení.", Toast.LENGTH_LONG).show();
         } else {
-            Navigation.createNavigateOnClickListener(R.id.homeToBarcode, null);
+            NavHostFragment.findNavController(this).navigate(R.id.homeToBarcode);
         }
     }
 
@@ -152,7 +178,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        if(switchIconView.isIconEnabled()){
+        if (mSwitchIconView.isIconEnabled()) {
             showSearchByEan();
         }
     }
@@ -167,14 +193,6 @@ public class HomeFragment extends Fragment {
     private void hideSearchByEan() {
         mEanInputLayout.requestFocus();
         mEanInputLayout.setVisibility(View.GONE);
-    }
-
-    private void searchByName() {
-        moveToSearchFragment();
-    }
-
-    private void moveToSearchFragment(){
-            NavHostFragment.findNavController(this).navigate(R.id.toSearch);
     }
 
 

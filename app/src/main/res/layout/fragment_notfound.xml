@@ -95,6 +95,7 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:src="@drawable/ic_add_black_24dp"
+        app:backgroundTint="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -106,6 +107,7 @@
         android:clickable="true"
         android:src="@drawable/ic_add_black_24dp"
         android:visibility="gone"
+        app:backgroundTint="#FF0000"
         app:layout_constraintBottom_toTopOf="@+id/addFab"
         app:layout_constraintStart_toStartOf="@+id/addFab"
         tools:visibility="gone" />
@@ -118,6 +120,7 @@
         android:clickable="true"
         android:src="@drawable/ic_add_black_24dp"
         android:visibility="gone"
+        app:backgroundTint="#FF0000"
         app:layout_constraintBottom_toTopOf="@+id/orderFab"
         app:layout_constraintStart_toStartOf="@+id/addFab"
         tools:visibility="gone" />
