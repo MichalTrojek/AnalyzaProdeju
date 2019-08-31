@@ -53,7 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d(TAG, "Device " + Build.DEVICE);
+        Log.d(TAG, "Display " + Build.DISPLAY);
+        Log.d(TAG, "Model " + Build.MODEL);
+        Log.d(TAG, "Manufacturer " + Build.MANUFACTURER);
+        Log.d(TAG, "Hardware " + Build.HARDWARE);
 
         setContentView(R.layout.activity_main);
         copyDatabaseFromAssetsToWorkingDirectory();
@@ -137,13 +141,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void askForPermission() {
+
+
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 // you already have a permission
-//                if (mNavController.getCurrentDestination().getId() == R.id.homeFragment) {
-//                    mViewModel.checkForDatabaseUpdate();
-//                }
                 handleUpdatingDatabase();
 
             } else {
@@ -162,9 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    if (mNavController.getCurrentDestination().getId() == R.id.homeFragment) {
-//                        mViewModel.checkForDatabaseUpdate();
-//                    }
+
                     handleUpdatingDatabase();
                 } else {
                     Toast.makeText(this, "Aplikace nebude správně fungovat bez povoleného přístupu k souborům.", Toast.LENGTH_LONG).show();

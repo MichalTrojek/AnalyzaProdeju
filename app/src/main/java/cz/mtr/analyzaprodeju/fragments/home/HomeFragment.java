@@ -1,6 +1,7 @@
 package cz.mtr.analyzaprodeju.fragments.home;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        findViews(view);
+        setupViews(view);
         setupViewModel();
         setEanInputListenerToHandleEnterKey();
 
@@ -74,19 +75,26 @@ public class HomeFragment extends Fragment {
     }
 
 
-
-
-
-
-
-
-
-    private void findViews(View view) {
+    private void setupViews(View view) {
         mScanButton = view.findViewById(R.id.scan_button);
-        mScanButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToBarcode, null));
+        mScanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onScanButtonClicked();
+            }
+        });
+
         mEanInputLayout = view.findViewById(R.id.eanInput);
         mEanInputEditText = view.findViewById(R.id.eanEditText);
 
+    }
+
+    private void onScanButtonClicked() {
+        if (Build.MODEL.toLowerCase().equals("pda")) {
+            Toast.makeText(getContext(), "Na tomto zařízení je tato funkce vypnutá. Použíjte funkci hledat podle eanu a pak skenujte tlačítkem na zařízení.", Toast.LENGTH_LONG).show();
+        } else {
+            Navigation.createNavigateOnClickListener(R.id.homeToBarcode, null);
+        }
     }
 
 

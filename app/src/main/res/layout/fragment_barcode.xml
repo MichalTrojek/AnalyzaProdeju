@@ -49,6 +49,16 @@
             tools:layout_editor_absoluteX="132dp"
             tools:layout_editor_absoluteY="527dp" />
 
+        <info.androidhive.barcode.ScannerOverlay
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#44000000"
+            app:line_color="#FF0000"
+            app:line_speed="12"
+            app:line_width="6"
+            app:square_height="200"
+            app:square_width="200"/>
+
     </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

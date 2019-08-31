@@ -37,11 +37,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha03'
     implementation 'androidx.room:room-runtime:2.1.0'
     annotationProcessor 'androidx.room:room-compiler:2.1.0'
-    // google mobile vision
-    implementation 'com.google.android.gms:play-services-vision:18.0.0'
 
-    // barcode reader
+    // google mobile vision and barcode reader
+    implementation 'com.google.android.gms:play-services-vision:18.0.0'
     implementation 'info.androidhive:barcode-reader:1.1.5'
+
+
+
     implementation 'androidx.navigation:navigation-fragment:2.0.0'
     implementation 'androidx.navigation:navigation-ui:2.0.0'
 
