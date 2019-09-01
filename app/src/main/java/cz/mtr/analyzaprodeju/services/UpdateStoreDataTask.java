@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju;
+package cz.mtr.analyzaprodeju.services;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -12,7 +12,7 @@ import org.apache.commons.net.ftp.FTPFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.fragments.ftp.FloresAnalysisReader;
 import cz.mtr.analyzaprodeju.models.Model;
@@ -31,7 +31,6 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
     private String mFilename;
 
     public UpdateStoreDataTask(String name, String password) {
-        Log.d(TAG, "UPDATE NAME " + name);
         mFilename = name;
         mPath = "/stavy/";
         mPassword = password;
@@ -47,6 +46,7 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
     protected Boolean doInBackground(String... voids) {
         boolean success = false;
         FTPClient ftp = null;
+
         try {
             ftp = new FTPClient();
             ftp.connect(mAddress);
@@ -58,10 +58,9 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
 
                 for (FTPFile f : ftp.listFiles()) {
                     if (f.getName().toLowerCase().equals(mFilename.toLowerCase())) {
-                        Log.d(TAG, f.getName().toLowerCase().equals(mFilename.toLowerCase()) + " " + f.getName().toLowerCase() + " name " + mFilename.toLowerCase());
                         if (Model.getInstance().getPrefs().getUpdatedTime() != f.getTimestamp().getTimeInMillis()) {
                             Model.getInstance().getPrefs().setUpdatedTime(f.getTimestamp().getTimeInMillis());
-                            Model.getInstance().getPrefs().setStoreItems(readAnalysFromFtp(ftp.retrieveFileStream(mFilename)));
+                            Model.getInstance().getPrefs().setStoreItems(readStoreStatus(ftp.retrieveFileStream(mFilename)));
                         }
                         break;
                     }
@@ -81,16 +80,15 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
         return null;
     }
 
-    private ArrayList<StoreItem> readAnalysFromFtp(InputStream input) {
-        ArrayList<StoreItem> items = new ArrayList<>();
+    private HashMap<String, StoreItem> readStoreStatus(InputStream input) {
+        HashMap<String, StoreItem> items = new HashMap<>();
+
         try {
             CSVReader reader = new CSVReader(new InputStreamReader(input, "Windows-1250"), ';', '\"', 1);
             String[] record;
-
-            Log.d(TAG, "Started");
             while ((record = reader.readNext()) != null) {
                 try {
-                    items.add(new StoreItem(record[0], record[3], record[8], record[2], record[4]));
+                    items.put(record[0], new StoreItem(record[0], record[3], record[8], record[2], record[4]));
                 } catch (Exception e) {
                     e.printStackTrace();
                     continue;
@@ -114,7 +112,6 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
         if (!isLoggedIn) {
             success = false;
         }
-
         super.onPostExecute(success);
     }
 

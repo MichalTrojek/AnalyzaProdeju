@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju;
+package cz.mtr.analyzaprodeju.services;
 
 import android.os.AsyncTask;
 import android.util.Log;

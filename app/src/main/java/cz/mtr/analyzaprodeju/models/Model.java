@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.services.StoreItem;
 import cz.mtr.analyzaprodeju.fragments.scraper.stores.WebItem;
 import cz.mtr.analyzaprodeju.fragments.scraper.suppliers.WebItemSuppliers;
 import cz.mtr.analyzaprodeju.repository.room.Article;
@@ -17,7 +18,10 @@ public class Model {
     public static final String TAG = Model.class.getSimpleName();
 
     private static volatile Model INSTANCE;
-    private HashMap<String, SharedArticle> analysis = new HashMap<>();
+    private HashMap<String, SharedArticle> mAnalysis = new HashMap<>();
+    private HashMap<String, StoreItem> mStoreItems;
+
+
     private SharedPreferences mPrefs;
     private Context mContext;
     private ArrayList<ExportSharedArticle> orders = new ArrayList<>();
@@ -125,15 +129,32 @@ public class Model {
         return mPrefs;
     }
 
-    public void setAnalysis(HashMap<String, SharedArticle> analysis) {
-        this.analysis = analysis;
-        if (analysis != null) {
-            if (analysis.size() > 0) {
+    public void setAnalysis(HashMap<String, SharedArticle> mAnalysis) {
+        this.mAnalysis = mAnalysis;
+        if (mAnalysis != null) {
+            if (mAnalysis.size() > 0) {
                 saveAnalysis();
             }
         }
     }
 
+    public HashMap<String, SharedArticle> getAnalysis() {
+        return this.mAnalysis;
+    }
+
+
+    public HashMap<String, StoreItem> getStoreItems() {
+        return mStoreItems;
+    }
+
+    public void setStoreItems(HashMap<String, StoreItem> mStoreItems) {
+        if (mStoreItems != null) {
+            if (mStoreItems.size() > 0) {
+                getPrefs().setStoreItems(mStoreItems);
+            }
+        }
+
+    }
     public void saveOrdersAndReturns() {
         mPrefs.setOrders(orders);
         mPrefs.setReturns(returns);
@@ -170,21 +191,21 @@ public class Model {
     }
 
 
-    public HashMap<String, SharedArticle> getAnalysis() {
-        return this.analysis;
-    }
-
     public void saveAnalysis() {
-        mPrefs.setAnalysis(analysis);
+        mPrefs.setAnalysis(mAnalysis);
     }
 
     public void loadAnalysis() {
-        analysis = mPrefs.getAnalysis();
+        mAnalysis = mPrefs.getAnalysis();
+    }
+
+    public void loadStoreItems(){
+        mStoreItems = mPrefs.getStoreItems();
     }
 
     public void clearAnalysis() {
-        if (analysis != null) {
-            analysis.clear();
+        if (mAnalysis != null) {
+            mAnalysis.clear();
         }
     }
 

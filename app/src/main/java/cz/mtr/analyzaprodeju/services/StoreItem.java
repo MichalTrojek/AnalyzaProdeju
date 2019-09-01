@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju;
+package cz.mtr.analyzaprodeju.services;
 
 public class StoreItem {
     private String ean = "", location = "", amount = "", name = "", price = "";

@@ -1,10 +1,9 @@
-package cz.mtr.analyzaprodeju;
+package cz.mtr.analyzaprodeju.services;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.util.Log;
 
-import cz.mtr.analyzaprodeju.fragments.ftp.UpdateDatabaseTask;
 import cz.mtr.analyzaprodeju.models.Model;
 
 public class UpdateDataJobService extends JobService {

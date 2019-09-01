@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.ftp;
+package cz.mtr.analyzaprodeju.services;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import cz.mtr.analyzaprodeju.MainActivity;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
+import cz.mtr.analyzaprodeju.fragments.ftp.FtpViewModel;
 import cz.mtr.analyzaprodeju.repository.room.Article;
 
 public class UpdateDatabaseTask extends AsyncTask<String, Integer, Void> {

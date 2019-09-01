@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import cz.mtr.analyzaprodeju.StoreItem;
+import cz.mtr.analyzaprodeju.services.StoreItem;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -140,7 +140,7 @@ public class SharedPreferences {
         return returns;
     }
 
-    public void setStoreItems(ArrayList<StoreItem> items) {
+    public void setStoreItems(HashMap<String, StoreItem> items) {
         mEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(items);
@@ -148,14 +148,14 @@ public class SharedPreferences {
         mEditor.apply();
     }
 
-    public ArrayList<StoreItem> getStoreItems() {
+    public HashMap<String, StoreItem> getStoreItems() {
         Gson gson = new Gson();
         String json = mPrefs.getString("storeItems", null);
-        Type type = new TypeToken<ArrayList<StoreItem>>() {
+        Type type = new TypeToken<HashMap<String, StoreItem>>() {
         }.getType();
-        ArrayList<StoreItem> storeItems = gson.fromJson(json, type);
+        HashMap<String, StoreItem> storeItems = gson.fromJson(json, type);
         if (storeItems == null) {
-            storeItems = new ArrayList<>();
+            storeItems = new HashMap<>();
         }
         return storeItems;
     }
@@ -181,7 +181,7 @@ public class SharedPreferences {
     }
 
     public long getUpdatedTime() {
-        return mPrefs.getInt("time", -99);
+        return mPrefs.getLong("time", -99);
     }
 
     public void setUpdatedTime(long currentDbVersion) {

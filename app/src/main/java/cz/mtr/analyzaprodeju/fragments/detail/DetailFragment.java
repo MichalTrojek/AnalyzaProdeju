@@ -141,8 +141,11 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     }
 
     private String deliveredAs(DisplayableArticle displayableArticle) {
-        if (displayableArticle.getCommision().equals("1514")) {
+        String name = displayableArticle.getCommision();
+        if (name.equals("1514")) {
             return "KOMISE";
+        } else if (name.equals("neni")) {
+            return "PRODUKT NEBYL V ANALÝZE NALEZEN";
         } else {
             return "PEVNO";
         }

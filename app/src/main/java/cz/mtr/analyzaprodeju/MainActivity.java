@@ -33,8 +33,8 @@ import cz.mtr.analyzaprodeju.fragments.dialogs.DialogUpdateFound;
 import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.network.Client;
-import cz.mtr.analyzaprodeju.repository.room.ArticleRoomDatabase;
 import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
+import cz.mtr.analyzaprodeju.services.UpdateDataJobService;
 import cz.mtr.analyzaprodeju.utils.KeyboardHider;
 import cz.mtr.analyzaprodeju.utils.Printer;
 
@@ -88,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setPeriodic(15 * 60 * 1000)
                 .build();
 
+
+
+
+
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
 
         int resultCode = scheduler.schedule(info);
@@ -113,11 +117,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onStart() {
         super.onStart();
-        Model.getInstance().loadOrdersAndReturns();
-        Model.getInstance().loadAnalysis();
+        restoreData();
         askForPermission();
 
 
+    }
+
+    private void restoreData() {
+        Model.getInstance().loadOrdersAndReturns();
+        Model.getInstance().loadAnalysis();
+        Model.getInstance().loadStoreItems();
     }
 
 
@@ -142,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 // you already have a permission
+
                 handleUpdatingDatabase();
 
             } else {
@@ -172,8 +182,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void handleUpdatingDatabase() {
         if (mNavController.getCurrentDestination().getId() == R.id.homeFragment) {
-            ArticleRoomDatabase.getInstance(getApplication()).close();
-            mViewModel.checkForDatabaseUpdate();
+//            ArticleRoomDatabase.getInstance(getApplication()).close();
+//            mViewModel.checkForDatabaseUpdate();
         }
     }
 

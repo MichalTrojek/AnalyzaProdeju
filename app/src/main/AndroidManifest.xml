@@ -44,7 +44,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <service
-            android:name=".UpdateDataJobService"
+            android:name=".services.UpdateDataJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
 
             />

@@ -1,7 +1,6 @@
 package cz.mtr.analyzaprodeju.fragments.search;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -10,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.services.StoreItem;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.DataRepository;
 import cz.mtr.analyzaprodeju.repository.room.Article;
@@ -45,10 +45,13 @@ public class SearchViewModel extends AndroidViewModel {
         return mList;
     }
 
+
     public void findArticle(String ean) {
-        Log.d(TAG, ean);
         if (Model.getInstance().getAnalysis().containsKey(ean)) {
             mArticleAnalysis = Model.getInstance().getAnalysis().get(ean);
+            mStatus.setValue(SearchStatus.ANALYSIS);
+        } else if (Model.getInstance().getStoreItems().containsKey(ean)) {
+            mArticleAnalysis = convertItemToArticle(Model.getInstance().getStoreItems().get(ean));
             mStatus.setValue(SearchStatus.ANALYSIS);
         } else {
             Article article = mRepository.getArticle(ean);
@@ -59,6 +62,7 @@ public class SearchViewModel extends AndroidViewModel {
         }
     }
 
+
     private SharedArticle convertArticleToSharedArticle(Article article) {
         SharedArticle shared = new SharedArticle();
         shared.setEan(article.getEan());
@@ -67,6 +71,23 @@ public class SearchViewModel extends AndroidViewModel {
         return shared;
     }
 
+
+    private SharedArticle convertItemToArticle(StoreItem item) {
+        SharedArticle shared = new SharedArticle();
+        shared.setEan(item.getEan());
+        shared.setLocation(item.getLocation());
+        shared.setPrice(item.getPrice());
+        shared.setStored(item.getAmount());
+        shared.setName(item.getName());
+        shared.setSales1("0");
+        shared.setSales2("0");
+        shared.setRevenue("0");
+        shared.setDaysOfSupplies("0");
+        shared.setRanking("x");
+        shared.setRankingEshop("x");
+        shared.setCommision("neni");
+        return shared;
+    }
     public MutableLiveData<SearchStatus> getStatus() {
         return mStatus;
     }
