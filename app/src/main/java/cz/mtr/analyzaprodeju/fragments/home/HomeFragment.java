@@ -116,9 +116,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void onScanButtonClicked() {
-//        UpdateStoreDataTask task = new UpdateStoreDataTask("test.CSV", Model.getInstance().getPrefs().getPassword());
-//        task.execute();
-//        Log.d(TAG, "TASK STAAAAAAAARTED");
         if (Build.MODEL.toLowerCase().equals("pda")) {
             Toast.makeText(getContext(), "Na tomto zařízení je tato funkce vypnutá. Použíjte funkci hledat podle eanu a pak skenujte tlačítkem na zařízení.", Toast.LENGTH_LONG).show();
         } else {

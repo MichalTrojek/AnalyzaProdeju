@@ -1,15 +1,15 @@
 package cz.mtr.analyzaprodeju.models;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import cz.mtr.analyzaprodeju.services.StoreItem;
 import cz.mtr.analyzaprodeju.fragments.scraper.stores.WebItem;
 import cz.mtr.analyzaprodeju.fragments.scraper.suppliers.WebItemSuppliers;
+import cz.mtr.analyzaprodeju.repository.preferences.AnalysisPreferences;
+import cz.mtr.analyzaprodeju.repository.preferences.StoreItemsPreferences;
 import cz.mtr.analyzaprodeju.repository.room.Article;
+import cz.mtr.analyzaprodeju.services.StoreItem;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -22,8 +22,6 @@ public class Model {
     private HashMap<String, StoreItem> mStoreItems;
 
 
-    private SharedPreferences mPrefs;
-    private Context mContext;
     private ArrayList<ExportSharedArticle> orders = new ArrayList<>();
     private ArrayList<ExportSharedArticle> returns = new ArrayList<>();
     private String mImageLink = "";
@@ -53,11 +51,6 @@ public class Model {
         return INSTANCE;
     }
 
-    public void createPrefs(Context context) {
-        this.mContext = context;
-        mPrefs = new SharedPreferences(mContext);
-
-    }
 
     public void addReturns(ExportSharedArticle a) {
         if (!"".equals(a.getExportAmount())) {
@@ -125,18 +118,16 @@ public class Model {
     }
 
 
-    public SharedPreferences getPrefs() {
-        return mPrefs;
-    }
-
     public void setAnalysis(HashMap<String, SharedArticle> mAnalysis) {
         this.mAnalysis = mAnalysis;
         if (mAnalysis != null) {
             if (mAnalysis.size() > 0) {
-                saveAnalysis();
+                AnalysisPreferences.getInstance().setAnalysis(mAnalysis);
             }
         }
     }
+
+
 
     public HashMap<String, SharedArticle> getAnalysis() {
         return this.mAnalysis;
@@ -147,22 +138,18 @@ public class Model {
         return mStoreItems;
     }
 
-    public void setStoreItems(HashMap<String, StoreItem> mStoreItems) {
-        if (mStoreItems != null) {
-            if (mStoreItems.size() > 0) {
-                getPrefs().setStoreItems(mStoreItems);
-            }
-        }
-
+    public void setStoreItems(HashMap<String, StoreItem> storeItems) {
+        mStoreItems = storeItems;
+        StoreItemsPreferences.getInstance().saveStoreItems(storeItems);
     }
     public void saveOrdersAndReturns() {
-        mPrefs.setOrders(orders);
-        mPrefs.setReturns(returns);
+        StoreItemsPreferences.getInstance().saveOrders(orders);
+        StoreItemsPreferences.getInstance().saveReturns(returns);
     }
 
     public void loadOrdersAndReturns() {
-        orders = mPrefs.getOrders();
-        returns = mPrefs.getReturns();
+        orders = StoreItemsPreferences.getInstance().loadOrders();
+        returns = StoreItemsPreferences.getInstance().loadReturns();
     }
 
     public void setImageLink(String imageLink) {
@@ -191,16 +178,12 @@ public class Model {
     }
 
 
-    public void saveAnalysis() {
-        mPrefs.setAnalysis(mAnalysis);
-    }
-
     public void loadAnalysis() {
-        mAnalysis = mPrefs.getAnalysis();
+        mAnalysis = AnalysisPreferences.getInstance().getAnalysis();
     }
 
     public void loadStoreItems(){
-        mStoreItems = mPrefs.getStoreItems();
+        mStoreItems = StoreItemsPreferences.getInstance().loadStoreItems();
     }
 
     public void clearAnalysis() {

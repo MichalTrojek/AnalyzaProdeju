@@ -14,11 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.text.Normalizer;
 
 import cz.mtr.analyzaprodeju.R;
 
@@ -29,7 +29,6 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     private FtpViewModel mViewModel;
     private Spinner mSpinner;
     private Button mDownloadButton;
-    private DownloadAnalysisFtpTask mTask;
     private TextInputEditText mPasswordEditText;
 
 
@@ -54,14 +53,32 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(FtpViewModel.class);
-        mPasswordEditText.setText(mViewModel.getPassword());
-        mSpinner.setSelection(mViewModel.getLastSelectedItem());
+        mViewModel.getPassword().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                mPasswordEditText.setText(s);
+            }
+        });
+
+        mViewModel.getIndexOfLastSelectedItem().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                mSpinner.setSelection(integer);
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
         adapterView.getAdapter().getItem(pos);
-        mViewModel.setLastSelectedItem(pos);
+        mViewModel.setIndexOfLastSelectedItem(pos);
 
     }
 
@@ -73,14 +90,9 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
 
     @Override
     public void onClick(View view) {
-        String name = Normalizer.normalize(mSpinner.getSelectedItem().toString(), Normalizer.Form.NFD);
-        name = name.replaceAll("[^\\p{ASCII}]", "");
         if (mPasswordEditText.length() != 0) {
-            mViewModel.savePassword(mPasswordEditText.getText().toString());
-            name = mViewModel.convertNameToShortcut(name.toLowerCase());
-            mViewModel.setSelectedStore(name);
-            mTask = new DownloadAnalysisFtpTask(getContext(), name, mViewModel.getPassword());
-            mTask.execute();
+            mViewModel.onDownloadDataClick(mSpinner.getSelectedItem().toString(), mPasswordEditText.getText().toString(), this.getFragmentManager());
+            Navigation.findNavController(getView()).navigate(R.id.homeFragment);
         } else {
             Toast toast = Toast.makeText(getContext(), "Není vložené heslo", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -88,11 +100,5 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
         }
     }
 
-    @Override
-    public void onDestroy() {
-        if (mTask != null) {
-            mTask.cancel(true);
-        }
-        super.onDestroy();
-    }
+
 }

@@ -26,7 +26,6 @@ import java.nio.channels.FileChannel;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDownloadDatabase;
-import cz.mtr.analyzaprodeju.models.Model;
 
 public class DatabaseDownloader {
 
@@ -100,7 +99,7 @@ public class DatabaseDownloader {
                     dialog.setCancelable(true);
 
                     dialog.dismiss();
-                    Model.getInstance().getPrefs().setCurrentDatabaseVersion(onlineDbVersionNumber);
+//                    Model.getInstance().getPrefs().setCurrentDatabaseVersion(onlineDbVersionNumber);
                 } catch (IOException e) {
                     dialog.setCancelable(true);
                     dialog.dismiss();

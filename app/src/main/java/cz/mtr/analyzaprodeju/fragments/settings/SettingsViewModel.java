@@ -6,13 +6,12 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.regex.Pattern;
 
-import cz.mtr.analyzaprodeju.models.Model;
+import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 
 public class SettingsViewModel extends ViewModel {
 
     private MutableLiveData<String> mIpAddress = new MutableLiveData<>();
-    private MutableLiveData<String> mPassword = new MutableLiveData<>();
-    private MutableLiveData<String> mLogin = new MutableLiveData<>();
+
 
 
     private final Pattern PATTERN = Pattern.compile(
@@ -25,50 +24,20 @@ public class SettingsViewModel extends ViewModel {
 
 
     public void setIpAddress(String ip) {
-        Model.getInstance().getPrefs().setIp(ip);
+        GeneralPreferences.getInstance().saveIp(ip);
     }
 
-    public void setPassword(String pass) {
-        Model.getInstance().getPrefs().setPassword(pass);
-    }
-
-    public void setLogin(String login) {
-        Model.getInstance().getPrefs().setLogin(login);
-    }
 
 
     public LiveData<String> getIpAddress() {
-        mIpAddress.setValue(Model.getInstance().getPrefs().getIp());
+        mIpAddress.setValue(GeneralPreferences.getInstance().loadIp());
         return mIpAddress;
     }
 
-    public LiveData<String> getPassword() {
-        if (Model.getInstance().getPrefs().getPassword().isEmpty()) {
-            mPassword.setValue("");
-        } else {
-            mPassword.setValue(hidePassword(Model.getInstance().getPrefs().getPassword().length()));
-        }
-        return mPassword;
-    }
 
-    public LiveData<String> getLogin() {
-        if (Model.getInstance().getPrefs().getLogin().isEmpty()) {
-            mLogin.setValue("");
-        } else {
 
-            mLogin.setValue(Model.getInstance().getPrefs().getLogin());
-        }
-        return mLogin;
-    }
 
-    private String hidePassword(int i) {
-        StringBuilder sb = new StringBuilder();
-        while (i > 0) {
-            sb.append("*");
-            i--;
-        }
-        return sb.toString();
-    }
+
 
 
     public boolean validateIpAddress(String ip) {

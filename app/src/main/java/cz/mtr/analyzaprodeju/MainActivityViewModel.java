@@ -12,7 +12,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDownloadDatabase;
-import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.network.DatabaseDownloader;
 import cz.mtr.analyzaprodeju.network.DatabaseVersion;
 import retrofit2.Call;
@@ -49,13 +48,13 @@ public class MainActivityViewModel extends AndroidViewModel {
 
                     DatabaseVersion version = response.body();
                     onlineDbVersionNumber = Integer.valueOf(version.getDatabaseVersion());
-                    if (onlineDbVersionNumber > Model.getInstance().getPrefs().getCurrentDatabaseVersion()) {
-                        if (isWifiEnabled()) {
-                            updateFound.setValue(true);
-                        } else {
-                            Toast.makeText(getApplication(), "Je dostupná nová databáze, pro stažení se připojte k WIFI.", Toast.LENGTH_LONG).show();
-                        }
-                    }
+//                    if (onlineDbVersionNumber > Model.getInstance().getPrefs().getCurrentDatabaseVersion()) {
+//                        if (isWifiEnabled()) {
+//                            updateFound.setValue(true);
+//                        } else {
+//                            Toast.makeText(getApplication(), "Je dostupná nová databáze, pro stažení se připojte k WIFI.", Toast.LENGTH_LONG).show();
+//                        }
+//                    }
                 }
             }
 

@@ -5,10 +5,11 @@ import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
-import cz.mtr.analyzaprodeju.MainActivity;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 
 public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
@@ -23,11 +24,13 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
     private boolean isEmpty = true, isLoggedIn = true;
     private Context mContext;
     private FloresAnalysisReader mAnalysisReader;
-    private DialogLoadingFragment progressDialog;
+    private DialogLoadingFragment mProgressBar;
+    private FragmentManager mFragmentManager;
 
 
-    public DownloadAnalysisFtpTask(Context context, String name, String password) {
+    public DownloadAnalysisFtpTask(Context context, String name, String password, FragmentManager fragmentManager) {
         mPath = "/prodejny/" + name;
+        mFragmentManager = fragmentManager;
         mContext = context;
         mPassword = password;
         mAnalysisReader = new FloresAnalysisReader();
@@ -35,9 +38,9 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
 
     @Override
     protected void onPreExecute() {
-        progressDialog = new DialogLoadingFragment();
-        progressDialog.setCancelable(false);
-        progressDialog.show((((MainActivity) mContext).getSupportFragmentManager()), "FragmentChangeDialog");
+        mProgressBar = new DialogLoadingFragment();
+        mProgressBar.setCancelable(false);
+        mProgressBar.show(mFragmentManager, "FragmentChangeDialog");
     }
 
     @Override
@@ -69,6 +72,8 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
     }
 
 
+
+
     @Override
     protected void onPostExecute(Void v) {
         super.onPostExecute(v);
@@ -82,7 +87,7 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
             }
         }
         mContext = null;
-        progressDialog.dismiss();
+        mProgressBar.dismiss();
     }
 
     private void showToast(String text, boolean isShort) {

@@ -33,8 +33,11 @@ import cz.mtr.analyzaprodeju.fragments.dialogs.DialogUpdateFound;
 import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.network.Client;
+import cz.mtr.analyzaprodeju.repository.preferences.AnalysisPreferences;
+import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
+import cz.mtr.analyzaprodeju.repository.preferences.StoreItemsPreferences;
 import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
-import cz.mtr.analyzaprodeju.services.UpdateDataJobService;
+import cz.mtr.analyzaprodeju.services.UpdateAnalysisJobService;
 import cz.mtr.analyzaprodeju.utils.KeyboardHider;
 import cz.mtr.analyzaprodeju.utils.Printer;
 
@@ -54,16 +57,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         copyDatabaseFromAssetsToWorkingDirectory();
         setupDrawerLayout();
         handleHamburgerButtonPress();
+        initializePreferences();
 
         mNavigationView.setCheckedItem(R.id.nav_home);
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
-
-        Model.getInstance().createPrefs(this);
 
         mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         mViewModel.getUpdateFound().observe(this, new Observer<Boolean>() {
@@ -78,22 +80,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         scheduleUpdateDataJob();
     }
 
+    private void initializePreferences() {
+        AnalysisPreferences.init(this);
+        GeneralPreferences.init(this);
+        StoreItemsPreferences.init(this);
+    }
+
 
     private void scheduleUpdateDataJob() {
-        Log.d(TAG, "zavolal se ScheduleUpdateDataJob");
-        ComponentName componentName = new ComponentName(this, UpdateDataJobService.class);
+        scheduleUpdateAnalysis();
+
+    }
+
+    private void scheduleUpdateAnalysis() {
+        Log.d(TAG, "ANALYSIS JOB CALLED");
+        ComponentName componentName = new ComponentName(this, UpdateAnalysisJobService.class);
         JobInfo info = new JobInfo.Builder(UPDATE_DATA_JOB, componentName)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
                 .setPersisted(true)
                 .setPeriodic(15 * 60 * 1000)
                 .build();
-
-
-
-
-
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-
         int resultCode = scheduler.schedule(info);
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
             Log.d(TAG, "Job scheduled");
@@ -271,12 +278,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void handleImport() {
-        Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
+        Client client = new Client(GeneralPreferences.getInstance().loadIp(), this);
         client.execute("analyza");
     }
 
     private void handleExport() {
-        Client client = new Client(Model.getInstance().getPrefs().getIp(), this);
+        Client client = new Client(GeneralPreferences.getInstance().loadIp(), this);
         client.execute("export");
     }
 

@@ -28,7 +28,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cz.mtr.analyzaprodeju.R;
-import cz.mtr.analyzaprodeju.fragments.scraper.ScrapInfoAsyncTask;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -51,24 +50,7 @@ public class NotFoundFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_notfound, container, false);
         mNameTextView = view.findViewById(R.id.scaperNameTextView);
         mEanTextView = view.findViewById(R.id.eanTextView);
-        mEanTextView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if (isNetworkAvailable()) {
-                    if (Model.getInstance().getPrefs().getLogin().isEmpty() || Model.getInstance().getPrefs().getPassword().isEmpty()) {
-                        Toast.makeText(getContext(), "Nejsou vloženy logovací údaje.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Model.getInstance().setEan(mEanTextView.getText().toString());
-                        Model.getInstance().setTitleName(mNameTextView.getText().toString());
-                        ScrapInfoAsyncTask task = new ScrapInfoAsyncTask(getView(), getContext());
-                        task.execute(Model.getInstance().getEan());
-                    }
-                } else {
-                    Toast.makeText(getContext(), "Nepřipojeno k internetu.", Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
-        });
+
         mPriceTextView = view.findViewById(R.id.priceTextView);
         addFob = view.findViewById(R.id.addFab);
         returnFob = view.findViewById(R.id.returnFab);

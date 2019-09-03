@@ -3,7 +3,10 @@ package cz.mtr.analyzaprodeju.services;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -14,8 +17,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
-import cz.mtr.analyzaprodeju.fragments.ftp.FloresAnalysisReader;
 import cz.mtr.analyzaprodeju.models.Model;
+import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 
 public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
 
@@ -26,15 +29,13 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
 
 
     private String mPath = "";
-    private boolean isEmpty = true, isLoggedIn = true;
-    private FloresAnalysisReader mAnalysisReader;
+    private boolean isLoggedIn = true;
     private String mFilename;
 
     public UpdateStoreDataTask(String name, String password) {
         mFilename = name;
         mPath = "/stavy/";
         mPassword = password;
-        mAnalysisReader = new FloresAnalysisReader();
     }
 
     @Override
@@ -46,7 +47,6 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
     protected Boolean doInBackground(String... voids) {
         boolean success = false;
         FTPClient ftp = null;
-
         try {
             ftp = new FTPClient();
             ftp.connect(mAddress);
@@ -55,18 +55,16 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
                 ftp.setFileType(FTP.BINARY_FILE_TYPE);
                 ftp.enterLocalPassiveMode();
                 ftp.changeWorkingDirectory(mPath);
-
                 for (FTPFile f : ftp.listFiles()) {
+                    if (f.getName().toLowerCase().equals(GeneralPreferences.getInstance().loadLastStoreNameFile())) {
+
+                    }
                     if (f.getName().toLowerCase().equals(mFilename.toLowerCase())) {
-                        if (Model.getInstance().getPrefs().getUpdatedTime() != f.getTimestamp().getTimeInMillis()) {
-                            Model.getInstance().getPrefs().setUpdatedTime(f.getTimestamp().getTimeInMillis());
-                            Model.getInstance().getPrefs().setStoreItems(readStoreStatus(ftp.retrieveFileStream(mFilename)));
-                        }
+                        GeneralPreferences.getInstance().saveLastStoreNameFile(f.getName().toLowerCase());
+                        Model.getInstance().setStoreItems(readStoreStatus(ftp.retrieveFileStream(mFilename)));
                         break;
                     }
                 }
-
-
                 success = true;
             } else {
                 isLoggedIn = false;
@@ -80,28 +78,37 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
         return null;
     }
 
+
     private HashMap<String, StoreItem> readStoreStatus(InputStream input) {
         HashMap<String, StoreItem> items = new HashMap<>();
-
+        Log.d(TAG, "readStoreStatus started");
         try {
-            CSVReader reader = new CSVReader(new InputStreamReader(input, "Windows-1250"), ';', '\"', 1);
+
+            CSVParser parser = new CSVParserBuilder().withSeparator(';').withIgnoreQuotations(true).build();
+            CSVReader reader = new CSVReaderBuilder(new InputStreamReader(input, "Windows-1250")).withSkipLines(1).withCSVParser(parser).build();
+
             String[] record;
+            Log.d(TAG, mFilename);
             while ((record = reader.readNext()) != null) {
+
                 try {
                     items.put(record[0], new StoreItem(record[0], record[3], record[8], record[2], record[4]));
                 } catch (Exception e) {
+                    Log.d(TAG, mFilename);
+                    Log.d(TAG, record[0]);
+                    Log.d(TAG, e.getMessage());
                     e.printStackTrace();
                     continue;
                 }
             }
-
-
             if (items.size() != 0) {
-                Log.d(TAG, items.size() + " Velikost");
+                Log.d(TAG, "Store Items " + items.size() + " Velikost");
+
             }
             reader.close();
 
         } catch (IOException e) {
+            Log.d(TAG, e.getMessage());
             e.printStackTrace();
         }
         return items;

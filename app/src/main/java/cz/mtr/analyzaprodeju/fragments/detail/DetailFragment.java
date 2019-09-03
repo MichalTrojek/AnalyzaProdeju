@@ -1,8 +1,6 @@
 package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,7 +28,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLargerImage;
-import cz.mtr.analyzaprodeju.fragments.scraper.ScrapInfoAsyncTask;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 
@@ -155,26 +152,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private void setupTextViews(View view) {
         nameTextView = view.findViewById(R.id.scaperNameTextView);
         eanTextView = view.findViewById(R.id.eanTextView);
-        eanTextView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if (isNetworkAvailable()) {
-                    if (Model.getInstance().getPrefs().getLogin().isEmpty() || Model.getInstance().getPrefs().getPassword().isEmpty()) {
-                        Toast.makeText(getContext(), "Nejsou vloženy logovací údaje.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Model.getInstance().setEan(eanTextView.getText().toString());
-                        Model.getInstance().setTitleName(nameTextView.getText().toString());
-                        ScrapInfoAsyncTask task = new ScrapInfoAsyncTask(getView(), getContext());
-                        task.execute(Model.getInstance().getEan());
-                    }
-                } else {
-                    Toast.makeText(getContext(), "Nepřipojeno k internetu.", Toast.LENGTH_SHORT).show();
-                }
-
-
-                return false;
-            }
-        });
         priceTextView = view.findViewById(R.id.priceTextView);
         rankTextView = view.findViewById(R.id.rankTextView);
         eshopTextView = view.findViewById(R.id.eshopTextView);
@@ -196,12 +173,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         mDontOrderLabelTextView = view.findViewById(R.id.dontOrderTextView);
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
 
     private boolean isOrder;
 

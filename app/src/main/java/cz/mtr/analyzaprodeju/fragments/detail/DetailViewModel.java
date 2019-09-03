@@ -1,16 +1,11 @@
 package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.app.Application;
-import android.content.Intent;
-import android.net.Uri;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import cz.mtr.analyzaprodeju.fragments.scraper.ScrapInfoAsyncTask;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
@@ -86,17 +81,6 @@ public class DetailViewModel extends AndroidViewModel {
         exportArticle.setSales2Days(article.getSales2Days());
         exportArticle.setExportAmount(amount);
         return exportArticle;
-    }
-
-    public void navigateToScraper(View view, TextView eanTextView) {
-        if (Model.getInstance().getPrefs().getLogin().isEmpty() || Model.getInstance().getPrefs().getPassword().isEmpty()) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.knihydobrovsky.cz/vyhledavani?search=" + eanTextView.getText().toString()));
-            getApplication().startActivity(browserIntent);
-        } else {
-            Model.getInstance().setEan(eanTextView.getText().toString());
-            ScrapInfoAsyncTask task = new ScrapInfoAsyncTask(view, getApplication().getApplicationContext());
-            task.execute(Model.getInstance().getEan());
-        }
     }
 
 
