@@ -44,10 +44,10 @@
             android:resource="@array/preloaded_fonts" />
 
         <service
-            android:name=".services.UpdateDataJobService"
+            android:name=".services.UpdateAnalysisJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
-
             />
+
     </application>
 
 
