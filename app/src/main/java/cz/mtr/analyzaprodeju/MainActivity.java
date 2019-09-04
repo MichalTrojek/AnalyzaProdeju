@@ -28,6 +28,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
+import cz.mtr.analyzaprodeju.asynctasks.UnziperTask;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDownloadDatabase;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogUpdateFound;
 import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;

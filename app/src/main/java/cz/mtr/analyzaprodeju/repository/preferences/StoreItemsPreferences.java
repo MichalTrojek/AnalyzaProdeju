@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import cz.mtr.analyzaprodeju.services.StoreItem;
+import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 
 public class StoreItemsPreferences {

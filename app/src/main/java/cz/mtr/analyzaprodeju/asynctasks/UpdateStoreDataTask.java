@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.services;
+package cz.mtr.analyzaprodeju.asynctasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -19,6 +19,7 @@ import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
+import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
 
 public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
 

@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju;
+package cz.mtr.analyzaprodeju.asynctasks;
 
 import android.content.Context;
 import android.os.AsyncTask;

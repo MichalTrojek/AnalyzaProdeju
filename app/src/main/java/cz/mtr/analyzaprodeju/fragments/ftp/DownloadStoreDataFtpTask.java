@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.models.Model;
-import cz.mtr.analyzaprodeju.services.StoreItem;
+import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
 
 public class DownloadStoreDataFtpTask extends AsyncTask<String, Integer, Boolean> {
 
