@@ -47,6 +47,7 @@ public class DatabaseCopier {
             output.flush();
             input.close();
             Log.i(TAG, "Database has been copied.");
+            Log.d("DEBUG","DONE");
         } catch (IOException e) {
             Log.i(TAG, "Database has not been copied.");
             e.printStackTrace();

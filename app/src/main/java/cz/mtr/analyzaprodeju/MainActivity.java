@@ -36,7 +36,6 @@ import cz.mtr.analyzaprodeju.network.Client;
 import cz.mtr.analyzaprodeju.repository.preferences.AnalysisPreferences;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 import cz.mtr.analyzaprodeju.repository.preferences.StoreItemsPreferences;
-import cz.mtr.analyzaprodeju.repository.room.DatabaseCopier;
 import cz.mtr.analyzaprodeju.services.UpdateAnalysisJobService;
 import cz.mtr.analyzaprodeju.utils.KeyboardHider;
 import cz.mtr.analyzaprodeju.utils.Printer;
@@ -196,7 +195,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void copyDatabaseFromAssetsToWorkingDirectory() {
-        new DatabaseCopier(this).copy();
+        UnziperTask task = new UnziperTask(this, getSupportFragmentManager());
+        task.execute();
+//        new DatabaseCopier(this).copy();
     }
 
     private void setupDrawerLayout() {
