@@ -225,6 +225,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         clearBackStack();
+        Log.d(TAG, "INFO " + mNavController.getCurrentDestination().getId() );
+
         if (!Authentication.getInstance().areButtonsBlocked()) {
             switch (menuItem.getItemId()) {
                 case R.id.nav_home:
@@ -257,6 +259,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     handlePrintJob();
                     break;
                 case R.id.nav_ranking:
+                    Log.d(TAG, "inside ranking");
+                    Log.d(TAG, " " + (mNavController.getCurrentDestination().getId() != R.id.rankingFragment));
+                    Log.d(TAG, "mNav " + mNavController.getCurrentDestination().getId() + " id " + R.id.rankingFragment);
                     if (mNavController.getCurrentDestination().getId() != R.id.rankingFragment) {
                         if (Model.getInstance().getAnalysis().isEmpty()) {
                             Toast.makeText(this, "Není nahraná analýza.", Toast.LENGTH_SHORT).show();
@@ -281,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
+        Log.d(TAG, "Clicked 2");
         return true;
     }
 
