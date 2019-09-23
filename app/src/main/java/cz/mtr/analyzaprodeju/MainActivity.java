@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void cancelUpdateDataJob() {
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         scheduler.cancel(UPDATE_DATA_JOB);
-
     }
 
     @Override
@@ -132,8 +131,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         restoreData();
         askForPermission();
-
-
     }
 
     private void restoreData() {

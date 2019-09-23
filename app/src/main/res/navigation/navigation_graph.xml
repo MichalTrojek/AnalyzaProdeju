@@ -23,18 +23,18 @@
             android:id="@+id/homeToNotFound"
             app:destination="@id/notFoundFragment"
             app:enterAnim="@anim/enter_from_top"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right"
+            app:exitAnim="@anim/exit_to_bottom"
+            app:popEnterAnim="@anim/enter_from_bottom"
+            app:popExitAnim="@anim/exit_to_top"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/homeToDetail"
             app:destination="@id/detailFragment"
             app:enterAnim="@anim/enter_from_top"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right"
+            app:exitAnim="@anim/exit_to_bottom"
+            app:popEnterAnim="@anim/enter_from_bottom"
+            app:popExitAnim="@anim/exit_to_top"
             app:popUpTo="@+id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -117,9 +117,9 @@
             android:id="@+id/rankingToDetail"
             app:destination="@+id/detailFragment"
             app:enterAnim="@anim/enter_from_top"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right"
+            app:exitAnim="@anim/exit_to_bottom"
+            app:popEnterAnim="@anim/enter_from_bottom"
+            app:popExitAnim="@anim/exit_to_top"
             app:popUpTo="@+id/rankingFragment" />
     </fragment>
     <fragment
@@ -136,19 +136,18 @@
             android:id="@+id/searchToDetail"
             app:destination="@id/detailFragment"
             app:enterAnim="@anim/enter_from_top"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right"
+            app:exitAnim="@anim/exit_to_bottom"
+            app:popEnterAnim="@anim/enter_from_bottom"
+            app:popExitAnim="@anim/exit_to_top"
             app:popUpTo="@+id/searchFragment" />
         <action
             android:id="@+id/searchToNotFound"
             app:destination="@id/notFoundFragment"
             app:enterAnim="@anim/enter_from_top"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right"
-            app:popUpTo="@+id/searchFragment"
-            app:popUpToInclusive="false" />
+            app:exitAnim="@anim/exit_to_bottom"
+            app:popEnterAnim="@anim/enter_from_bottom"
+            app:popExitAnim="@anim/exit_to_top"
+            app:popUpTo="@+id/searchFragment" />
     </fragment>
     <action
         android:id="@+id/toSearch"
@@ -162,33 +161,33 @@
         android:id="@+id/toRanking"
         app:destination="@id/rankingFragment"
         app:enterAnim="@anim/enter_from_top"
-        app:exitAnim="@anim/exit_to_left"
-        app:popEnterAnim="@anim/enter_from_left"
-        app:popExitAnim="@anim/exit_to_right"
+        app:exitAnim="@anim/exit_to_bottom"
+        app:popEnterAnim="@anim/enter_from_bottom"
+        app:popExitAnim="@anim/exit_to_top"
         app:popUpTo="@+id/homeFragment" />
     <action
         android:id="@+id/toDisplay"
         app:destination="@id/displayFragment"
         app:enterAnim="@anim/enter_from_top"
-        app:exitAnim="@anim/exit_to_left"
-        app:popEnterAnim="@anim/enter_from_left"
-        app:popExitAnim="@anim/exit_to_right"
+        app:exitAnim="@anim/exit_to_bottom"
+        app:popEnterAnim="@anim/enter_from_bottom"
+        app:popExitAnim="@anim/exit_to_top"
         app:popUpTo="@+id/homeFragment" />
     <action
         android:id="@+id/toSettings"
         app:destination="@id/settingsFragment"
         app:enterAnim="@anim/enter_from_top"
-        app:exitAnim="@anim/exit_to_left"
-        app:popEnterAnim="@anim/enter_from_left"
-        app:popExitAnim="@anim/exit_to_right"
+        app:exitAnim="@anim/exit_to_bottom"
+        app:popEnterAnim="@anim/enter_from_bottom"
+        app:popExitAnim="@anim/exit_to_top"
         app:popUpTo="@+id/homeFragment" />
     <action
         android:id="@+id/toAbout"
         app:destination="@id/aboutFragment"
         app:enterAnim="@anim/enter_from_top"
-        app:exitAnim="@anim/exit_to_left"
-        app:popEnterAnim="@anim/enter_from_left"
-        app:popExitAnim="@anim/exit_to_right"
+        app:exitAnim="@anim/exit_to_bottom"
+        app:popEnterAnim="@anim/enter_from_bottom"
+        app:popExitAnim="@anim/exit_to_top"
         app:popUpTo="@+id/homeFragment" />
     <action
         android:id="@+id/toHome"
@@ -214,8 +213,6 @@
         app:destination="@id/ftpFragment"
         app:enterAnim="@anim/enter_from_top"
         app:exitAnim="@anim/exit_to_bottom"
-        app:popEnterAnim="@anim/enter_from_bottom"
-        app:popExitAnim="@anim/exit_to_top"
         app:popUpTo="@+id/homeFragment" />
 
 </navigation>

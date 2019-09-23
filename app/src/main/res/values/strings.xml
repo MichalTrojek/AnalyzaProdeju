@@ -18,7 +18,7 @@
     <string name="detail_text_drawer_menu">Detail</string>
 
     <string name="printer_text_drawer_menu"> Vratky a Objednávky</string>
-    <string name="settings_text_drawer_menu">Nastavení</string>
+    <string name="settings_text_drawer_menu">Nastavení IP</string>
     <string name="about_text_drawer_menu">O aplikaci</string>
     <string name="search_text_drawer_menu">Hledat podle názvu</string>
     <string name="info_text_drawer_menu">Informace</string>
