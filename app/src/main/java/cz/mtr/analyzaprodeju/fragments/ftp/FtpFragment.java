@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -92,7 +93,9 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     public void onClick(View view) {
         if (mPasswordEditText.length() != 0) {
             mViewModel.onDownloadDataClick(mSpinner.getSelectedItem().toString(), mPasswordEditText.getText().toString(), this.getFragmentManager());
+            clearBackStack();
             Navigation.findNavController(getView()).navigate(R.id.homeFragment);
+
         } else {
             Toast toast = Toast.makeText(getContext(), "Není vložené heslo", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -100,5 +103,11 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
         }
     }
 
+    private void clearBackStack() {
+        FragmentManager fm = getFragmentManager();
+        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStack();
+        }
+    }
 
 }

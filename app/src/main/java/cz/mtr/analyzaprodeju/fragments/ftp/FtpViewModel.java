@@ -77,7 +77,7 @@ public class FtpViewModel extends AndroidViewModel {
         setSelectedStore(storeName);
         setPassword(password);
         new DownloadAnalysisFtpTask(mContext, storeName, password, fragmentManager).execute();
-        new DownloadStoreDataFtpTask(GeneralPreferences.getInstance().loadFilename(), password).execute();
+//        new DownloadStoreDataFtpTask(GeneralPreferences.getInstance().loadFilename(), password).execute();
     }
 
     private String cleanString(String selectedName) {

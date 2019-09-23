@@ -29,6 +29,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.navigation.NavigationView;
 
 import cz.mtr.analyzaprodeju.asynctasks.UnziperTask;
+import cz.mtr.analyzaprodeju.auth.Authentication;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDownloadDatabase;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogUpdateFound;
 import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
@@ -77,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+
+        Authentication.init(this);
+        Authentication.getInstance().check();
         scheduleUpdateDataJob();
     }
 
@@ -88,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void scheduleUpdateDataJob() {
-        scheduleUpdateAnalysis();
+        if (!Authentication.getInstance().isDownloadBlocked()) {
+            scheduleUpdateAnalysis();
+        }
 
     }
 
@@ -222,58 +228,60 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         clearBackStack();
-        switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-                if (mNavController.getCurrentDestination().getId() != R.id.homeFragment) {
-                    mNavController.navigate(R.id.toHome);
-                }
-                break;
-            case R.id.nav_about:
-                if (mNavController.getCurrentDestination().getId() != R.id.aboutFragment) {
-                    mNavController.navigate(R.id.toAbout);
-                }
-                break;
-            case R.id.nav_settings:
-                if (mNavController.getCurrentDestination().getId() != R.id.settingsFragment) {
-                    mNavController.navigate(R.id.toSettings);
-                }
-                break;
-            case R.id.nav_ftp:
-                if (mNavController.getCurrentDestination().getId() != R.id.ftpFragment) {
-                    mNavController.navigate(R.id.toFtp);
-                }
-                break;
-            case R.id.nav_import:
-                handleImport();
-                break;
-            case R.id.nav_export:
-                handleExport();
-                break;
-            case R.id.nav_printer:
-                handlePrintJob();
-                break;
-            case R.id.nav_ranking:
-                if (mNavController.getCurrentDestination().getId() != R.id.rankingFragment) {
-                    if (Model.getInstance().getAnalysis().isEmpty()) {
-                        Toast.makeText(this, "Není nahraná analýza.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        mNavController.navigate(R.id.toRanking);
+        if (!Authentication.getInstance().areButtonsBlocked()) {
+            switch (menuItem.getItemId()) {
+                case R.id.nav_home:
+                    if (mNavController.getCurrentDestination().getId() != R.id.homeFragment) {
+                        mNavController.navigate(R.id.toHome);
                     }
-                }
-                break;
-            case R.id.nav_display:
-                if (mNavController.getCurrentDestination().getId() != R.id.displayFragment) {
-                    if (Model.getInstance().getReturns().isEmpty() && Model.getInstance().getOrders().isEmpty()) {
-                        Toast.makeText(this, "Neobsahuje žádné položky.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        mNavController.navigate(R.id.toDisplay);
+                    break;
+                case R.id.nav_about:
+                    if (mNavController.getCurrentDestination().getId() != R.id.aboutFragment) {
+                        mNavController.navigate(R.id.toAbout);
                     }
-                }
-                break;
-            case R.id.nav_search:
-                if (mNavController.getCurrentDestination().getId() != R.id.searchFragment) {
-                    mNavController.navigate(R.id.toSearch);
-                }
+                    break;
+                case R.id.nav_settings:
+                    if (mNavController.getCurrentDestination().getId() != R.id.settingsFragment) {
+                        mNavController.navigate(R.id.toSettings);
+                    }
+                    break;
+                case R.id.nav_ftp:
+                    if (mNavController.getCurrentDestination().getId() != R.id.ftpFragment) {
+                        mNavController.navigate(R.id.toFtp);
+                    }
+                    break;
+                case R.id.nav_import:
+                    handleImport();
+                    break;
+                case R.id.nav_export:
+                    handleExport();
+                    break;
+                case R.id.nav_printer:
+                    handlePrintJob();
+                    break;
+                case R.id.nav_ranking:
+                    if (mNavController.getCurrentDestination().getId() != R.id.rankingFragment) {
+                        if (Model.getInstance().getAnalysis().isEmpty()) {
+                            Toast.makeText(this, "Není nahraná analýza.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mNavController.navigate(R.id.toRanking);
+                        }
+                    }
+                    break;
+                case R.id.nav_display:
+                    if (mNavController.getCurrentDestination().getId() != R.id.displayFragment) {
+                        if (Model.getInstance().getReturns().isEmpty() && Model.getInstance().getOrders().isEmpty()) {
+                            Toast.makeText(this, "Neobsahuje žádné položky.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mNavController.navigate(R.id.toDisplay);
+                        }
+                    }
+                    break;
+                case R.id.nav_search:
+                    if (mNavController.getCurrentDestination().getId() != R.id.searchFragment) {
+                        mNavController.navigate(R.id.toSearch);
+                    }
+            }
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
