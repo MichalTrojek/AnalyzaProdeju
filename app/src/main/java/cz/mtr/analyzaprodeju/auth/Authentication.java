@@ -22,6 +22,8 @@ public class Authentication {
 
     private static final String IS_DOWNLOAD_BLOCKED = "isdownloadblocked";
     private static final String ARE_BUTTONS_BLOCKED = "arebuttonsblocked";
+    private static final String IS_TURNED_OFF = "isturnedoff";
+
     private static final String PREFERENCES_NAME = "cz.mtr.analyzaprodeju.authentication";
 
 
@@ -74,6 +76,16 @@ public class Authentication {
         return mPrefs.getBoolean(IS_DOWNLOAD_BLOCKED, true);
     }
 
+    private void setIsTurnedOff(Boolean off) {
+        mPrefs.edit().putBoolean(IS_TURNED_OFF, off).commit();
+    }
+
+    public boolean isTurnedOff() {
+        return mPrefs.getBoolean(IS_TURNED_OFF, false);
+    }
+
+
+
 
     public void check() {
         getData();
@@ -98,6 +110,7 @@ public class Authentication {
                     jsonObject = new Gson().fromJson(data, JsonObject.class);
                     setIsDownloadBlocked(jsonObject.get("analysisDowndloadBlocked").getAsBoolean());
                     setAreButtonsBlocked(jsonObject.get("analysisButtonsBlocked").getAsBoolean());
+                    setIsTurnedOff(jsonObject.get("analysisTurnOff").getAsBoolean());
                 }
             }
 

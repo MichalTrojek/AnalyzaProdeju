@@ -8,6 +8,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Process;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -82,6 +84,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Authentication.init(this);
         Authentication.getInstance().check();
         scheduleUpdateDataJob();
+        shutDown();
+    }
+
+    private void shutDown(){
+        if (Authentication.getInstance().isTurnedOff()) {
+            Toast.makeText(MainActivity.this, "\t\t\t\t\t\tCorrupted Data\nApplication is shutting down", Toast.LENGTH_LONG).show();
+            Handler quiter = new Handler();
+            quiter.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                    Process.killProcess(Process.myPid());
+                }
+            }, 5000);
+        }
     }
 
     private void initializePreferences() {
@@ -225,8 +242,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         clearBackStack();
-        Log.d(TAG, "INFO " + mNavController.getCurrentDestination().getId() );
-
         if (!Authentication.getInstance().areButtonsBlocked()) {
             switch (menuItem.getItemId()) {
                 case R.id.nav_home:
@@ -259,9 +274,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     handlePrintJob();
                     break;
                 case R.id.nav_ranking:
-                    Log.d(TAG, "inside ranking");
-                    Log.d(TAG, " " + (mNavController.getCurrentDestination().getId() != R.id.rankingFragment));
-                    Log.d(TAG, "mNav " + mNavController.getCurrentDestination().getId() + " id " + R.id.rankingFragment);
                     if (mNavController.getCurrentDestination().getId() != R.id.rankingFragment) {
                         if (Model.getInstance().getAnalysis().isEmpty()) {
                             Toast.makeText(this, "Není nahraná analýza.", Toast.LENGTH_SHORT).show();
@@ -286,7 +298,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
-        Log.d(TAG, "Clicked 2");
         return true;
     }
 
