@@ -6,6 +6,7 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -225,6 +226,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.navigationView);
         mNavigationView.setNavigationItemSelectedListener(this);
+        setupAnimation();
+    }
+
+    private void setupAnimation(){
+        AnimationDrawable animation = (AnimationDrawable) mDrawerLayout.getBackground();
+        animation.setEnterFadeDuration(2000);
+        animation.setExitFadeDuration(4000);
+        animation.start();
     }
 
     private void handleHamburgerButtonPress() {

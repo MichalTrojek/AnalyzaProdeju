@@ -13,4 +13,7 @@
 
     <color name="black">#000000</color>
 
+
+    <color name="gradientColor">#DBD5D5</color>
+
 </resources>
