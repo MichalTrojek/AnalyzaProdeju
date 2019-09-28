@@ -17,9 +17,8 @@ public class UpdateAnalysisJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
         Log.d(TAG, "UpdateAnalysisJobService started");
-
-        doBackgroundWork(jobParameters);
         GeneralPreferences.init(getApplicationContext());
+        doBackgroundWork(jobParameters);
         return true; // true = task bude trvat delsi dobu
     }
 

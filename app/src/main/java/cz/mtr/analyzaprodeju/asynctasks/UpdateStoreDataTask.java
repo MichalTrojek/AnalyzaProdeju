@@ -18,8 +18,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.models.Model;
-import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
+import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 
 public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
 
