@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.ftp;
+package cz.mtr.analyzaprodeju.fragments.ftp.analysis;
 
 import android.content.Context;
 import android.os.AsyncTask;

@@ -4,7 +4,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.util.Log;
 
-import cz.mtr.analyzaprodeju.asynctasks.UpdateAnalysisTask;
+import cz.mtr.analyzaprodeju.services.asynctasks.UpdateAnalysisTask;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 
 public class UpdateAnalysisJobService extends JobService {

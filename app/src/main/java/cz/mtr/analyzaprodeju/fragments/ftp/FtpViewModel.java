@@ -12,6 +12,8 @@ import androidx.lifecycle.MutableLiveData;
 import java.text.Normalizer;
 import java.util.List;
 
+import cz.mtr.analyzaprodeju.fragments.ftp.analysis.DownloadAnalysisFtpTask;
+import cz.mtr.analyzaprodeju.fragments.ftp.storedata.DownloadStoreDataFtpTask;
 import cz.mtr.analyzaprodeju.repository.DataRepository;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 import cz.mtr.analyzaprodeju.repository.room.Article;
@@ -77,7 +79,7 @@ public class FtpViewModel extends AndroidViewModel {
         setSelectedStore(storeName);
         setPassword(password);
         new DownloadAnalysisFtpTask(mContext, storeName, password, fragmentManager).execute();
-//        new DownloadStoreDataFtpTask(GeneralPreferences.getInstance().loadFilename(), password).execute();
+        new DownloadStoreDataFtpTask(GeneralPreferences.getInstance().loadFilename(), password).execute();
     }
 
     private String cleanString(String selectedName) {

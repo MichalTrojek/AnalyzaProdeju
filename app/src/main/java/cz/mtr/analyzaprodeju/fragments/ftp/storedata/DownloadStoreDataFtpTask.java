@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.asynctasks;
+package cz.mtr.analyzaprodeju.fragments.ftp.storedata;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -19,11 +19,10 @@ import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
-import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 
-public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
+public class DownloadStoreDataFtpTask extends AsyncTask<String, Integer, Boolean> {
 
-    private static final String TAG = UpdateStoreDataTask.class.getSimpleName();
+    private static final String TAG = DownloadStoreDataFtpTask.class.getSimpleName();
     private String mAddress = "81.95.110.138";
     private String mUsername = "knihydobro9";
     private String mPassword;
@@ -33,7 +32,7 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
     private boolean isLoggedIn = true;
     private String mFilename;
 
-    public UpdateStoreDataTask(String name, String password) {
+    public DownloadStoreDataFtpTask(String name, String password) {
         mFilename = name;
         mPath = "/stavy/";
         mPassword = password;
@@ -57,11 +56,8 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
                 ftp.enterLocalPassiveMode();
                 ftp.changeWorkingDirectory(mPath);
                 for (FTPFile f : ftp.listFiles()) {
-                    if (f.getName().toLowerCase().equals(GeneralPreferences.getInstance().loadLastStoreNameFile())) {
-
-                    }
+                    Log.d(TAG, mFilename);
                     if (f.getName().toLowerCase().equals(mFilename.toLowerCase())) {
-                        GeneralPreferences.getInstance().saveLastStoreNameFile(f.getName().toLowerCase());
                         Model.getInstance().setStoreItems(readStoreStatus(ftp.retrieveFileStream(mFilename)));
                         break;
                     }
@@ -78,26 +74,28 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
         }
         return null;
     }
-
+ 
 
     private HashMap<String, StoreItem> readStoreStatus(InputStream input) {
         HashMap<String, StoreItem> items = new HashMap<>();
-        Log.d(TAG, "readStoreStatus started");
         try {
-
             CSVParser parser = new CSVParserBuilder().withSeparator(';').withIgnoreQuotations(true).build();
             CSVReader reader = new CSVReaderBuilder(new InputStreamReader(input, "Windows-1250")).withSkipLines(1).withCSVParser(parser).build();
-
             String[] record;
-            Log.d(TAG, mFilename);
             while ((record = reader.readNext()) != null) {
 
                 try {
-                    items.put(record[0], new StoreItem(record[0], record[3], record[8], record[2], record[4]));
+
+                    if (items.containsKey(record[0].trim().toLowerCase())) {
+                        StoreItem itemInMap = items.get(record[0]);
+                        int totalAmount = Integer.parseInt(itemInMap.getAmount()) + Integer.parseInt(record[8]);
+                        String regal = itemInMap.getLocation() + " " + record[3];
+                        items.get(record[0]).setAmount(totalAmount + "");
+                        items.get(record[0]).setLocation(regal);
+                    } else {
+                        items.put(record[0].trim().toLowerCase(), new StoreItem(record[0], record[3], record[8], record[2], record[4]));
+                    }
                 } catch (Exception e) {
-                    Log.d(TAG, mFilename);
-                    Log.d(TAG, record[0]);
-                    Log.d(TAG, e.getMessage());
                     e.printStackTrace();
                     continue;
                 }
@@ -109,7 +107,6 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
             reader.close();
 
         } catch (IOException e) {
-            Log.d(TAG, e.getMessage());
             e.printStackTrace();
         }
         return items;

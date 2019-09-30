@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.asynctasks;
+package cz.mtr.analyzaprodeju.services.asynctasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -7,7 +7,7 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
-import cz.mtr.analyzaprodeju.fragments.ftp.FloresAnalysisReader;
+import cz.mtr.analyzaprodeju.fragments.ftp.analysis.FloresAnalysisReader;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 
 public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
