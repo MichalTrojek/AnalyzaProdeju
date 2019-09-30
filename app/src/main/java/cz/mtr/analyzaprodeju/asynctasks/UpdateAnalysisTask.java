@@ -38,9 +38,9 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
     @Override
     protected Boolean doInBackground(String... voids) {
         boolean success = false;
-        FTPClient ftp = null;
+
         try {
-            ftp = new FTPClient();
+            FTPClient ftp = new FTPClient();
             ftp.connect(mAddress);
             boolean login = ftp.login(mUsername, mPassword);
             if (login) {
@@ -71,7 +71,7 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return success;
     }
 
 
