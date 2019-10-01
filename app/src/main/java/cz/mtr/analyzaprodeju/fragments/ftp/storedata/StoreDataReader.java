@@ -36,9 +36,7 @@ public class StoreDataReader {
             CSVReader reader = new CSVReaderBuilder(new InputStreamReader(input, "Windows-1250")).withSkipLines(1).withCSVParser(parser).build();
             String[] record;
             while ((record = reader.readNext()) != null) {
-
                 try {
-
                     if (items.containsKey(record[0].trim().toLowerCase())) {
                         StoreItem itemInMap = items.get(record[0]);
                         int totalAmount = Integer.parseInt(itemInMap.getAmount()) + Integer.parseInt(record[8]);
@@ -55,10 +53,8 @@ public class StoreDataReader {
             }
             if (items.size() != 0) {
                 Log.d(TAG, "Service Store Items " + items.size() + " Velikost");
-
             }
             reader.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
