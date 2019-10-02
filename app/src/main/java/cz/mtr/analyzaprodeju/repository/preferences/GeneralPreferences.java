@@ -71,10 +71,14 @@ public class GeneralPreferences {
     }
 
 
+
+    // stavy prodejen
     public void saveFilename(String name) {
         mPrefs.edit().putString(SELECTED_FILENAME, name).commit();
     }
 
+
+    // stavy prodejen
     public String loadFilename() {
         return mPrefs.getString(SELECTED_FILENAME, "");
     }
@@ -88,7 +92,7 @@ public class GeneralPreferences {
         return mPrefs.getString(SELECTED_STORE_NAME, "");
     }
 
-
+    // stavy prodejen
     public void saveLastStoreNameFile(String name) {
         mPrefs.edit().putString(LAST_STORE_FILE_NAME, name).commit();
     }

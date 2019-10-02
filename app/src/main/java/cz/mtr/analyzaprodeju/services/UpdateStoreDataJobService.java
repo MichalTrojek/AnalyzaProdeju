@@ -4,19 +4,19 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.util.Log;
 
-import cz.mtr.analyzaprodeju.services.asynctasks.UpdateAnalysisTask;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
+import cz.mtr.analyzaprodeju.services.asynctasks.UpdateStoreDataTask;
 
-public class UpdateAnalysisJobService extends JobService {
+public class UpdateStoreDataJobService extends JobService {
 
-    private static final String TAG = UpdateAnalysisJobService.class.getSimpleName();
+    private static final String TAG = UpdateStoreDataJobService.class.getSimpleName();
     private boolean jobCancelled = false;
-    private UpdateAnalysisTask mTask;
+    private UpdateStoreDataTask mTask;
 
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
-        Log.d(TAG, "UpdateAnalysisJobService started");
+        Log.d(TAG, "UpdateStoreDataService has started");
         GeneralPreferences.init(getApplicationContext());
         doBackgroundWork(jobParameters);
         return true; // true = task bude trvat delsi dobu
@@ -24,15 +24,15 @@ public class UpdateAnalysisJobService extends JobService {
 
 
     private void doBackgroundWork(final JobParameters jobParameters) {
-        String storeName = GeneralPreferences.getInstance().loadSelectedStore();
+        String storeName = GeneralPreferences.getInstance().loadFilename();
         String password = GeneralPreferences.getInstance().loadPassword();
         if (!storeName.isEmpty() && !password.isEmpty()) {
-            Log.d(TAG, " UpdateAnalysisJobService Task called");
-            mTask = new UpdateAnalysisTask(storeName, password) {
+            Log.d(TAG, "UpdateStoreDataService Task called");
+            mTask = new UpdateStoreDataTask(storeName, password) {
                 @Override
                 protected void onPostExecute(Boolean success) {
                     jobFinished(jobParameters, !success);
-                    Log.d(TAG, "UpdateAnalysisJobService JOB FINISHED");
+                    Log.d(TAG, "UpdateStoreDataService JOB FINISHED");
                 }
             };
             mTask.execute();
@@ -41,7 +41,7 @@ public class UpdateAnalysisJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        Log.d(TAG, "Job cancelled before completion");
+        Log.d(TAG, "UpdateStoreDataService Job cancelled before completion");
         if (mTask != null) {
             mTask.cancel(true);
         }

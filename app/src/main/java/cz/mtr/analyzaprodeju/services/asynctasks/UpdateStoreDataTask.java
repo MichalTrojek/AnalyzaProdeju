@@ -1,6 +1,7 @@
 package cz.mtr.analyzaprodeju.services.asynctasks;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -23,6 +24,7 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
     private String mFilename;
 
     public UpdateStoreDataTask(String name, String password) {
+        Log.d(TAG, "Constructor");
         mFilename = name;
         mPath = "/stavy/";
         mPassword = password;
@@ -30,12 +32,13 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
 
     @Override
     protected void onPreExecute() {
-
+        Log.d(TAG, "On Preexcecute ");
     }
 
     @Override
     protected Boolean doInBackground(String... voids) {
         boolean success = false;
+        Log.d(TAG, "Downloading started");
         FTPClient ftp = null;
         try {
             ftp = new FTPClient();
@@ -46,10 +49,12 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
                 ftp.enterLocalPassiveMode();
                 ftp.changeWorkingDirectory(mPath);
                 for (FTPFile f : ftp.listFiles()) {
-                    if (f.getName().toLowerCase().equals(GeneralPreferences.getInstance().loadLastStoreNameFile())) {
-
-                    }
+//                    if(f.getName().equalsIgnoreCase(GeneralPreferences.getInstance().loadLastStoreNameFile()) && f.getTimestamp() != GeneralPreferences.getInstance().loadLastTimestanp()){
+//
+//                    }
+                    Log.d(TAG, f.getTimestamp() + "");
                     if (f.getName().toLowerCase().equals(mFilename.toLowerCase())) {
+                        Log.d(TAG, "Inside second if");
                         GeneralPreferences.getInstance().saveLastStoreNameFile(f.getName().toLowerCase());
                         Model.getInstance().setStoreItems(new StoreDataReader().getStoreStatus(ftp.retrieveFileStream(mFilename)));
                         break;
@@ -65,15 +70,19 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return success;
     }
 
 
     @Override
     protected void onPostExecute(Boolean success) {
+        Log.d(TAG, "On post execute");
         if (!isLoggedIn) {
+            Log.d(TAG, "failed to login");
             success = false;
         }
+
+        Log.d(TAG, "succes");
         super.onPostExecute(success);
     }
 

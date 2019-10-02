@@ -80,6 +80,9 @@ public class FtpViewModel extends AndroidViewModel {
         setPassword(password);
         new DownloadAnalysisFtpTask(mContext, storeName, password, fragmentManager).execute();
         new DownloadStoreDataFtpTask(GeneralPreferences.getInstance().loadFilename(), password).execute();
+
+
+//        new UpdateStoreDataTask("test.CSV", password).execute();
     }
 
 

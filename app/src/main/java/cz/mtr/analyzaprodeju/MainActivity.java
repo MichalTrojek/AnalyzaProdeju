@@ -42,12 +42,14 @@ import cz.mtr.analyzaprodeju.repository.preferences.AnalysisPreferences;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 import cz.mtr.analyzaprodeju.repository.preferences.StoreItemsPreferences;
 import cz.mtr.analyzaprodeju.services.UpdateAnalysisJobService;
+import cz.mtr.analyzaprodeju.services.UpdateStoreDataJobService;
 import cz.mtr.analyzaprodeju.utils.KeyboardHider;
 import cz.mtr.analyzaprodeju.utils.Printer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PrinterDialog.OnPrintClicked {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int UPDATE_DATA_JOB = 321;
+    private static final int UPDATE_STORE_DATA_JOB = 320;
 
 
     private DrawerLayout mDrawerLayout;
@@ -112,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void scheduleUpdateDataJob() {
         if (!Authentication.getInstance().isDownloadBlocked()) {
             scheduleUpdateAnalysis();
+            scheduleUpdateStoreData();
         }
 
     }
@@ -127,10 +130,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode = scheduler.schedule(info);
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
-            Log.d(TAG, "Job scheduled");
+            Log.d(TAG, "Analysis Job scheduled");
         } else {
-            Log.d(TAG, "Job scheduling failed");
+            Log.d(TAG, "Analysis Job scheduling failed");
         }
+    }
+
+    private void scheduleUpdateStoreData() {
+        Log.d(TAG, "STORE DATA JOB CALLED");
+        ComponentName componentName = new ComponentName(this, UpdateStoreDataJobService.class);
+        JobInfo info = new JobInfo.Builder((UPDATE_STORE_DATA_JOB), componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPersisted(true)
+                .setPeriodic(15 * 60 * 1000)
+                .build();
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+            Log.d(TAG, "Store dataJob scheduled");
+        } else {
+            Log.d(TAG, "Store Data Job scheduling failed");
+        }
+
     }
 
     private void cancelUpdateDataJob() {
