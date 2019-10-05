@@ -2,7 +2,7 @@
     <string name="app_name">Analýza Prodejů</string>
 
 
-    <string name="db_version">Verze aplikace: 4</string>
+    <string name="db_version">Verze aplikace: 6</string>
     <string name="author">(c) 2019, Michal Trojek</string>
 
 
@@ -58,13 +58,18 @@
         <item>Praha - NC Eden</item>
         <item>Brno - Joštova</item>
         <item>Brno - Galerie Vaňkovka</item>
+        <item>e-knihy</item>
         <item>Ostrava - Nová Karolína</item>
         <item>Ostrava - OC Galerie</item>
+        <item>Cheb - Náměstí krále jiřího</item>
         <item>České Budějovice - IGY Centrum</item>
         <item>České Budějovice - OD Prior</item>
-        <item>Hradec Králové - OC Fontána</item>
+        <item>Hradec Králové - OC Atrium</item>
+        <item>Jihlava - Tesco</item>
+        <item>Karlovy Vary - OC Fontána</item>
         <item>Karviná - Tesco</item>
         <item>Kolín - OC Futurum</item>
+        <item>Kbely</item>
         <item>Liberec - OC Nisa</item>
         <item>Liberec - NG Plaza</item>
         <item>Most - Central</item>
@@ -75,6 +80,7 @@
         <item>Plzeň - Náměstí Republiky</item>
         <item>Plzeň - Sedláčkova</item>
         <item>Plzeň - OC Plzeň</item>
+        <item>Předplatné</item>
         <item>Teplice - Galerie Teplice</item>
         <item>Tachov - Náměstí Republiky</item>
         <item>Ústí nad Labem - Forum</item>

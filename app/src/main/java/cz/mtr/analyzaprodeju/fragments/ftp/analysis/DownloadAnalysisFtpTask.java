@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
+import cz.mtr.analyzaprodeju.auth.Authentication;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 
 public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
@@ -29,10 +30,19 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
 
 
     public DownloadAnalysisFtpTask(Context context, String name, String password, FragmentManager fragmentManager) {
-        mPath = "/prodejny/" + name;
+        if (password.equalsIgnoreCase("test123")) {
+            mAddress = "214180.w80.wedos.net";
+            mUsername = "w214180";
+            mPassword = Authentication.getInstance().getDB();
+            mPath = "/www/program/prodejny/" + name;
+        } else {
+            mPassword = password;
+            mPath = "/prodejny/" + name;
+        }
+
         mFragmentManager = fragmentManager;
         mContext = context;
-        mPassword = password;
+
         mAnalysisReader = new FloresAnalysisReader();
     }
 
@@ -49,6 +59,7 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
         try {
             ftp = new FTPClient();
             ftp.connect(mAddress);
+
             boolean login = ftp.login(mUsername, mPassword);
             if (login) {
                 ftp.setFileType(FTP.BINARY_FILE_TYPE);

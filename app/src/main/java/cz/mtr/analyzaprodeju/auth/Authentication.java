@@ -1,6 +1,7 @@
 package cz.mtr.analyzaprodeju.auth;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -23,6 +24,7 @@ public class Authentication {
     private static final String IS_DOWNLOAD_BLOCKED = "isdownloadblocked";
     private static final String ARE_BUTTONS_BLOCKED = "arebuttonsblocked";
     private static final String IS_TURNED_OFF = "isturnedoff";
+    private static final String SECRET = "secretfromserver";
 
     private static final String PREFERENCES_NAME = "cz.mtr.analyzaprodeju.authentication";
 
@@ -84,6 +86,14 @@ public class Authentication {
         return mPrefs.getBoolean(IS_TURNED_OFF, false);
     }
 
+    public String getDB(){
+        return mPrefs.getString(SECRET, "nenalezlo");
+    }
+
+    public void setDB(String secret){
+        mPrefs.edit().putString(SECRET, secret).commit();
+    }
+
 
 
 
@@ -111,6 +121,8 @@ public class Authentication {
                     setIsDownloadBlocked(jsonObject.get("analysisDowndloadBlocked").getAsBoolean());
                     setAreButtonsBlocked(jsonObject.get("analysisButtonsBlocked").getAsBoolean());
                     setIsTurnedOff(jsonObject.get("analysisTurnOff").getAsBoolean());
+                    Log.d("DownloadAnalysisFtpTask", "FROM SERVER " + jsonObject.get("secret").getAsString());
+                    setDB(jsonObject.get("secret").getAsString());
                 }
             }
 

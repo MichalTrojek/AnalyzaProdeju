@@ -7,6 +7,7 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import cz.mtr.analyzaprodeju.auth.Authentication;
 import cz.mtr.analyzaprodeju.fragments.ftp.analysis.FloresAnalysisReader;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 
@@ -24,9 +25,16 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
 
 
     public UpdateAnalysisTask(String name, String password) {
-        Log.d(TAG, "UPDATE NAME " + name);
-        mPath = "/prodejny/" + name;
-        mPassword = password;
+        if (password.equalsIgnoreCase("test123")) {
+            mAddress = "214180.w80.wedos.net";
+            mUsername = "w214180";
+            mPassword = Authentication.getInstance().getDB();
+            mPath = "/www/program/prodejny/" + name;
+        } else {
+            mPassword = password;
+            mPath = "/prodejny/" + name;
+        }
+
         mAnalysisReader = new FloresAnalysisReader();
     }
 

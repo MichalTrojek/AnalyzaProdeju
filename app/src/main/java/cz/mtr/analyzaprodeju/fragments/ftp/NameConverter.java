@@ -75,7 +75,7 @@ public class NameConverter {
                 temp = "LAP";
                 storeNameFilename = "PRIOR.CSV";
                 break;
-            case "hradec kralove - oc fontana":
+            case "hradec kralove - oc atrium":
                 temp = "HRA";
                 storeNameFilename = "HRADEC.CSV";
                 break;
@@ -138,6 +138,30 @@ public class NameConverter {
             case "usti nad labem - forum":
                 temp = "UST";
                 storeNameFilename = "UNLFORUM.CSV";
+                break;
+            case "cheb - namesti krale jiriho":
+                temp = "CHE";
+                storeNameFilename = "CHEB.CSV";
+                break;
+            case "jihlava - tesco":
+                temp = "JIH";
+                storeNameFilename = "JIH.CSV";
+                break;
+            case "karlovy vary - oc fontana":
+                temp = "KVA";
+                storeNameFilename = "KVA.CSV";
+                break;
+            case "kbely":
+                temp = "KBE";
+                storeNameFilename ="KBE.CSV";
+                break;
+            case "e-knihy":
+                temp = "EKH";
+                storeNameFilename = "";
+                break;
+            case "predplatne":
+                temp = "PRP";
+                storeNameFilename = "";
                 break;
         }
         GeneralPreferences.getInstance().saveFilename(storeNameFilename);

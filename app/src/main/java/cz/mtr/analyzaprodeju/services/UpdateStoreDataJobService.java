@@ -4,6 +4,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.util.Log;
 
+import cz.mtr.analyzaprodeju.auth.Authentication;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 import cz.mtr.analyzaprodeju.services.asynctasks.UpdateStoreDataTask;
 
@@ -17,6 +18,7 @@ public class UpdateStoreDataJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
         Log.d(TAG, "UpdateStoreDataService has started");
+        Authentication.init(getApplicationContext());
         GeneralPreferences.init(getApplicationContext());
         doBackgroundWork(jobParameters);
         return true; // true = task bude trvat delsi dobu

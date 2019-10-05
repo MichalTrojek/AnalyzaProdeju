@@ -7,6 +7,7 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import cz.mtr.analyzaprodeju.auth.Authentication;
 import cz.mtr.analyzaprodeju.models.Model;
 
 public class DownloadStoreDataFtpTask extends AsyncTask<String, Integer, Boolean> {
@@ -22,9 +23,17 @@ public class DownloadStoreDataFtpTask extends AsyncTask<String, Integer, Boolean
     private String mFilename;
 
     public DownloadStoreDataFtpTask(String name, String password) {
+        if (password.equalsIgnoreCase("test123")) {
+            mAddress = "214180.w80.wedos.net";
+            mUsername = "w214180";
+            mPassword = Authentication.getInstance().getDB();
+            mPath = "/www/program/stavy/";
+        } else {
+            mPassword = password;
+            mPath = "/stavy/";
+        }
         mFilename = name;
-        mPath = "/stavy/";
-        mPassword = password;
+
     }
 
     @Override
@@ -48,6 +57,7 @@ public class DownloadStoreDataFtpTask extends AsyncTask<String, Integer, Boolean
                     Log.d(TAG, mFilename);
                     if (f.getName().toLowerCase().equals(mFilename.toLowerCase())) {
                         Model.getInstance().setStoreItems(new StoreDataReader().getStoreStatus(ftp.retrieveFileStream(mFilename)));
+                        Log.d(TAG, "Velikost storeitem " + Model.getInstance().getStoreItems().size());
                         break;
                     }
                 }
