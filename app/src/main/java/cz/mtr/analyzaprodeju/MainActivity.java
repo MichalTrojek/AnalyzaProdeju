@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        Authentication.init(this);
         Authentication.getInstance().check();
         scheduleUpdateDataJob();
         shutDown();
@@ -105,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initializePreferences() {
+        Authentication.init(this);
         AnalysisPreferences.init(this);
         GeneralPreferences.init(this);
         StoreItemsPreferences.init(this);

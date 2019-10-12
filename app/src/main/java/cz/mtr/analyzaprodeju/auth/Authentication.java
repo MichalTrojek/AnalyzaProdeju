@@ -1,7 +1,6 @@
 package cz.mtr.analyzaprodeju.auth;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -105,6 +104,8 @@ public class Authentication {
 
     private void getData() {
 
+
+
         final String url = "http://skladovypomocnik.cz/authinfo.json";
 
         OkHttpClient client = new OkHttpClient();
@@ -121,7 +122,6 @@ public class Authentication {
                     setIsDownloadBlocked(jsonObject.get("analysisDowndloadBlocked").getAsBoolean());
                     setAreButtonsBlocked(jsonObject.get("analysisButtonsBlocked").getAsBoolean());
                     setIsTurnedOff(jsonObject.get("analysisTurnOff").getAsBoolean());
-                    Log.d("DownloadAnalysisFtpTask", "FROM SERVER " + jsonObject.get("secret").getAsString());
                     setDB(jsonObject.get("secret").getAsString());
                 }
             }

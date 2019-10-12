@@ -1,11 +1,14 @@
 package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -16,8 +19,8 @@ public class ImageScrapTask extends AsyncTask<String, Void, Void> {
 
 
     private String mImageLink = "";
-    private String largeImageLink = "";
-    private String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
+    private String mLargeImageLink = "";
+    private String mUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
     private ImageView mImageView;
     private ProgressBar mProgress;
 
@@ -37,26 +40,39 @@ public class ImageScrapTask extends AsyncTask<String, Void, Void> {
 
             // Po vyhledání podle eanu najde odkaz na detail knížky
             Document searchQuery = Jsoup.connect("https://www.knihydobrovsky.cz/vyhledavani?search=" + ean)
-                    .userAgent(userAgent)
+                    .userAgent(mUserAgent)
                     .get();
 
-
-            mImageLink = searchQuery.select(
-                    "#snippet-bookSearchList-itemListSnippet > section > div > ul > li > article > h2 > a > span.img.shadow > img")
-                    .attr("src");
-
-            String linkToPage = searchQuery
-                    .select("#snippet-bookSearchList-itemListSnippet > section > div > ul > li > article > h2 > a")
-                    .attr("href");
+//
+//            mImageLink = searchQuery.select(
+//                    "#snippet-bookSearchList-itemListSnippet > section > div > ul > li > article > h2 > a > span.img.shadow > img")
+//                    .attr("src");
 
 
-            //opens detail page
-            Document pageDetail = Jsoup.connect("https://www.knihydobrovsky.cz/" + linkToPage)
-                    .userAgent(userAgent).get();
+            Elements images = searchQuery.select("img");
+            Log.d(TAG, "Velikost " + images.size());
+            for(Element image : images){
+//                Log.d(TAG, image.attr("src"));
+                if(image.attr("src").contains("mod_eshop/produkty")){
+                    mImageLink = image.attr("src");
+                    mLargeImageLink = mImageLink;
+                    Log.d(TAG, mImageLink);
+                }
+            }
+
+//            String linkToPage = searchQuery
+//                    .select("#snippet-bookSearchList-itemListSnippet > section > div > ul > li > article > h2 > a")
+//                    .attr("href");
+//
+//
+//            //opens detail page
+//            Document pageDetail = Jsoup.connect("https://www.knihydobrovsky.cz/" + linkToPage)
+//                    .userAgent(mUserAgent).get();
 
 
-            largeImageLink = pageDetail.select("#main > div.section.section-gradient-bottom-big > div > div > div.img.shelf > div.book > img").attr("src");
-
+//            mLargeImageLink = pageDetail.select("#main > div.section.section-gradient-bottom-big > div > div > div.img.shelf > div.book > img").attr("src");
+            Log.d(TAG, "mImageLink " + mImageLink);
+//            Log.d(TAG, "Velkej " + mLargeImageLink);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,7 +89,7 @@ public class ImageScrapTask extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void v) {
         Model.getInstance().setImageLink(mImageLink);
-        Model.getInstance().setLargeImageLink(largeImageLink);
+        Model.getInstance().setLargeImageLink(mLargeImageLink);
         ImageDisplay display = new ImageDisplay(Model.getInstance().getImageLink(), mImageView, mProgress);
         display.show();
 
