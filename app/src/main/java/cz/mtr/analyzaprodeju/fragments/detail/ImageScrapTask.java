@@ -1,7 +1,6 @@
 package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 

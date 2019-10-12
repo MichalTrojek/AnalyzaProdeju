@@ -21,6 +21,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.textfield.TextInputEditText;
 
 import cz.mtr.analyzaprodeju.R;
+import cz.mtr.analyzaprodeju.fragments.home.HomeFragmentDirections;
 
 public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -92,8 +93,7 @@ public class FtpFragment extends Fragment implements AdapterView.OnItemSelectedL
     public void onClick(View view) {
         if (mPasswordEditText.length() != 0) {
             mViewModel.onDownloadDataClick(mSpinner.getSelectedItem().toString(), mPasswordEditText.getText().toString(), this.getFragmentManager());
-            Navigation.findNavController(getView()).navigate(R.id.homeFragment);
-
+            Navigation.findNavController(getView()).navigate(HomeFragmentDirections.toHome());
         } else {
             Toast toast = Toast.makeText(getContext(), "Není vložené heslo", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
