@@ -31,13 +31,11 @@ public class DetailViewModel extends AndroidViewModel {
     public void loadImage(String ean, ImageView imageView, ProgressBar progressBar) {
         String imageLink = mRepository.getLink(ean);
         if (imageLink != null) {
-            Log.d(TAG, "Gettings image from Database");
             Model.getInstance().setImageLink(imageLink);
             Model.getInstance().setLargeImageLink(imageLink);
             ImageDisplay display = new ImageDisplay(Model.getInstance().getImageLink(), imageView, progressBar);
             display.show();
         } else {
-            Log.d(TAG, "Getting image from web");
             ImageScrapTask task = new ImageScrapTask(imageView, progressBar, mRepository);
             task.execute(ean);
         }

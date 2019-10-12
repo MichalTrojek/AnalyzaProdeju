@@ -49,7 +49,6 @@ public class ImageScrapTask extends AsyncTask<String, Void, Void> {
                     mLargeImageLink = mImageLink;
                 }
             }
-            Log.d("DetailViewModel", "saving link to db");
             mRepository.insertLink(ean, mImageLink);
         } catch (IOException e) {
             e.printStackTrace();
