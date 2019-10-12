@@ -113,12 +113,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 locationsTextView.setText(displayableArticle.getLocation());
                 authorTextView.setText("Autor: " + displayableArticle.getAuthor());
                 mDontOrderLabelTextView.setText(displayableArticle.getDontOrder());
-
-                ImageScrapTask task = new ImageScrapTask(mImageView, mProgressBar);
-                task.execute(eanTextView.getText().toString());
-
+                mViewModel.loadImage(eanTextView.getText().toString(), mImageView, mProgressBar);
             }
         });
+
 
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +134,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         fab_rotate_clock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_clock);
 
     }
+
 
     private String deliveredAs(DisplayableArticle displayableArticle) {
         String name = displayableArticle.getCommision();

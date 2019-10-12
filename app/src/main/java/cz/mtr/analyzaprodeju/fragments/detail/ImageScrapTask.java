@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 import cz.mtr.analyzaprodeju.models.Model;
+import cz.mtr.analyzaprodeju.repository.room.linkDatabase.LinkRepository;
 
 public class ImageScrapTask extends AsyncTask<String, Void, Void> {
     public static final String TAG = ImageScrapTask.class.getSimpleName();
@@ -23,57 +24,33 @@ public class ImageScrapTask extends AsyncTask<String, Void, Void> {
     private String mUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
     private ImageView mImageView;
     private ProgressBar mProgress;
+    private LinkRepository mRepository;
 
 
-    public ImageScrapTask(ImageView imageView, ProgressBar progressBar) {
+    public ImageScrapTask(ImageView imageView, ProgressBar progressBar, LinkRepository repository) {
         mImageView = imageView;
         mProgress = progressBar;
+        mRepository = repository;
     }
 
 
     @Override
     protected Void doInBackground(String... args) {
         String ean = args[0];
-
         try {
 
-
-            // Po vyhledání podle eanu najde odkaz na detail knížky
             Document searchQuery = Jsoup.connect("https://www.knihydobrovsky.cz/vyhledavani?search=" + ean)
                     .userAgent(mUserAgent)
                     .get();
-
-//
-//            mImageLink = searchQuery.select(
-//                    "#snippet-bookSearchList-itemListSnippet > section > div > ul > li > article > h2 > a > span.img.shadow > img")
-//                    .attr("src");
-
-
             Elements images = searchQuery.select("img");
-            Log.d(TAG, "Velikost " + images.size());
             for(Element image : images){
-//                Log.d(TAG, image.attr("src"));
                 if(image.attr("src").contains("mod_eshop/produkty")){
                     mImageLink = image.attr("src");
                     mLargeImageLink = mImageLink;
-                    Log.d(TAG, mImageLink);
                 }
             }
-
-//            String linkToPage = searchQuery
-//                    .select("#snippet-bookSearchList-itemListSnippet > section > div > ul > li > article > h2 > a")
-//                    .attr("href");
-//
-//
-//            //opens detail page
-//            Document pageDetail = Jsoup.connect("https://www.knihydobrovsky.cz/" + linkToPage)
-//                    .userAgent(mUserAgent).get();
-
-
-//            mLargeImageLink = pageDetail.select("#main > div.section.section-gradient-bottom-big > div > div > div.img.shelf > div.book > img").attr("src");
-            Log.d(TAG, "mImageLink " + mImageLink);
-//            Log.d(TAG, "Velkej " + mLargeImageLink);
-
+            Log.d("DetailViewModel", "saving link to db");
+            mRepository.insertLink(ean, mImageLink);
         } catch (IOException e) {
             e.printStackTrace();
         }

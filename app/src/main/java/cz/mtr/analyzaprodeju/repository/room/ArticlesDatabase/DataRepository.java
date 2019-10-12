@@ -1,13 +1,10 @@
-package cz.mtr.analyzaprodeju.repository;
+package cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase;
 
 import android.app.Application;
 import android.util.Log;
 
 import java.util.List;
 
-import cz.mtr.analyzaprodeju.repository.room.Article;
-import cz.mtr.analyzaprodeju.repository.room.ArticleDao;
-import cz.mtr.analyzaprodeju.repository.room.ArticleRoomDatabase;
 import cz.mtr.analyzaprodeju.repository.room.ItemFts;
 
 public class DataRepository {

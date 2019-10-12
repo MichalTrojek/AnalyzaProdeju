@@ -11,8 +11,8 @@ import java.util.List;
 
 import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
 import cz.mtr.analyzaprodeju.models.Model;
-import cz.mtr.analyzaprodeju.repository.DataRepository;
-import cz.mtr.analyzaprodeju.repository.room.Article;
+import cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase.DataRepository;
+import cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase.Article;
 import cz.mtr.analyzaprodeju.repository.room.ItemFts;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 

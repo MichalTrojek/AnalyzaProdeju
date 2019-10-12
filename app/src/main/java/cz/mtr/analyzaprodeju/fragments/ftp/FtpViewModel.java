@@ -14,9 +14,9 @@ import java.util.List;
 
 import cz.mtr.analyzaprodeju.fragments.ftp.analysis.DownloadAnalysisFtpTask;
 import cz.mtr.analyzaprodeju.fragments.ftp.storedata.DownloadStoreDataFtpTask;
-import cz.mtr.analyzaprodeju.repository.DataRepository;
+import cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase.DataRepository;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
-import cz.mtr.analyzaprodeju.repository.room.Article;
+import cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase.Article;
 
 
 public class FtpViewModel extends AndroidViewModel {

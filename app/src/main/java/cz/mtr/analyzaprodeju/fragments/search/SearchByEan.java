@@ -4,8 +4,8 @@ import android.app.Application;
 
 import cz.mtr.analyzaprodeju.fragments.barcode.BarcodeViewModel;
 import cz.mtr.analyzaprodeju.models.Model;
-import cz.mtr.analyzaprodeju.repository.DataRepository;
-import cz.mtr.analyzaprodeju.repository.room.Article;
+import cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase.DataRepository;
+import cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase.Article;
 import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 

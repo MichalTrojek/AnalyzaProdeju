@@ -1,10 +1,12 @@
-package cz.mtr.analyzaprodeju.repository.room;
+package cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import cz.mtr.analyzaprodeju.repository.room.ItemFts;
 
 
 @Database(entities = {Article.class, ItemFts.class}, version = 1, exportSchema = false)

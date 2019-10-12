@@ -8,7 +8,7 @@ import cz.mtr.analyzaprodeju.fragments.scraper.stores.WebItem;
 import cz.mtr.analyzaprodeju.fragments.scraper.suppliers.WebItemSuppliers;
 import cz.mtr.analyzaprodeju.repository.preferences.AnalysisPreferences;
 import cz.mtr.analyzaprodeju.repository.preferences.StoreItemsPreferences;
-import cz.mtr.analyzaprodeju.repository.room.Article;
+import cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase.Article;
 import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;

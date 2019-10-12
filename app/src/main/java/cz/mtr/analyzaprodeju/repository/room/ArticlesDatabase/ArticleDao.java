@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.repository.room;
+package cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase;
 
 
 import androidx.room.Dao;
@@ -11,6 +11,8 @@ import androidx.room.Transaction;
 import androidx.sqlite.db.SupportSQLiteQuery;
 
 import java.util.List;
+
+import cz.mtr.analyzaprodeju.repository.room.ItemFts;
 
 @Dao
 public interface ArticleDao {

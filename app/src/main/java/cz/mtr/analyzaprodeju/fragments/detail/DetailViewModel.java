@@ -1,6 +1,9 @@
 package cz.mtr.analyzaprodeju.fragments.detail;
 
 import android.app.Application;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
+import cz.mtr.analyzaprodeju.repository.room.linkDatabase.LinkRepository;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -17,17 +21,30 @@ public class DetailViewModel extends AndroidViewModel {
 
 
     private MutableLiveData<DisplayableArticle> mArticleFromAnalysis = new MutableLiveData<>();
-
+    private LinkRepository mRepository;
 
     public DetailViewModel(@NonNull Application application) {
         super(application);
+        mRepository = new LinkRepository(application);
+    }
 
+    public void loadImage(String ean, ImageView imageView, ProgressBar progressBar) {
+        String imageLink = mRepository.getLink(ean);
+        if (imageLink != null) {
+            Log.d(TAG, "Gettings image from Database");
+            Model.getInstance().setImageLink(imageLink);
+            Model.getInstance().setLargeImageLink(imageLink);
+            ImageDisplay display = new ImageDisplay(Model.getInstance().getImageLink(), imageView, progressBar);
+            display.show();
+        } else {
+            Log.d(TAG, "Getting image from web");
+            ImageScrapTask task = new ImageScrapTask(imageView, progressBar, mRepository);
+            task.execute(ean);
+        }
 
     }
 
     public MutableLiveData<DisplayableArticle> getArticle(SharedArticle a) {
-
-
         DisplayableArticle article = new DisplayableArticle(a.getRanking(), a.getEan(), a.getName(), a.getSales1(), a.getSales2()
                 , a.getRevenue(), a.getStored(), a.getDaysOfSupplies(), a.getLocation(), a.getPrice(), a.getSupplier(),
                 a.getAuthor(), a.getDateOfLastSale(), a.getDateOfLastDelivery(), a.getReleaseDate(), a.getCommision(), a.getRankingEshop(),

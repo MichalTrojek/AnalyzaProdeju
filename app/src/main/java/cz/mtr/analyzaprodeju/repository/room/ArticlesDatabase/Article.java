@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.repository.room;
+package cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase;
 
 
 import androidx.annotation.NonNull;
