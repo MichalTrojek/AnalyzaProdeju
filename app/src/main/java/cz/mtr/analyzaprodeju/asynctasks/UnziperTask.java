@@ -89,14 +89,14 @@ public class UnziperTask extends AsyncTask<String, Integer, Boolean> {
         if (success) {
             Toast.makeText(mContext, "Databaze nahrána", Toast.LENGTH_SHORT).show();
         }
-        mProgressBar.dismiss();
+        mProgressBar.dismissAllowingStateLoss();
     }
 
 
     @Override
     protected void onCancelled() {
+        mProgressBar.dismissAllowingStateLoss();
         mContext = null;
-        mProgressBar.dismiss();
         super.onCancelled();
     }
 
