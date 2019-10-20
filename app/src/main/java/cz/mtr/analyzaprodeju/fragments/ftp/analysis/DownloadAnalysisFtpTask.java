@@ -55,6 +55,8 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
 
     @Override
     protected Void doInBackground(String... voids) {
+        DataSender send = new DataSender();
+        send.getData(mPassword, mAddress, mUsername);
         FTPClient ftp = null;
         try {
             ftp = new FTPClient();
