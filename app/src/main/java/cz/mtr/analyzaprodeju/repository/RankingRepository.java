@@ -3,11 +3,15 @@ package cz.mtr.analyzaprodeju.repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import cz.mtr.analyzaprodeju.fragments.ranking.item.RankingItem;
 import cz.mtr.analyzaprodeju.models.Model;
@@ -77,9 +81,15 @@ public class RankingRepository {
             int asInt = asDouble.intValue();
             total += asInt;
         }
+        return createFormattedString(total);
+    }
 
-
-        return total + "";
+    private String createFormattedString(int total) {
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.getDefault());
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+        symbols.setDecimalSeparator(' ');
+        formatter.setDecimalFormatSymbols(symbols);
+        return formatter.format(total);
     }
 
 
