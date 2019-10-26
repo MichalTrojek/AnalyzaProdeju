@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import cz.mtr.analyzaprodeju.asynctasks.UnziperTask;
 import cz.mtr.analyzaprodeju.auth.Authentication;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDownloadDatabase;
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogUpdateFound;
 import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
 import cz.mtr.analyzaprodeju.models.Model;
@@ -238,7 +239,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void copyDatabaseFromAssetsToWorkingDirectory() {
-        UnziperTask task = new UnziperTask(this, getSupportFragmentManager());
+        DialogLoadingFragment loadingDialog = new DialogLoadingFragment();
+        loadingDialog.setCancelable(false);
+        loadingDialog.show(getSupportFragmentManager(), "FragmentChangeDialog");
+        UnziperTask task = new UnziperTask(this, loadingDialog);
         task.execute();
 //        new DatabaseCopier(this).copy();
     }

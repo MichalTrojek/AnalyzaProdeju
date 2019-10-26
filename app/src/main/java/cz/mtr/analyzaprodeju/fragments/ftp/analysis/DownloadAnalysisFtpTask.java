@@ -100,7 +100,7 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
             }
         }
         mContext = null;
-        mProgressBar.dismiss();
+        mProgressBar.dismissAllowingStateLoss();
     }
 
     private void showToast(String text, boolean isShort) {

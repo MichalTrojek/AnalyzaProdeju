@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentManager;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,22 +23,14 @@ public class UnziperTask extends AsyncTask<String, Integer, Boolean> {
     private Context mContext;
 
     private DialogLoadingFragment mProgressBar;
-    private FragmentManager mFragmentManager;
 
 
-    public UnziperTask(Context context, FragmentManager fragmentManager) {
-        mFragmentManager = fragmentManager;
-        mContext = context;
-
+    public UnziperTask(Context context, DialogLoadingFragment dialogLoadingFragment) {
+        this.mContext = context;
+        this.mProgressBar = dialogLoadingFragment;
 
     }
 
-    @Override
-    protected void onPreExecute() {
-        mProgressBar = new DialogLoadingFragment();
-        mProgressBar.setCancelable(false);
-        mProgressBar.show(mFragmentManager, "FragmentChangeDialog");
-    }
 
     @Override
     protected Boolean doInBackground(String... voids) {
