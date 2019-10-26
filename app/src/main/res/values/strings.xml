@@ -2,7 +2,7 @@
     <string name="app_name">Analýza Prodejů</string>
 
 
-    <string name="db_version">Verze aplikace: 9</string>
+    <string name="db_version">Verze aplikace: 10</string>
     <string name="author">© 2019, Michal Trojek</string>
 
 
@@ -10,10 +10,10 @@
     <string name="navigation_drawer_close">Open navigation drawer</string>
     <string name="content_description_for_logo">Logo</string>
     <string name="home_text_drawer_menu">Domů</string>
-    <string name="import_data_text_drawer_menu">Nahrát data z analýzy</string>
+    <string name="import_data_text_drawer_menu">Nahrát data z PC</string>
     <string name="ftp_data_text_drawer_menu">Nahrát data z FTP</string>
     <string name="printer_data_text_drawer_menu">Tisk</string>
-    <string name="export_data_text_drawer_menu">Odeslat data</string>
+    <string name="export_data_text_drawer_menu">Odeslat data do PC</string>
     <string name="ranking_text_drawer_menu">Žebříček prodejů</string>
     <string name="detail_text_drawer_menu">Detail</string>
 
