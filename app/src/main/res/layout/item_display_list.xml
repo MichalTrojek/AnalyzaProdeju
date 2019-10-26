@@ -43,10 +43,10 @@
             android:id="@+id/divider2"
             android:layout_width="1dp"
             android:layout_height="19dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="70dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/itemAmountTextView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
