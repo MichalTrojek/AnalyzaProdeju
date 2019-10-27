@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.utils;
+package cz.mtr.analyzaprodeju.fragments.display;
 
 import android.content.Context;
 import android.print.PrintAttributes;

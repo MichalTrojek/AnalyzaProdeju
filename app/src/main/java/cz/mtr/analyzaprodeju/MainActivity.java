@@ -36,7 +36,6 @@ import cz.mtr.analyzaprodeju.auth.Authentication;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDownloadDatabase;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogUpdateFound;
-import cz.mtr.analyzaprodeju.fragments.dialogs.PrinterDialog;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.network.Client;
 import cz.mtr.analyzaprodeju.repository.preferences.AnalysisPreferences;
@@ -45,9 +44,8 @@ import cz.mtr.analyzaprodeju.repository.preferences.StoreItemsPreferences;
 import cz.mtr.analyzaprodeju.services.UpdateAnalysisJobService;
 import cz.mtr.analyzaprodeju.services.UpdateStoreDataJobService;
 import cz.mtr.analyzaprodeju.utils.KeyboardHider;
-import cz.mtr.analyzaprodeju.utils.Printer;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PrinterDialog.OnPrintClicked {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int UPDATE_DATA_JOB = 321;
     private static final int UPDATE_STORE_DATA_JOB = 320;
@@ -305,9 +303,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.nav_export:
                     handleExport();
                     break;
-                case R.id.nav_printer:
-                    handlePrintJob();
-                    break;
                 case R.id.nav_ranking:
                     if (mNavController.getCurrentDestination().getId() != R.id.rankingFragment) {
                         if (Model.getInstance().getAnalysis().isEmpty()) {
@@ -346,25 +341,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         client.execute("export");
     }
 
-    private void handlePrintJob() {
-        PrinterDialog dialog = new PrinterDialog();
-        dialog.getActivity();
-        dialog.show(getSupportFragmentManager(), "PrinterDialog");
 
-
-    }
-
-    @Override
-    public void returnsClicked() {
-        Printer printer = new Printer(this);
-        printer.print(Model.getInstance().getReturns(), "Vratka");
-    }
-
-    @Override
-    public void ordersClicked() {
-        Printer printer = new Printer(this);
-        printer.print(Model.getInstance().getOrders(), "Objednávka");
-    }
 
 
     @Override
@@ -382,16 +359,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fm.popBackStack();
         }
     }
-
-
-//    private Context primaryBaseActivity;
-//
-//    @Override
-//    protected void attachBaseContext(Context newBase) {
-//        primaryBaseActivity = newBase;
-//        Model.getInstance().saveMainActivityContextForPrinter(newBase);
-//        super.attachBaseContext(newBase);
-//    }
-
 
 }

@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import cz.mtr.analyzaprodeju.models.Model;
-import cz.mtr.analyzaprodeju.utils.Printer;
 
 public class DisplayViewModel extends AndroidViewModel {
 
