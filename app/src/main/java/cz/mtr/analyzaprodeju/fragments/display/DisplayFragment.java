@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +21,7 @@ import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDeleteFragment;
 import cz.mtr.analyzaprodeju.fragments.display.adapter.PrinterPageViewAdapter;
 import cz.mtr.analyzaprodeju.fragments.display.orders.OrdersFragment;
 import cz.mtr.analyzaprodeju.fragments.display.returns.ReturnsFragment;
+import cz.mtr.analyzaprodeju.fragments.home.HomeFragmentDirections;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 
@@ -92,8 +94,24 @@ public class DisplayFragment extends Fragment implements DialogDeleteFragment.On
                 areReturnsEmpty = booleans[0];
                 areOrdersEmpty = booleans[1];
                 showOrHideButtons(position);
+                handleTabSwitchtingAndLeavingFragment();
             }
         });
+    }
+
+    private void handleTabSwitchtingAndLeavingFragment() {
+        goToHomeFragment();
+        if (areOrdersEmpty) {
+            mViewPager.setCurrentItem(0);
+        } else if (areReturnsEmpty) {
+            mViewPager.setCurrentItem(1);
+        }
+    }
+
+    private void goToHomeFragment() {
+        if (areReturnsEmpty && areOrdersEmpty) {
+            Navigation.findNavController(getView()).navigate(HomeFragmentDirections.toHome());
+        }
     }
 
 
