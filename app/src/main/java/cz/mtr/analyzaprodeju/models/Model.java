@@ -1,15 +1,19 @@
 package cz.mtr.analyzaprodeju.models;
 
+import android.content.Context;
+
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import cz.mtr.analyzaprodeju.fragments.scraper.stores.WebItem;
 import cz.mtr.analyzaprodeju.fragments.scraper.suppliers.WebItemSuppliers;
+import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
 import cz.mtr.analyzaprodeju.repository.preferences.AnalysisPreferences;
 import cz.mtr.analyzaprodeju.repository.preferences.StoreItemsPreferences;
 import cz.mtr.analyzaprodeju.repository.room.ArticlesDatabase.Article;
-import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
@@ -29,6 +33,9 @@ public class Model {
     private String ean;
     private List<WebItem> items = new ArrayList<>();
     private List<WebItemSuppliers> suppliersItems = new ArrayList<>();
+    private MutableLiveData<Boolean[]> ordersAndReturnsStatus = new MutableLiveData<>();
+    private Context mContext;
+
 
 
 
@@ -145,7 +152,13 @@ public class Model {
     public void saveOrdersAndReturns() {
         StoreItemsPreferences.getInstance().saveOrders(orders);
         StoreItemsPreferences.getInstance().saveReturns(returns);
+        ordersAndReturnsStatus.setValue(new Boolean[]{returns.isEmpty(), orders.isEmpty()});
     }
+
+    public MutableLiveData<Boolean[]> getOrdersAndReturnsStatus() {
+        return ordersAndReturnsStatus;
+    }
+
 
     public void loadOrdersAndReturns() {
         orders = StoreItemsPreferences.getInstance().loadOrders();
@@ -190,6 +203,18 @@ public class Model {
         if (mAnalysis != null) {
             mAnalysis.clear();
         }
+    }
+
+
+    /*
+        Saves MainActivity context so it can later be used be printer (in display fragment). Otherwise it crashes with illegal state exception.
+     */
+    public void saveMainActivityContextForPrinter(Context c) {
+        this.mContext = c;
+    }
+
+    public Context getMainActivityContext() {
+        return this.mContext;
     }
 
 

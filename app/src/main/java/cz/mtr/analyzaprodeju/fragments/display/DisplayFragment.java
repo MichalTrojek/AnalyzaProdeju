@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,6 +20,7 @@ import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDeleteFragment;
 import cz.mtr.analyzaprodeju.fragments.display.adapter.PrinterPageViewAdapter;
 import cz.mtr.analyzaprodeju.fragments.display.orders.OrdersFragment;
 import cz.mtr.analyzaprodeju.fragments.display.returns.ReturnsFragment;
+import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.models.datastructures.DisplayableArticle;
 
 public class DisplayFragment extends Fragment implements DialogDeleteFragment.OnDeleteConfirmed {
@@ -26,10 +29,12 @@ public class DisplayFragment extends Fragment implements DialogDeleteFragment.On
 
 
     private ViewPager mViewPager;
-    private FloatingActionButton mDeleteFab;
+    private FloatingActionButton mDeleteFab, mPrintFab;
     private TabLayout mTabLayout;
     private ReturnsFragment returnsFragment = new ReturnsFragment();
     private OrdersFragment ordersFragment = new OrdersFragment();
+    private DisplayViewModel mViewModel;
+    private boolean areOrdersEmpty, areReturnsEmpty;
 
 
     public static DisplayFragment newInstance() {
@@ -40,34 +45,55 @@ public class DisplayFragment extends Fragment implements DialogDeleteFragment.On
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frament_display, container, false);
-
         mViewPager = view.findViewById(R.id.viewPager);
         setupViewPager(mViewPager);
-
-
         mTabLayout = view.findViewById(R.id.tabLayout);
         mTabLayout.setupWithViewPager(mViewPager);
+        setupFloatingActionButtons(view);
+        switchTabToOrdersIfReturnsAreEmpty();
+        return view;
+    }
 
-
+    private void setupFloatingActionButtons(View view) {
         mDeleteFab = view.findViewById(R.id.deleteAllFloatingButton);
         mDeleteFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 DialogDeleteFragment dialog = new DialogDeleteFragment();
                 dialog.setTargetFragment(DisplayFragment.this, 1);
                 dialog.show(getFragmentManager(), "DisplayFragment");
-
-
             }
         });
 
-        return view;
+        mPrintFab = view.findViewById(R.id.printerFob);
+        mPrintFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mViewModel.print(mTabLayout.getSelectedTabPosition());
+            }
+        });
     }
+
+    private void switchTabToOrdersIfReturnsAreEmpty() {
+        if (Model.getInstance().getReturns().isEmpty()) {
+            mViewPager.setCurrentItem(1);
+        }
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(DisplayViewModel.class);
+        mViewModel.getOrderAndReturnsStatus().observe(getViewLifecycleOwner(), new Observer<Boolean[]>() {
+            @Override
+            public void onChanged(Boolean[] booleans) {
+                int position = mTabLayout.getSelectedTabPosition();
+                areReturnsEmpty = booleans[0];
+                areOrdersEmpty = booleans[1];
+                showOrHideButtons(position);
+            }
+        });
     }
 
 
@@ -76,15 +102,55 @@ public class DisplayFragment extends Fragment implements DialogDeleteFragment.On
         adapter.addFragment(returnsFragment, "Vratka");
         adapter.addFragment(ordersFragment, "Objednavka");
         viewPager.setAdapter(adapter);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                showOrHideButtons(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
+
+    private void showOrHideButtons(int position) {
+        if (position == 0 && areReturnsEmpty) {
+            hideButtons();
+        } else if (position == 1 && areOrdersEmpty) {
+            hideButtons();
+        } else {
+            showButtons();
+        }
+    }
+
+    private void hideButtons() {
+        mPrintFab.hide();
+        mDeleteFab.hide();
+    }
+
+    private void showButtons() {
+        mPrintFab.show();
+        mDeleteFab.show();
+    }
+
 
 
     @Override
     public void deleteConfirmed() {
-        if (mTabLayout.getSelectedTabPosition() == 0) {
+        int position = mTabLayout.getSelectedTabPosition();
+        if (position == 0) {
             returnsFragment.deleteAllAndRefresh();
-        } else if (mTabLayout.getSelectedTabPosition() == 1) {
+        } else if (position == 1) {
             ordersFragment.deleteAllAndRefresh();
         }
     }
+
+
 }

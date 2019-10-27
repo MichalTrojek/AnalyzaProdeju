@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupDrawerLayout();
         handleHamburgerButtonPress();
         initializePreferences();
+        Model.getInstance().saveMainActivityContextForPrinter(MainActivity.this);
 
         mNavigationView.setCheckedItem(R.id.nav_home);
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -381,6 +382,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fm.popBackStack();
         }
     }
+
+
+//    private Context primaryBaseActivity;
+//
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        primaryBaseActivity = newBase;
+//        Model.getInstance().saveMainActivityContextForPrinter(newBase);
+//        super.attachBaseContext(newBase);
+//    }
 
 
 }
