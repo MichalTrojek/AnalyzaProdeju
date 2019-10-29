@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import cz.mtr.analyzaprodeju.R;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogDeleteFragment;
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 import cz.mtr.analyzaprodeju.fragments.display.adapter.PrinterPageViewAdapter;
 import cz.mtr.analyzaprodeju.fragments.display.orders.OrdersFragment;
 import cz.mtr.analyzaprodeju.fragments.display.returns.ReturnsFragment;
@@ -31,7 +32,7 @@ public class DisplayFragment extends Fragment implements DialogDeleteFragment.On
 
 
     private ViewPager mViewPager;
-    private FloatingActionButton mDeleteFab, mPrintFab;
+    private FloatingActionButton mDeleteFab, mPrintFab, mExportFab;
     private TabLayout mTabLayout;
     private ReturnsFragment returnsFragment = new ReturnsFragment();
     private OrdersFragment ordersFragment = new OrdersFragment();
@@ -72,6 +73,17 @@ public class DisplayFragment extends Fragment implements DialogDeleteFragment.On
             @Override
             public void onClick(View view) {
                 mViewModel.print(mTabLayout.getSelectedTabPosition());
+            }
+        });
+
+        mExportFab = view.findViewById(R.id.exportFab);
+        mExportFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogLoadingFragment loadingDialog = new DialogLoadingFragment();
+                loadingDialog.setCancelable(false);
+                loadingDialog.show(getFragmentManager(), "FragmentChangeDialog");
+                mViewModel.export(mTabLayout.getSelectedTabPosition(), loadingDialog);
             }
         });
     }
@@ -151,11 +163,13 @@ public class DisplayFragment extends Fragment implements DialogDeleteFragment.On
     private void hideButtons() {
         mPrintFab.hide();
         mDeleteFab.hide();
+        mExportFab.hide();
     }
 
     private void showButtons() {
         mPrintFab.show();
         mDeleteFab.show();
+        mExportFab.show();
     }
 
 

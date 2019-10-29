@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 import cz.mtr.analyzaprodeju.models.Model;
 
 public class DisplayViewModel extends AndroidViewModel {
@@ -31,6 +32,11 @@ public class DisplayViewModel extends AndroidViewModel {
                 position == 0 ?
                         "Vratka" :
                         "Objednávka");
+    }
+
+    public void export(int position, DialogLoadingFragment progressDialog) {
+        SaveOfflineFilesTask excelCreator = new SaveOfflineFilesTask(getApplication(), progressDialog);
+        excelCreator.execute(position);
     }
 
 

@@ -1,5 +1,7 @@
 package cz.mtr.analyzaprodeju.shared;
 
+import android.util.Log;
+
 import java.io.Serializable;
 
 public class SharedArticle implements Serializable {
@@ -48,11 +50,12 @@ public class SharedArticle implements Serializable {
 
 
 	public String getEshopCode() {
+		Log.d("DEBUGUJU", "get shared article" + this.eshopCode);
 		return this.eshopCode;
 	}
 
-	public void setEshopCode(String code) {
-		eshopCode = code;
+	public void setEshopCode(String eshopCode) {
+		this.eshopCode = eshopCode;
 	}
 
 	public String getRanking() {
