@@ -71,7 +71,7 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
                     isEmpty = false;
                     mAnalysisReader.readAnalysisFromFtp(
                             ftp.retrieveFileStream(
-                                    ftp.listFiles()[ftp.listFiles().length - 1].getName()));
+                                    ftp.listFiles()[ftp.listFiles().length - 1].getName()), 0);
                 }
             } else {
                 isLoggedIn = false;

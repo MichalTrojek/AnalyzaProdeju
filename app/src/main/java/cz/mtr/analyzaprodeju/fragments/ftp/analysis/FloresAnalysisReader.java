@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.models.Model;
+import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class FloresAnalysisReader {
@@ -22,7 +23,7 @@ public class FloresAnalysisReader {
 
     }
 
-    public HashMap<String, SharedArticle> readAnalysisFromFtp(InputStream input) {
+    public HashMap<String, SharedArticle> readAnalysisFromFtp(InputStream input, long timeStamp) {
         HashMap<String, SharedArticle> map = new HashMap<>(500000, 1);
         SharedArticle shared;
         try {
@@ -74,6 +75,9 @@ public class FloresAnalysisReader {
             mArticleAmount = map.size() + "";
             if (map.size() != 0) {
                 Model.getInstance().setAnalysis(map);
+                if(timeStamp != 0) {
+                    GeneralPreferences.getInstance().saveUpdatedTime(timeStamp);
+                }
                 Log.d(TAG, "Analyza nahrana " + map.size());
             }
             reader.close();
