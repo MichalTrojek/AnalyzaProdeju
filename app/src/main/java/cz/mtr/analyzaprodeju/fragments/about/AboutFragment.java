@@ -32,10 +32,10 @@ public class AboutFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(AboutViewModel.class);
-        mViewModel.getDbVersion().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+        mViewModel.getDataInfo().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onChanged(Integer integer) {
-                dbVersionTextView.setText("Verze databaze: " + integer);
+            public void onChanged(String string) {
+                dbVersionTextView.setText(string);
             }
         });
 
