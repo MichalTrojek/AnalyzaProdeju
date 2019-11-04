@@ -10,14 +10,14 @@ import cz.mtr.analyzaprodeju.services.asynctasks.UpdateStoreDataTask;
 
 public class UpdateStoreDataJobService extends JobService {
 
-    private static final String TAG = UpdateStoreDataJobService.class.getSimpleName();
+    private static final String TestService = UpdateStoreDataJobService.class.getSimpleName();
     private boolean jobCancelled = false;
     private UpdateStoreDataTask mTask;
 
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
-        Log.d(TAG, "UpdateStoreDataService has started");
+        Log.d(TestService, "UpdateStoreDataService has started");
         Authentication.init(getApplicationContext());
         GeneralPreferences.init(getApplicationContext());
         doBackgroundWork(jobParameters);
@@ -29,12 +29,12 @@ public class UpdateStoreDataJobService extends JobService {
         String storeName = GeneralPreferences.getInstance().loadFilename();
         String password = GeneralPreferences.getInstance().loadPassword();
         if (!storeName.isEmpty() && !password.isEmpty()) {
-            Log.d(TAG, "UpdateStoreDataService Task called");
+            Log.d(TestService, "UpdateStoreDataService Task called");
             mTask = new UpdateStoreDataTask(storeName, password) {
                 @Override
                 protected void onPostExecute(Boolean success) {
                     jobFinished(jobParameters, !success);
-                    Log.d(TAG, "UpdateStoreDataService JOB FINISHED");
+                    Log.d(TestService, "UpdateStoreDataService JOB FINISHED");
                 }
             };
             mTask.execute();
@@ -43,7 +43,7 @@ public class UpdateStoreDataJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        Log.d(TAG, "UpdateStoreDataService Job cancelled before completion");
+        Log.d(TestService, "UpdateStoreDataService Job cancelled before completion");
         if (mTask != null) {
             mTask.cancel(true);
         }

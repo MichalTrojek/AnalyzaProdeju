@@ -25,7 +25,7 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
     private String mFilename;
 
     public UpdateStoreDataTask(String name, String password) {
-        Log.d(TAG, "Constructor");
+        Log.d("TestService", "StoreDaa file name " +  name);
         if (password.equalsIgnoreCase("test123")) {
             mAddress = "214180.w80.wedos.net";
             mUsername = "w214180";
@@ -43,13 +43,13 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
 
     @Override
     protected void onPreExecute() {
-        Log.d(TAG, "On Preexcecute ");
+
     }
 
     @Override
     protected Boolean doInBackground(String... voids) {
         boolean success = false;
-        Log.d(TAG, "Downloading started");
+
         FTPClient ftp = null;
         try {
             ftp = new FTPClient();
@@ -60,15 +60,13 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
                 ftp.enterLocalPassiveMode();
                 ftp.changeWorkingDirectory(mPath);
                 for (FTPFile f : ftp.listFiles()) {
-//                    if(f.getName().equalsIgnoreCase(GeneralPreferences.getInstance().loadLastStoreNameFile()) && f.getTimestamp() != GeneralPreferences.getInstance().loadLastTimestanp()){
-//
-//                    }
-                    Log.d(TAG, f.getTimestamp() + "");
-                    if (f.getName().toLowerCase().equals(mFilename.toLowerCase())) {
-                        Log.d(TAG, "Inside second if");
-                        GeneralPreferences.getInstance().saveLastStoreNameFile(f.getName().toLowerCase());
-                        Model.getInstance().setStoreItems(new StoreDataReader().getStoreStatus(ftp.retrieveFileStream(mFilename)));
+
+                    if (f.getName().toLowerCase().equals(mFilename.toLowerCase()) && GeneralPreferences.getInstance().loadStoreDataUpdateTime() != f.getTimestamp().getTimeInMillis()) {
+                        Log.d("TestService", "Downloading store data");
+                        Model.getInstance().setStoreItems(new StoreDataReader().getStoreStatus(ftp.retrieveFileStream(mFilename), f.getTimestamp().getTimeInMillis()));
                         break;
+                    } else {
+                        Log.d("TestService", "No Store Update1");
                     }
                 }
                 success = true;
@@ -84,16 +82,13 @@ public class UpdateStoreDataTask extends AsyncTask<String, Integer, Boolean> {
         return success;
     }
 
-
     @Override
     protected void onPostExecute(Boolean success) {
-        Log.d(TAG, "On post execute");
         if (!isLoggedIn) {
-            Log.d(TAG, "failed to login");
+            Log.d("TestService", "failed to log in");
             success = false;
         }
-
-        Log.d(TAG, "succes");
+        Log.d("TestService", "store data success " + success);
         super.onPostExecute(success);
     }
 

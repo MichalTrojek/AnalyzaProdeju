@@ -56,8 +56,9 @@ public class DownloadStoreDataFtpTask extends AsyncTask<String, Integer, Boolean
                 for (FTPFile f : ftp.listFiles()) {
                     Log.d(TAG, mFilename);
                     if (f.getName().toLowerCase().equals(mFilename.toLowerCase())) {
-                        Model.getInstance().setStoreItems(new StoreDataReader().getStoreStatus(ftp.retrieveFileStream(mFilename)));
-                        Log.d(TAG, "Velikost storeitem " + Model.getInstance().getStoreItems().size());
+                        Model.getInstance().setStoreItems
+                                (new StoreDataReader().getStoreStatus(
+                                        ftp.retrieveFileStream(mFilename), 0));
                         break;
                     }
                 }

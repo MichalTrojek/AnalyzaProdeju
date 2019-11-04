@@ -76,9 +76,9 @@ public class FloresAnalysisReader {
             if (map.size() != 0) {
                 Model.getInstance().setAnalysis(map);
                 if(timeStamp != 0) {
-                    GeneralPreferences.getInstance().saveUpdatedTime(timeStamp);
+                    GeneralPreferences.getInstance().saveAnalysisUpdatedTime(timeStamp);
+                    Log.d("TestService", "Analysis save timestamp " + timeStamp);
                 }
-                Log.d(TAG, "Analyza nahrana " + map.size());
             }
             reader.close();
 

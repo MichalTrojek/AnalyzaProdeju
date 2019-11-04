@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import cz.mtr.analyzaprodeju.models.datastructures.StoreItem;
+import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 
 public class StoreDataReader {
 
@@ -23,14 +24,13 @@ public class StoreDataReader {
 
     }
 
-    public HashMap<String, StoreItem> getStoreStatus(InputStream input) {
-        return readStoreStatus(input);
+    public HashMap<String, StoreItem> getStoreStatus(InputStream input, long timestamp) {
+        return readStoreStatus(input, timestamp);
     }
 
 
-    private HashMap<String, StoreItem> readStoreStatus(InputStream input) {
+    private HashMap<String, StoreItem> readStoreStatus(InputStream input, long timestamp) {
         HashMap<String, StoreItem> items = new HashMap<>();
-        Log.d(TAG, "Service Store Update started");
         try {
             CSVParser parser = new CSVParserBuilder().withSeparator(';').withIgnoreQuotations(true).build();
             CSVReader reader = new CSVReaderBuilder(new InputStreamReader(input, "Windows-1250")).withSkipLines(1).withCSVParser(parser).build();
@@ -51,8 +51,12 @@ public class StoreDataReader {
                     continue;
                 }
             }
+
             if (items.size() != 0) {
-                Log.d(TAG, "Service Store Items " + items.size() + " Velikost");
+                if(timestamp != 0) {
+                    GeneralPreferences.getInstance().saveStoreDataTime(timestamp);
+                    Log.d("TestService", "Saved store data timestamp");
+                }
             }
             reader.close();
         } catch (IOException e) {

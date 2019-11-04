@@ -15,6 +15,7 @@ public class GeneralPreferences {
     private static final String SELECTED_STORE_NAME = "selectedstorename";
     private static final String LAST_STORE_FILE_NAME = "laststorefilename";
     private static final String TIME = "time";
+    private static final String STORE_DATA_TIME = "storedatatime";
 
 
     private android.content.SharedPreferences mPrefs;
@@ -92,23 +93,23 @@ public class GeneralPreferences {
         return mPrefs.getString(SELECTED_STORE_NAME, "");
     }
 
-    // stavy prodejen
-    public void saveLastStoreNameFile(String name) {
-        mPrefs.edit().putString(LAST_STORE_FILE_NAME, name).commit();
-    }
 
 
-    public String loadLastStoreNameFile() {
-        return mPrefs.getString(LAST_STORE_FILE_NAME, "nenalezlo");
-    }
-
-
-    public long loadUpdatedTime() {
+    public long loadAnalysisUpdatedTime() {
         return mPrefs.getLong(TIME, -99);
     }
 
-    public void saveUpdatedTime(long time) {
+    public void saveAnalysisUpdatedTime(long time) {
         mPrefs.edit().putLong(TIME, time).commit();
+    }
+
+
+    public long loadStoreDataUpdateTime(){
+        return mPrefs.getLong(STORE_DATA_TIME, -99);
+    }
+
+    public void saveStoreDataTime(long time){
+        mPrefs.edit().putLong(STORE_DATA_TIME, time).commit();
     }
 
 

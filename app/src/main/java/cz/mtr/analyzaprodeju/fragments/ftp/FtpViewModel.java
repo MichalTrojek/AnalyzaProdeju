@@ -26,7 +26,7 @@ public class FtpViewModel extends AndroidViewModel {
     private Context mContext;
     private MutableLiveData<String> mPassword = new MutableLiveData<>();
     private MutableLiveData<Integer> mLastSelectedItemIndex = new MutableLiveData<>();
-    private MutableLiveData<String> filenameOfStore = new MutableLiveData<>();
+
     
 
     public FtpViewModel(@NonNull Application application) {
@@ -69,10 +69,6 @@ public class FtpViewModel extends AndroidViewModel {
     }
 
 
-    public MutableLiveData<String> getStoreFileName() {
-        filenameOfStore.setValue(GeneralPreferences.getInstance().loadFilename());
-        return filenameOfStore;
-    }
 
     public void onDownloadDataClick(String storeName, String password, FragmentManager fragmentManager) {
         storeName = new NameConverter().convertNameToShortcut(cleanString(storeName));
@@ -80,9 +76,6 @@ public class FtpViewModel extends AndroidViewModel {
         setPassword(password);
         new DownloadAnalysisFtpTask(mContext, storeName, password, fragmentManager).execute();
         new DownloadStoreDataFtpTask(GeneralPreferences.getInstance().loadFilename(), password).execute();
-
-
-//        new UpdateStoreDataTask("test.CSV", password).execute();
     }
 
 

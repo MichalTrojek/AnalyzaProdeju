@@ -25,7 +25,6 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
     private long mTimestamp;
 
     public UpdateAnalysisTask(String name, String password) {
-        Log.d(TAG, "Update Analysis Constructor");
         if (password.equalsIgnoreCase("test123")) {
             mAddress = "214180.w80.wedos.net";
             mUsername = "w214180";
@@ -35,7 +34,7 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
             mPassword = password;
             mPath = "/prodejny/" + name;
         }
-        Log.d("JobService", "Store name " + name);
+        Log.d("TestService", "Analysis file name " + name);
         mAnalysisReader = new FloresAnalysisReader();
     }
 
@@ -47,7 +46,7 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
     @Override
     protected Boolean doInBackground(String... voids) {
         boolean success = false;
-        Log.d(TAG, "Update Analysis do in background");
+
         try {
             FTPClient ftp = new FTPClient();
             ftp.connect(mAddress);
@@ -59,19 +58,15 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
 
                 if (ftp.listFiles().length > 2) {
                     FTPFile file = ftp.listFiles()[ftp.listFiles().length - 1];
-                    Log.d("JobService", "name file " + file.getName());
-                    if (GeneralPreferences.getInstance().loadUpdatedTime()!= file.getTimestamp().getTimeInMillis()) {
-//                        GeneralPreferences.getInstance().saveUpdatedTime(file.getTimestamp().getTimeInMillis());
+                    if (GeneralPreferences.getInstance().loadAnalysisUpdatedTime()!= file.getTimestamp().getTimeInMillis()) {
                         isEmpty = false;
                         mAnalysisReader.readAnalysisFromFtp(
                                 ftp.retrieveFileStream(file.getName()), file.getTimestamp().getTimeInMillis());
                         success = true;
                         mTimestamp = file.getTimestamp().getTimeInMillis();
-                        Log.d(TAG, "Update");
+                        Log.d("TestService", "Analysis Update");
                     } else {
-                        Log.d("JobService", "saved updateTime " + GeneralPreferences.getInstance().loadUpdatedTime());
-                        Log.d("JobService", "timestamp " + file.getTimestamp().getTimeInMillis());
-                        Log.d(TAG, "neni update");
+                        Log.d("TestService", "Analysis no Update");
 
                     }
                 }
