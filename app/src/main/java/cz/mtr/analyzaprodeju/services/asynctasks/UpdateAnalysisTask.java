@@ -46,7 +46,13 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
     @Override
     protected Boolean doInBackground(String... voids) {
         boolean success = false;
+        getOldRevenue();
+        success = downloadAnalysisFromFtp();
+        return success;
+    }
 
+    private boolean downloadAnalysisFromFtp() {
+        boolean success = false;
         try {
             FTPClient ftp = new FTPClient();
             ftp.connect(mAddress);
@@ -58,7 +64,7 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
 
                 if (ftp.listFiles().length > 2) {
                     FTPFile file = ftp.listFiles()[ftp.listFiles().length - 1];
-                    if (GeneralPreferences.getInstance().loadAnalysisUpdatedTime()!= file.getTimestamp().getTimeInMillis()) {
+                    if (GeneralPreferences.getInstance().loadAnalysisUpdatedTime() != file.getTimestamp().getTimeInMillis()) {
                         isEmpty = false;
                         mAnalysisReader.readAnalysisFromFtp(
                                 ftp.retrieveFileStream(file.getName()), file.getTimestamp().getTimeInMillis());
@@ -81,6 +87,41 @@ public class UpdateAnalysisTask extends AsyncTask<String, Integer, Boolean> {
         }
         return success;
     }
+
+    private void getOldRevenue() {
+        try {
+            FTPClient ftp = new FTPClient();
+            ftp.connect(mAddress);
+            boolean login = ftp.login(mUsername, mPassword);
+            if (login) {
+                ftp.setFileType(FTP.BINARY_FILE_TYPE);
+                ftp.enterLocalPassiveMode();
+                ftp.changeWorkingDirectory(mPath);
+
+                if (ftp.listFiles().length > 2) {
+                    FTPFile file = ftp.listFiles()[ftp.listFiles().length - 2];
+                    if (GeneralPreferences.getInstance().loadAnalysisUpdatedTime() != file.getTimestamp().getTimeInMillis()) {
+                        isEmpty = false;
+                        mAnalysisReader.getTotalRevenueFromYesterday(
+                                ftp.retrieveFileStream(file.getName()));
+
+                        mTimestamp = file.getTimestamp().getTimeInMillis();
+                        Log.d("TestService", "OldRevenue Update");
+                    } else {
+                        Log.d("TestService", "OldRevenue Update");
+                    }
+                }
+            } else {
+                isLoggedIn = false;
+            }
+            ftp.logout();
+            ftp.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     @Override

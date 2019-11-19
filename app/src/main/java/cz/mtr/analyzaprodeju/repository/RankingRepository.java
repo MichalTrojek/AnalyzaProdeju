@@ -69,7 +69,7 @@ public class RankingRepository {
     public String getInfo() {
         ArrayList<SharedArticle> list = new ArrayList<>(Model.getInstance().getAnalysis().values());
         SharedArticle article = (SharedArticle) list.get(0);
-        info = String.format("Od: %s  Do: %s\nCelkem %s Kč\nVčera: %s Kč", article.getSales1DateSince(), article.getSales1DateTo(), getTotalRevenue(), dailyRevenue);
+        info = String.format("Od: %s  Do: %s\nCelkem: %s Kč\nVčera: %s Kč", article.getSales1DateSince(), article.getSales1DateTo(), getTotalRevenue(), dailyRevenue);
         return info;
     }
 
