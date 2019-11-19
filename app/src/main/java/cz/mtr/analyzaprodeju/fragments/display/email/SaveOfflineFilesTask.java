@@ -113,7 +113,7 @@ public class SaveOfflineFilesTask extends AsyncTask<Integer, Integer, Void> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        test();
+//        test();
     }
 
     public void test() {
