@@ -79,7 +79,9 @@ public class RankingRepository {
             revenue = revenue.replace(",", ".");
             Double asDouble = Double.parseDouble(revenue);
             int asInt = asDouble.intValue();
-            total += asInt;
+            if(asInt > 0) {
+                total += asInt;
+            }
         }
         return createFormattedString(total);
     }
