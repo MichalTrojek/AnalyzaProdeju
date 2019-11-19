@@ -16,6 +16,7 @@ public class GeneralPreferences {
     private static final String LAST_STORE_FILE_NAME = "laststorefilename";
     private static final String TIME = "time";
     private static final String STORE_DATA_TIME = "storedatatime";
+    private static final String OLD_REVENUE = "oldrevenue";
 
 
     private android.content.SharedPreferences mPrefs;
@@ -111,6 +112,16 @@ public class GeneralPreferences {
     public void saveStoreDataTime(long time){
         mPrefs.edit().putLong(STORE_DATA_TIME, time).commit();
     }
+
+
+    public void saveTotalRevenueFromYesterday(int oldRevenue) {
+        mPrefs.edit().putInt(OLD_REVENUE, oldRevenue).commit();
+    }
+
+    public int getTotalRevenueFromYesterday() {
+        return mPrefs.getInt(OLD_REVENUE, 0);
+    }
+
 
 
 }

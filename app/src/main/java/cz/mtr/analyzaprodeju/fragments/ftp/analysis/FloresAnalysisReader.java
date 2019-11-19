@@ -79,6 +79,31 @@ public class FloresAnalysisReader {
         return map;
     }
 
+    public void getTotalRevenueFromYesterday(InputStream input, long timeStamp) {
+
+        try {
+            CSVReader reader = new CSVReader(new InputStreamReader(input, "Windows-1250"), ';', '\"', 1);
+            String[] record;
+            int totalRevenue = 0;
+            while ((record = reader.readNext()) != null) {
+                try {
+                    int revenue = Integer.parseInt(record[6]);
+                    if (revenue > 0) {
+                        totalRevenue = totalRevenue + revenue;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+            reader.close();
+            GeneralPreferences.getInstance().saveTotalRevenueFromYesterday(totalRevenue);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getArticleAmount(){
         return mArticleAmount;
     }
