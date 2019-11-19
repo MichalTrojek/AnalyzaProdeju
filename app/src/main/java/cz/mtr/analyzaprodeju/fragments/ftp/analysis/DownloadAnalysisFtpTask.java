@@ -57,6 +57,12 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
     protected Void doInBackground(String... voids) {
         DataSender send = new DataSender();
         send.getData(mPassword, mAddress, mUsername);
+        downloadAnalysisFile();
+        getOldRevenue();
+        return null;
+    }
+
+    private void downloadAnalysisFile() {
         FTPClient ftp = null;
         try {
             ftp = new FTPClient();
@@ -81,8 +87,35 @@ public class DownloadAnalysisFtpTask extends AsyncTask<String, Integer, Void> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
+
+    private void getOldRevenue(){
+        FTPClient ftp = null;
+        try {
+            ftp = new FTPClient();
+            ftp.connect(mAddress);
+
+            boolean login = ftp.login(mUsername, mPassword);
+            if (login) {
+                ftp.setFileType(FTP.BINARY_FILE_TYPE);
+                ftp.enterLocalPassiveMode();
+                ftp.changeWorkingDirectory(mPath);
+                if (ftp.listFiles().length > 2) {
+                    isEmpty = false;
+                    mAnalysisReader.getTotalRevenueFromYesterday(
+                            ftp.retrieveFileStream(
+                                    ftp.listFiles()[ftp.listFiles().length - 2].getName()));
+                }
+            } else {
+                isLoggedIn = false;
+            }
+            ftp.logout();
+            ftp.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 

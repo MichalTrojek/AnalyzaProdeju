@@ -79,7 +79,7 @@ public class FloresAnalysisReader {
         return map;
     }
 
-    public void getTotalRevenueFromYesterday(InputStream input, long timeStamp) {
+    public void getTotalRevenueFromYesterday(InputStream input) {
 
         try {
             CSVReader reader = new CSVReader(new InputStreamReader(input, "Windows-1250"), ';', '\"', 1);
