@@ -25,7 +25,7 @@ public class EmailSender {
     private void send(Context context, File attachment) {
         final File file = attachment;
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("application/octet-stream"); /* or use intent.setType("message/rfc822); */
+        intent.setType("application/octet-stream");
         intent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
         if (!file.exists() || !file.canRead()) {
             Toast.makeText(context, "Attachment Error", Toast.LENGTH_SHORT).show();

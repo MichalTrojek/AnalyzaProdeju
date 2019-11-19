@@ -171,7 +171,11 @@ public class SharedArticle implements Serializable {
 	}
 
 	public void setRevenue(String revenue) {
-		this.revenue = revenue;
+		if(Integer.parseInt(revenue) > 0) {
+			this.revenue = revenue;
+		} else {
+			this.revenue = "0";
+		}
 	}
 
 	public void setReleaseDate(String released) {

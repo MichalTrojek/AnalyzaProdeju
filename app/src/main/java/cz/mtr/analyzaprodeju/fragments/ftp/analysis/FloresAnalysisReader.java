@@ -31,11 +31,6 @@ public class FloresAnalysisReader {
             while ((record = reader.readNext()) != null) {
                 try {
                     rankingCounter++;
-                    if (record[3].contains("Dárková knižní") || record[3].contains("Klubový slevový poukaz")
-                            || record[3].contains("VOUCHER")) {
-                        rankingCounter--;
-                        continue;
-                    }
                     shared = new SharedArticle();
                     shared.setEshopCode(record[1]);
                     shared.setRanking(rankingCounter + "");
@@ -62,7 +57,6 @@ public class FloresAnalysisReader {
                     shared.setSales2DateSince(record[23]);
                     shared.setSales2DateTo(record[24]);
                     shared.setSales2Days(record[25]);
-
                     map.put(record[2], shared);
                 } catch (Exception e) {
                     e.printStackTrace();
