@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.display;
+package cz.mtr.analyzaprodeju.fragments.display.email;
 
 import androidx.core.content.FileProvider;
 

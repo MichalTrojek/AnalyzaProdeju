@@ -1,7 +1,5 @@
 package cz.mtr.analyzaprodeju.fragments.ftp.analysis;
 
-import android.util.Log;
-
 import com.opencsv.CSVReader;
 
 import java.io.IOException;
@@ -77,7 +75,6 @@ public class FloresAnalysisReader {
                 Model.getInstance().setAnalysis(map);
                 if(timeStamp != 0) {
                     GeneralPreferences.getInstance().saveAnalysisUpdatedTime(timeStamp);
-                    Log.d("TestService", "Analysis save timestamp " + timeStamp);
                 }
             }
             reader.close();

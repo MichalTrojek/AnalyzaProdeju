@@ -7,6 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
+import cz.mtr.analyzaprodeju.fragments.display.email.SaveOfflineFilesTask;
+import cz.mtr.analyzaprodeju.fragments.display.printer.Printer;
 import cz.mtr.analyzaprodeju.models.Model;
 
 public class DisplayViewModel extends AndroidViewModel {
