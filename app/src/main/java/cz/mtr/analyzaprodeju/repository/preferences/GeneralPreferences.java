@@ -114,13 +114,6 @@ public class GeneralPreferences {
     }
 
 
-    public void saveTotalRevenueFromYesterday(int oldRevenue) {
-        mPrefs.edit().putInt(OLD_REVENUE, oldRevenue).commit();
-    }
-
-    public int getTotalRevenueFromYesterday() {
-        return mPrefs.getInt(OLD_REVENUE, 0);
-    }
 
 
 

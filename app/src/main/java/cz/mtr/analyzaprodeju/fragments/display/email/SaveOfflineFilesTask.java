@@ -21,7 +21,6 @@ import java.util.Date;
 import cz.mtr.analyzaprodeju.fragments.dialogs.DialogLoadingFragment;
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.shared.ExportSharedArticle;
-import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class SaveOfflineFilesTask extends AsyncTask<Integer, Integer, Void> {
 
@@ -113,41 +112,9 @@ public class SaveOfflineFilesTask extends AsyncTask<Integer, Integer, Void> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        test();
     }
 
-    public void test() {
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet1 = workbook.createSheet();
-        createFirstRow(sheet1, "Vratka");
-        int i = 1;
-        for (SharedArticle e : Model.getInstance().getAnalysis().values()) {
-            Row row = sheet1.createRow(i);
-            row.createCell(0).setCellValue(e.getEan());
-            row.createCell(1).setCellValue(e.getName());
-            row.createCell(2).setCellValue(Integer.parseInt(e.getRevenue()));
-            i++;
-        }
 
-        try {
-            if (isExternalStorageWritable()) {
-                mFilename = "TEST" + returnDate() + ".xlsx";
-                File file = new File(Environment.getExternalStorageDirectory(), mFilename);
-                FileOutputStream fileOut = new FileOutputStream(file);
-                workbook.write(fileOut);
-                fileOut.close();
-                MediaScannerConnection.scanFile(
-                        mContext,
-                        new String[]{file.getAbsolutePath()}, // "file" was created with "new File(...)"
-                        null,
-                        null);
-            } else {
-                System.out.println("external storage is not writable");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public void createExcelOrdersFile(ArrayList<ExportSharedArticle> orders) {

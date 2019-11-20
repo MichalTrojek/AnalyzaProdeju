@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Random;
 
 import cz.mtr.analyzaprodeju.models.Model;
 import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
@@ -30,11 +31,19 @@ public class FloresAnalysisReader {
             int rankingCounter = 0;
             while ((record = reader.readNext()) != null) {
                 try {
+                    String ean;
                     rankingCounter++;
                     shared = new SharedArticle();
                     shared.setEshopCode(record[1]);
                     shared.setRanking(rankingCounter + "");
-                    shared.setEan(record[2]);
+                    if (record[2].isEmpty()) {
+                        Random random = new Random();
+                        ean = "t" + random.nextInt(Integer.MAX_VALUE);
+                        shared.setEan(ean);
+                    } else {
+                        ean = record[2];
+                    }
+                    shared.setEan(ean);
                     shared.setName(record[3]);
                     shared.setSales1(record[4]);
                     shared.setSales2(record[5]);
@@ -57,13 +66,12 @@ public class FloresAnalysisReader {
                     shared.setSales2DateSince(record[23]);
                     shared.setSales2DateTo(record[24]);
                     shared.setSales2Days(record[25]);
-                    map.put(record[2], shared);
+                    map.put(ean, shared);
                 } catch (Exception e) {
                     e.printStackTrace();
                     continue;
                 }
             }
-
             mArticleAmount = map.size() + "";
             if (map.size() != 0) {
                 Model.getInstance().setAnalysis(map);
@@ -79,30 +87,7 @@ public class FloresAnalysisReader {
         return map;
     }
 
-    public void getTotalRevenueFromYesterday(InputStream input) {
 
-        try {
-            CSVReader reader = new CSVReader(new InputStreamReader(input, "Windows-1250"), ';', '\"', 1);
-            String[] record;
-            int totalRevenue = 0;
-            while ((record = reader.readNext()) != null) {
-                try {
-                    int revenue = Integer.parseInt(record[6]);
-                    if (revenue > 0) {
-                        totalRevenue = totalRevenue + revenue;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    continue;
-                }
-            }
-            reader.close();
-            GeneralPreferences.getInstance().saveTotalRevenueFromYesterday(totalRevenue);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public String getArticleAmount(){
         return mArticleAmount;

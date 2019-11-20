@@ -15,7 +15,6 @@ import java.util.Locale;
 
 import cz.mtr.analyzaprodeju.fragments.ranking.item.RankingItem;
 import cz.mtr.analyzaprodeju.models.Model;
-import cz.mtr.analyzaprodeju.repository.preferences.GeneralPreferences;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class RankingRepository {
@@ -23,7 +22,6 @@ public class RankingRepository {
     private static final String TAG = RankingRepository.class.getSimpleName();
 
     private String info = "";
-    private String dailyRevenue = "";
     private MutableLiveData<List<RankingItem>> allRankingItem = new MutableLiveData<>();
 
     public RankingRepository() {
@@ -69,7 +67,7 @@ public class RankingRepository {
     public String getInfo() {
         ArrayList<SharedArticle> list = new ArrayList<>(Model.getInstance().getAnalysis().values());
         SharedArticle article = (SharedArticle) list.get(0);
-        info = String.format("Od: %s  Do: %s\nCelkem: %s Kč\nVčera: %s Kč", article.getSales1DateSince(), article.getSales1DateTo(), getTotalRevenue(), dailyRevenue);
+        info = String.format("Od: %s  Do: %s\nCelkem: %s Kč", article.getSales1DateSince(), article.getSales1DateTo(), getTotalRevenue());
         return info;
     }
 
@@ -85,13 +83,10 @@ public class RankingRepository {
                 total += asInt;
             }
         }
-        calculateDailyRevenue(total);
         return createFormattedString(total);
     }
 
-    private void calculateDailyRevenue(int total){
-        dailyRevenue = createFormattedString(total - GeneralPreferences.getInstance().getTotalRevenueFromYesterday());
-    }
+
 
     private String createFormattedString(int total) {
         DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.getDefault());
