@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int UPDATE_DATA_JOB = 321;
     private static final int UPDATE_STORE_DATA_JOB = 320;
+    private static final int MINUTES = 60;
 
 
     private DrawerLayout mDrawerLayout;
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         JobInfo info = new JobInfo.Builder(UPDATE_DATA_JOB, componentName)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
                 .setPersisted(true)
-                .setPeriodic(15 * 60 * 1000)
+                .setPeriodic(MINUTES * 60 * 1000)
                 .build();
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode = scheduler.schedule(info);
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         JobInfo info = new JobInfo.Builder((UPDATE_STORE_DATA_JOB), componentName)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
                 .setPersisted(true)
-                .setPeriodic(15 * 60 * 1000)
+                .setPeriodic(MINUTES * 60 * 1000)
                 .build();
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode = scheduler.schedule(info);
