@@ -17,13 +17,386 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="205dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/salesCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingCardView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/nameCardView"
+                app:layout_constraintTop_toBottomOf="@+id/nameCardView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="PRODEJE"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="true"
+                        android:textColor="#000000"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/salesDaysTwoTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="ZA 151 DNŮ :"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/salesDaysOneTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/salesDaysOneTextView" />
+
+                    <TextView
+                        android:id="@+id/salesAmountTwoTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="430KS"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/salesDaysTwoTextView"
+                        app:layout_constraintTop_toTopOf="@+id/salesDaysTwoTextView"
+                        tools:text="430KS" />
+
+                    <TextView
+                        android:id="@+id/salesAmountOneTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/salesAmountTwoTextView"
+                        app:layout_constraintTop_toTopOf="@+id/salesDaysOneTextView"
+                        tools:text="101KS" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="OBRAT "
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="@+id/salesDaysTwoTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/salesDaysTwoTextView" />
+
+                    <TextView
+                        android:id="@+id/salesDaysOneTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="ZA 31 DNŮ : "
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/textView13"
+                        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+                    <TextView
+                        android:id="@+id/amountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="35249,- Kč"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView15"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15"
+                        tools:text="35249,- Kč" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ratingCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/warehouseCardView"
+                app:layout_constraintEnd_toEndOf="@+id/imageCardView"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/imageCardView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="POŘADÍ PRODEJŮ  "
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textColor="#000000"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="PRODEJNA : "
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="@+id/textView17"
+                        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+                    <TextView
+                        android:id="@+id/rankTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="1."
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/textView30"
+                        app:layout_constraintTop_toTopOf="@+id/textView30"
+                        tools:text="1." />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="ESHOP :  "
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="@+id/textView30"
+                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                    <TextView
+                        android:id="@+id/eshopTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8."
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/rankTextView"
+                        app:layout_constraintTop_toTopOf="@+id/textView31"
+                        tools:text="8." />
+
+                    <TextView
+                        android:id="@+id/lastSaleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="08.07.2019"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView32"
+                        app:layout_constraintTop_toBottomOf="@+id/textView32"
+                        tools:text="08.07.2019" />
+
+                    <TextView
+                        android:id="@+id/textView32"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="POSLEDNÍ PRODEJ  "
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView17"
+                        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/nameCardView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageCardView"
+                app:layout_constraintEnd_toStartOf="@+id/imageCardView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Název:   "
+                        android:textColor="#000000"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/dontOrderTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="#FF0000"
+                        app:layout_constraintBottom_toTopOf="@+id/eanTextView"
+                        app:layout_constraintEnd_toEndOf="@+id/scaperNameTextView"
+                        app:layout_constraintStart_toStartOf="@+id/textView28"
+                        app:layout_constraintTop_toBottomOf="@+id/scaperNameTextView"
+                        tools:text="  (DOPRODEJ)" />
+
+                    <TextView
+                        android:id="@+id/scaperNameTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Tiché roky"
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView28"
+                        app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+                    <TextView
+                        android:id="@+id/eanTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9788075779113"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView29"
+                        app:layout_constraintStart_toStartOf="@+id/scaperNameTextView" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="EAN:   "
+                        android:textColor="#000000"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imageCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:id="@+id/nuthing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/itemPreview"
+                        app:layout_constraintEnd_toEndOf="@+id/itemPreview"
+                        app:layout_constraintStart_toStartOf="@+id/itemPreview"
+                        app:layout_constraintTop_toTopOf="@+id/itemPreview">
+
+
+                        <ProgressBar
+                            android:id="@+id/imageProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
+                    </FrameLayout>
+
+                    <ImageView
+                        android:id="@+id/itemPreview"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:padding="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@tools:sample/avatars[3]" />
+
+                    <TextView
+                        android:id="@+id/textView27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="CENA:"
+                        android:textColor="#000000"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemPreview" />
+
+                    <TextView
+                        android:id="@+id/priceTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="349,- Kč"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView27"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView27" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/infoCardView"
@@ -40,14 +413,39 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/releasedTextView"
+                        android:id="@+id/supplierTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="NAŠE NAKLADATELSTVÍ (KOMISE)"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/textView21"
+                        app:layout_constraintTop_toTopOf="@+id/textView21"
+                        tools:text="NAŠE NAKLADATELSTVÍ (KOMISE)" />
+
+                    <TextView
+                        android:id="@+id/textView21"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
+                        android:text="DODAVATEL:"
                         android:textColor="#000000"
+                        android:textStyle="italic"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/releasedTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="#000000"
+                        app:layout_constraintStart_toStartOf="@+id/textView21"
+                        app:layout_constraintTop_toBottomOf="@+id/textView21"
                         tools:text="Vydáno: 25.04.2019" />
 
                     <TextView
@@ -85,14 +483,12 @@
                         android:id="@+id/textView26"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:text="LOKACE"
-                        android:textAlignment="center"
+                        android:textAlignment="viewStart"
                         android:textColor="#000000"
                         android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,376 +496,17 @@
                         android:id="@+id/locationsTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="16dp"
-                        android:textAlignment="center"
+                        android:textAlignment="viewStart"
                         android:textColor="#000000"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView26"
                         app:layout_constraintTop_toBottomOf="@+id/textView26"
                         app:layout_constraintVertical_bias="1.0"
                         tools:text="011, 123, 312, 543, 123, 654, 785, 123, 999" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/salesCardView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eanCardView">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/salesDaysOneTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Za 31 dnů"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView6"
-                        tools:text="Za 31 dnů" />
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="PRODEJE"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="@+id/salesDaysTwoTextView"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/salesDaysOneTextView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/salesDaysTwoTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="Za 151 dnů"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toEndOf="@+id/salesDaysOneTextView"
-                        app:layout_constraintTop_toTopOf="@+id/salesDaysOneTextView"
-                        tools:text="Za 151 dnů" />
-
-                    <TextView
-                        android:id="@+id/salesAmountOneTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/salesDaysOneTextView"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="@+id/salesDaysOneTextView"
-                        app:layout_constraintTop_toBottomOf="@+id/salesDaysOneTextView"
-                        tools:text="101KS" />
-
-                    <TextView
-                        android:id="@+id/salesAmountTwoTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="430KS"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/salesDaysTwoTextView"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/salesDaysTwoTextView"
-                        app:layout_constraintTop_toTopOf="@+id/salesAmountOneTextView"
-                        tools:text="430KS" />
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="POSLEDNÍ PRODEJ  "
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="@+id/textView5"
-                        app:layout_constraintStart_toStartOf="@+id/textView12"
-                        app:layout_constraintTop_toTopOf="@+id/textView9" />
-
-                    <TextView
-                        android:id="@+id/lastSaleTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="08.07.2019"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/textView10"
-                        app:layout_constraintHorizontal_bias="0.48"
-                        app:layout_constraintStart_toStartOf="@+id/textView10"
-                        app:layout_constraintTop_toBottomOf="@+id/textView10"
-                        app:layout_constraintVertical_bias="0.0"
-                        tools:text="08.07.2019" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="  POŘADÍ PRODEJŮ  "
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="@+id/textView5"
-                        app:layout_constraintStart_toStartOf="@+id/textView12"
-                        app:layout_constraintTop_toTopOf="@+id/textView6" />
-
-                    <TextView
-                        android:id="@+id/textView12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="PRODEJNA"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toStartOf="@+id/textView5"
-                        app:layout_constraintTop_toTopOf="@+id/salesDaysTwoTextView" />
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="ESHOP  "
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-                    <TextView
-                        android:id="@+id/rankTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="1."
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/textView12"
-                        app:layout_constraintStart_toStartOf="@+id/textView12"
-                        app:layout_constraintTop_toBottomOf="@+id/textView12"
-                        tools:text="1." />
-
-                    <TextView
-                        android:id="@+id/eshopTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="8."
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/textView5"
-                        app:layout_constraintStart_toStartOf="@+id/textView5"
-                        app:layout_constraintTop_toTopOf="@+id/rankTextView"
-                        tools:text="8." />
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="OBRAT  "
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="@+id/salesAmountTwoTextView"
-                        app:layout_constraintStart_toStartOf="@+id/salesAmountOneTextView"
-                        app:layout_constraintTop_toBottomOf="@+id/salesAmountTwoTextView" />
-
-                    <TextView
-                        android:id="@+id/amountTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="35249,- Kč"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/textView9"
-                        app:layout_constraintStart_toStartOf="@+id/textView9"
-                        app:layout_constraintTop_toTopOf="@+id/lastSaleTextView"
-                        tools:text="35249,- Kč" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/nameCardView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-                    <FrameLayout
-                        android:id="@+id/nuthing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-
-                        <ImageView
-                            android:id="@+id/itemPreview"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:padding="10dp"
-                            tools:srcCompat="@tools:sample/avatars[3]" />
-
-                        <ProgressBar
-                            android:id="@+id/imageProgress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center" />
-
-                    </FrameLayout>
-
-
-                    <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Název:   "
-                        android:textColor="#000000"
-                        android:textStyle="italic"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/dontOrderTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#FF0000"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/scaperNameTextView"
-                        app:layout_constraintStart_toStartOf="@+id/textView13"
-                        tools:text="  (DOPRODEJ)" />
-
-                    <TextView
-                        android:id="@+id/scaperNameTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="Tiché roky"
-                        android:textAlignment="textStart"
-                        android:textColor="#000000"
-                        android:textStyle="bold|italic"
-                        app:layout_constraintEnd_toStartOf="@+id/nuthing"
-                        app:layout_constraintStart_toEndOf="@+id/textView13"
-                        app:layout_constraintTop_toTopOf="@+id/textView13" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/eanCardView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameCardView">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="EAN:   "
-                        android:textColor="#000000"
-                        android:textStyle="italic"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/eanTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="9788075779113"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/textView15"
-                        app:layout_constraintTop_toTopOf="@+id/textView15" />
-
-                    <TextView
-                        android:id="@+id/textView17"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="CENA:"
-                        android:textColor="#000000"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toStartOf="@+id/priceTextView"
-                        app:layout_constraintTop_toTopOf="@+id/eanTextView" />
-
-                    <TextView
-                        android:id="@+id/priceTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="349,- Kč"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView17" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -494,21 +531,24 @@
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
                         android:text="SKLADEM  "
                         android:textColor="#000000"
                         android:textStyle="italic"
+                        app:layout_constraintEnd_toStartOf="@+id/textView18"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView24" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:text="ZÁSOBA NA"
                         android:textColor="#000000"
                         android:textStyle="italic"
+                        app:layout_constraintEnd_toStartOf="@+id/textView24"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/textView16"
                         app:layout_constraintTop_toTopOf="@+id/textView16" />
 
@@ -516,10 +556,12 @@
                         android:id="@+id/storedTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:text="33ks"
                         android:textColor="#000000"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView16"
                         app:layout_constraintStart_toStartOf="@+id/textView16"
                         app:layout_constraintTop_toBottomOf="@+id/textView16"
@@ -537,52 +579,22 @@
                         tools:text="10,13 dnů" />
 
                     <TextView
-                        android:id="@+id/textView21"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="DODAVATEL"
-                        android:textColor="#000000"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/daysOfSuppliesTextView" />
-
-                    <TextView
-                        android:id="@+id/supplierTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="NAŠE NAKLADATELSTVÍ (KOMISE)"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/textView21"
-                        app:layout_constraintStart_toStartOf="@+id/textView21"
-                        app:layout_constraintTop_toBottomOf="@+id/textView21"
-                        tools:text="NAŠE NAKLADATELSTVÍ (KOMISE)" />
-
-                    <TextView
                         android:id="@+id/textView24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
                         android:text="POSLEDNÍ PŘÍJEM  "
                         android:textColor="#000000"
                         android:textStyle="italic"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/textView18"
+                        app:layout_constraintTop_toTopOf="@+id/textView18" />
 
                     <TextView
                         android:id="@+id/lastDeliveryTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="8dp"
                         android:text="19.06.2019"
                         android:textColor="#000000"
                         android:textStyle="bold"
