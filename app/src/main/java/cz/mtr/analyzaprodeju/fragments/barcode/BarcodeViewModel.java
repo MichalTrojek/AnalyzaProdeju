@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import cz.mtr.analyzaprodeju.fragments.search.SearchByEan;
+import cz.mtr.analyzaprodeju.fragments.home.SearchByEan;
 import cz.mtr.analyzaprodeju.shared.SharedArticle;
 
 public class BarcodeViewModel extends AndroidViewModel {

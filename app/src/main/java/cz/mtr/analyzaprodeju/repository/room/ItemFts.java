@@ -14,7 +14,6 @@ public class ItemFts {
     private String mEan;
     @ColumnInfo(name = "name")
     private String mName;
-
     @ColumnInfo(name = "normalizedName")
     private String mNormalizedName;
 

@@ -339,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void handleExport() {
         Client client = new Client(GeneralPreferences.getInstance().loadIp(), this);
-        client.execute("export");
+        client.execute("createFileAndOpenEmailClient");
     }
 
 

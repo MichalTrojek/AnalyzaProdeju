@@ -46,7 +46,7 @@ public class Client extends AsyncTask<String, Integer, Void> {
         this.message = voids[0];
         if (voids[0].equalsIgnoreCase("analyza")) {
             handleAnalysisImport();
-        } else if (voids[0].equalsIgnoreCase("export")) {
+        } else if (voids[0].equalsIgnoreCase("createFileAndOpenEmailClient")) {
             handleExport();
         }
         return null;

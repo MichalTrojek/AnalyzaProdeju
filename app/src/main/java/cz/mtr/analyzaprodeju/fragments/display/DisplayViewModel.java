@@ -1,6 +1,7 @@
 package cz.mtr.analyzaprodeju.fragments.display;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -36,7 +37,8 @@ public class DisplayViewModel extends AndroidViewModel {
                         "Objednávka");
     }
 
-    public void export(int position, DialogLoadingFragment progressDialog) {
+    public void createFileAndOpenEmailClient(int position, DialogLoadingFragment progressDialog) {
+        Log.d("testuju", "TET");
         SaveOfflineFilesTask excelCreator = new SaveOfflineFilesTask(getApplication(), progressDialog);
         excelCreator.execute(position);
     }

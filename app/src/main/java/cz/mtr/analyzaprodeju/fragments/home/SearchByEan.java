@@ -1,4 +1,4 @@
-package cz.mtr.analyzaprodeju.fragments.search;
+package cz.mtr.analyzaprodeju.fragments.home;
 
 import android.app.Application;
 

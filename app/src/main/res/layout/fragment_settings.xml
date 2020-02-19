@@ -35,7 +35,6 @@
         android:id="@+id/ip_adress_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="128dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/imageView19"

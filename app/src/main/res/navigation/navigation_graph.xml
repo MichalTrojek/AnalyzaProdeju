@@ -74,13 +74,6 @@
         <argument
             android:name="articleAnalys"
             app:argType="cz.mtr.analyzaprodeju.shared.SharedArticle" />
-        <action
-            android:id="@+id/detailToScraper"
-            app:destination="@id/scraperFragment"
-            app:enterAnim="@anim/enter_from_top"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -100,13 +93,6 @@
         <argument
             android:name="ArticleDb"
             app:argType="cz.mtr.analyzaprodeju.shared.SharedArticle" />
-        <action
-            android:id="@+id/notFoundToScraper"
-            app:destination="@id/scraperFragment"
-            app:enterAnim="@anim/enter_from_top"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/rankingFragment"
@@ -198,11 +184,6 @@
         app:popExitAnim="@anim/exit_to_right"
         app:popUpTo="@+id/homeFragment"
         app:popUpToInclusive="true" />
-    <fragment
-        android:id="@+id/scraperFragment"
-        android:name="cz.mtr.analyzaprodeju.fragments.scraper.ScraperFragment"
-        android:label="fragment_scraper"
-        tools:layout="@layout/fragment_scraper" />
     <fragment
         android:id="@+id/ftpFragment"
         android:name="cz.mtr.analyzaprodeju.fragments.ftp.FtpFragment"

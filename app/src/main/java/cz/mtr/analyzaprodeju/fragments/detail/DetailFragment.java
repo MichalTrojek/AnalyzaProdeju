@@ -101,9 +101,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 eshopTextView.setText(displayableArticle.getRankingEshop() + ".");
                 revenueTextView.setText(displayableArticle.getRevenue() + ",- Kč");
                 salesAmountOneTextView.setText(displayableArticle.getSales1() + "ks");
-                salesDaysOneTextView.setText("ZA " + displayableArticle.getSales1Days() + " DNŮ");
+                salesDaysOneTextView.setText("ZA " + displayableArticle.getSales1Days() + " DNŮ :");
                 salesAmountTwoTextView.setText(displayableArticle.getSales2() + "ks");
-                salesDaysTwoTextView.setText("ZA " + displayableArticle.getSales2Days() + " DNŮ");
+                salesDaysTwoTextView.setText("ZA " + displayableArticle.getSales2Days() + " DNŮ :");
                 lastSaleTextView.setText(displayableArticle.getDateOfLastSale());
                 storedTextView.setText(displayableArticle.getStored() + "ks");
                 daysOfSuppliesTextView.setText(displayableArticle.getDaysOfSupplies() + " dnů");

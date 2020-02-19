@@ -83,7 +83,7 @@ public class DisplayFragment extends Fragment implements DialogDeleteFragment.On
                 DialogLoadingFragment loadingDialog = new DialogLoadingFragment();
                 loadingDialog.setCancelable(false);
                 loadingDialog.show(getFragmentManager(), "FragmentChangeDialog");
-                mViewModel.export(mTabLayout.getSelectedTabPosition(), loadingDialog);
+                mViewModel.createFileAndOpenEmailClient(mTabLayout.getSelectedTabPosition(), loadingDialog);
             }
         });
     }
