@@ -40,7 +40,7 @@ public class RankingViewModel extends AndroidViewModel {
         return mInfo;
     }
 
-    public MutableLiveData<SharedArticle> getArticleAnalysis() {
+    public MutableLiveData<SharedArticle> getArticleFromAnalysis() {
         return mArticleAnalysis;
     }
 

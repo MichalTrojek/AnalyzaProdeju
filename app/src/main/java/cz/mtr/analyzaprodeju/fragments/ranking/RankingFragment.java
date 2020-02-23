@@ -70,7 +70,7 @@ public class RankingFragment extends Fragment implements OnItemClickListener {
             }
         });
 
-        mViewModel.getArticleAnalysis().observe(getViewLifecycleOwner(), new Observer<SharedArticle>() {
+        mViewModel.getArticleFromAnalysis().observe(getViewLifecycleOwner(), new Observer<SharedArticle>() {
             @Override
             public void onChanged(SharedArticle sharedArticle) {
                 try {

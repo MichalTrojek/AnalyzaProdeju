@@ -98,22 +98,14 @@ public class Authentication {
 
     public void check() {
         getData();
-
     }
 
 
     private void getData() {
-
-
-
         final String url = "http://skladovypomocnik.cz/authinfo.json";
-
         OkHttpClient client = new OkHttpClient();
-
         Request request = new Request.Builder().url(url).build();
-
         client.newCall(request).enqueue(new Callback() {
-
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (response.isSuccessful()) {
@@ -125,14 +117,11 @@ public class Authentication {
                     setDB(jsonObject.get("secret").getAsString());
                 }
             }
-
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 e.printStackTrace();
             }
         });
-
-
     }
 
 
