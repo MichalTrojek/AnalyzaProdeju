@@ -1,5 +1,5 @@
 # Analýza prodejů
-[Android ] Rozšíření Skladového pomocníka do čtečky čárových kódů. Zobrazje data z analýzy prodejů.  Samostatně nepoužitelné.
+[Android ] Aplikace pro mobilní telefony. Zobrazje data z analýzy prodejů.  Samostatně nepoužitelné.
 
 ## První spuštění
 
