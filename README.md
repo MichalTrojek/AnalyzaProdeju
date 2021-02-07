@@ -35,6 +35,17 @@ V pozadí aplikace se zároveň spustí služba, která v případě změny dat 
 
 
 
+
+## Vyhledávání a detail knihy
+
+
+Knihu je možné vyhledat podle názvu knihy, naskenováním čárového kódu a nebo ručním zadáním čárového kódu. Po nalezení knihy se zobrazí fragment obsahující detailní informace o knize. 
+
+Z tohoto fragmentu můžete knihu přidat do vratky nebo do objednávky kliknutím červeného tlačítka se symbolem plus.
+
+![detail3](https://user-images.githubusercontent.com/26610601/105232730-165fc180-5b69-11eb-9a1e-5b2c59174648.jpg)
+
+
 ## Žebříček prodejů
 
 
@@ -48,16 +59,6 @@ Po kliknutí na knížku se zobrazí detailní informace o knížce.
 
 ![zebricek](https://user-images.githubusercontent.com/26610601/105232658-fc25e380-5b68-11eb-9485-588256b3de7a.jpg)
 
-
-
-## Vyhledávání a detail knihy
-
-
-Knihu je možné vyhledat podle názvu knihy, naskenováním čárového kódu a nebo ručním zadáním čárového kódu. Po nalezení knihy se zobrazí fragment obsahující detailní informace o knize. 
-
-Z tohoto fragmentu můžete knihu přidat do vratky nebo do objednávky kliknutím červeného tlačítka se symbolem plus.
-
-![detail3](https://user-images.githubusercontent.com/26610601/105232730-165fc180-5b69-11eb-9a1e-5b2c59174648.jpg)
 
 
 ## Vratky a objednávky
